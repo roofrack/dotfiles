@@ -91,8 +91,10 @@ set guifont=Meslo\ Regular\ for\ Powerline.otf
 
 
 "===============Mapping Stuff============================ 
+
 " Note: When mapping, do not comment out on the same line
-"inserting a space...
+
+"inserting a space or a character...
 :nmap <Space> i_<Esc>r
 
 "This maps the key to return to normal mode.
@@ -103,6 +105,9 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 " A quick way to source .vimrc so you dont have to restart vim.
 :nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
 
 " Add double quotes to a word 
 :nnoremap <leader>, viw<esc>a"<esc>hbi"<esc>lel
@@ -122,6 +127,27 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" clear search highlights
+noremap <silent><Leader>/ :nohls<CR>
+
+" select all
+noremap <Leader>a ggVG
+
+" Open last/new buffer
+noremap <Leader><Leader> <C-^>
+
+" Hit <f5> to run Python code
+noremap <f5> :w <CR>!clear <CR>:!python % <CR>
+
+" Toggle on/off NERDTree
+noremap <C-n> :NERDTreeToggle<CR>
+
+" Show current file in NERDtree
+noremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+
+" Insert blank lines without insert mode
+noremap t o<ESC>k
+noremap T O<ESC>j
 
 
 " ================ Turn Off Swap Files ==============
