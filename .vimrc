@@ -23,12 +23,11 @@ set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40
 set ruler
 set mouse=a
-
-
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 " set hidden
+
 
 
 
@@ -119,7 +118,7 @@ au BufWritePost .vimrc so ~/.vimrc
 nnoremap ; :
 
 " Close a split window
-nnoremap ii :close <cr>
+nnoremap <c-i> :close <cr>
 
 " Easier way to move around splits (open windows)
 map <c-j> <c-w>j
