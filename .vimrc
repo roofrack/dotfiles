@@ -1,3 +1,5 @@
+" Here is a good example vimrc file: http://dougblack.io/words/a-good-vimrc.html
+
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -11,6 +13,7 @@ set nocompatible
 syntax on
 set t_Co=256
 colorscheme wombat256
+"set modelines=1                "Check for commands on last line
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
@@ -27,7 +30,6 @@ set mouse=a
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 " set hidden
-
 
 
 
@@ -71,22 +73,27 @@ Bundle 'scrooloose/nerdtree'
 " This fixes weird font in NERDtree...
 let g:NERDTreeDirArrows=0 
 "Bundle 'python_editing'
-
-
+Bundle 'mattn/emmet-vim'
+Bundle 'tpope/vim-surround'
+"Bundle 'rstacruz/sparkup'
 
 
 "Need this line after listing all the plugins
-filetype plugin indent on
+"filetype plugin indent on
 
 
 "-------------------Some plugin settings------------
 
 let g:airline_theme='badwolf'
 set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
 "set guifont=Liberation\ Mono\ for\ Powerline\ 10 
-set guifont=Meslo\ Regular\ for\ Powerline.otf
+"set guifont=Meslo\ Regular\ for\ Powerline.otf
 "let g:airline_powerline_fonts = 1
 "let g:Powerline_symbols = 'fancy'
+
+
+
 
 
 "===============Mapping Stuff============================ 
@@ -96,8 +103,13 @@ set guifont=Meslo\ Regular\ for\ Powerline.otf
 "inserting a space or a character...
 :nmap <Space> i_<Esc>r
 
+" while in insert mode, move down a line
+inoremap <c-o> <Esc>o
+
 "This maps the key to return to normal mode.
 inoremap jk <Esc>
+vnoremap jk <Esc> 
+cnoremap jk <Esc> 
 
 " Quick way to edit your vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -148,6 +160,9 @@ noremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 noremap t o<ESC>k
 noremap T O<ESC>j
 
+" When indenting keep selection highlighted
+vnoremap > >gv
+vnoremap < <gv
 
 " ================ Turn Off Swap Files ==============
 
@@ -190,13 +205,14 @@ set nobackup
 
 " ================ Indentation ======================
 
-"set autoindent
-"set smartindent
+set autoindent
+set smartindent
+set smartindent
 "set smarttab
-"set shiftwidth=2
+set shiftwidth=4
 "set softtabstop=2
-"set tabstop=2
-"set expandtab
+set tabstop=8
+set expandtab
 
 "filetype plugin on
 "filetype indent on
@@ -211,13 +227,11 @@ set nobackup
 
 
 
-" ================ Folds ============================
+" ================ Folding  =======================
 
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
-
-
 
 
 
@@ -235,3 +249,5 @@ set nofoldenable        "dont fold by default
 
 
 " ================ Custom Settings ========================
+" These are turned on with the 'set modelines=1' 
+" vim:foldmethod=marker:foldlevel=0      
