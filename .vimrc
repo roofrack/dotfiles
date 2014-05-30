@@ -7,7 +7,7 @@ set nocompatible
 
 
 
-" ================ General Config ====================
+" ================ General Config===============================================
 
 "turn on syntax highlighting
 syntax on
@@ -22,7 +22,8 @@ set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
-set cursorline
+set cursorline                  "Turn on line highlighting
+"The line below turns off the white highlighting line
 hi CursorLine term=bold cterm=bold guibg=Grey40
 set ruler
 set mouse=a
@@ -31,26 +32,15 @@ set mouse=a
 " http://items.sjbach.com/319/configuring-vim-right
 " set hidden
 
-
-
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
 " The mapleader has to be set before vundle starts loading all 
 " the plugins.
 let mapleader=","
+au BufWritePost .vimrc so ~/.vimrc       "source .vimrc file on save
 
 
-
-
-
-
-
-
-
-
-
-
-" =============== Vundle Initialization ===============
+" =============== Vundle Initialization========================================
 
 " This loads all the plugins specified in ~/.vim/vundle.vim
 " Use Vundle plugin to manage all other plugins
@@ -70,8 +60,6 @@ Bundle 'vim-colorscheme-switcher'
 "Bundle 'flazz/vim-colorschemes'
 Bundle 'vim-misc'
 Bundle 'scrooloose/nerdtree'
-" This fixes weird font in NERDtree...
-let g:NERDTreeDirArrows=0 
 "Bundle 'python_editing'
 Bundle 'mattn/emmet-vim'
 Bundle 'tpope/vim-surround'
@@ -79,10 +67,10 @@ Bundle 'tpope/vim-surround'
 
 
 "Need this line after listing all the plugins
-"filetype plugin indent on
+filetype plugin indent on
 
 
-"-------------------Some plugin settings------------
+"-------------------Some plugin settings--------------
 
 let g:airline_theme='badwolf'
 set laststatus=2
@@ -92,79 +80,95 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline_powerline_fonts = 1
 "let g:Powerline_symbols = 'fancy'
 
+" This fixes weird font in NERDtree...
+let g:NERDTreeDirArrows=0  
 
 
 
 
-"===============Mapping Stuff============================ 
+"===============Mapping Stuff=================================================== 
 
 " Note: When mapping, do not comment out on the same line
 
-"inserting a space or a character...
-:nmap <Space> i_<Esc>r
 
-" while in insert mode, move down a line
-inoremap <c-o> <Esc>o
 
-"This maps the key to return to normal mode.
-inoremap jk <Esc>
-vnoremap jk <Esc> 
-cnoremap jk <Esc> 
 
+"----- misc mappings --------------------------------- 
+
+:nnoremap <leader>sv :source $MYVIMRC<cr>
 " Quick way to edit your vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" clear search highlights
+noremap <silent><Leader>/ :nohls<CR>
 
-" A quick way to source .vimrc so you dont have to restart vim.
-:nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Automatically reload vimrc when it's saved
-au BufWritePost .vimrc so ~/.vimrc
-
-" Add double quotes to a word 
-:nnoremap <leader>, viw<esc>a"<esc>hbi"<esc>lel
-
-" Add double quotes to a sentence !!!! Havnt got this working yet
-":nnoremap <leader>- vis<esc>^"<esc>g_"<esc>
-
-" Enter command mode easier ...
-nnoremap ; :
+"---- movement mappings ------------------------------
 
 " Close a split window
 nnoremap <c-i> :close <cr>
-
 " Easier way to move around splits (open windows)
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-" clear search highlights
-noremap <silent><Leader>/ :nohls<CR>
-
-" select all
-noremap <Leader>a ggVG
-
 " Open last/new buffer
 noremap <Leader><Leader> <C-^>
 
-" Hit <f5> to run Python code
-noremap <f5> :w <CR>!clear <CR>:!python % <CR>
+" while in insert mode, move down a line
+inoremap <c-o> <Esc>o
 
-" Toggle on/off NERDTree
-noremap <C-n> :NERDTreeToggle<CR>
+" Use jk to return to normal mode.
+inoremap jk <Esc>
+vnoremap jk <Esc> 
+cnoremap jk <Esc> 
 
-" Show current file in NERDtree
-noremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+" Enter command mode easier ...
+nnoremap ; :
 
-" Insert blank lines without insert mode
-noremap t o<ESC>k
-noremap T O<ESC>j
+
+"---- editing mappings --------------------------------
+
+"inserting a space or a character in normal mode
+:nmap <Space> i_<Esc>r
+
+
+" Add double quotes to a word 
+":nnoremap <leader>, viw<esc>a"<esc>hbi"<esc>lel
+
+" Add double quotes to a sentence !!!! Havnt got this working yet
+":nnoremap <leader>- vis<esc>^"<esc>g_"<esc>
+
+" select all
+noremap <Leader>a ggVG
 
 " When indenting keep selection highlighted
 vnoremap > >gv
 vnoremap < <gv
 
-" ================ Turn Off Swap Files ==============
+" Insert blank lines in normal mode
+noremap <leader>t o<ESC>k
+noremap <leader>T O<ESC>j
+
+
+
+"---- plugin mappings ---------------------------------
+
+" Auto correct python code to PEP8 standars
+nnoremap <leader>f :PymodeLintAuto<CR>
+" Hit <f5> to run Python code
+noremap <f5> :w <CR>!clear <CR>:!python % <CR>
+
+" Toggle on/off NERDTree
+noremap <C-n> :NERDTreeToggle<CR>
+" Show current file in NERDtree
+noremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+
+
+
+"==============================================================================
+
+
+" ================ Turn Off Swap Files ========================================
 
 set noswapfile
 set nobackup
@@ -174,24 +178,7 @@ set nobackup
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-" ================ Persistent Undo ==================
+" ================ Persistent Undo ============================================
 
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
@@ -203,16 +190,20 @@ set nobackup
 
 
 
-" ================ Indentation ======================
+" ================ Indentation ================================================
 
-set autoindent
 set smartindent
-set smartindent
-"set smarttab
-set shiftwidth=4
-"set softtabstop=2
-set tabstop=8
-set expandtab
+set textwidth=79  " lines longer than 79 columns will be broken
+set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
+set tabstop=4     " an hard TAB displays as 4 columns
+set expandtab     " insert spaces when hitting TABs
+set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set shiftround    " round indent to multiple of 'shiftwidth'
+set autoindent    " align the new line indent with the previous line
+
+
+
+
 
 "filetype plugin on
 "filetype indent on
@@ -227,7 +218,7 @@ set expandtab
 
 
 
-" ================ Folding  =======================
+" ================ Folding  ===================================================
 
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
@@ -235,19 +226,19 @@ set nofoldenable        "dont fold by default
 
 
 
-" ================ Completion =======================
+" ================ Completion =================================================
 
 
 
 
 
-" ================ Scrolling ========================
+" ================ Scrolling ==================================================
 
 "set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 "set sidescrolloff=15
 "set sidescroll=1
 
 
-" ================ Custom Settings ========================
+" ================ Custom Settings ============================================
 " These are turned on with the 'set modelines=1' 
 " vim:foldmethod=marker:foldlevel=0      
