@@ -52,26 +52,26 @@ call vundle#rc()
 " Plugins go here...
 Bundle 'gmarik/vundle'
 Bundle 'klen/python-mode'
-Bundle 'pydiction'
+"Bundle 'pydiction'
 Bundle 'vim-airline'
 "Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/powerline-fonts'
-Bundle 'vim-colorscheme-switcher'
+"Bundle 'Lokaltog/powerline-fonts'
+"Bundle 'vim-colorscheme-switcher'
 "Bundle 'flazz/vim-colorschemes'
 Bundle 'vim-misc'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'python_editing'
-Bundle 'mattn/emmet-vim'
+"Bundle 'mattn/emmet-vim'
 Bundle 'tpope/vim-surround'
 "Bundle 'rstacruz/sparkup'
-
-
+Bundle 'christoomey/vim-tmux-navigator'
+"Bundle 'tpope/vim-dispatch'
 "Need this line after listing all the plugins
 filetype plugin indent on
 
-
 "-------------------Some plugin settings--------------
 
+" vim-airline
 let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
@@ -83,7 +83,8 @@ let g:airline#extensions#tabline#enabled = 1
 " This fixes weird font in NERDtree...
 let g:NERDTreeDirArrows=0  
 
-
+" Pymode
+let g:pymode_lint_on_write=0
 
 
 "===============Mapping Stuff=================================================== 
@@ -119,6 +120,7 @@ inoremap <c-o> <Esc>o
 
 " Use jk to return to normal mode.
 inoremap jk <Esc>
+inoremap kj <Esc>
 vnoremap jk <Esc> 
 cnoremap jk <Esc> 
 
