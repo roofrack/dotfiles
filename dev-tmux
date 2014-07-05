@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Set up a default tmux session for development
+# called dev-tmux
+
+tmux new-session -d -s gui
+
+tmux rename-window develop # name the first window 
+
+tmux split-window -v # splits the window up and down 
+tmux split-window -h # splits the window side to side
+
+tmux resize-pane -t 0 -D 20 # resize first window down
+tmux resize-pane -t 1 -R 20 # resize bottom left win over
+
+tmux send-keys -t 0 'workon goth' enter
+tmux send-keys -t 0 'vim' enter
+
+tmux send-keys -t 1 'workon gui' enter
+tmux send-keys -t 1 'ipython' enter
+
+tmux select-pane -t 0
+
+tmux new-window -t gui:1 -n 'play'
+tmux split-window -v # splits the window up and down 
+tmux send-keys -t 0 'vim' enter
+tmux select-pane -t 0
+
+tmux -2 attach-session -d 
