@@ -2,11 +2,15 @@
 # ~/.bashrc
 #
 
+EDITOR='vim'
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+
 alias ls='ls --color=auto'
 
+alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to 264
 
 
 # setting the prompt ...
@@ -26,7 +30,11 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 export VIRTUALENVWRAPPER_VIRTUALENV=virtualenv2
 source /usr/bin/virtualenvwrapper.sh
 
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+source ~/.bin/tmuxinator.bash
 
+# Adding a ~/bin/ directory to PATH
+export PATH=$PATH:~/bin/:~/.bin/
 
-alias v='vim rob.py'
-alias foo='python2 rob.py'
+# Make the arch logo appear in new shell startup
+archey

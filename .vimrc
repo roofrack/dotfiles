@@ -56,8 +56,8 @@ Bundle 'klen/python-mode'
 Bundle 'vim-airline'
 "Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Lokaltog/powerline-fonts'
-"Bundle 'vim-colorscheme-switcher'
-"Bundle 'flazz/vim-colorschemes'
+Bundle 'vim-colorscheme-switcher'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'vim-misc'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'python_editing'
@@ -82,6 +82,10 @@ let g:airline#extensions#tabline#enabled = 1
 
 " This fixes weird font in NERDtree...
 let g:NERDTreeDirArrows=0  
+let NERDTreeWinSize = 10
+
+
+
 
 " Pymode
 let g:pymode_lint_on_write=0
@@ -101,7 +105,9 @@ let g:pymode_lint_on_write=0
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " clear search highlights
 noremap <silent><Leader>/ :nohls<CR>
-
+" Save and run a file using <F5>
+inoremap <F5> <Esc>:w<CR>:!%:p<CR>
+nnoremap <F5> <Esc>:w<CR>:!%:p<CR>
 
 "---- movement mappings ------------------------------
 
@@ -129,6 +135,9 @@ nnoremap ; :
 
 
 "---- editing mappings --------------------------------
+
+" Change a word to uppercase
+"<Leader> U 
 
 "inserting a space or a character in normal mode
 :nmap <Space> i_<Esc>r
@@ -158,7 +167,7 @@ noremap <leader>T O<ESC>j
 " Auto correct python code to PEP8 standars
 nnoremap <leader>f :PymodeLintAuto<CR>
 " Hit <f5> to run Python code
-noremap <f5> :w <CR>!clear <CR>:!python % <CR>
+"noremap <f5> :w <CR>!clear <CR>:!python % <CR>
 
 " Toggle on/off NERDTree
 noremap <C-n> :NERDTreeToggle<CR>
