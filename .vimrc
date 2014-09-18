@@ -51,7 +51,7 @@ call vundle#rc()
 
 " Plugins go here...
 Bundle 'gmarik/vundle'
-Bundle 'klen/python-mode'
+"Bundle 'klen/python-mode'
 "Bundle 'pydiction'
 Bundle 'vim-airline'
 "Bundle 'Lokaltog/vim-powerline'
@@ -66,6 +66,10 @@ Bundle 'tpope/vim-surround'
 "Bundle 'rstacruz/sparkup'
 Bundle 'christoomey/vim-tmux-navigator'
 "Bundle 'tpope/vim-dispatch'
+"Bundle 'vim-scripts/upAndDown'
+"Bundle 'ivanov/vim-ipython'
+Bundle 'vim-scripts/dbext.vim'
+
 "Need this line after listing all the plugins
 filetype plugin indent on
 
@@ -106,8 +110,9 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " clear search highlights
 noremap <silent><Leader>/ :nohls<CR>
 " Save and run a file using <F5>
-inoremap <F5> <Esc>:w<CR>:!%:p<CR>
-nnoremap <F5> <Esc>:w<CR>:!%:p<CR>
+inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
+nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
+
 
 "---- movement mappings ------------------------------
 
