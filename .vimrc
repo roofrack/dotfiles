@@ -68,7 +68,8 @@ Bundle 'christoomey/vim-tmux-navigator'
 "Bundle 'tpope/vim-dispatch'
 "Bundle 'vim-scripts/upAndDown'
 "Bundle 'ivanov/vim-ipython'
-Bundle 'vim-scripts/dbext.vim'
+"Bundle 'vim-scripts/dbext.vim' 
+Bundle 'tpope/vim-commentary'
 
 "Need this line after listing all the plugins
 filetype plugin indent on
@@ -78,7 +79,7 @@ filetype plugin indent on
 " vim-airline
 let g:airline_theme='badwolf'
 set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 "set guifont=Liberation\ Mono\ for\ Powerline\ 10 
 "set guifont=Meslo\ Regular\ for\ Powerline.otf
 "let g:airline_powerline_fonts = 1
@@ -88,8 +89,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:NERDTreeDirArrows=0  
 let NERDTreeWinSize = 10
 
-
-
+"Database stuff for the dbtext plugin...
+"let g:dbext_default_profile_SQLITE = 'type=SQLITE:dbname=tysql.sqlite'
 
 " Pymode
 let g:pymode_lint_on_write=0
@@ -97,12 +98,7 @@ let g:pymode_lint_on_write=0
 
 "===============Mapping Stuff=================================================== 
 
-" Note: When mapping, do not comment out on the same line
-
-
-
-
-"----- misc mappings --------------------------------- 
+" Note: When mapping, do not comment out on the same line "----- misc mappings --------------------------------- 
 
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 " Quick way to edit your vimrc
