@@ -11,6 +11,7 @@ set nocompatible
 
 "turn on syntax highlighting
 syntax on
+set encoding=utf-8 " Need this for vim-airline to work.
 set t_Co=256
 colorscheme wombat256
 "set modelines=1                "Check for commands on last line
@@ -65,10 +66,11 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
 "Bundle 'rstacruz/sparkup'
 Bundle 'christoomey/vim-tmux-navigator'
+"Bundle 'edkolev/tmuxline.vim'
 "Bundle 'tpope/vim-dispatch'
 "Bundle 'vim-scripts/upAndDown'
 "Bundle 'ivanov/vim-ipython'
-"Bundle 'vim-scripts/dbext.vim' 
+Bundle 'dbext.vim'
 Bundle 'tpope/vim-commentary'
 
 "Need this line after listing all the plugins
@@ -79,18 +81,34 @@ filetype plugin indent on
 " vim-airline
 let g:airline_theme='badwolf'
 set laststatus=2
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 "set guifont=Liberation\ Mono\ for\ Powerline\ 10 
 "set guifont=Meslo\ Regular\ for\ Powerline.otf
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 "let g:Powerline_symbols = 'fancy'
+
+"let g:airline#extensions#branch#enabled=1
+"let g:airline#extensions#branch#empty_message='no repo'
+"let g:airline#extensions#hunks#enabled=0
+"let g:airline#extensions#whitespace#enabled=1
+"let g:airline#extensions#whitespace#mixed_indent_algo=1 "Tabs before spaces
+
+
+
 
 " This fixes weird font in NERDtree...
 let g:NERDTreeDirArrows=0  
-let NERDTreeWinSize = 10
+let NERDTreeWinSize = 16
 
-"Database stuff for the dbtext plugin...
-"let g:dbext_default_profile_SQLITE = 'type=SQLITE:dbname=tysql.sqlite'
+" Change dbext command terminator to ';'
+" this will allow multiline select statements to execute using <leader>se
+" but I can't get it to work. I am a slow and stupid man.
+" let g:dbext_default_cmd_terminator = ";"
+
+"Database profile connections for the dbtext plugin...
+let g:dbext_default_profile_SQLITE_for_tysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/tysql.sqlite'
+let g:dbext_default_profile_SQLITE_for_disposabletysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/disposable_tysql.sqlite'
+
 
 " Pymode
 let g:pymode_lint_on_write=0
@@ -127,8 +145,11 @@ inoremap <c-o> <Esc>o
 
 " Use jk to return to normal mode.
 inoremap jk <Esc>
+inoremap JK <Esc>
+inoremap KJ <Esc>
 inoremap kj <Esc>
 vnoremap jk <Esc> 
+vnoremap JK <Esc> 
 cnoremap jk <Esc> 
 
 " Enter command mode easier ...

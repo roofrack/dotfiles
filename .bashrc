@@ -33,8 +33,8 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 export VIRTUALENVWRAPPER_VIRTUALENV=virtualenv2
 source /usr/bin/virtualenvwrapper.sh
 
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-source ~/.bin/tmuxinator.bash
+#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+#source ~/.bin/tmuxinator.bash
 
 # Adding a ~/bin/ directory to PATH
 export PATH=$PATH:~/bin/:~/.bin/
