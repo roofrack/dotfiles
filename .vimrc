@@ -77,6 +77,7 @@ filetype plugin indent on
 
 "-------------------Some plugin settings--------------
 
+" flazz/vim-colorschemes
 colorscheme wombat256
 
 " vim-airline ...
