@@ -10,7 +10,7 @@ export EDITOR='vim'
 alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
 alias vi='vim'
 alias ls='ls --color=auto'
-alias ll='ls -l'
+alias ll='ls -lX'
 alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 
 alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to 264

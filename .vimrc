@@ -13,8 +13,7 @@ set nocompatible
 syntax on
 set encoding=utf-8 " Need this for vim-airline to work.
 set t_Co=256
-colorscheme wombat256
-"set modelines=1                "Check for commands on last line
+set modelines=1                "Check for commands on last line
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
@@ -78,7 +77,9 @@ filetype plugin indent on
 
 "-------------------Some plugin settings--------------
 
-" vim-airline
+colorscheme wombat256
+
+" vim-airline ...
 let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
@@ -96,21 +97,24 @@ let g:airline_powerline_fonts = 1
 
 
 
+" NERDTree ...
 " This fixes weird font in NERDtree...
 let g:NERDTreeDirArrows=0  
 let NERDTreeWinSize = 16
 
-" Change dbext command terminator to ';'
-" this will allow multiline select statements to execute using <leader>se
-" but I can't get it to work. I am a slow and stupid man.
-" let g:dbext_default_cmd_terminator = ";"
+ 
+" dbext ...
+let g:dbext_default_buffer_lines = 10
+"let g:dbext_default_use_sep_result_buffer = 1
 
 "Database profile connections for the dbtext plugin...
 let g:dbext_default_profile_SQLITE_for_tysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/tysql.sqlite'
-let g:dbext_default_profile_SQLITE_for_disposabletysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/disposable_tysql.sqlite'
+
+let g:dbext_default_profile_SQLITE_for_disposabletysql='type=SQLITE::dbname=~/database/disposable_tysql.sqlite'
 
 
-" Pymode
+
+" Pymode ...
 let g:pymode_lint_on_write=0
 
 
