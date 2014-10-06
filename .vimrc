@@ -71,6 +71,7 @@ Bundle 'christoomey/vim-tmux-navigator'
 "Bundle 'ivanov/vim-ipython'
 Bundle 'dbext.vim'
 Bundle 'tpope/vim-commentary'
+Plugin 'fugitive.vim'
 
 "Need this line after listing all the plugins
 filetype plugin indent on
@@ -88,6 +89,8 @@ let g:airline#extensions#tabline#enabled = 1
 "set guifont=Meslo\ Regular\ for\ Powerline.otf
 let g:airline_powerline_fonts = 1
 "let g:Powerline_symbols = 'fancy'
+
+
 
 "let g:airline#extensions#branch#enabled=1
 "let g:airline#extensions#branch#empty_message='no repo'

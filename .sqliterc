@@ -2,3 +2,4 @@
 .nullvalue 'NULL'
 .mode columns
 .headers on
+.width 25 25 30
