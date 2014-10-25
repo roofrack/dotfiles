@@ -53,6 +53,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 "Bundle 'klen/python-mode'
 "Bundle 'pydiction'
+Plugin 'fugitive.vim'
 Bundle 'vim-airline'
 "Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Lokaltog/powerline-fonts'
@@ -71,7 +72,6 @@ Bundle 'christoomey/vim-tmux-navigator'
 "Bundle 'ivanov/vim-ipython'
 Bundle 'dbext.vim'
 Bundle 'tpope/vim-commentary'
-Plugin 'fugitive.vim'
 
 "Need this line after listing all the plugins
 filetype plugin indent on
