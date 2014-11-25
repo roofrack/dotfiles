@@ -1,0 +1,84 @@
+These are a collection of commands for pacman orgnized by category
+
+==================================================================
+                                Installation
+==================================================================
+
+pacman -S "pkg_name" (install pkg_name)
+
+pacman -Syu (updates system)
+
+pacman -Sy (update and refresh all pkgs)
+pacman -Syy (force update and refresh all pkgs)
+
+pacman -Ss (search Arch repo using regex)
+
+pacman -U "path/to/local/pkg" (installs a pkg from on your system)
+
+makepkg -sic (builds and installs a AUR package)
+    -download a build package from AUR
+    -extract it using tar -xvpzf pkg_name.tar.gz -C ~/builds
+    -cd into builds and run makepkg -sic
+
+pacman -Sw "pkg_name" (downloads pkg but doesnt install it)
+
+
+
+
+
+
+
+==================================================================
+                                Search
+==================================================================
+
+pacman -Ss (searches official repo using regex)
+
+pacman -Qs (search for a specific installed pkg)
+
+pacman -Qe (lists all packages currently installed - I think)
+
+pacman -Qq | grep -Fv -f <(pacman -Qqm) (lists only official pkgs)
+
+pacman -Qqm (list packages installed from AUR)
+
+pacman -Ql (shows where a pkg is installed)
+
+pacman -Qdt (lists orphaned pkgs)
+
+
+
+
+
+
+
+
+==================================================================
+                                Installation
+==================================================================
+
+pacman -S "pkg_name" (install pkg_name)
+
+pacman -Syu (updates system)
+
+pacman -Sy (update and refresh all pkgs)
+pacman -Syy (force update and refresh all pkgs)
+
+pacman -Ss (search Arch repo using regex)
+
+pacman -U "path/to/local/pkg" (installs a pkg from on your system)
+
+makepkg -sic (builds and installs a AUR package)
+    -download a build package from AUR
+    -extract it using tar -xvpzf pkg_name.tar.gz -C ~/builds
+    -cd into builds and run makepkg -sic
+
+pacman -Sw "pkg_name" (downloads pkg but doesnt install it)
+
+
+
+
+
+
+
+==================================================================

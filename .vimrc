@@ -117,6 +117,7 @@ let g:dbext_default_profile_SQLITE_for_tysql='type=SQLITE:SQLITE_bin=/usr/bin/sq
 let g:dbext_default_profile_SQLITE_for_disposabletysql='type=SQLITE::dbname=~/database/disposable_tysql.sqlite'
 
 let g:dbext_default_profile_SQLITE_for_sheep='type=SQLITE:dbname=~/database/sheep/sheep.sqlite'
+let g:dbext_default_profile_SQLITE_for_sheep_bad='type=SQLITE:dbname=~/database/sheep/sheep_bad.sqlite'
 
 
 " Pymode ...
