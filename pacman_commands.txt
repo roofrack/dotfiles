@@ -1,5 +1,8 @@
 These are a collection of commands for pacman orgnized by category
 
+settings for pacman are stored in /etc/pacman.conf
+pkg's old and new are stored in /var/cache/pacman/pkg
+
 ==================================================================
                                 Installation
 ==================================================================
@@ -50,35 +53,19 @@ pacman -Qdt (lists orphaned pkgs)
 
 
 
-
-
-
 ==================================================================
-                                Installation
+                                Clean
 ==================================================================
 
-pacman -S "pkg_name" (install pkg_name)
+All pkgs are retained in var/cache/pacman/pkg and this directory
+can get large so good idea to clean it once in a while.
 
-pacman -Syu (updates system)
+du -md1 / | sort -n (this show where disk space goes)
 
-pacman -Sy (update and refresh all pkgs)
-pacman -Syy (force update and refresh all pkgs)
+pacsysclean (lists pkg's and how much space they use)
 
-pacman -Ss (search Arch repo using regex)
+pacman -Scc (wipes out the cache)
 
-pacman -U "path/to/local/pkg" (installs a pkg from on your system)
-
-makepkg -sic (builds and installs a AUR package)
-    -download a build package from AUR
-    -extract it using tar -xvpzf pkg_name.tar.gz -C ~/builds
-    -cd into builds and run makepkg -sic
-
-pacman -Sw "pkg_name" (downloads pkg but doesnt install it)
-
-
-
-
-
-
-
-==================================================================
+paccache -r 
+paccache -ruk0 (use these two in order to clean cache. It leaves 
+                the first three newest pkg versions intact)
