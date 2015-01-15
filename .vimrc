@@ -1,6 +1,6 @@
 " Here is a good example vimrc file: http://dougblack.io/words/a-good-vimrc.html
 
-" Use Vim settings, rather then Vi settings (much better!).
+" Use Vim settings, rather then Vi settings much better!
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
@@ -39,6 +39,9 @@ set mouse=a
 let mapleader=","
 au BufWritePost .vimrc so ~/.vimrc       "source .vimrc file on save
 
+
+set helpheight=99999 "makes :help open in bigger buffer
+set wildmenu "tab completion for the vim help
 
 " =============== Vundle Initialization========================================
 
@@ -123,14 +126,35 @@ let g:dbext_default_profile_SQLITE_for_sheep_bad='type=SQLITE:dbname=~/database/
 " Pymode ...
 let g:pymode_lint_on_write=0
 
+" emmett settings
+
+" This allows the use of the trigger key in all modes 
+let g:user_emmet_mode='a'
+
+"===============abbreviations for auto correct===================================
+
+" This is great for common typos or for just expanding things
+" The format is: iab <typo> <expansion>
+iab pritn print
+
+
+
+
+
+
+
 
 "===============Mapping Stuff=================================================== 
 
-" Note: When mapping, do not comment out on the same line "----- misc mappings --------------------------------- 
+
+" Note: When mapping, do not comment out on the same line "
+
+
+" ---- misc mappings --------------------------------- 
 
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 " Quick way to edit your vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 " clear search highlights
 noremap <silent><Leader>/ :nohls<CR>
 " Save and run a file using <F5>
@@ -143,15 +167,15 @@ nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
 " Close a split window
 nnoremap <c-i> :close <cr>
 " Easier way to move around splits (open windows)
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
 " Open last/new buffer
 noremap <Leader><Leader> <C-^>
 
 " while in insert mode, move down a line
-inoremap <c-o> <Esc>o
+"inoremap <c-o> <Esc>o
 
 " Use jk to return to normal mode.
 inoremap jk <Esc>
@@ -191,6 +215,7 @@ vnoremap < <gv
 " Insert blank lines in normal mode
 noremap <leader>t o<ESC>k
 noremap <leader>T O<ESC>j
+
 
 
 
@@ -236,7 +261,7 @@ set nobackup
 " ================ Indentation ================================================
 
 set smartindent
-set textwidth=79  " lines longer than 79 columns will be broken
+" set textwidth=79  " lines longer than 79 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " an hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs

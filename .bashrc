@@ -13,6 +13,7 @@ alias ls='ls --color=auto'
 alias ll='clear; ls -lX'
 alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 alias runserver='python manage.py runserver'
+alias bob='python manage.py'
 
 alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to 264
 
