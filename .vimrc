@@ -34,10 +34,12 @@ set mouse=a
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
-" The mapleader has to be set before vundle starts loading all 
+" The mapleader has to be set before vundle starts loading all
 " the plugins.
 let mapleader=","
 au BufWritePost .vimrc so ~/.vimrc       "source .vimrc file on save
+" Strip trailing whitespace from file on when saving
+autocmd BufWritePre * :%s/\s\+$//e
 
 
 set helpheight=99999 "makes :help open in bigger buffer
@@ -88,7 +90,7 @@ colorscheme wombat256
 let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-"set guifont=Liberation\ Mono\ for\ Powerline\ 10 
+"set guifont=Liberation\ Mono\ for\ Powerline\ 10
 "set guifont=Meslo\ Regular\ for\ Powerline.otf
 let g:airline_powerline_fonts = 1
 "let g:Powerline_symbols = 'fancy'
@@ -106,10 +108,10 @@ let g:airline_powerline_fonts = 1
 
 " NERDTree ...
 " This fixes weird font in NERDtree...
-let g:NERDTreeDirArrows=0  
+let g:NERDTreeDirArrows=0
 let NERDTreeWinSize = 16
 
- 
+
 " dbext ...
 let g:dbext_default_buffer_lines = 10
 "let g:dbext_default_use_sep_result_buffer = 1
@@ -128,7 +130,7 @@ let g:pymode_lint_on_write=0
 
 " emmett settings
 
-" This allows the use of the trigger key in all modes 
+" This allows the use of the trigger key in all modes
 let g:user_emmet_mode='a'
 
 "===============abbreviations for auto correct===================================
@@ -144,13 +146,13 @@ iab pritn print
 
 
 
-"===============Mapping Stuff=================================================== 
+"===============Mapping Stuff===================================================
 
 
 " Note: When mapping, do not comment out on the same line "
 
 
-" ---- misc mappings --------------------------------- 
+" ---- misc mappings ---------------------------------
 
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 " Quick way to edit your vimrc
@@ -182,9 +184,9 @@ inoremap jk <Esc>
 inoremap JK <Esc>
 inoremap KJ <Esc>
 inoremap kj <Esc>
-vnoremap jk <Esc> 
-vnoremap JK <Esc> 
-cnoremap jk <Esc> 
+vnoremap jk <Esc>
+vnoremap JK <Esc>
+cnoremap jk <Esc>
 
 " Enter command mode easier ...
 nnoremap ; :
@@ -193,13 +195,13 @@ nnoremap ; :
 "---- editing mappings --------------------------------
 
 " Change a word to uppercase
-"<Leader> U 
+"<Leader> U
 
 "inserting a space or a character in normal mode
 :nmap <Space> i_<Esc>r
 
 
-" Add double quotes to a word 
+" Add double quotes to a word
 ":nnoremap <leader>, viw<esc>a"<esc>hbi"<esc>lel
 
 " Add double quotes to a sentence !!!! Havnt got this working yet
@@ -216,6 +218,9 @@ vnoremap < <gv
 noremap <leader>t o<ESC>k
 noremap <leader>T O<ESC>j
 
+" copy to system clipboard while in visual mode. This allows you to
+" copy from vim and paste into another application outside of vim.
+vnoremap <C-c> "+y
 
 
 
@@ -308,5 +313,5 @@ set nofoldenable        "dont fold by default
 
 
 " ================ Custom Settings ============================================
-" These are turned on with the 'set modelines=1' 
-" vim:foldmethod=marker:foldlevel=0      
+" These are turned on with the 'set modelines=1'
+" vim:foldmethod=marker:foldlevel=0
