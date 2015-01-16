@@ -27,10 +27,6 @@ set ttimeoutlen=50             "this prevents delay when using esc to exit inser
 "The line below turns off the white highlighting line
 hi CursorLine term=bold cterm=bold guibg=Grey40
 
-" Change leader to a comma because the backslash is too far away
-" That means all \x commands turn into ,x
-" The mapleader has to be set before vundle starts loading all
-" the plugins.
 let mapleader=","
 
 "------------------------------Indentation--------------------------------------
