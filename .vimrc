@@ -17,7 +17,7 @@ set showcmd                    "Show incomplete cmds down the bottom
 set cursorline                 "Turn on line highlighting
 set ruler                      "show line number and column
 set mouse=a                    "allows proper use of mouse inside vim
-"set hidden                     "have buffer with unsaved work open in background
+set hidden                     "have buffer with unsaved work open in background
 set helpheight=99999           "makes :help open in bigger buffer
 set wildmenu                   "tab completion for the vim help
 set noswapfile                 "prevents extra file being saved in home directory
@@ -154,7 +154,7 @@ let g:user_emmet_mode='a'
 "source vimrc
 nnoremap <leader>sv :so %<cr>
 "Quick way to edit your vimrc
-nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 
 "Save and run a python file using <F5>
 inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
