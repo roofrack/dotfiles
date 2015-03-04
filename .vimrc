@@ -23,9 +23,15 @@ set wildmenu                   "tab completion for the vim help
 set noswapfile                 "prevents extra file being saved in home directory
 set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
+"set nowrap
 
 "This prevents html lines from wrapping when window is shrunk
-autocmd BufNewFile,BufRead *.html setlocal nowrap
+augroup html_nowrap
+    autocmd!
+    autocmd BufNewFile,BufRead *.html setlocal nowrap
+augroup END
+
+
 
 "The line below turns off the white highlighting line
 hi CursorLine term=bold cterm=bold guibg=Grey40
@@ -90,6 +96,9 @@ Plugin 'mattn/emmet-vim'
 " Plugin 'ivanov/vim-ipython'
 " Plugin 'dbext.vim'
 Plugin 'tpope/vim-commentary'
+Plugin 'jaxbot/browserlink.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'rust-lang/rust.vim'
 
 "Need this line after listing all the plugins
 filetype plugin indent on
@@ -105,9 +114,10 @@ colorscheme wombat256
 let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
+set guifont=Liberation\ Mono\ for\ Powerline\ 10 
 let g:Powerline_symbols = 'fancy'
-
 
 "NERDTree_settings ...
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
@@ -143,7 +153,15 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 let g:user_emmet_mode='a'
 
 
+"Syntastic_settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "===============================================================================
 "                                                                              =
@@ -171,7 +189,7 @@ inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
 nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
 
 " Enter command mode easier ...
-noremap ; :
+nnoremap ; :
 
 "----------------------------editing mappings-----------------------------------
 
@@ -227,6 +245,7 @@ noremap <Leader><Leader> <C-^>
 "===============================================================================
 
 iab pritn print
+iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
 
 
 

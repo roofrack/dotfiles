@@ -4,7 +4,7 @@
 "                                                                              =
 "===============================================================================
 
-"Use Vim settings, rather then Vi settings much better!
+"Set nocompatible to run vim rather than vi
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 syntax on                      "turn on syntax highlighting
@@ -24,10 +24,14 @@ set noswapfile                 "prevents extra file being saved in home director
 set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
 
+"This prevents html lines from wrapping when window is shrunk
+autocmd BufNewFile,BufRead *.html setlocal nowrap
+
 "The line below turns off the white highlighting line
 hi CursorLine term=bold cterm=bold guibg=Grey40
 
 let mapleader=","
+let maplocalleader="\\"
 
 "------------------------------Indentation--------------------------------------
 set smartindent
@@ -69,10 +73,8 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 " Plugin 'klen/python-mode'
 " Plugin 'pydiction'
-" Plugin 'fugitive.vim'
+Plugin 'fugitive.vim'
 Plugin 'vim-airline'
-" Plugin 'Lokaltog/vim-powerline'
-" Plugin 'Lokaltog/powerline-fonts'
 Plugin 'vim-colorscheme-switcher'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-misc'
@@ -87,7 +89,7 @@ Plugin 'mattn/emmet-vim'
 " Plugin 'vim-scripts/upAndDown'
 " Plugin 'ivanov/vim-ipython'
 " Plugin 'dbext.vim'
-" Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-commentary'
 
 "Need this line after listing all the plugins
 filetype plugin indent on
@@ -104,11 +106,13 @@ let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:Powerline_symbols = 'fancy'
 
 
 "NERDTree_settings ...
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
 let NERDTreeWinSize = 20
+let NERDTreeShowBookmarks = 1
 "Toggle on/off NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree
@@ -153,8 +157,14 @@ let g:user_emmet_mode='a'
 
 "source vimrc
 nnoremap <leader>sv :so %<cr>
+
 "Quick way to edit your vimrc
-nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+"prevent vimrc from wrapping
+augroup vimrc
+    autocmd!
+    autocmd BufRead .vimrc setlocal nowrap
+augroup END
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "Save and run a python file using <F5>
 inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
