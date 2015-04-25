@@ -6,6 +6,7 @@ export EDITOR='vim'
 
 # bash history settings...
 export HISTCONTROL=ignoredups
+export HISTFILESIZE=1000
 export HISTSIZE=500
 
 # If not running interactively, don't do anything
