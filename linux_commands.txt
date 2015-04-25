@@ -1,0 +1,10 @@
+awk commands...
+---------------
+
+delete duplicates in a file without the need to sort first
+awk '!x[$0]++' filename
+
+
+
+sed commands...
+---------------

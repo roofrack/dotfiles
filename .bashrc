@@ -6,6 +6,8 @@ export EDITOR='vim'
 
 # bash history settings...
 export HISTCONTROL=ignoredups
+export HISTCONTROL=erasedups
+export HISTIGNORE="history:ll:ls:cd"
 export HISTFILESIZE=1000
 export HISTSIZE=500
 
