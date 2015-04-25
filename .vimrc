@@ -152,16 +152,16 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 "This allows the use of the trigger key in all modes
 let g:user_emmet_mode='a'
 
-
 "Syntastic_settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height=2
 
 "===============================================================================
 "                                                                              =
@@ -187,6 +187,8 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 "Save and run a python file using <F5>
 inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
 nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
+inoremap <F6> <Esc>:w<CR>:!python3 %<CR>
+nnoremap <F6> <Esc>:w<CR>:!python3 %<CR>
 
 " Enter command mode easier ...
 nnoremap ; :

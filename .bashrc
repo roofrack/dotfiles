@@ -4,6 +4,10 @@
 
 export EDITOR='vim'
 
+# bash history settings...
+export HISTCONTROL=ignoredups
+export HISTSIZE=500
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
