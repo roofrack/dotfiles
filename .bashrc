@@ -4,10 +4,13 @@
 
 export EDITOR='vim'
 
+# puts bash EDITOR in vi mode
+set -o vi   
+
 # bash history settings...
 export HISTCONTROL=ignoredups
 export HISTCONTROL=erasedups
-export HISTIGNORE="history:ll:ls:cd"
+export HISTIGNORE="history:ll:ls:cd:cl"
 export HISTFILESIZE=1000
 export HISTSIZE=500
 
@@ -18,9 +21,11 @@ alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" r
 alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='clear; ls -lX'
+alias cl='clear'
 alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 alias runserver='python manage.py runserver'
 alias bob='python manage.py'
+alias his='history | less'
 
 alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to 264
 
