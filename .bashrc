@@ -8,8 +8,8 @@ export EDITOR='vim'
 set -o vi   
 
 # bash history settings...
-export HISTCONTROL=ignoredups
-export HISTCONTROL=erasedups
+#export HISTCONTROL=ignoredups
+#export HISTCONTROL=erasedups
 export HISTIGNORE="history:ll:ls:cd:cl"
 export HISTFILESIZE=1000
 export HISTSIZE=500
@@ -25,7 +25,9 @@ alias cl='clear'
 alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 alias runserver='python manage.py runserver'
 alias bob='python manage.py'
-alias his='history | less'
+alias his='history 10'
+alias hg='history | grep'
+
 
 alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to 264
 
