@@ -6,11 +6,12 @@ export EDITOR='vim'
 
 # puts bash EDITOR in vi mode
 set -o vi   
+bind "\C-o":vi-movement-mode
 
 # bash history settings...
-#export HISTCONTROL=ignoredups
-#export HISTCONTROL=erasedups
-export HISTIGNORE="history:ll:ls:cd:cl"
+export HISTCONTROL=ignoredups
+export HISTCONTROL=erasedups
+export HISTIGNORE="history:ll:ls:cd:cl:his"
 export HISTFILESIZE=1000
 export HISTSIZE=500
 

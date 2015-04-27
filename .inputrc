@@ -1,0 +1,3 @@
+# This is for changing the prompt in bash when using vim editing mode
+
+set show-mode-in-prompt on
