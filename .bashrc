@@ -8,11 +8,21 @@ export EDITOR='vim'
 set -o vi   
 
 #some key bindings in bash...
-bind "\C-o":vi-movement-mode                  #change to normal mode (vim mode)
-bind '"\C-l":"\C-uclear\C-m"'                 #clear screen in vim insert mode
-bind '"\es":"\C-usudo "'                      #add sudo to beginning of line(insert mode)
+#-----------------------------
+
+#change to normal mode (vim mode)
+bind "\C-o":vi-movement-mode                  
+
+#clear screen in vim insert mode
+bind '"\C-l":"\C-uclear\C-m"'                 
+
+#add sudo to beginning of line (insert mode)
+bind '"\es":"\C-usudo "'                      
+
 
 # bash history settings...
+#--------------------------
+
 # export HISTCONTROL=ignoredups
 # export HISTCONTROL=erasedups
 export HISTCONTROL=ignoreboth:erasedups
@@ -39,6 +49,7 @@ alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to
 
 
 # setting the prompt ...
+#------------------------
 
 #PS1='[\u@\h \W]\$ '
 # OR...

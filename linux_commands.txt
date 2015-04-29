@@ -1,3 +1,18 @@
+user account commands
+---------------------
+
+useradd
+userdel
+usermod
+
+groupadd 
+groupdel
+groupmod
+
+chown
+chmod
+
+
 awk commands...
 ---------------
 
