@@ -6,11 +6,16 @@ export EDITOR='vim'
 
 # puts bash EDITOR in vi mode
 set -o vi   
-bind "\C-o":vi-movement-mode
+
+#some key bindings in bash...
+bind "\C-o":vi-movement-mode                  #change to normal mode (vim mode)
+bind '"\C-l":"\C-uclear\C-m"'                 #clear screen in vim insert mode
+bind '"\es":"\C-usudo "'                      #add sudo to beginning of line(insert mode)
 
 # bash history settings...
-export HISTCONTROL=ignoredups
-export HISTCONTROL=erasedups
+# export HISTCONTROL=ignoredups
+# export HISTCONTROL=erasedups
+export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE="history:ll:ls:cd:cl:his"
 export HISTFILESIZE=1000
 export HISTSIZE=500
@@ -26,7 +31,7 @@ alias cl='clear'
 alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 alias runserver='python manage.py runserver'
 alias bob='python manage.py'
-alias his='history 10'
+alias his='history 20'
 alias hg='history | grep'
 
 
