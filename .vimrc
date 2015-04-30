@@ -224,13 +224,13 @@ cnoremap jk <Esc>
 
 "--------------------------insert mode mappings--------------------------------
 
-"ctrl-v will allow to type the 2nd if you need it
+"ctrl-v will allow to type the 2nd letter if you need it
 
-"go to just before first non-blank text in a line
+"go to beginning of line
 inoremap II <Esc>I
 "go to the end of the line
 inoremap AA <Esc>A
-"start editing on a new line
+"start editing on a new line above the current line
 inoremap OO <Esc>O
 "change what is to the right of cursor
 inoremap CC <Esc>C
