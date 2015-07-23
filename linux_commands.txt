@@ -32,7 +32,7 @@ set project dir when activating virtenv
 activate the environment and then type: setvirtualenvproject
 
 to start a env using python3...
-virtualenv -p python3 envname
+virtualenv -p /usr/bin/python3 env_name
 
 
 setting up uwsgi and nginx server
