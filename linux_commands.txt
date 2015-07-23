@@ -23,3 +23,31 @@ awk '!x[$0]++' filename
 
 sed commands...
 ---------------
+
+
+virtualenv commands...
+----------------------
+
+set project dir when activating virtenv
+activate the environment and then type: setvirtualenvproject
+
+to start a env using python3...
+virtualenv -p python3 envname
+
+
+setting up uwsgi and nginx server
+---------------------------------
+
+see these websites ...
+
+http://uwsgi-docs.readthedocs.org/en/latest/tutorials/Django_and_nginx.html
+
+https://www.digitalocean.com/community/tutorials ... 
+how-to-serve-django-applications-with-uwsgi-andnginx-on-centos-7
+
+
+
+notes to me...
+--------------
+
+hey Rob, your a dumbass

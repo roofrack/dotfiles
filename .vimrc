@@ -184,6 +184,16 @@ augroup vimrc
 augroup END
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
+"To run certain lines in bash you would use this...
+":line#start,line#endw !bash
+
+"if you just want to run the current line than use...
+".w !bash
+
+"This works by instead of writing to disk it 'writes' to the stdin of another
+"program which in this case is bash.
+
+
 "Save and run a python file using <F5>
 inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
 nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
