@@ -70,13 +70,13 @@ set nofoldenable               "dont fold by default
 " Use Vundle plugin to manage all other plugins
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 
 "--------------------------plugins----------------------------------------------
 
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'gmarik/vundle'
 " Plugin 'klen/python-mode'
 " Plugin 'pydiction'
 Plugin 'fugitive.vim'
@@ -101,7 +101,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
 
 "Need this line after listing all the plugins
-call vundle#end()
 filetype plugin indent on
 
 

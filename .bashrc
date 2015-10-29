@@ -17,7 +17,7 @@ bind "\C-o":vi-movement-mode
 bind '"\C-l":"\C-uclear\C-m"'                 
 
 #add sudo to beginning of line (insert mode)
-bind '"\es":"\C-usudo "'                      
+bind '"\es":"\C-usudo"'                      
 
 
 # bash history settings...
