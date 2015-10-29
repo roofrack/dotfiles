@@ -29,7 +29,7 @@ virtualenv commands...
 ----------------------
 
 set project dir when activating virtenv
-activate the environment and then type: setvirtualenvproject
+activate the environment, cd into dir and then type: setvirtualenvproject
 
 to start a env using python3...
 virtualenv -p /usr/bin/python3 env_name
@@ -42,8 +42,23 @@ see these websites ...
 
 http://uwsgi-docs.readthedocs.org/en/latest/tutorials/Django_and_nginx.html
 
-https://www.digitalocean.com/community/tutorials ... 
+https://www.digitalocean.com/community/tutorials ..o. 
 how-to-serve-django-applications-with-uwsgi-andnginx-on-centos-7
+
+see nginx's output log...
+sudo tail -f /var/log/nginx/access.logs
+
+journalctl -u nginx.service -f
+
+using netcat 
+------------
+
+can just use nc instead of typing out netcat
+
+this is handy for checking server output on the command line...
+netcat localhost port#
+
+
 
 
 

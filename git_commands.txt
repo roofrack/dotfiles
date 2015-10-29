@@ -1,3 +1,7 @@
 # these 2 commands make my laptop the same as git hub
 git fetch --all
 git reset --hard origin/master
+
+
+clone a repo
+git clone https://github/.com/roofrack/dotfiles.git ~/dotfiles
