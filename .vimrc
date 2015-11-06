@@ -23,7 +23,7 @@ set wildmenu                   "tab completion for the vim help
 set noswapfile                 "prevents extra file being saved in home directory
 set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
-"set nowrap
+set nowrap
 
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
