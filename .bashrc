@@ -77,4 +77,4 @@ source /usr/share/git/completion/git-completion.bash
 export PATH=$PATH:~/bin/:~/.bin/
 
 # Make the arch logo appear in new shell startup
-archey
+#archey

@@ -25,6 +25,7 @@ set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
 set nowrap
 
+
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
     autocmd!
@@ -80,7 +81,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'klen/python-mode'
 " Plugin 'pydiction'
 Plugin 'fugitive.vim'
-Plugin 'vim-airline'
+"Plugin 'vim-airline'
 Plugin 'vim-colorscheme-switcher'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-misc'
@@ -89,7 +90,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
 " Plugin 'tpope/vim-surround'
 " Plugin 'rstacruz/sparkup'
-" Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'edkolev/tmuxline.vim'
 " Plugin 'tpope/vim-dispatch'
 " Plugin 'vim-scripts/upAndDown'
@@ -235,22 +236,8 @@ cnoremap jk <Esc>
 
 "--------------------------insert mode mappings--------------------------------
 
-"ctrl-v will allow to type the 2nd letter if you need it
 
-"go to beginning of line
-inoremap II <Esc>I
-"go to the end of the line
-inoremap AA <Esc>A
-"start editing on a new line above the current line
-inoremap OO <Esc>O
-"change what is to the right of cursor
-inoremap CC <Esc>C
-"change the whole line
-inoremap SS <Esc>S
-"delete the current line(end in normal mode)
-inoremap DD <Esc>dd
-"undo
-inoremap UU <Esc>ui
+
 
 
 
