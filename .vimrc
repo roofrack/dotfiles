@@ -81,7 +81,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'klen/python-mode'
 " Plugin 'pydiction'
 Plugin 'fugitive.vim'
-"Plugin 'vim-airline'
+Plugin 'vim-airline'
 Plugin 'vim-colorscheme-switcher'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-misc'
@@ -101,6 +101,7 @@ Plugin 'jaxbot/browserlink.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
 
+
 "Need this line after listing all the plugins
 call vundle#end()
 filetype plugin indent on
@@ -118,7 +119,7 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
-set guifont=Liberation\ Mono\ for\ Powerline\ 10 
+"set guifont=Liberation\ Mono\ for\ Powerline\ 10 
 let g:Powerline_symbols = 'fancy'
 
 "NERDTree_settings ...
