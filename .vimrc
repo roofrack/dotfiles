@@ -25,7 +25,6 @@ set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
 set nowrap
 
-
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
     autocmd!
@@ -95,7 +94,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'tpope/vim-dispatch'
 " Plugin 'vim-scripts/upAndDown'
 " Plugin 'ivanov/vim-ipython'
-" Plugin 'dbext.vim'
+Plugin 'dbext.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'jaxbot/browserlink.vim'
 Plugin 'scrooloose/syntastic'
@@ -118,9 +117,15 @@ let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" when i turn this on it will screw airline up (laptop computer works ok)
+" When its off the fonts don't look as nice
 let g:airline_powerline_fonts = 1
+
 "set guifont=Liberation\ Mono\ for\ Powerline\ 10 
-let g:Powerline_symbols = 'fancy'
+
+" not sure what this does if anything
+" let g:Powerline_symbols = 'fancy'
 
 "NERDTree_settings ...
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
@@ -133,8 +138,8 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 "dbext_settings ...
-"let g:dbext_default_buffer_lines = 10
-"let g:dbext_default_use_sep_result_buffer = 1
+let g:dbext_default_buffer_lines = 10
+let g:dbext_default_use_sep_result_buffer = 1
 
 "Database profile connections for the dbtext plugin...
 "let g:dbext_default_profile_SQLITE_for_tysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/tysql.sqlite'
@@ -143,6 +148,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 "let g:dbext_default_profile_SQLITE_for_sheep='type=SQLITE:dbname=~/database/sheep/sheep.sqlite'
 "let g:dbext_default_profile_SQLITE_for_sheep_bad='type=SQLITE:dbname=~/database/sheep/sheep_bad.sqlite'
+let g:dbext_default_profile_SQLITE_for_sample ='type=SQLITE:dbname=~/pythonstuff/tutorials/flask/flask-intro/sample.db'
 
 
 "Pymode_settings ...

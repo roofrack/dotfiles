@@ -1,3 +1,12 @@
+mv
+--
+
+mv dir1 dir2 (moves dir1 and its contents into dir2)
+
+
+
+
+
 user account commands
 ---------------------
 
@@ -35,6 +44,29 @@ to start a env using python3...
 virtualenv -p /usr/bin/python3 env_name
 
 
+can also use python3 built in venv...
+this is the more correct way rather than virtualenvwrapper. Not sure
+why but when using python3 should use this. Cd into your project and
+type the following to start a new enviroment (usually called venv).
+
+pyvenv /path/to/where_you_want/<venv>  
+source <venv>/bin/activate  (this activates the env)
+deactivate (to deactivate the env)
+
+
+
+pip commands
+------------
+
+to copy a venv do this...
+pip freeze > requirements.txt
+
+activate your new venv and run ...
+pip install -r requirements.txt
+
+
+
+
 setting up uwsgi and nginx server
 ---------------------------------
 
@@ -59,8 +91,15 @@ this is handy for checking server output on the command line...
 netcat localhost port#
 
 
+nmap commands
+-------------
 
+sudo nmap -sP 192.168.1.1
 
+logging commands
+----------------
+
+tail -F filename     
 
 notes to me...
 --------------

@@ -44,8 +44,9 @@ alias bob='python manage.py'
 alias his='history 20'
 alias hg='history | grep'
 
-
-alias tmux='tmux -2'         # Prevents colorscheme change in vim. Sets color to 264
+# The 2 prevents colorscheme change in vim. Sets color to 264
+# the -u forces tmux to use unicode. This allows vim-airline to work inside tmux.
+alias tmux='tmux -2u'
 
 
 # setting the prompt ...
