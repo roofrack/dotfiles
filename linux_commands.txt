@@ -94,7 +94,8 @@ netcat localhost port#
 nmap commands
 -------------
 
-sudo nmap -sP 192.168.1.1
+scan the network and shows only the ip's that are up. Fairly fast.
+sudo nmap -sP 192.168.1.0/24
 
 logging commands
 ----------------
