@@ -23,7 +23,7 @@ set wildmenu                   "tab completion for the vim help
 set noswapfile                 "prevents extra file being saved in home directory
 set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
-"set nowrap
+set nowrap
 
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
@@ -70,13 +70,13 @@ set nofoldenable               "dont fold by default
 " Use Vundle plugin to manage all other plugins
 
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 
 "--------------------------plugins----------------------------------------------
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 " Plugin 'klen/python-mode'
 " Plugin 'pydiction'
 Plugin 'fugitive.vim'
@@ -89,18 +89,20 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
 " Plugin 'tpope/vim-surround'
 " Plugin 'rstacruz/sparkup'
-" Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'edkolev/tmuxline.vim'
 " Plugin 'tpope/vim-dispatch'
 " Plugin 'vim-scripts/upAndDown'
 " Plugin 'ivanov/vim-ipython'
-" Plugin 'dbext.vim'
+Plugin 'dbext.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'jaxbot/browserlink.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
 
+
 "Need this line after listing all the plugins
+call vundle#end()
 filetype plugin indent on
 
 
@@ -115,9 +117,15 @@ let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" when i turn this on it will screw airline up (laptop computer works ok)
+" When its off the fonts don't look as nice
 let g:airline_powerline_fonts = 1
-set guifont=Liberation\ Mono\ for\ Powerline\ 10 
-let g:Powerline_symbols = 'fancy'
+
+"set guifont=Liberation\ Mono\ for\ Powerline\ 10 
+
+" not sure what this does if anything
+" let g:Powerline_symbols = 'fancy'
 
 "NERDTree_settings ...
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
@@ -130,8 +138,8 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 "dbext_settings ...
-"let g:dbext_default_buffer_lines = 10
-"let g:dbext_default_use_sep_result_buffer = 1
+let g:dbext_default_buffer_lines = 10
+let g:dbext_default_use_sep_result_buffer = 1
 
 "Database profile connections for the dbtext plugin...
 "let g:dbext_default_profile_SQLITE_for_tysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/tysql.sqlite'
@@ -140,6 +148,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 "let g:dbext_default_profile_SQLITE_for_sheep='type=SQLITE:dbname=~/database/sheep/sheep.sqlite'
 "let g:dbext_default_profile_SQLITE_for_sheep_bad='type=SQLITE:dbname=~/database/sheep/sheep_bad.sqlite'
+let g:dbext_default_profile_SQLITE_for_sample ='type=SQLITE:dbname=~/pythonstuff/tutorials/flask/flask-intro/sample.db'
 
 
 "Pymode_settings ...
@@ -234,22 +243,8 @@ cnoremap jk <Esc>
 
 "--------------------------insert mode mappings--------------------------------
 
-"ctrl-v will allow to type the 2nd letter if you need it
 
-"go to beginning of line
-inoremap II <Esc>I
-"go to the end of the line
-inoremap AA <Esc>A
-"start editing on a new line above the current line
-inoremap OO <Esc>O
-"change what is to the right of cursor
-inoremap CC <Esc>C
-"change the whole line
-inoremap SS <Esc>S
-"delete the current line(end in normal mode)
-inoremap DD <Esc>dd
-"undo
-inoremap UU <Esc>ui
+
 
 
 

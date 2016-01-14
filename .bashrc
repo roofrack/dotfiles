@@ -33,6 +33,10 @@ export HISTSIZE=500
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+
+# Some alias's
+#-------------
+
 alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
 alias vi='vim'
 alias ls='ls --color=auto'
@@ -41,12 +45,22 @@ alias cl='clear'
 alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 alias runserver='python manage.py runserver'
 alias bob='python manage.py'
+
 alias his='history 20'
 alias hg='history | grep'
+
+alias jf='cd ~/pythonstuff/tutorials/flask/flask-intro/'
+
+
 
 # The 2 prevents colorscheme change in vim. Sets color to 264
 # the -u forces tmux to use unicode. This allows vim-airline to work inside tmux.
 alias tmux='tmux -2u'
+alias ta='tmux -2u a'
+alias ka='killall tmux'
+alias tl='tmux ls'
+
+
 
 
 # setting the prompt ...
@@ -61,7 +75,10 @@ PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W \[\033[1;3
 
 export PS1
 
+
 # Virtualenv
+#-----------
+
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2

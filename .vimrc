@@ -117,6 +117,8 @@ let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_inactive_collapse=1
+let g:airline#extensions#syntastic#enabled = 1
 
 " when i turn this on it will screw airline up (laptop computer works ok)
 " When its off the fonts don't look as nice
@@ -126,6 +128,8 @@ let g:airline_powerline_fonts = 1
 
 " not sure what this does if anything
 " let g:Powerline_symbols = 'fancy'
+
+
 
 "NERDTree_settings ...
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
