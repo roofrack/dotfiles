@@ -4,7 +4,7 @@
 # Set up a default tmux session for development
 # Hey rob, read the man pages for more commands. You dummy.
 
-
+##################################################################################
 
 tmux -2u  new-session -d -s work  
 # Names the session to 'work'. must use -2u so forces
@@ -29,7 +29,7 @@ tmux split-window -h # splits the window side to side
 tmux resize-pane -t 0 -D 5
 tmux resize-pane -t 1 -R 20 # resize bottom left win over
 
-tmux send-keys -t 0 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl && vim' enter
+tmux send-keys -t 0 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl && vim' C-m        #can use enter or C-m for return
 tmux send-keys -t 1 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl' enter
 tmux send-keys -t 1 'source venv/bin/activate && cl' enter
 tmux send-keys -t 2 'cd && cl' enter
@@ -55,7 +55,7 @@ tmux new-window -t work:1 -n 'play'
 
 tmux send-keys -t 0 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl && vim' enter
 
-tmux last-window -t    # go back to first window
+tmux last-window    # go back to first window
 
 
 

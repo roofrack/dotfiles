@@ -61,6 +61,15 @@ alias ka='killall tmux'
 alias tl='tmux ls'
 
 
+# More tmux stuff...
+#-------------------
+# Could not get this to work
+# Some variables... change these as needed
+SESSIONNAME="work"
+MYDIRECTORY_1="~/pythonstuff/tutorials"
+PATHTODIRECTORY_2="change this to whatever"
+PATHTODIRECTORY_3="change this to whatever"
+
 
 
 # setting the prompt ...
