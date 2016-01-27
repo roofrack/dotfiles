@@ -50,6 +50,10 @@ alias his='history 20'
 alias hg='history | grep'
 
 alias jf='cd ~/pythonstuff/tutorials/flask/flask-intro/'
+alias venv='source venv/bin/activate'
+
+alias vbash='vim ~/.bashrc'
+alias vvim='vim ~/.vimrc'
 
 
 
@@ -59,6 +63,7 @@ alias tmux='tmux -2u'
 alias ta='tmux -2u a'
 alias ka='killall tmux'
 alias tl='tmux ls'
+
 
 
 # More tmux stuff...

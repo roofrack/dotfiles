@@ -2,7 +2,7 @@
 
 
 # Set up a default tmux session for development
-# Hey rob, read the man pages for more commands. You dummy.
+# Hey rob, read the tmux man pages for more commands. You dummy.
 
 ##################################################################################
 
@@ -31,7 +31,7 @@ tmux resize-pane -t 1 -R 20 # resize bottom left win over
 
 tmux send-keys -t 0 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl && vim' C-m        #can use enter or C-m for return
 tmux send-keys -t 1 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl' enter
-tmux send-keys -t 1 'source venv/bin/activate && cl' enter
+tmux send-keys -t 1 'workon flask && cl' enter
 tmux send-keys -t 2 'cd && cl' enter
 
 tmux select-pane -t 0 # selects the first pane (top pane)

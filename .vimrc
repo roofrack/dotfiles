@@ -176,6 +176,23 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=2
 
+
+"youcompleteme_settings
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+
+
 "===============================================================================
 "                                                                              =
 "                             Mapping                                          = 
@@ -210,16 +227,53 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 "Save and run a python file using <F5>
 inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
 nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
-inoremap <F6> <Esc>:w<CR>:!python3 %<CR>
+inoremap <F6> <Esc>:w<CR>:!python3  %<CR>
 nnoremap <F6> <Esc>:w<CR>:!python3 %<CR>
+
 
 " Enter command mode easier ...
 nnoremap ; :
 
+
+
+
+"----------------------------tmux mapping in vim--------------------------------
+
+" We can combine vimscript and tmux scripting to do things in other panes.
+
+
+" This mapping will run the current python file (which is currently open in vim) in a 
+" seperate tmux pane (I usually make pane # 1 the bottom pane)
+autocmd Filetype python noremap <buffer> <CR> <Esc>:w<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
+
+" So... To break this down ...
+
+" autocmd Filetype python            -Makes this mapping only apply to python files (.py)
+" nnoremap <buffer> <CR>             -Make a mapping in normal mode using the 'enter' key as the shortcut key
+" <Esc>:w<CR>:                       -Get out of insert mode, enter command mode, save, enter, and then go back to command mode 
+" !                                  -Run the following commands as if they were in the bash shell
+" tmux send-keys -t 1                -send the following commands to terminal 1 (I usually have this as the bottom pane)
+" "cd %:p:h && cl && python -i %"    -cd into the same path as the current file thats open in vim, 
+"                                     cl screen(this is an alias for clear), and start python in interactive mode (the
+"                                     % symbol just stands for the filename which is currently open in vim)
+" Enter                              -Tells bash to press 'Enter'
+" <CR>                               -Tells vim to press 'Enter'
+" <CR>                               -Tells vim to return to where you left off
+
+
+" This one will reload the python shell with the current file open in vim
+autocmd Filetype python nnoremap g<CR> <Esc>:w<CR>:!tmux send-keys -t 1 "exit()" Enter "cl && python -i %" Enter <CR> <CR>
+
+
+
+
 "----------------------------editing mappings-----------------------------------
 
-"Change a word to uppercase
-inoremap <C-u> <Esc> gUiwi
+"Change a WORD to UPPERCASE
+"steps for this to work are... <Esc> back to normal mode than...
+" move one left(h), go uppercase for the inner word(hUiw), move to the end of the word(w),
+" move one more space so your back where you started.
+inoremap <C-u> <Esc>gUiwea
 nnoremap <C-u> gUiw
 
 "inserting a space or a character in normal mode
@@ -278,7 +332,8 @@ iab pritn print
 iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
 
 
-
+" python Abbreviations
+iab ifname if __name__=='__main__':
 
 
 
