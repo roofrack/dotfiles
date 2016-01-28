@@ -178,8 +178,9 @@ let g:syntastic_loc_list_height=2
 
 
 "youcompleteme_settings
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:ycm_autoclose_preview_window_after_completion=1
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:ycm_show_diagnostics_ui = 0
 
 "python with virtualenv support
 py << EOF
@@ -204,7 +205,7 @@ EOF
 "----------------------------misc mappings--------------------------------------
 
 "source vimrc
-nnoremap <leader>sv :so %<cr>
+nnoremap <leader>sv :source %<cr>
 
 "Quick way to edit your vimrc
 "prevent vimrc from wrapping
@@ -224,11 +225,11 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 "program which in this case is bash.
 
 
-"Save and run a python file using <F5>
-inoremap <F5> <Esc>:w<CR>:!python2 %<CR>
-nnoremap <F5> <Esc>:w<CR>:!python2 %<CR>
-inoremap <F6> <Esc>:w<CR>:!python3  %<CR>
-nnoremap <F6> <Esc>:w<CR>:!python3 %<CR>
+"Save(update) and run a python file using <F5>
+inoremap <F5> <Esc>:update<CR>:!python2 %<CR>
+nnoremap <F5> <Esc>:update<CR>:!python2 %<CR>
+inoremap <F6> <Esc>:update<CR>:!python3  %<CR>
+nnoremap <F6> <Esc>:update<CR>:!python3 %<CR>
 
 
 " Enter command mode easier ...
@@ -244,7 +245,7 @@ nnoremap ; :
 
 " This mapping will run the current python file (which is currently open in vim) in a 
 " seperate tmux pane (I usually make pane # 1 the bottom pane)
-autocmd Filetype python noremap <buffer> <CR> <Esc>:w<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
+autocmd Filetype python nnoremap <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
 
 " So... To break this down ...
 
@@ -261,8 +262,8 @@ autocmd Filetype python noremap <buffer> <CR> <Esc>:w<CR>:!tmux send-keys -t 1 "
 " <CR>                               -Tells vim to return to where you left off
 
 
-" This one will reload the python shell with the current file open in vim
-autocmd Filetype python nnoremap g<CR> <Esc>:w<CR>:!tmux send-keys -t 1 "exit()" Enter "cl && python -i %" Enter <CR> <CR>
+" This one (pressing g<CR>) will reload the python shell with the current file open in vim
+autocmd Filetype python nnoremap g<CR> <Esc>:update<CR>:!tmux send-keys -t 1 "exit()" Enter "cl && python -i %" Enter <CR> <CR>
 
 
 
@@ -273,6 +274,7 @@ autocmd Filetype python nnoremap g<CR> <Esc>:w<CR>:!tmux send-keys -t 1 "exit()"
 "steps for this to work are... <Esc> back to normal mode than...
 " move one left(h), go uppercase for the inner word(hUiw), move to the end of the word(w),
 " move one more space so your back where you started.
+" Note: the youcompleteme also uses ctr-u. So may not work in insert mode.
 inoremap <C-u> <Esc>gUiwea
 nnoremap <C-u> gUiw
 
@@ -328,12 +330,18 @@ nnoremap <Leader><Leader> <C-^>
 "                                                                              =
 "===============================================================================
 
+" Python abbreviations
+" --------------------
+
+autocmd Filetype python iabbrev <buffer> pr print()<Esc>i
+autocmd Filetype python iabbrev <buffer> prr print("")<Esc>hi
+
+iab ifname if __name__=='__main__':
+
+
+
 iab pritn print
 iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
-
-
-" python Abbreviations
-iab ifname if __name__=='__main__':
 
 
 
