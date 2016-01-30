@@ -100,6 +100,11 @@ Plugin 'jaxbot/browserlink.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
 
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
 
 "Need this line after listing all the plugins
 call vundle#end()
@@ -116,7 +121,7 @@ colorscheme wombat256
 let g:airline_theme='badwolf'
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline_inactive_collapse=1
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -178,11 +183,33 @@ let g:syntastic_loc_list_height=2
 
 
 "youcompleteme_settings
+"----------------------
 " let g:ycm_autoclose_preview_window_after_completion=1
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_show_diagnostics_ui = 1
+
+"this is so ultisnips can use the tab key. For completion in YCM us <C-n> and <C-p>.
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+
+
+
+
+
+" Ultisnips plugin settings
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+
 
 "python with virtualenv support
+"really not sure what this does or if its necessary
 py << EOF
 import os
 import sys
@@ -333,10 +360,10 @@ nnoremap <Leader><Leader> <C-^>
 " Python abbreviations
 " --------------------
 
-autocmd Filetype python iabbrev <buffer> pr print()<Esc>i
-autocmd Filetype python iabbrev <buffer> prr print("")<Esc>hi
+" autocmd Filetype python iabbrev <buffer> pr print()<Esc>i
+" autocmd Filetype python iabbrev <buffer> prr print("")<Esc>hi
 
-iab ifname if __name__=='__main__':
+" iab ifname if __name__=='__main__':
 
 
 

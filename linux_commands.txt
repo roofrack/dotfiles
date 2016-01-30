@@ -1,3 +1,28 @@
+Installing packages from Aur
+----------------------------
+
+1. cd into Download load dir and than download from aur ...
+    wget 'copy link address from aur package and paste here'
+
+2. Extract from a tarball. I usually put this in a builds dir.
+    tar -xvpzf filename.tar.gz -C /directory
+
+3. Now cd into the builds dir and run this...
+    makepkg -sic
+
+
+To unzip a file use:
+
+unzip packagemame.zip -d /path/to/where/you want the file to go
+
+
+
+
+
+
+
+
+
 mv
 --
 

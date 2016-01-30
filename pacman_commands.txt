@@ -1,11 +1,42 @@
+Quick intro to what I have learned in pacman
+--------------------------------------------
+
+-See the arch pacman wiki or man page
+-Also can try 'pacman command --help'
+
+-All package tarballs get downloaded to /var/cache/pacman/pkg (not aur pkgbuilds)
+
+-There are two locations for databases...
+    1) local databases in /var/lib/pacman/local/'all installed packages here'
+    2) the sync databases (the ones that are synced online) in /var/lib/pacman/sync
+
+
+    -Q commands refer to the locally installed pkgs
+    -S commands refer to the pkgs in the online repositorys
+
+-Make sure mirrorlist is up to date
+
+
+
+
+Pacaur AUR package manager
+--------------------------
+
+use the commands without sudo
+
+pacaur -Syu (updates pacman pkgs first and then checks aur for any updates and then updates those)
+pacaur -aSyu (only updates aur)
+pacaur -u (only updates the specified pkg)
+
+
+
 These are a collection of commands for pacman orgnized by category
-
-settings for pacman are stored in /etc/pacman.conf
-pkg's old and new are stored in /var/cache/pacman/pkg
-
+------------------------------------------------------------------
 ==================================================================
                                 Installation
 ==================================================================
+
+Note: to remove pkgs pacman -Rs
 
 pacman -S "pkg_name" (install pkg_name)
 
@@ -49,6 +80,8 @@ pacman -Ql (shows where a pkg is installed)
 
 pacman -Qdt (lists orphaned pkgs)
 
+This is a good one...
+pacman -Qi (prints out detailed info about a pkg installed on your system. Very handy!!!!!)
 
 
 
@@ -66,6 +99,7 @@ pacsysclean (lists pkg's and how much space they use)
 
 pacman -Scc (wipes out the cache)
 
+Note; Use the following 2 commands rather than the pacman -Scc
 paccache -r 
 paccache -ruk0 (use these two in order to clean cache. It leaves 
                 the first three newest pkg versions intact)
