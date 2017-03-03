@@ -13,7 +13,7 @@ set t_Co=256
 "set modelines=1                "Check for commands on last line
 set number                     "Line numbers are good
 set history=1000               "Store lots of :cmdline history
-set showcmd                    "Show incomplete cmds down the bottom
+" set showcmd                    "Show incomplete cmds down the bottom
 set cursorline                 "Turn on line highlighting
 set ruler                      "show line number and column
 set mouse=a                    "allows proper use of mouse inside vim
@@ -119,9 +119,15 @@ colorscheme wombat256
 
 "vim-airline_settings ...
 let g:airline_theme='badwolf'
+" let g:airline_theme='simple'
+" let g:airline_theme='dark'
+" let g:airline_theme='light'
+" let g:airline_theme='durant'
+" let g:airline_theme='hybrid'
+" let g:airline_theme='wombat'
 set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 0
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline_inactive_collapse=1
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -184,21 +190,23 @@ let g:syntastic_loc_list_height=2
 
 "youcompleteme_settings
 "----------------------
-" let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_completion=1
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " let g:ycm_show_diagnostics_ui = 1
 
 "this is so ultisnips can use the tab key. For completion in YCM us <C-n> and <C-p>.
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+" let g:ycm_key_list_select_completion=[]
+" let g:ycm_key_list_previous_completion=[]
 
-
+"this will shut off YCM
+" let g:ycm_auto_trigger=0
 
 
 
 " Ultisnips plugin settings
+"--------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
@@ -206,18 +214,21 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 
+" let g:bl_serverpath='0.0.0.0:9001/js/socket.js'
+
+
 
 
 "python with virtualenv support
 "really not sure what this does or if its necessary
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
+" py << EOF
+" import os
+" import sys
+" if 'VIRTUAL_ENV' in os.environ:
+"   project_base_dir = os.environ['VIRTUAL_ENV']
+"   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"   execfile(activate_this, dict(__file__=activate_this))
+" EOF
 
 
 
@@ -272,7 +283,7 @@ nnoremap ; :
 
 " This mapping will run the current python file (which is currently open in vim) in a 
 " seperate tmux pane (I usually make pane # 1 the bottom pane)
-autocmd Filetype python nnoremap <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
+autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
 
 " So... To break this down ...
 

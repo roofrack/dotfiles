@@ -74,7 +74,7 @@ To set the project dir when activating the virtualenv, activate the environment,
       setvirtualenvproject
 
 To start a env using python3...
-virtualenv -p /usr/bin/python3 env_name
+mkvirtualenv -p /usr/bin/python3 env_name
 
 
 
@@ -87,7 +87,7 @@ Need to keep reading.
 
 Cd into your project and type the following to start a new enviroment (usually called venv) ...
 
-
+see the docs venv has changed with python3.6
 pyvenv <venv>               (Note: <venv> just means the name of the virtualenv)
 
 source <venv>/bin/activate  (this activates the env)

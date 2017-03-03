@@ -29,8 +29,8 @@ tmux split-window -h # splits the window side to side
 tmux resize-pane -t 0 -D 5
 tmux resize-pane -t 1 -R 20 # resize bottom left win over
 
-tmux send-keys -t 0 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl && vim' C-m        #can use enter or C-m for return
-tmux send-keys -t 1 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl' enter
+tmux send-keys -t 0 'cd ~/pythonstuff/flask && cl && vim' C-m        #can use enter or C-m for return
+tmux send-keys -t 1 'cd ~/pythonstuff/flask && cl' enter
 tmux send-keys -t 1 'workon flask && cl' enter
 tmux send-keys -t 2 'cd && cl' enter
 
@@ -53,7 +53,7 @@ tmux select-pane -t 0 # selects the first pane (top pane)
 # Opens second window and names it 'play' in the 'work' session.
 tmux new-window -t work:1 -n 'play'
 
-tmux send-keys -t 0 'cd ~/pythonstuff/tutorials/flask/flask-intro && cl && vim' enter
+tmux send-keys -t 0 'cd ~/pythonstuff/flask && cl && vim' enter
 
 tmux last-window    # go back to first window
 

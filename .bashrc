@@ -11,8 +11,9 @@ set -o vi
 #-----------------------------
 
 #change to normal mode (vim mode)
-bind "\C-o":vi-movement-mode                  
-
+# bind "\C-o":vi-movement-mode                  
+bind '"jk":vi-movement-mode'
+bind '"kj":vi-movement-mode'
 #clear screen in vim insert mode
 bind '"\C-l":"\C-uclear\C-m"'                 
 
