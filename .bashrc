@@ -38,7 +38,8 @@ export HISTSIZE=500
 # Some alias's
 #-------------
 
-alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
+# alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
+alias go='cd /home/rob/pythonstuff/flask/flask_app'
 alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='clear; ls -lX'
