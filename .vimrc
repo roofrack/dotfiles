@@ -79,6 +79,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'klen/python-mode'
 " Plugin 'pydiction'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'fugitive.vim'
 Plugin 'vim-airline'
 Plugin 'vim-colorscheme-switcher'
@@ -96,9 +97,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'ivanov/vim-ipython'
 Plugin 'dbext.vim'
 Plugin 'tpope/vim-commentary'
-Plugin 'jaxbot/browserlink.vim'
+" Plugin 'jaxbot/browserlink.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'rust-lang/rust.vim'
+Plugin 'ternjs/tern_for_vim'
 
 Plugin 'SirVer/ultisnips'
 
@@ -191,6 +193,8 @@ let g:syntastic_loc_list_height=2
 "youcompleteme_settings
 "----------------------
 let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_server_python_interpreter = '/usr/bin/python2'
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " let g:ycm_show_diagnostics_ui = 1
 
@@ -213,9 +217,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" for Ultisnips to read in your custom snippets...
+" let g:UltiSnipsSnippetDir="~/.vim/UltiSnips"
 
-" let g:bl_serverpath='0.0.0.0:9001/js/socket.js'
-
+" to read in other Ultisnips...
+" let g:UltiSnipsSnippetDirectories=["snips", "UltiSnips"]
 
 
 
@@ -322,7 +328,7 @@ nnoremap <Space> i_<Esc>r
 "select all
 nnoremap <Leader>a ggVG
 
-"hen indenting keep selection highlighted
+"When indenting keep selection highlighted
 vnoremap > >gv
 vnoremap < <gv
 

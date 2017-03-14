@@ -56,6 +56,7 @@ alias venv='source venv/bin/activate'
 
 alias vbash='vim ~/.bashrc'
 alias vvim='vim ~/.vimrc'
+alias browser='browser-sync start --config bs-config.js'
 
 
 
