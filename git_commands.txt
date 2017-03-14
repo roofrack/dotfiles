@@ -2,6 +2,8 @@
 git fetch --all
 git reset --hard origin/master
 
+# push your stuff up to github (remote github is origin)
+git push origin master
 
 clone a repo
 git clone https://github/.com/roofrack/dotfiles.git ~/dotfiles
