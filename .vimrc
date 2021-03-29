@@ -14,7 +14,7 @@ set t_Co=256
 set number                     "Line numbers are good
 set history=1000               "Store lots of :cmdline history
 " set showcmd                    "Show incomplete cmds down the bottom
-set cursorline                 "Turn on line highlighting
+"set cursorline                 "Turn on line highlighting
 set ruler                      "show line number and column
 set mouse=a                    "allows proper use of mouse inside vim
 "set hidden                     "have buffer with unsaved work open in background
@@ -34,7 +34,7 @@ augroup END
 
 
 "The line below turns off the white highlighting line
-hi CursorLine term=bold cterm=bold guibg=Grey40
+"hi CursorLine term=bold cterm=bold guibg=Grey40
 
 let mapleader=","
 let maplocalleader="\\"
@@ -69,58 +69,58 @@ set nofoldenable               "dont fold by default
 " This loads all the plugins specified in ~/.vim/vundle.vim
 " Use Vundle plugin to manage all other plugins
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 
 
 "--------------------------plugins----------------------------------------------
 
-Plugin 'VundleVim/Vundle.vim'
-" Plugin 'klen/python-mode'
-" Plugin 'pydiction'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fugitive.vim'
-Plugin 'vim-airline'
-Plugin 'vim-colorscheme-switcher'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-misc'
-Plugin 'scrooloose/nerdtree'
-" Plugin 'python_editing'
-Plugin 'mattn/emmet-vim'
-" Plugin 'tpope/vim-surround'
-" Plugin 'rstacruz/sparkup'
-Plugin 'christoomey/vim-tmux-navigator'
-" Plugin 'edkolev/tmuxline.vim'
-" Plugin 'tpope/vim-dispatch'
-" Plugin 'vim-scripts/upAndDown'
-" Plugin 'ivanov/vim-ipython'
-Plugin 'dbext.vim'
-Plugin 'tpope/vim-commentary'
-" Plugin 'jaxbot/browserlink.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'rust-lang/rust.vim'
-Plugin 'ternjs/tern_for_vim'
+"Plugin 'VundleVim/Vundle.vim'
+"Plugin 'klen/python-mode'
+"Plugin 'pydiction'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'fugitive.vim'
+"Plugin 'vim-airline'
+"Plugin 'vim-colorscheme-switcher'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'vim-misc'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'python_editing'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'tpope/vim-surround'
+"Plugin 'rstacruz/sparkup'
+"Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'edkolev/tmuxline.vim'
+"Plugin 'tpope/vim-dispatch'
+"Plugin 'vim-scripts/upAndDown'
+"Plugin 'ivanov/vim-ipython'
+"Plugin 'dbext.vim'
+"Plugin 'tpope/vim-commentary'
+"Plugin 'jaxbot/browserlink.vim'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'rust-lang/rust.vim'
+"Plugin 'ternjs/tern_for_vim'
 
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
 
 
 "Need this line after listing all the plugins
-call vundle#end()
+"call vundle#end()
 filetype plugin indent on
 
 
 "------------------------plugin settings----------------------------------------
 
 "flazz/vim-colorschemes_settings ...
-colorscheme wombat256
+"colorscheme wombat256
 
 
 "vim-airline_settings ...
-let g:airline_theme='badwolf'
+"let g:airline_theme='badwolf'
 " let g:airline_theme='simple'
 " let g:airline_theme='dark'
 " let g:airline_theme='light'
@@ -130,12 +130,12 @@ let g:airline_theme='badwolf'
 set laststatus=2
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline_inactive_collapse=1
-let g:airline#extensions#syntastic#enabled = 1
+"let g:airline_inactive_collapse=1
+"let g:airline#extensions#syntastic#enabled = 1
 
 " when i turn this on it will screw airline up (laptop computer works ok)
 " When its off the fonts don't look as nice
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 
 "set guifont=Liberation\ Mono\ for\ Powerline\ 10 
 
@@ -145,18 +145,18 @@ let g:airline_powerline_fonts = 1
 
 
 "NERDTree_settings ...
-let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
-let NERDTreeWinSize = 20
-let NERDTreeShowBookmarks = 1
+"let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
+"let NERDTreeWinSize = 20
+"let NERDTreeShowBookmarks = 1
 "Toggle on/off NERDTree
-nnoremap <C-n> :NERDTreeToggle<CR>
+"nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree
 "nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 
 "dbext_settings ...
-let g:dbext_default_buffer_lines = 10
-let g:dbext_default_use_sep_result_buffer = 1
+"let g:dbext_default_buffer_lines = 10
+"let g:dbext_default_use_sep_result_buffer = 1
 
 "Database profile connections for the dbtext plugin...
 "let g:dbext_default_profile_SQLITE_for_tysql='type=SQLITE:SQLITE_bin=/usr/bin/sqlite3:dbname=~/database/tysql.sqlite'
@@ -165,7 +165,7 @@ let g:dbext_default_use_sep_result_buffer = 1
 
 "let g:dbext_default_profile_SQLITE_for_sheep='type=SQLITE:dbname=~/database/sheep/sheep.sqlite'
 "let g:dbext_default_profile_SQLITE_for_sheep_bad='type=SQLITE:dbname=~/database/sheep/sheep_bad.sqlite'
-let g:dbext_default_profile_SQLITE_for_sample ='type=SQLITE:dbname=~/pythonstuff/tutorials/flask/flask-intro/sample.db'
+"let g:dbext_default_profile_SQLITE_for_sample ='type=SQLITE:dbname=~/pythonstuff/tutorials/flask/flask-intro/sample.db'
 
 
 "Pymode_settings ...
@@ -176,23 +176,23 @@ let g:dbext_default_profile_SQLITE_for_sample ='type=SQLITE:dbname=~/pythonstuff
 
 "emmett_settings ...
 "This allows the use of the trigger key in all modes
-let g:user_emmet_mode='a'
+"let g:user_emmet_mode='a'
 
 "Syntastic_settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=2
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_loc_list_height=2
 
 
 "youcompleteme_settings
 "----------------------
-let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_autoclose_preview_window_after_completion=1
 " let g:ycm_confirm_extra_conf = 0
 " let g:ycm_server_python_interpreter = '/usr/bin/python2'
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -210,12 +210,12 @@ let g:ycm_autoclose_preview_window_after_completion=1
 " Ultisnips plugin settings
 "--------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsEditSplit="vertical"
 
 
 
@@ -284,7 +284,7 @@ nnoremap ; :
 
 " This mapping will run the current python file (which is currently open in vim) in a 
 " seperate tmux pane (I usually make pane # 1 the bottom pane)
-autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
+"autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
 
 " So... To break this down ...
 
@@ -302,7 +302,7 @@ autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux s
 
 
 " This one (pressing g<CR>) will reload the python shell with the current file open in vim
-autocmd Filetype python nnoremap g<CR> <Esc>:update<CR>:!tmux send-keys -t 1 "exit()" Enter "cl && python -i %" Enter <CR> <CR>
+"autocmd Filetype python nnoremap g<CR> <Esc>:update<CR>:!tmux send-keys -t 1 "exit()" Enter "cl && python -i %" Enter <CR> <CR>
 
 
 

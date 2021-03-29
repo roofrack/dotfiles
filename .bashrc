@@ -5,17 +5,17 @@
 export EDITOR='vim'
 
 # puts bash EDITOR in vi mode
-set -o vi   
+#set -o vi   
 
 #some key bindings in bash...
 #-----------------------------
 
 #change to normal mode (vim mode)
 # bind "\C-o":vi-movement-mode                  
-bind '"jk":vi-movement-mode'
-bind '"kj":vi-movement-mode'
+#bind '"jk":vi-movement-mode'
+#bind '"kj":vi-movement-mode'
 #clear screen in vim insert mode
-bind '"\C-l":"\C-uclear\C-m"'                 
+#bind '"\C-l":"\C-uclear\C-m"'                 
 
 #add sudo to beginning of line (insert mode)
 bind '"\es":"\C-usudo"'                      
@@ -26,10 +26,10 @@ bind '"\es":"\C-usudo"'
 
 # export HISTCONTROL=ignoredups
 # export HISTCONTROL=erasedups
-export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE="history:ll:ls:cd:cl:his"
-export HISTFILESIZE=1000
-export HISTSIZE=500
+#export HISTCONTROL=ignoreboth:erasedups
+#export HISTIGNORE="history:ll:ls:cd:cl:his"
+#export HISTFILESIZE=1000
+#export HISTSIZE=500
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
