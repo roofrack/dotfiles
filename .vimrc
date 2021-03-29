@@ -24,6 +24,7 @@ set noswapfile                 "prevents extra file being saved in home director
 set nobackup
 set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
 set nowrap
+set noshowmode                  "stops insert message appearinge
 
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
@@ -62,6 +63,17 @@ set nofoldenable               "dont fold by default
 "                             Plugins                                          = 
 "                                                                              =
 "===============================================================================
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+Plug 'itchyny/lightline.vim'
+call plug#end()
+
 
 
 "--------------------------Vundle Initialization--------------------------------
