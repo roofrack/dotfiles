@@ -7,22 +7,23 @@
 "Set nocompatible to run vim rather than vi
 "This must be first, because it changes other options as a side effect.
 set nocompatible
-syntax on                      "turn on syntax highlighting
-set encoding=utf-8             "Need this for vim-airline to work.
+syntax on                       "turn on syntax highlighting
+set encoding=utf-8              "Need this for vim-airline to work.
 set t_Co=256
+set laststatus=2
 "set modelines=1                "Check for commands on last line
-set number                     "Line numbers are good
-set history=1000               "Store lots of :cmdline history
-" set showcmd                    "Show incomplete cmds down the bottom
+set number                      "Line numbers are good
+set history=1000                "Store lots of :cmdline history
+"set showcmd                    "Show incomplete cmds down the bottom
 "set cursorline                 "Turn on line highlighting
-set ruler                      "show line number and column
-set mouse=a                    "allows proper use of mouse inside vim
+set ruler                       "show line number and column
+set mouse=a                     "allows proper use of mouse inside vim
 "set hidden                     "have buffer with unsaved work open in background
-set helpheight=99999           "makes :help open in bigger buffer
-set wildmenu                   "tab completion for the vim help
-set noswapfile                 "prevents extra file being saved in home directory
-set nobackup
-set ttimeoutlen=50             "this prevents delay when using esc to exit insert mode 
+set helpheight=99999            "makes :help open in bigger buffer
+set wildmenu                    "tab completion for the vim help
+"set noswapfile                 "prevents extra file being saved in home directory
+"set nobackup
+set ttimeoutlen=50              "this prevents delay when using esc to exit insert mode
 set nowrap
 set noshowmode                  "stops insert message appearinge
 
@@ -60,9 +61,13 @@ set nofoldenable               "dont fold by default
 
 "===============================================================================
 "                                                                              =
-"                             Plugins                                          = 
+"                             Plugins                                          =
 "                                                                              =
 "===============================================================================
+
+" These next few lines are for an auto installer for vim-plug. Works great. On a new system just
+" open vim and it will auto install vim-plug and setup .vim directory for my
+" plugins.
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -70,23 +75,18 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+"--------------------------plugins----------------------------------------------
 call plug#begin()
-Plug 'itchyny/lightline.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/vim-gitbranch'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
+"--------------------------------------------------------------------------------
 
-
-"--------------------------Vundle Initialization--------------------------------
-
-" This loads all the plugins specified in ~/.vim/vundle.vim
-" Use Vundle plugin to manage all other plugins
-
-"filetype off
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-
-
-"--------------------------plugins----------------------------------------------
 
 "Plugin 'VundleVim/Vundle.vim'
 "Plugin 'klen/python-mode'
@@ -97,8 +97,8 @@ call plug#end()
 "Plugin 'vim-colorscheme-switcher'
 "Plugin 'flazz/vim-colorschemes'
 "Plugin 'vim-misc'
-"Plugin 'scrooloose/nerdtree'
-"Plugin 'python_editing'
+"plugin 'scrooloose/nerdtree'
+"plugin 'python_editing'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'tpope/vim-surround'
 "Plugin 'rstacruz/sparkup'
@@ -121,8 +121,7 @@ call plug#end()
 
 
 "Need this line after listing all the plugins
-"call vundle#end()
-filetype plugin indent on
+"filetype plugin indent on
 
 
 "------------------------plugin settings----------------------------------------
@@ -132,14 +131,13 @@ filetype plugin indent on
 
 
 "vim-airline_settings ...
-"let g:airline_theme='badwolf'
+let g:airline_theme='badwolf'
 " let g:airline_theme='simple'
 " let g:airline_theme='dark'
 " let g:airline_theme='light'
 " let g:airline_theme='durant'
 " let g:airline_theme='hybrid'
 " let g:airline_theme='wombat'
-set laststatus=2
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#buffer_nr_show = 0
 "let g:airline_inactive_collapse=1
@@ -147,23 +145,17 @@ set laststatus=2
 
 " when i turn this on it will screw airline up (laptop computer works ok)
 " When its off the fonts don't look as nice
-"let g:airline_powerline_fonts = 1
-
-"set guifont=Liberation\ Mono\ for\ Powerline\ 10 
-
-" not sure what this does if anything
-" let g:Powerline_symbols = 'fancy'
-
+let g:airline_powerline_fonts = 1
 
 
 "NERDTree_settings ...
-"let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
-"let NERDTreeWinSize = 20
-"let NERDTreeShowBookmarks = 1
+let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
+let NERDTreeWinSize = 20
+let NERDTreeShowBookmarks = 1
 "Toggle on/off NERDTree
-"nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree
-"nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 
 "dbext_settings ...
@@ -232,22 +224,9 @@ set laststatus=2
 
 
 
-"python with virtualenv support
-"really not sure what this does or if its necessary
-" py << EOF
-" import os
-" import sys
-" if 'VIRTUAL_ENV' in os.environ:
-"   project_base_dir = os.environ['VIRTUAL_ENV']
-"   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"   execfile(activate_this, dict(__file__=activate_this))
-" EOF
-
-
-
 "===============================================================================
 "                                                                              =
-"                             Mapping                                          = 
+"                             Mapping                                          =
 "                                                                              =
 "===============================================================================
 
@@ -279,7 +258,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 "Save(update) and run a python file using <F5>
 inoremap <F5> <Esc>:update<CR>:!python2 %<CR>
 nnoremap <F5> <Esc>:update<CR>:!python2 %<CR>
-inoremap <F6> <Esc>:update<CR>:!python3  %<CR>
+inoremap <F6> <Esc>:update<CR>:!python3 %<CR>
 nnoremap <F6> <Esc>:update<CR>:!python3 %<CR>
 
 
@@ -294,7 +273,7 @@ nnoremap ; :
 " We can combine vimscript and tmux scripting to do things in other panes.
 
 
-" This mapping will run the current python file (which is currently open in vim) in a 
+" This mapping will run the current python file (which is currently open in vim) in a
 " seperate tmux pane (I usually make pane # 1 the bottom pane)
 "autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
 
@@ -302,10 +281,10 @@ nnoremap ; :
 
 " autocmd Filetype python            -Makes this mapping only apply to python files (.py)
 " nnoremap <buffer> <CR>             -Make a mapping in normal mode using the 'enter' key as the shortcut key
-" <Esc>:w<CR>:                       -Get out of insert mode, enter command mode, save, enter, and then go back to command mode 
+" <Esc>:w<CR>:                       -Get out of insert mode, enter command mode, save, enter, and then go back to command mode
 " !                                  -Run the following commands as if they were in the bash shell
 " tmux send-keys -t 1                -send the following commands to terminal 1 (I usually have this as the bottom pane)
-" "cd %:p:h && cl && python -i %"    -cd into the same path as the current file thats open in vim, 
+" "cd %:p:h && cl && python -i %"    -cd into the same path as the current file thats open in vim,
 "                                     cl screen(this is an alias for clear), and start python in interactive mode (the
 "                                     % symbol just stands for the filename which is currently open in vim)
 " Enter                              -Tells bash to press 'Enter'
@@ -365,7 +344,7 @@ cnoremap jk <Esc>
 nnoremap <leader>q :close <cr>
 
 "Easier way to move around splits (open windows)
-noremap <c-j> <c-w>j
+nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
@@ -377,7 +356,7 @@ nnoremap <Leader><Leader> <C-^>
 
 "===============================================================================
 "                                                                              =
-"                             Abbreviations                                    = 
+"                             Abbreviations                                    =
 "                                                                              =
 "===============================================================================
 
@@ -400,7 +379,7 @@ iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
 
 "===============================================================================
 "                                                                              =
-"                             Modelines                                        = 
+"                             Modelines                                        =
 "                                                                              =
 "===============================================================================
 

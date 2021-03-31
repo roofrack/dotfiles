@@ -5,20 +5,20 @@
 export EDITOR='vim'
 
 # puts bash EDITOR in vi mode
-#set -o vi   
+#set -o vi
 
 #some key bindings in bash...
 #-----------------------------
 
 #change to normal mode (vim mode)
-# bind "\C-o":vi-movement-mode                  
+# bind "\C-o":vi-movement-mode
 #bind '"jk":vi-movement-mode'
 #bind '"kj":vi-movement-mode'
 #clear screen in vim insert mode
-#bind '"\C-l":"\C-uclear\C-m"'                 
+#bind '"\C-l":"\C-uclear\C-m"'
 
 #add sudo to beginning of line (insert mode)
-bind '"\es":"\C-usudo"'                      
+bind '"\es":"\C-usudo"'
 
 
 # bash history settings...
@@ -88,7 +88,7 @@ PATHTODIRECTORY_3="change this to whatever"
 #PS1="\[\033[1;33m\][\u@\h\[\033[1;35m\] \w \[\033[1;33m\]]\[\033[1;35m\]\$\[\033[0m\]"
 # OR...
 # PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
-PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
+PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
 
 export PS1
 
