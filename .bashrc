@@ -18,7 +18,7 @@ export EDITOR='vim'
 #bind '"\C-l":"\C-uclear\C-m"'
 
 #add sudo to beginning of line (insert mode)
-bind '"\es":"\C-usudo"'
+#bind '"\es":"\C-usudo"'
 
 
 # bash history settings...
@@ -39,33 +39,33 @@ bind '"\es":"\C-usudo"'
 #-------------
 
 # alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
-alias go='cd /home/rob/pythonstuff/flask/flask_app'
-alias vi='vim'
-alias ls='ls --color=auto'
-alias ll='clear; ls -lX'
-alias cl='clear'
-alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
-alias runserver='python manage.py runserver'
-alias bob='python manage.py'
+#alias go='cd /home/rob/pythonstuff/flask/flask_app'
+#alias vi='vim'
+#alias ls='ls --color=auto'
+#alias ll='clear; ls -lX'
+#alias cl='clear'
+#alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
+#alias runserver='python manage.py runserver'
+#alias bob='python manage.py'
 
-alias his='history 20'
-alias hg='history | grep'
+#alias his='history 20'
+#alias hg='history | grep'
 
-alias jf='cd ~/pythonstuff/tutorials/flask/flask-intro/'
-alias venv='source venv/bin/activate'
+#alias jf='cd ~/pythonstuff/tutorials/flask/flask-intro/'
+#alias venv='source venv/bin/activate'
 
-alias vbash='vim ~/.bashrc'
-alias vvim='vim ~/.vimrc'
-alias browser='browser-sync start --config bs-config.js'
+#alias vbash='vim ~/.bashrc'
+#alias vvim='vim ~/.vimrc'
+#alias browser='browser-sync start --config bs-config.js'
 
 
 
 # The 2 prevents colorscheme change in vim. Sets color to 264
 # the -u forces tmux to use unicode. This allows vim-airline to work inside tmux.
-alias tmux='tmux -2u'
-alias ta='tmux -2u a'
-alias ka='killall tmux'
-alias tl='tmux ls'
+#alias tmux='tmux -2u'
+#alias ta='tmux -2u a'
+#alias ka='killall tmux'
+#alias tl='tmux ls'
 
 
 
@@ -73,10 +73,10 @@ alias tl='tmux ls'
 #-------------------
 # Could not get this to work
 # Some variables... change these as needed
-SESSIONNAME="work"
-MYDIRECTORY_1="~/pythonstuff/tutorials"
-PATHTODIRECTORY_2="change this to whatever"
-PATHTODIRECTORY_3="change this to whatever"
+#SESSIONNAME="work"
+#MYDIRECTORY_1="~/pythonstuff/tutorials"
+#PATHTODIRECTORY_2="change this to whatever"
+#PATHTODIRECTORY_3="change this to whatever"
 
 
 
@@ -96,11 +96,11 @@ export PS1
 # Virtualenv
 #-----------
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
-export VIRTUALENVWRAPPER_VIRTUALENV=virtualenv2
-source /usr/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/Projects
+#export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
+#export VIRTUALENVWRAPPER_VIRTUALENV=virtualenv2
+#source /usr/bin/virtualenvwrapper.sh
 
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 #source ~/.bin/tmuxinator.bash
@@ -109,7 +109,7 @@ source /usr/bin/virtualenvwrapper.sh
 source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
-export PATH=$PATH:~/bin/:~/.bin/
+#export PATH=$PATH:~/bin/:~/.bin/
 
 # Make the arch logo appear in new shell startup
 #archey
