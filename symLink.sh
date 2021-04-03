@@ -11,7 +11,7 @@ files=".bashrc .vimrc .inputrc .i3status.conf"
 dir=~/dotfiles
 
 mkdir ~/bob
-cd ~/bob
+
 for file in $files; do
     echo making yer sym link for $file...
     ln -sf $dir/$file ~/bob/$file
@@ -20,7 +20,7 @@ done
 echo A few more links...
 ln -sf ~/dotfiles/terminalrc ~/.config/xfce4/terminal/terminalrc
 ln -sf ~/dotfiles/rc.conf ~/.config/ranger/rc.conf
-ln -sf ~/dotfiles/config ~/config/i3/config
+ln -sf ~/dotfiles/config ~/.config/i3/config
 
 
 
