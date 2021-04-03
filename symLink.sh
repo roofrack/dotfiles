@@ -16,11 +16,14 @@ for file in $files; do
     echo making yer sym link for $file...
     ln -sf $dir/$file ~/bob/$file
 done
+
 # A few more links. TODO figure out how to not hard code these...
 echo A few more links...
 ln -sf ~/dotfiles/terminalrc ~/.config/xfce4/terminal/terminalrc
 ln -sf ~/dotfiles/rc.conf ~/.config/ranger/rc.conf
 ln -sf ~/dotfiles/config ~/.config/i3/config
+mkdir -p ~/bob//Pictures/wallpaper
+ln -sf ~/dotfiles/wallpaper/arch3.png ~/bob/Pictures/wallpaper
 
 
 
