@@ -7,7 +7,7 @@
 
 
 
-files=".bashrc .vimrc .inputrc .i3status.conf"
+files=".bashrc .vimrc .inputrc .i3status.conf .fehbg"
 dir=~/dotfiles
 
 mkdir ~/bob
