@@ -20,6 +20,7 @@ done
 echo A few more links...
 ln -sf ~/dotfiles/terminalrc ~/.config/xfce4/terminal/terminalrc
 ln -sf ~/dotfiles/rc.conf ~/.config/ranger/rc.conf
+ln -sf ~/dotfiles/config ~/config/i3/config
 
 
 
