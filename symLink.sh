@@ -7,14 +7,14 @@
 
 
 
-files=".bashrc .vimrc .inputrc .i3status.conf .fehbg"
+files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc"
 dir=~/dotfiles
 
-mkdir ~/bob
+#mkdir ~/bob
 
 for file in $files; do
     echo making yer sym link for $file...
-    ln -sf $dir/$file ~/bob/$file
+    ln -sf $dir/$file ~/$file
 done
 
 # A few more links. TODO figure out how to not hard code these...
@@ -22,8 +22,8 @@ echo A few more links...
 ln -sf ~/dotfiles/terminalrc ~/.config/xfce4/terminal/terminalrc
 ln -sf ~/dotfiles/rc.conf ~/.config/ranger/rc.conf
 ln -sf ~/dotfiles/config ~/.config/i3/config
-mkdir -p ~/bob//Pictures/wallpaper
-ln -sf ~/dotfiles/wallpaper/arch3.png ~/bob/Pictures/wallpaper
+mkdir -p ~/Pictures/wallpaper
+ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 
 
 
