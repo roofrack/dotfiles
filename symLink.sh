@@ -10,31 +10,26 @@
 files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc"
 dir=~/dotfiles
 
-#mkdir ~/bob
+mkdir bob
 
 for file in $files; do
     echo making yer sym link for $file...
-    ln -sf $dir/$file ~/$file
+    ln -sf $dir/$file ~/bob/$file
 done
 
+echo
 # A few more links. TODO figure out how to not hard code these...
-echo A few more links...
-ln -sf ~/dotfiles/terminalrc ~/.config/xfce4/terminal/terminalrc
-ln -sf ~/dotfiles/rc.conf ~/.config/ranger/rc.conf
-ln -sf ~/dotfiles/config ~/.config/i3/config
-mkdir -p ~/Pictures/wallpaper
-ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 
+echo Building config directories for i3, ranger, xfce4-terminal and symlinking them to dotfiles...
 
+mkdir -p ~/bob/.config/xfce4/terminal
+ln -sf ~/dotfiles/terminalrc ~/bob/.config/xfce4/terminal/terminalrc
+mkdir -p ~/bob/.config/ranger/
+ln -sf ~/dotfiles/rc.conf ~/bob/.config/ranger/rc.conf
+mkdir -p ~/bob/.config/i3/
+ln -sf ~/dotfiles/config ~/bob/.config/i3/config
+mkdir -p ~/bob/Pictures/wallpaper
+ln -sf ~/dotfiles/wallpaper/arch3.png ~/bob/Pictures/wallpaper
 
-
-
-echo "
--I used an f option (ln -sf in the link command to delete
-any files that may already exist.
-
--If the link will be nested in a directory such as ~/.config/i3/config it might
-be easier to just cd into the directory and use the ln -s command
-from there...
-So for example... cd into .config/i3/ and enter ln -sf ~/dotfiles/config
-and or perhaps cd .config/ranger/ and type ln -sf ~/dotfiles/rc.conf"
+echo Done!
+echo Rob, please read...  ~/dotfiles/README.txt!
