@@ -35,16 +35,16 @@ mv dir1 dir2 (moves dir1 and its contents into dir2)
 user account commands
 ---------------------
 
-useradd
-userdel
+useradd -m -G wheel username
+userdel username
 usermod
 
 groupadd 
 groupdel
 groupmod
 
-chown
-chmod
+chown rob:rob fileName
+chmod +x fileName
 
 
 awk commands...
