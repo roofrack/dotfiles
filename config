@@ -208,7 +208,7 @@ bar {
 exec_always feh --bg-fill ~/Pictures/wallpaper/arch3.png
 
 # Windows Compositor (had to pacman install picom to add transparency to i3)
-exec_always picom -f
+#exec_always picom -f
 
 #----- i3-gaps -----
 gaps inner 9
