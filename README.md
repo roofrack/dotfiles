@@ -24,7 +24,8 @@
      -ranger (just nice to have)
 
 # 4. i have this symlinked but may need to recopy /etc/X11/xinit/xinitrc to
-     ~/.xinitrc and comment out last 5 lines and add exec i3.
+     ~/.xinitrc and comment out last 5 lines and add exec i3. Dont forget to 
+     chown rob:rob .xinitrc or it wont work.
 # 
 # 5. for transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
 #    virtualbox issue.
