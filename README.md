@@ -18,20 +18,22 @@ Automating my set up...
 
  3. See dotfiles/archPackages for stuff to install but this is all you need...
 
-     -i3 (select 1 3 4 5)
-     -xorg-xinit
-     -xorg-server
-     -xfce4-terminal
-     -feh (for wallpaper)
-     -picom (for adding translucency to the xfce4-terminal)
+     -i3 (select 1 3 4 5),
+     -xorg-xinit,
+     -xorg-server,
+     -xfce4-terminal,
+     -feh (for wallpaper),
+     -picom (for adding translucency to the xfce4-terminal).
      -gnu-free-fonts (airline works fine without this except for the little line symbol won't
       render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
-      font pkg the unicode works
+      font pkg the unicode works,
      -ranger (just nice to have)
 
- 4. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
+ 4. run ./dotfiles/i3bootstrap.sh
+
+ 5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. Dont forget to
      chown rob:rob .xinitrc or it wont work.
 
- 5. For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
+ 6. For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
     virtualbox issue. I have symlinked this as well to dotfiles directory so should work.
