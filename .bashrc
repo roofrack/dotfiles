@@ -18,7 +18,7 @@ export EDITOR='vim'
 #bind '"\C-l":"\C-uclear\C-m"'
 
 #add sudo to beginning of line (insert mode)
-#bind '"\es":"\C-usudo"'
+bind '"\es":"\C-usudo"'
 
 
 # bash history settings...
@@ -40,22 +40,23 @@ export EDITOR='vim'
 
 # alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
 #alias go='cd /home/rob/pythonstuff/flask/flask_app'
-#alias vi='vim'
-#alias ls='ls --color=auto'
+alias vi='vim'
+alias ls='ls --color=auto'
 #alias ll='clear; ls -lX'
+alias ll='ls -la'
 #alias cl='clear'
 #alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 #alias runserver='python manage.py runserver'
 #alias bob='python manage.py'
 
-#alias his='history 20'
-#alias hg='history | grep'
+alias his='history 20'
+alias hg='history | grep'
 
 #alias jf='cd ~/pythonstuff/tutorials/flask/flask-intro/'
 #alias venv='source venv/bin/activate'
 
-#alias vbash='vim ~/.bashrc'
-#alias vvim='vim ~/.vimrc'
+alias brc='vim ~/.bashrc'
+alias vrc='vim ~/.vimrc'
 #alias browser='browser-sync start --config bs-config.js'
 
 

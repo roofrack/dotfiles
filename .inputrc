@@ -1,5 +1,5 @@
 # Rob, you make this file March 29, 2021
-# Best to add vi mode stuff in the inputrc file rather then bash so vi mode 
+# Best to add vi mode stuff in the inputrc file rather then bash so vi mode
 # keybindings work in all terminal applicatiions other then just bash.
 #
 set editing-mode vi
