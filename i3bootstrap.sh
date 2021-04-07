@@ -2,15 +2,14 @@
 
 # A fun little project to create sym links in yer home directory to yer dot files...
 #
-# Of course you will have to change the parts where it says bob and make
-# it just work for your home directory...
+# This is for setting up a new install with the I3 Window Manager and your config files.
+#
+#
 
 
 
 files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf"
 dir=~/dotfiles
-
-#mkdir bob
 
 for file in $files; do
     echo making yer sym link for $file...
