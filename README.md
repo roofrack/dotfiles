@@ -27,6 +27,7 @@ Automating my set up...
         render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
         font pkg the unicode works,
      ranger (just nice to have)
+     ntp (may need this to sync your system time. Use systemctl enable & start ntpd.service)
 
  4. run ./dotfiles/i3bootstrap.sh
 

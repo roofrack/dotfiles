@@ -13,6 +13,7 @@ set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
 set number                      "Line numbers are good
+set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
 "set cursorline                 "Turn on line highlighting
@@ -152,11 +153,11 @@ let g:airline_powerline_fonts = 1
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
 let NERDTreeWinSize = 20
 let NERDTreeShowBookmarks = 1
+let NERDTreeHighlightCursorline=0
 "Toggle on/off NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree
 nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
-
 
 "dbext_settings ...
 "let g:dbext_default_buffer_lines = 10
