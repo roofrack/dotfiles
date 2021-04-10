@@ -110,12 +110,9 @@ roofrack () {
     git add --all
     echo git status...
     git status
-
+    echo
     echo running git commit...
     git commit -m "another"
-    echo git status...
-    git status
-    
     echo
     echo pushing to GitHub...
     git push origin master
