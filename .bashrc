@@ -121,4 +121,5 @@ roof () {
 
     git add --all
     git commit -m "another"
+    git status
 }
