@@ -105,7 +105,6 @@ source /usr/share/git/completion/git-completion.bash
 # Funcions I made (robert)
 # -----------------------
 
-alias roof='roofrack roofrack'
 roofrack () {
     git add --all
     git commit -m "another"
