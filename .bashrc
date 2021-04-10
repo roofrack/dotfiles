@@ -105,6 +105,7 @@ source /usr/share/git/completion/git-completion.bash
 # Funcions I made (robert)
 # -----------------------
 
+# speed up git commands
 roofrack () {
     echo running git add --all...
     git add --all
