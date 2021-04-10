@@ -119,6 +119,6 @@ source /usr/share/git/completion/git-completion.bash
 # -----------------------
 roof () {
 
-    git add *
-    git commit -m "yep"
+    git add --all
+    git commit -m "another"
 }
