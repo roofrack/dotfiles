@@ -111,5 +111,7 @@ roofrack () {
     git commit -m "another"
     git status
     echo
-    git push origin master $1=roofrack
+    git push origin master $1
+    $1=roofrack
+
 }
