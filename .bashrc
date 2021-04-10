@@ -122,4 +122,5 @@ roof () {
     git add --all
     git commit -m "another"
     git status
+    git push origin master
 }
