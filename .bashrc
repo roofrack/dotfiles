@@ -111,5 +111,5 @@ roofrack () {
     git status
     echo
     echo pushing to GitHub...
-    git push origin master $1
+    git push origin master
 }
