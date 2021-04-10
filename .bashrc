@@ -105,13 +105,12 @@ source /usr/share/git/completion/git-completion.bash
 # Funcions I made (robert)
 # -----------------------
 
+alias roof='roofrack roofrack'
 roofrack () {
-
     git add --all
     git commit -m "another"
     git status
     echo
     echo pushing to GitHub...
-    $1="roofrack"
     git push origin master $1
 }
