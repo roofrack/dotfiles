@@ -4,19 +4,6 @@
 
 export EDITOR='vim'
 
-# puts bash EDITOR in vi mode
-#set -o vi
-
-#some key bindings in bash...
-#-----------------------------
-
-#change to normal mode (vim mode)
-# bind "\C-o":vi-movement-mode
-#bind '"jk":vi-movement-mode'
-#bind '"kj":vi-movement-mode'
-#clear screen in vim insert mode
-#bind '"\C-l":"\C-uclear\C-m"'
-
 #add sudo to beginning of line (insert mode)
 bind '"\es":"\C-usudo"'
 
@@ -117,10 +104,12 @@ source /usr/share/git/completion/git-completion.bash
 
 # Funcions I made (robert)
 # -----------------------
-roof () {
+
+roofrack () {
 
     git add --all
     git commit -m "another"
     git status
+    echo
     git push origin master
 }
