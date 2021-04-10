@@ -1,6 +1,6 @@
-                                                                ===========================
-                                                                =        README.md        =
-                                                                ===========================
+                                                ===========================
+                                                =        README.md        =
+                                                ===========================
 
 I wrote this as a guide for myself for installing some things on a new Arch
 installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few directories and
