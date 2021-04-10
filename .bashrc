@@ -108,7 +108,6 @@ source /usr/share/git/completion/git-completion.bash
 roofrack () {
     echo running git add --all...
     git add --all
-    echo
     git status
     echo running git commit...
     git commit -m "another"
