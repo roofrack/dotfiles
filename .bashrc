@@ -114,3 +114,11 @@ source /usr/share/git/completion/git-completion.bash
 
 # Make the arch logo appear in new shell startup
 #archey
+
+# Funcions I made (robert)
+# -----------------------
+roof () {
+
+    git add *
+    git commit -m "yep"
+}
