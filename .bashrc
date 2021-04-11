@@ -53,7 +53,10 @@ alias vrc='vim ~/.vimrc'
 #alias tmux='tmux -2u'
 #alias ta='tmux -2u a'
 #alias ka='killall tmux'
-#alias tl='tmux ls'
+alias tl='tmux ls'
+alias tn='tmux new -s'
+alias tk='tmux kill-session -t'
+alias ta='tmux a'
 
 
 
@@ -105,8 +108,7 @@ source /usr/share/git/completion/git-completion.bash
 # Funcions I made (robert)
 # -----------------------
 
-# speed up git commands
-# might be a better way of doing this but...
+# a function to condense git commands
 roofrack () {
     echo running git add --all...
     git add --all

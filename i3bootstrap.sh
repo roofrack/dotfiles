@@ -8,7 +8,7 @@
 
 
 
-files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf"
+files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 dir=~/dotfiles
 
 for file in $files; do

@@ -37,3 +37,6 @@ Automating my set up...
 
  6. For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
     virtualbox issue. I have symlinked this as well to dotfiles directory so should work.
+
+ 7. Tmux installed with pacman. May want to install tpm (a tmux plugin manager by...
+    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm)

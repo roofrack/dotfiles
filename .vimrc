@@ -27,6 +27,7 @@ set wildmenu                    "tab completion for the vim help
 set ttimeoutlen=50              "this prevents delay when using esc to exit insert mode
 set nowrap
 set noshowmode                  "stops insert message appearinge
+set background=dark             "Need this on for tmux to not change the vim color-scheme
 
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
@@ -81,6 +82,8 @@ call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
 "Plug 'itchyny/lightline.vim'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
@@ -158,6 +161,11 @@ let NERDTreeHighlightCursorline=0
 nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree
 nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+
+
+" vim-tmux-runner settings
+let g:VtrUseVtrMaps = 1
+"let g:VtrClearBeforeSend = 1
 
 "dbext_settings ...
 "let g:dbext_default_buffer_lines = 10
@@ -257,10 +265,10 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 
 "Save(update) and run a python file using <F5>
-inoremap <F5> <Esc>:update<CR>:!python2 %<CR>
-nnoremap <F5> <Esc>:update<CR>:!python2 %<CR>
-inoremap <F6> <Esc>:update<CR>:!python3 %<CR>
-nnoremap <F6> <Esc>:update<CR>:!python3 %<CR>
+"inoremap <F5> <Esc>:update<CR>:!python2 %<CR>
+"nnoremap <F5> <Esc>:update<CR>:!python2 %<CR>
+"inoremap <F6> <Esc>:update<CR>:!python3 %<CR>
+"nnoremap <F6> <Esc>:update<CR>:!python3 %<CR>
 
 
 " Enter command mode easier ...
@@ -276,7 +284,7 @@ nnoremap ; :
 
 " This mapping will run the current python file (which is currently open in vim) in a
 " seperate tmux pane (I usually make pane # 1 the bottom pane)
-"autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && cl && python -i %" Enter <CR> <CR>
+"autocmd Filetype python nnoremap <silent> <buffer> <CR> <Esc>:update<CR>:!tmux send-keys -t 1 "cd %:p:h && clear && python -i %" Enter <CR> <CR>
 
 " So... To break this down ...
 
@@ -294,7 +302,7 @@ nnoremap ; :
 
 
 " This one (pressing g<CR>) will reload the python shell with the current file open in vim
-"autocmd Filetype python nnoremap g<CR> <Esc>:update<CR>:!tmux send-keys -t 1 "exit()" Enter "cl && python -i %" Enter <CR> <CR>
+"autocmd Filetype python nnoremap g<CR> <Esc>:update<CR>:!tmux send-keys -t 1 "exit()" Enter "clear && python -i %" Enter <CR> <CR>
 
 
 
