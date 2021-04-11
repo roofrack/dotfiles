@@ -111,6 +111,8 @@ source /usr/share/git/completion/git-completion.bash
 
 # a function to condense git commands
 roofrack () {
+    echo cd\'ing into dotfiles
+    cd ~/dotfiles
     echo running git add --all...
     git add --all
     echo git status...
