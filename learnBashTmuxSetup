@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Set up a default tmux session for development
+# Using vim-tmux-runner plugin inside .tmux.conf and set this up to attach the 
+# runner to pane 1 (bottom pane) and load a vim file in top pane (pane 0)
+
+clear                                                        #clear screen
+echo Setting up yer enviroment...
+echo 
+echo This will take a few seconds...
+echo
+echo Just hold yer horses...
+echo
+
+tmux new-session -d -s LearnBash > /dev/null 2>&1
+# the > /dev/null part makes the command run silently
+
+
+###########################################################
+#
+# First Window
+#
+###########################################################
+
+tmux rename-window play > /dev/null 2>&1
+
+tmux split-window -v > /dev/null 2>&1                        #splits the window up and down
+
+tmux send-keys -t 0 'vim buppy.sh' enter > /dev/null 2>&1    #open vim file buppy.sh
+
+# this is cool... can send commands to run inside vim so this will 
+# set up the bottom pane 1 to be the tmux runner.
+tmux send-keys -t 0 ':VtrAttachToPane1' enter > /dev/null 2>&1
+
+tmux resize-pane -t 0 -D 5 > /dev/null 2>&1                  #resize top pane down a bit
+tmux select-pane -t 0 > /dev/null 2>&1
+
+
+
+tmux -2 attach-session -d > /dev/null 2>&1
