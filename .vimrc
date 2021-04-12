@@ -165,6 +165,8 @@ nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 "vim-tmux-runner settings...
 let g:VtrUseVtrMaps = 1          "use default Vtm mappings
+nnoremap f<cr> :VtrSendFile<cr>
+nnoremap fl :VtrSendFile<cr>
 
 "dbext_settings ...
 "let g:dbext_default_buffer_lines = 10
