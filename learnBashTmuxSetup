@@ -25,16 +25,16 @@ tmux new-session -d -s LearnBash > /dev/null 2>&1
 tmux rename-window play > /dev/null 2>&1
 
 tmux split-window -v > /dev/null 2>&1                        #splits the window up and down
-tmux resize-pane -t 0 -D 5 > /dev/null 2>&1                  #resize top pane down a bit
 
 tmux send-keys -t 0 'vim buppy.sh' enter > /dev/null 2>&1    #open vim file buppy.sh
+
+
+tmux select-pane -t 0 > /dev/null 2>&1
+tmux resize-pane -t 0 -D 5 > /dev/null 2>&1                  #resize top pane down a bit
 
 # this is cool... can send commands to run inside vim so this will 
 # set up the bottom pane 1 to be the tmux runner.
 tmux send-keys -t 0 ':VtrAttachToPane1' enter > /dev/null 2>&1
-
-tmux select-pane -t 0 > /dev/null 2>&1
-
 
 
 tmux -2 attach-session -d > /dev/null 2>&1
