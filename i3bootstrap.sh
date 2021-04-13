@@ -31,7 +31,7 @@ mkdir -p ~/Pictures/wallpaper
 ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 echo
 echo cloning tpm for tmux plugins...
-clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo
 echo DONE!!!
 echo
