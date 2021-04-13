@@ -30,7 +30,8 @@ ln -sf ~/dotfiles/config ~/.config/i3/config
 mkdir -p ~/Pictures/wallpaper
 ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 echo
-echo cloning tpm for tmux plugins...
+echo Getting tpm for tmux plugins...
+echo Just hang on a few more seconds...
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo
 echo DONE!!!
