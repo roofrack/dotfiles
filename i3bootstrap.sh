@@ -5,7 +5,7 @@
 # This is for setting up a new install with the I3 Window Manager and your config files.
 #
 #
-
+clear        #clear screen
 
 
 files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
@@ -32,6 +32,8 @@ ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 echo
 echo Getting tpm for tmux plugins...
 echo Just hang on a few more seconds...
+echo
+echo
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo
 echo DONE!!!
