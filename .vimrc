@@ -165,8 +165,11 @@ nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 "vim-tmux-runner settings...
 let g:VtrUseVtrMaps = 1          "use default Vtm mappings
+"let g:vtr_filetype_runner_overrides = {
+            \ 'python': 'python -i {file}'
+            \}
 nnoremap f<cr> :VtrSendFile<cr>
-nnoremap fl :VtrSendFile<cr>
+nnoremap fl :VtrSendLinesToRunner<cr>
 
 "dbext_settings ...
 "let g:dbext_default_buffer_lines = 10
