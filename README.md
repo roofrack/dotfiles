@@ -17,19 +17,18 @@ Automating my set up...
 
  3. See dotfiles/archPackages for stuff to install but this is all you need...
 
-     i3 (select 1 3 4 5),
-     xorg-xinit,
-     xorg-server,
-     xfce4-terminal,
-     feh (for wallpaper),
-     picom (for adding translucency to the xfce4-terminal),
-     gnu-free-fonts (airline works fine without this except for the little line symbol won't
+     • i3 (select 1 3 4 5),
+     • xorg-xinit,
+     • xorg-server,
+     • xfce4-terminal,
+     • feh (for wallpaper),
+     • picom (for adding translucency to the xfce4-terminal),
+     • gnu-free-fonts (airline works fine without this except for the little line symbol won't
         render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
-        font pkg the unicode works,
-     ranger (just nice to have),
-     ntp (may need this to sync your system time. Use systemctl enable & start ntpd.service)
+        font pkg the unicode works),
+     • ranger (just nice to have)
 
- 4. run ./dotfiles/i3bootstrap.sh
+ 4. Run ./dotfiles/i3bootstrap.sh
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. Dont forget to
@@ -39,4 +38,5 @@ Automating my set up...
     virtualbox issue. I have symlinked this as well to dotfiles directory so should work.
 
  7. Tmux installed with pacman. May want to install tpm (a tmux plugin manager by...
-    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm)
+    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The above i3boostrap.sh script
+    will install this. Once tmux is open do <prefix>I to install the tmux plugins.
