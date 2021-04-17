@@ -3,8 +3,8 @@
 # A fun little project to create sym links in yer home directory to yer dot files...
 #
 # This is for setting up a new install with the I3 Window Manager and your config files.
-#
-#
+
+
 clear        #clear screen
 
 
@@ -17,7 +17,7 @@ for file in $files; do
 done
 
 echo
-# A few more links. TODO figure out how to not hard code these...
+# A few more links. TODO Its a work in progress...
 
 echo Building config directories for i3, ranger, xfce4-terminal and symlinking them to dotfiles...
 
