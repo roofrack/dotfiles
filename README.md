@@ -38,5 +38,6 @@ Automating my set up...
     virtualbox issue. I have symlinked this as well to dotfiles directory so should work.
 
  7. Tmux installed with pacman. May want to install tpm (a tmux plugin manager by...
-    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The above i3boostrap.sh script
-    will install this. Once tmux is open do <prefix>I to install the tmux plugins.
+    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The i3boostrap.sh script
+    is set to install this. Once tmux is open type the prefix key and then "I" to 
+    have tmux install the plugins listed in your .tmux.conf file.
