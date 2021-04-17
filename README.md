@@ -17,16 +17,16 @@ Automating my set up...
 
  3. See dotfiles/archPackages for stuff to install but this is all you need...
 
-     \ • i3 (select 1 3 4 5),
-     \ • xorg-xinit,
-     \ • xorg-server,
-     \ • xfce4-terminal,
-     \ • feh (for wallpaper),
-     \ • picom (for adding translucency to the xfce4-terminal),
-     \ • gnu-free-fonts (airline works fine without this except for the little line symbol won't
+      • i3 (select 1 3 4 5),
+      • xorg-xinit,
+      • xorg-server,
+      • xfce4-terminal,
+      • feh (for wallpaper),
+      • picom (for adding translucency to the xfce4-terminal),
+      • gnu-free-fonts (airline works fine without this except for the little line symbol won't
         render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
         font pkg the unicode works),
-     \ • ranger (just nice to have)
+      • ranger (just nice to have)
 
  4. Run ./dotfiles/i3bootstrap.sh
 
