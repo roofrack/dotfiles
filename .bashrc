@@ -50,7 +50,7 @@ alias vrc='vim ~/.vimrc'
 # put in hibernation mode. I have not figured out how to make it consistently keep
 # accurate time.
 # This command will sync the time...
-alias timeSync='sudo timedatectl set-ntp false; sudo timedatectl set-ntp true'
+alias timeSync='sudo timedatectl set-ntp false && sudo timedatectl set-ntp true'
 
 # The 2 prevents colorscheme change in vim. Sets color to 264
 # the -u forces tmux to use unicode. This allows vim-airline to work inside tmux.
