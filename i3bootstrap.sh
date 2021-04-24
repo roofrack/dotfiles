@@ -7,6 +7,17 @@
 
 clear        #clear screen
 
+# This part is just a decoration...
+echo -ne "[ Installing Software  " 
+
+for i in $(seq 70)
+    do 
+        echo -ne "#"; sleep .01
+    done
+echo -ne " ]"
+echo
+echo
+
 
 files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 dir=~/dotfiles

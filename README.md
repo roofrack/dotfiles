@@ -39,5 +39,5 @@ Automating my set up...
 
  7. Tmux installed with pacman. May want to install tpm (a tmux plugin manager by...
     clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The i3boostrap.sh script
-    is set to install this. Once tmux is open type the prefix key and then "I" to 
+    is set to install this. Once tmux is open type the prefix key and then "I" to
     have tmux install the plugins listed in your .tmux.conf file.
