@@ -3,33 +3,37 @@
 # A fun little project to create sym links in yer home directory to yer dot files...
 # This is for setting up a new install with the I3 Window Manager and your config files.
 
-DIR_CONFIG="$HOME/play/.config"
-DIR_PICT="$HOME/play/Pictures"
 DIR_DOTFILES="$HOME/dotfiles"
+DIR_CONFIG="$HOME/play/.config"
 
-# ADD ANY FILES OR DIR's you want built here...
-files_add="config terminalrc rc.conf wallpaper/arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
-dir_add="$DIR_CONFIG/i3/ $DIR_CONFIG/xfce4/terminal $DIR_CONFIG/ $DIR_CONFIG/ranger $DIR_PICT/wallpaper"
 
+SYM_LINK=$(ln -sf $DIR_DOTFILES/$file) 
+DIR_I3="$DIR_CONFIG/i3"
+DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
+DIR_RANGER="$DIR_CONFIG/ranger"
+DIR_WALLPAPER="$HOME/Pictures/wallpaper"
+
+files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 
 for file in $files_add; do
 
     echo making yer sym link for $file...
+
     if [ $file == "config" ]; then
-        mkdir -p $DIR_CONFIG/i3 #&& ln -sf $DIR_DOTFILES/$file 
+        mkdir -p $DIR_I3 && SYM_LINK $DIR_I3
+
+    elif [ $file == "terminalrc" ]; then
+        mkdir -p $DIR_XFCE4 && SYM_LINK $DIR_XFCE4
+    
+    elif [ $file == "rc.conf" ]; then
+        mkdir -p $DIR_RANGER && SYM_LINK $DIR_RANGER
+
+    elif [ $file == "arch3.png" ]; then
+        mkdir -p $DIR_WALLPAPER && SYM_LINK $DIR_WALLPAPER
+
+    else
+     ln -sf $DIR_DOTFILES/$file 
     fi
-
-    # if [ $file == "terminalrc" ]; then
-    #     mkdir -p $DIR_CONFIG/xinitrc/terminal #&& ln -sf $DIR_DOTFILES/$file 
-    # fi
-    # if [ $file == "rc.conf" ]; then
-    #     mkdir -p $DIR_CONFIG/ranger #&& ln -sf $DIR_DOTFILES/$file 
-    # fi
-    # if [ $file == "wallpaper/arch3.png" ]; then
-    #     mkdir -p $DIR_PICT/wallpaper #&& ln -sf $DIR_DOTFILES/wallpaper/arch3.png
-    # fi
-
-    # # ln -sf $DIR_DOTFILES/$file 
 done
 
 
@@ -78,9 +82,9 @@ echo
 echo Getting tpm for tmux plugins...
 # sleep 3
 echo
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# echo
+# echo DONE!!!
 echo
-echo DONE!!!
-echo
-echo READ... ~/dotfiles/README.md for more info
-echo
+# echo READ... ~/dotfiles/README.md for more info
+ echo
