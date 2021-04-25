@@ -87,6 +87,7 @@ Plug 'christoomey/vim-tmux-runner'
 "Plug 'itchyny/lightline.vim'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 "--------------------------------------------------------------------------------

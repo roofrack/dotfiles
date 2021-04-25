@@ -12,12 +12,13 @@ echo -ne "[ Installing Software  "
 
 for i in $(seq 70)
     do 
-        echo -ne "#"; sleep .01
+        echo -ne "#"
     done
 echo -ne " ]"
+sleep 3
 echo
 echo
-
+clear
 
 files=".bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 dir=~/dotfiles
@@ -26,6 +27,7 @@ for file in $files; do
     echo making yer sym link for $file...
     ln -sf $dir/$file ~/$file
 done
+sleep 3
 
 echo
 # A few more links. TODO Its a work in progress...
@@ -41,9 +43,9 @@ ln -sf ~/dotfiles/config ~/.config/i3/config
 mkdir -p ~/Pictures/wallpaper
 ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 echo
-echo Just hang on a few more seconds there sport...
 echo
 echo Getting tpm for tmux plugins...
+sleep 3
 echo
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo
