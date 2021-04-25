@@ -5,13 +5,14 @@
 
 DIR_DOTFILES="$HOME/dotfiles"
 DIR_CONFIG="$HOME/play/.config"
+DIR_PICS="$HOME/play/Pictures"
 
 
 SYM_LINK=$(ln -sf $DIR_DOTFILES/$file) 
 DIR_I3="$DIR_CONFIG/i3"
 DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
-DIR_WALLPAPER="$HOME/Pictures/wallpaper"
+DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 
