@@ -15,6 +15,7 @@ DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
+# ADD files which you want linked to your dotfiles...
 files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 
 for file in $files_add; do
@@ -22,11 +23,10 @@ for file in $files_add; do
     echo making yer sym link for $file...
 
     if [ $file == "config" ]; then
-        # mkdir -p $DIR_I3 && ln -sf $HOME/dotfiles/$file $DIR_I3
         mkdir -p $DIR_I3 && $SYM_LINK $DIR_DOTFILES/$file $DIR_I3
         # this one doesnt work... the SYM_LINK variable is wrong or something
         # mkdir -p $DIR_I3 && SYM_LINK $DIR_I3
-        echo $DIR_DOTFILES/$file
+        echo $DIR_DOTFILES/$file #(printing out here for troubleshooting)
 
     elif [ $file == "terminalrc" ]; then
         mkdir -p $DIR_XFCE4 && $SYM_LINK $DIR_DOTFILES/$file $DIR_XFCE4
