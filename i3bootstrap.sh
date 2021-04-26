@@ -17,7 +17,7 @@ DIR_WALLPAPER="$DIR_PICS/wallpaper"
 # ADD files which you want linked to your dotfiles
 # and then will need to add the stuff in below as well...
 # files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
-files_add="$DIR_DOTFILES/dotfiles/* $DIR_DOTFILES/dotfiles/.[!.]?*"
+files_add="$DIR_DOTFILES/Config_Files/* $DIR_DOTFILES/Config_Files/.[!.]?*"
 
 clear                       # Clear screen
 
