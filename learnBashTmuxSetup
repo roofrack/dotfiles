@@ -12,6 +12,12 @@ echo
 echo Just hold yer horses...
 echo
 
+if [ -d ~/play ]; then
+    cd ~/play
+else
+    mkdir ~/play && cd ~/play
+fi
+
 tmux new-session -d -s LearnBash > /dev/null 2>&1
 # the > /dev/null part makes the command run silently
 

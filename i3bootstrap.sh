@@ -3,6 +3,8 @@
 # A fun little project to create sym links in yer home directory to yer dot files...
 # This is for setting up a new install (Arch) with the I3 Window Manager and your config files.
 
+MESSAGE_1="Building and Sym-Linking"
+MESSAGE_2="Sym-Linking"
 DIR_DOTFILES="$HOME/dotfiles"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
@@ -25,23 +27,23 @@ for file in $files_add; do
 
     if [ $file == "config" ]; then
         mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
-        echo Building and Sym-linking $DIR_I3/$file
+        echo MESSAGE_1 $DIR_I3/$file
 
     elif [ $file == "terminalrc" ]; then
         mkdir -p $DIR_XFCE4 && $SYM_LINK $DIR_XFCE4
-        echo Building and Sym-linking $DIR_XFCE4/$file
+        echo MESSAGE_1 $DIR_XFCE4/$file
 
     elif [ $file == "rc.conf" ]; then
         mkdir -p $DIR_RANGER && $SYM_LINK $DIR_RANGER
-        echo Building and Sym-linking $DIR_RANGER/$file
+        echo MESSAGE_1 $DIR_RANGER/$file
 
     elif [ $file == "arch3.png" ]; then
         mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_WALLPAPER
-        echo Building and Sym-linking $DIR_WALLPAPER/$file
+        echo MESSAGE_1 $DIR_WALLPAPER/$file
         echo
     else
     $SYM_LINK
-    echo Sym-linking $file...
+    echo MESSAGE_2 $file...
     fi
 done
 
