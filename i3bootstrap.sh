@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # A fun little project to create sym links in yer home directory to yer dot files...
-# This is for setting up a new install with the I3 Window Manager and your config files.
+# This is for setting up a new install (Arch) with the I3 Window Manager and your config files.
 
 DIR_DOTFILES="$HOME/dotfiles"
 DIR_CONFIG="$HOME/play/.config"
@@ -23,7 +23,6 @@ for file in $files_add; do
     # above into $file instead of whats in the loop.
     SYM_LINK="ln -sf $DIR_DOTFILES/$file"
 
-
     if [ $file == "config" ]; then
         mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
         echo Building and Sym-linking $DIR_I3/$file
@@ -40,23 +39,17 @@ for file in $files_add; do
         mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_WALLPAPER
         echo Building and Sym-linking $DIR_WALLPAPER/$file
         echo
-
     else
-    # sleep 1
     $SYM_LINK
     echo Sym-linking $file...
     fi
 done
 
 
-
-
-
 # for dir in dir_add; do
 #     mkdir -p $dir
 #     ln -s $DIR_DOTFILES/$dir
 # done
-
 
 
 # clear        #clear screen
@@ -69,12 +62,6 @@ done
         # # echo -ne "#"
     # done
 # echo -ne " ]"
-# sleep 3
-# echo
-# echo
-
-
-
 
 
 # mkdir -p ~/.config/xfce4/terminal
@@ -85,7 +72,8 @@ done
 # ln -sf ~/dotfiles/config ~/.config/i3/config
 # mkdir -p ~/Pictures/wallpaper
 # ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
-# echo
+
+
 sleep 1
 
 if [ -d ~/.tmux ]; then
