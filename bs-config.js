@@ -1,1 +1,0 @@
-/home/kerry/dotfiles/Config_Files/bs-config.js

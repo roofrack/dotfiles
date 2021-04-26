@@ -44,7 +44,7 @@ for file in $files_add; do
         echo $MESSAGE_1 $DIR_WALLPAPER/$file
         echo
     else
-    $SYM_LINK 
+    $SYM_LINK $HOME
     echo $MESSAGE_2 $file...
     fi
 done
