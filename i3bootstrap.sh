@@ -5,7 +5,7 @@
 
 MESSAGE_1="Building and Sym-Linking"
 MESSAGE_2="Sym-Linking"
-DIR_DOTFILES="$HOME/dotfiles"
+DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
 
@@ -17,7 +17,7 @@ DIR_WALLPAPER="$DIR_PICS/wallpaper"
 # ADD files which you want linked to your dotfiles
 # and then will need to add the stuff in below as well...
 # files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
-files_add="$DIR_DOTFILES/Config_Files/* $DIR_DOTFILES/Config_Files/.[!.]?*"
+files_add="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 
 clear                       # Clear screen
 
@@ -27,7 +27,7 @@ for file in $files_add; do
     # SYM_LINK="ln -sf $DIR_DOTFILES/$file"
     SYM_LINK="ln -sf $file"
 
-    if [ $file == "config" ]; then
+    if [ $file == $DIR_DOTFILES/config ]; then
         mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
         echo MESSAGE_1 $DIR_I3/$file
 
