@@ -16,14 +16,16 @@ DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 # ADD files which you want linked to your dotfiles
 # and then will need to add the stuff in below as well...
-files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
+# files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
+files_add="$DIR_DOTFILES/dotfiles/* $DIR_DOTFILES/dotfiles/.[!.]?*"
 
 clear                       # Clear screen
 
 for file in $files_add; do
     # This variable has to be declared here or it won't sym-link. It reads in something up
     # above into $file instead of whats in the loop.
-    SYM_LINK="ln -sf $DIR_DOTFILES/$file"
+    # SYM_LINK="ln -sf $DIR_DOTFILES/$file"
+    SYM_LINK="ln -sf $file"
 
     if [ $file == "config" ]; then
         mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
@@ -42,7 +44,7 @@ for file in $files_add; do
         echo MESSAGE_1 $DIR_WALLPAPER/$file
         echo
     else
-    $SYM_LINK
+    $SYM_LINK 
     echo MESSAGE_2 $file...
     fi
 done
