@@ -29,23 +29,23 @@ for file in $files_add; do
 
     if [ $file == $DIR_DOTFILES/config ]; then
         mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
-        echo MESSAGE_1 $DIR_I3/$file
+        echo $MESSAGE_1 $DIR_I3/$file
 
-    elif [ $file == "terminalrc" ]; then
+    elif [ $file == $DIR_DOTFILES/terminalrc ]; then
         mkdir -p $DIR_XFCE4 && $SYM_LINK $DIR_XFCE4
-        echo MESSAGE_1 $DIR_XFCE4/$file
+        echo $MESSAGE_1 $DIR_XFCE4/$file
 
-    elif [ $file == "rc.conf" ]; then
+    elif [ $file == $DIR_DOTFILES/rc.conf ]; then
         mkdir -p $DIR_RANGER && $SYM_LINK $DIR_RANGER
-        echo MESSAGE_1 $DIR_RANGER/$file
+        echo $MESSAGE_1 $DIR_RANGER/$file
 
-    elif [ $file == "arch3.png" ]; then
+    elif [ $file == $DIR_CONFIG/arch3.png ]; then
         mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_WALLPAPER
-        echo MESSAGE_1 $DIR_WALLPAPER/$file
+        echo $MESSAGE_1 $DIR_WALLPAPER/$file
         echo
     else
     $SYM_LINK 
-    echo MESSAGE_2 $file...
+    echo $MESSAGE_2 $file...
     fi
 done
 

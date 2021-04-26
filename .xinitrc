@@ -1,0 +1,1 @@
+/home/kerry/dotfiles/Config_Files/.xinitrc
