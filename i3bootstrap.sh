@@ -7,39 +7,44 @@ DIR_DOTFILES="$HOME/dotfiles"
 DIR_CONFIG="$HOME/play/.config"
 DIR_PICS="$HOME/play/Pictures"
 
-# I can not make this work. It wont read in the dir part.
-# SYM_LINK=$(ln -sf $DIR_DOTFILES/$file)
-SYM_LINK="ln -sf"
 DIR_I3="$DIR_CONFIG/i3"
 DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
-# ADD files which you want linked to your dotfiles...
+# ADD files which you want linked to your dotfiles
+# and then will need to add the stuff in below as well...
 files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
 
-for file in $files_add; do
+clear                       # Clear screen
 
-    echo making yer sym link for $file...
+for file in $files_add; do
+    # This variable has to be declared here or it won't sym-link. It reads in something up
+    # above into $file instead of whats in the loop.
+    SYM_LINK="ln -sf $DIR_DOTFILES/$file"
+
 
     if [ $file == "config" ]; then
-        mkdir -p $DIR_I3 && $SYM_LINK $DIR_DOTFILES/$file $DIR_I3
-        # this one doesnt work... the SYM_LINK variable is wrong or something
-        # mkdir -p $DIR_I3 && SYM_LINK $DIR_I3
-        echo $DIR_DOTFILES/$file #(printing out here for troubleshooting)
+        mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
+        echo Building and Sym-linking $DIR_I3/$file
 
     elif [ $file == "terminalrc" ]; then
-        mkdir -p $DIR_XFCE4 && $SYM_LINK $DIR_DOTFILES/$file $DIR_XFCE4
+        mkdir -p $DIR_XFCE4 && $SYM_LINK $DIR_XFCE4
+        echo Building and Sym-linking $DIR_XFCE4/$file
 
     elif [ $file == "rc.conf" ]; then
-        mkdir -p $DIR_RANGER && $SYM_LINK $DIR_DOTFILES/$file $DIR_RANGER
+        mkdir -p $DIR_RANGER && $SYM_LINK $DIR_RANGER
+        echo Building and Sym-linking $DIR_RANGER/$file
 
     elif [ $file == "arch3.png" ]; then
-        mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_DOTFILES/$file $DIR_WALLPAPER
+        mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_WALLPAPER
+        echo Building and Sym-linking $DIR_WALLPAPER/$file
+        echo
 
     else
-    $SYM_LINK $DIR_DOTFILES/$file
-    # SYM_LINK
+    # sleep 1
+    $SYM_LINK
+    echo Sym-linking $file...
     fi
 done
 
@@ -67,7 +72,6 @@ done
 # sleep 3
 # echo
 # echo
-# clear
 
 
 
@@ -82,13 +86,17 @@ done
 # mkdir -p ~/Pictures/wallpaper
 # ln -sf ~/dotfiles/wallpaper/arch3.png ~/Pictures/wallpaper
 # echo
-# echo
-# echo Getting tpm for tmux plugins...
-# sleep 3
-# echo
-# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-# echo
-# echo DONE!!!
+sleep 1
+
+if [ -d ~/.tmux ]; then
+    echo
+else
+    echo Getting tpm for tmux plugins...
+    echo
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+echo DONE!!!
 echo
-# echo READ... ~/dotfiles/README.md for more info
- echo
+echo READ... $DIR_DOTFILES/README.md for more info
+echo
