@@ -4,8 +4,8 @@
 # This is for setting up a new install (Arch) with the I3 Window Manager and your config files.
 
 DIR_DOTFILES="$HOME/dotfiles"
-DIR_CONFIG="$HOME/play/.config"
-DIR_PICS="$HOME/play/Pictures"
+DIR_CONFIG="$HOME/.config"
+DIR_PICS="$HOME/Pictures"
 
 DIR_I3="$DIR_CONFIG/i3"
 DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
