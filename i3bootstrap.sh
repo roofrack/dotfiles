@@ -39,7 +39,7 @@ for file in $files_add; do
         mkdir -p $DIR_RANGER && $SYM_LINK $DIR_RANGER
         echo $MESSAGE_1 $DIR_RANGER/$file
 
-    elif [ $file == $DIR_CONFIG/arch3.png ]; then
+    elif [ $file == $DIR_DOTFILES/arch3.png ]; then
         mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_WALLPAPER
         echo $MESSAGE_1 $DIR_WALLPAPER/$file
         echo
