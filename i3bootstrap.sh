@@ -15,11 +15,10 @@ files_symlink="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 
 #=========================================================================================
 for dir in $dir_build; do
-message_dir="echo Building directory"
+message_dir="echo Building directory $dir"
     mkdir -p $dir
-    $message_dir $dir
+    $message_dir
 done
-#=========================================================================================
 
 #=========================================================================================
 for file in $files_symlink; do
@@ -29,22 +28,23 @@ message_symlink="echo Sym-Linking $(basename $file)"
 
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
-
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
         $sym_link $DIR_XFCE4
-
     elif [ $file == $DIR_DOTFILES/rc.conf ]; then
         $sym_link $DIR_RANGER
-
     elif [ $file == $DIR_DOTFILES/arch3.png ]; then
         $sym_link $DIR_WALLPAPER
-
     else
     $sym_link $HOME
     fi
     $message_symlink
 done
 #=========================================================================================
+
+
+
+
+
 
 # This part is just a decoration...
 # echo -ne "[ Installing Software  "
