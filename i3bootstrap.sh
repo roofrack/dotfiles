@@ -10,18 +10,18 @@ DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
-dir_build="$DIR_I3 $DIR_XFCE4 $DIR_RANGER $DIR_WALLPAPER"
-files_symlink="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
+DIR_BUILD="$DIR_I3 $DIR_XFCE4 $DIR_RANGER $DIR_WALLPAPER"
+FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 
 #=========================================================================================
-for dir in $dir_build; do
+for dir in $DIR_BUILD; do
 message_dir="echo Building directory $dir"
     mkdir -p $dir
     $message_dir
 done
 
 #=========================================================================================
-for file in $files_symlink; do
+for file in $FILES_SYMLINK; do
 # These variables have to be declared here or it won't sym-link.
 sym_link="ln -sf $file"
 message_symlink="echo Sym-Linking $(basename $file)"
@@ -55,10 +55,8 @@ done
 # echo -ne " ]"
 
 
-sleep 1
-
 if [ -d ~/.tmux ]; then
-    echo
+    true
 else
     echo Getting tpm for tmux plugins...
     echo
@@ -66,5 +64,6 @@ else
 fi
 
 echo Finished !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+echo
 echo READ...     dotfiles/README.md for more info
 echo
