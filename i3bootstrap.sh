@@ -12,10 +12,10 @@ DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
-files_add="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
+files_symlink="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 
 #============================================================================================
-for file in $files_add; do
+for file in $files_symlink; do
 
 # These variables have to be declared here or it won't sym-link. It reads in something up
 # above into $file instead of whats in the loop for file_add.
