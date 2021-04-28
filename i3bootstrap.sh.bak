@@ -3,8 +3,8 @@
 # A fun little project to create sym links in yer home directory to yer dot files...
 # This is for setting up a new install (Arch) with the I3 Window Manager and your config files.
 
-message_dir="Building directory for"
-message_symlink="Sym-Linking"
+MESSAGE_1="Building directory and Sym-Linking for"
+MESSAGE_2="Sym-Linking"
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
@@ -24,30 +24,29 @@ clear                       # Clear screen
 for file in $files_add; do
     # This variable has to be declared here or it won't sym-link. It reads in something up
     # above into $file instead of whats in the loop.
-    # sym_link="ln -sf $DIR_DOTFILES/$file"
-    sym_link="ln -sf $file"
+    # SYM_LINK="ln -sf $DIR_DOTFILES/$file"
+    SYM_LINK="ln -sf $file"
 
     if [ $file == $DIR_DOTFILES/config ]; then
-        mkdir -p $DIR_I3 && $sym_link $DIR_I3
-        # echo $message_dir $DIR_I3/$file
-        # echo $message_dir $DIR_I3
-        echo $message_dir $(basename $file)
+        mkdir -p $DIR_I3 && $SYM_LINK $DIR_I3
+        # echo $MESSAGE_1 $DIR_I3/$file
+        echo $MESSAGE_1 $DIR_I3
 
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
-        mkdir -p $DIR_XFCE4 && $sym_link $DIR_XFCE4
-        echo $message_dir $DIR_XFCE4
+        mkdir -p $DIR_XFCE4 && $SYM_LINK $DIR_XFCE4
+        echo $MESSAGE_1 $DIR_XFCE4
 
     elif [ $file == $DIR_DOTFILES/rc.conf ]; then
-        mkdir -p $DIR_RANGER && $sym_link $DIR_RANGER
-        echo $message_dir $DIR_RANGER
+        mkdir -p $DIR_RANGER && $SYM_LINK $DIR_RANGER
+        echo $MESSAGE_1 $DIR_RANGER
 
     elif [ $file == $DIR_DOTFILES/arch3.png ]; then
-        mkdir -p $DIR_WALLPAPER && $sym_link $DIR_WALLPAPER
-        echo $message_dir $DIR_WALLPAPER
+        mkdir -p $DIR_WALLPAPER && $SYM_LINK $DIR_WALLPAPER
+        echo $MESSAGE_1 $DIR_WALLPAPER
 
     else
-    $sym_link $HOME
-    echo $message_symlink $(basename $file)
+    $SYM_LINK $HOME
+    echo $MESSAGE_2 $file
     fi
 done
 
