@@ -11,9 +11,9 @@ DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 DIR_BUILD="$DIR_I3 $DIR_XFCE4 $DIR_RANGER $DIR_WALLPAPER"
-FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   #cant seem to make brace expan work
+FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make brace expan work.
 
-# Need to build directories for packages which install config files in  nested dir's.
+# Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
 for dir in $DIR_BUILD; do
 message_dir="echo Building directory $dir"
@@ -23,8 +23,7 @@ done
 
 #=========================================================================================
 for file in $FILES_SYMLINK; do
-# These variables have to be declared here or it won't sym-link.
-sym_link="ln -sf $file"
+sym_link="ln -sf $file"               # Must declare these var's here or they won't work.
 message_symlink="echo Sym-Linking $(basename $file)"
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
