@@ -25,7 +25,6 @@ for file in $files_symlink; do
 # These variables have to be declared here or it won't sym-link.
 sym_link="ln -sf $file"
 message_symlink="echo Sym-Linking $(basename $file)"
-
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
