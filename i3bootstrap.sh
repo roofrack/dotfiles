@@ -11,9 +11,9 @@ DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 DIR_BUILD="$DIR_I3 $DIR_XFCE4 $DIR_RANGER $DIR_WALLPAPER"
-FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
+FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   #cant seem to make brace expan work
 
-# Need to build directories for packages which install config files in a nested dir's.
+# Need to build directories for packages which install config files in  nested dir's.
 #=========================================================================================
 for dir in $DIR_BUILD; do
 message_dir="echo Building directory $dir"
