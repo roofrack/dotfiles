@@ -20,29 +20,29 @@ for file in $files_symlink; do
 # These variables have to be declared here or it won't sym-link. It reads in something up
 # above into $file instead of whats in the loop for file_add.
 sym_link="ln -sf $file"
-message_symlink="echo Sym-Linking $(basename $file)"
 message_dir="echo Building directory"
+message_symlink="echo Sym-Linking $(basename $file)"
 
     if [ $file == $DIR_DOTFILES/config ]; then
         mkdir -p $DIR_I3 && $sym_link $DIR_I3
-        $message_dir $DIR_I3 && $message_symlink
+        $message_dir $DIR_I3
 
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
         mkdir -p $DIR_XFCE4 && $sym_link $DIR_XFCE4
-        $message_dir $DIR_XFCE4 && $message_symlink
+        $message_dir $DIR_XFCE4
 
     elif [ $file == $DIR_DOTFILES/rc.conf ]; then
         mkdir -p $DIR_RANGER && $sym_link $DIR_RANGER
-        $message_dir $DIR_RANGER && $message_symlink
+        $message_dir $DIR_RANGER
 
     elif [ $file == $DIR_DOTFILES/arch3.png ]; then
         mkdir -p $DIR_WALLPAPER && $sym_link $DIR_WALLPAPER
-        $message_dir $DIR_WALLPAPER && $message_symlink
+        $message_dir $DIR_WALLPAPER
 
     else
-    $sym_link $HOME && $message_symlink
-
+    $sym_link $HOME
     fi
+    $message_symlink
 done
 #=============================================================================================
 
@@ -67,6 +67,5 @@ else
 fi
 
 echo Finished !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-echo
 echo READ...     dotfiles/README.md for more info
 echo
