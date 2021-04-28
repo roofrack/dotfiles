@@ -2,9 +2,8 @@
 
 # A fun little project to create sym links in yer home directory to yer dot files...
 # This is for setting up a new install (Arch) with the I3 Window Manager and your config files.
+clear
 
-message_dir="Building directory for"
-message_symlink="Sym-Linking"
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
@@ -14,43 +13,44 @@ DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
-# ADD files which you want linked to your dotfiles
-# and then will need to add the stuff in below as well...
-# files_add="config terminalrc rc.conf arch3.png .bashrc .vimrc .inputrc .i3status.conf .fehbg .xinitrc picom.conf .tmux.conf"
-files_add="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"     # Used regex for hidden files here
+files_add="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 
-clear                       # Clear screen
-
+#============================================================================================
 for file in $files_add; do
-    # This variable has to be declared here or it won't sym-link. It reads in something up
-    # above into $file instead of whats in the loop.
-    # sym_link="ln -sf $DIR_DOTFILES/$file"
-    sym_link="ln -sf $file"
+
+# These variables have to be declared here or it won't sym-link. It reads in something up
+# above into $file instead of whats in the loop for file_add.
+sym_link="ln -sf $file"
+message_symlink="echo Sym-Linking $(basename $file)"
+message_dir="echo Building directory"
 
     if [ $file == $DIR_DOTFILES/config ]; then
         mkdir -p $DIR_I3 && $sym_link $DIR_I3
-        # echo $message_dir $DIR_I3/$file
         # echo $message_dir $DIR_I3
-        echo $message_dir $(basename $file)
+        $message_dir $DIR_I3
+        $message_symlink
 
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
         mkdir -p $DIR_XFCE4 && $sym_link $DIR_XFCE4
-        echo $message_dir $DIR_XFCE4
+        $message_dir $DIR_XFCE4
+        $message_symlink
 
     elif [ $file == $DIR_DOTFILES/rc.conf ]; then
         mkdir -p $DIR_RANGER && $sym_link $DIR_RANGER
-        echo $message_dir $DIR_RANGER
+        $message_dir $DIR_RANGER
+        $message_symlink
 
     elif [ $file == $DIR_DOTFILES/arch3.png ]; then
         mkdir -p $DIR_WALLPAPER && $sym_link $DIR_WALLPAPER
-        echo $message_dir $DIR_WALLPAPER
+        $message_dir $DIR_WALLPAPER
+        $message_symlink
 
     else
     $sym_link $HOME
-    echo $message_symlink $(basename $file)
+    $message_symlink
     fi
 done
-
+#=============================================================================================
 
 # for dir in dir_add; do
 #     mkdir -p $dir

@@ -64,6 +64,7 @@ alias ta='tmux a'
 alias tka='tmux kill-server'
 
 alias ed='vim ~/dotfiles/i3bootstrap.sh'
+alias run='sh ~/dotfiles/i3bootstrap.sh'
 alias del='rm -rf ~/play/*; clear'
 
 # More tmux stuff...
