@@ -52,5 +52,5 @@ else
 fi
 
 echo
-echo READ...     dotfiles/README.md for more info
 echo
+ printf "READ... "; tput smul; printf "dotfiles/README.md"; tput rmul; printf " for more info\n"; #tput rmul"
