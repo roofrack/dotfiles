@@ -16,15 +16,19 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make bra
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
 for dir in $DIR_BUILD; do
-message_dir="echo Building directory $dir"
-    mkdir -p $dir
-    $message_dir
+# message_dir="echo Building directory $dir"
+    # mkdir -p $dir
+    # $message_dir
+    message_dir="Building directory for $dir"
+    length=${#message_dir}
+    printf "%s%*s" "${message_dir}" $(($(tput cols) - $length)) "[ ###################################################### ]"
+    sleep .1
 done
 
 #=========================================================================================
 for file in $FILES_SYMLINK; do
-sym_link="ln -sf $file"               # Must declare these var's here or they won't work.
-message_symlink="echo Sym-Linking $(basename $file)"
+    sym_link="ln -sf $file"               # Must declare these var's here or they won't work.
+    message_symlink="Sym-Linking $(basename $file)"
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
@@ -36,24 +40,12 @@ message_symlink="echo Sym-Linking $(basename $file)"
     else
     $sym_link $HOME
     fi
-    $message_symlink
+    # $message_symlink
+    length=${#message_symlink}
+    printf "%s%*s" "${message_symlink}" $(($(tput cols) - $length)) "[ ########################################################### ]"
+    sleep .1
 done
 #=========================================================================================
-
-
-
-
-
-
-# This part is just a decoration...
-# echo -ne "[ Installing Software  "
-
-# for i in $(seq 70)
-    # do
-        # # echo -ne "#"
-    # done
-# echo -ne " ]"
-
 
 if [ -d ~/.tmux ]; then
     true
@@ -63,7 +55,6 @@ else
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-echo Finished !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 echo
 echo READ...     dotfiles/README.md for more info
 echo
