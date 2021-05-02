@@ -27,20 +27,20 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make bra
 
 # second way to show message. Would like to figure out how to show the #'s in an even line.
 for dir in $DIR_BUILD; do
-message_dir="Building directory for $dir                      [ "
+     mkdir -p $dir
+message_dir="Building directory for $dir                                               [ "
 length=${#message_dir}
-        printf "${message_dir}"
-            for i in $(seq $(($(tput cols) - $(($length + 2))))); do
-            # for i in $(seq $(($(tput cols) - 30))); do
-                printf "%s" "#"
-            done
-        printf " ]"
+    printf "${message_dir}"
+        for i in $(seq $(($(tput cols) - $(($length + 2))))); do
+            printf "%s" "#"
+        done
+    printf " ]"
 done
 
 #=========================================================================================
 for file in $FILES_SYMLINK; do
     sym_link="ln -sf $file"               # Must declare these var's here or they won't work.
-    message_symlink="Sym-Linking $(basename $file)"
+    message_symlink="Sym-Linking $(basename $file)                                                                     [ "
     length=${#message_symlink}
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
@@ -53,8 +53,17 @@ for file in $FILES_SYMLINK; do
     else
     $sym_link $HOME
     fi
-    printf "%s%*s" "${message_symlink}" $(($(tput cols) - $length)) "[ ################################## ]"
-    sleep .05
+
+    # The first way to print message...
+    # printf "%s%*s" "${message_symlink}" $(($(tput cols) - $length)) "[ ################################## ]"
+
+    # The second way to print message...
+    length=${#message_symlink}
+        printf "${message_symlink}"
+            for i in $(seq $(($(tput cols) - $(($length + 2))))); do
+                printf "%s" "#"
+            done
+        printf " ]"
 done
 #=========================================================================================
 
