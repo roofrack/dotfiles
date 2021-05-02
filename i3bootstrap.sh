@@ -16,11 +16,28 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make bra
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
 for dir in $DIR_BUILD; do
+    mkdir -p $dir
     message_dir="Building directory for $dir"
     length=${#message_dir}
     printf "%s%*s" "${message_dir}" $(($(tput cols) - $length)) "[ ########################################### ]"
     sleep .05
 done
+
+
+
+
+# for dir in $DIR_BUILD; do
+# Message="Building directory for $dir [ "
+# length=${#Message}
+#         printf "${Message}"
+#             for i in $(seq $(($(tput cols) - $(($length + 2))))); do
+            # for i in $(seq $(($(tput cols) - 30))); do
+                # printf "%s" "#"
+            # done
+        # printf " ]"
+# done
+
+
 
 #=========================================================================================
 for file in $FILES_SYMLINK; do
