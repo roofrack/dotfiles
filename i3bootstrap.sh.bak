@@ -15,33 +15,28 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make bra
 
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
-# Can show message this way or the next way.
-
-# for dir in $DIR_BUILD; do
-    # mkdir -p $dir
-    # message_dir="Building directory for $dir"
-    # length=${#message_dir}
-    # printf "%s%*s" "${message_dir}" $(($(tput cols) - $length)) "[ ########################################### ]"
-    # sleep .05
-# done
-
-# second way to show message. Would like to figure out how to show the #'s in an even line.
 for dir in $DIR_BUILD; do
-     mkdir -p $dir
-message_dir="Building directory for $dir                                               [ "
-length=${#message_dir}
-    printf "${message_dir}"
-        for i in $(seq $(($(tput cols) - $(($length + 2))))); do
-            printf "%s" "#"
-        done
-    printf " ]"
+    mkdir -p $dir
+    message_dir="Building directory for $dir"
+    length_message=${#message_dir}
+    number_of_spaces=$(($(tput cols) - $length_message - 50))
+    tput civis                  # Make prompt invisible
+    printf "${message_dir}%*s[ " ${number_of_spaces}
+    for i in $(seq 46); do
+        printf "#"
+    done
+    printf " ]\n"                           # Don't need the \n here but just in case.
 done
+# NOTE: The loop usesr 4 less spaces then the 50 in the number_of_spaces variable to
+# account for the spaces taken up with the [ and ] brackets. Using the number 50 was just
+# arbritary and can be however long you want the line of "#" characters to be.
 
 #=========================================================================================
 for file in $FILES_SYMLINK; do
-    sym_link="ln -sf $file"               # Must declare these var's here or they won't work.
-    message_symlink="Sym-Linking $(basename $file)                                                                     [ "
+    sym_link="ln -sf $file"                         # Must declare these var's here or they won't work.
+    message_symlink="Sym-Linking $(basename $file)"
     length=${#message_symlink}
+    number_of_spaces=$(($(tput cols) - $length - 50))
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
@@ -54,16 +49,13 @@ for file in $FILES_SYMLINK; do
     $sym_link $HOME
     fi
 
-    # The first way to print message...
-    # printf "%s%*s" "${message_symlink}" $(($(tput cols) - $length)) "[ ################################## ]"
+    printf "$message_symlink%*s[ " ${number_of_spaces}
+    
+    for i in $(seq 46); do
+        printf "#"
+    done
 
-    # The second way to print message...
-    length=${#message_symlink}
-        printf "${message_symlink}"
-            for i in $(seq $(($(tput cols) - $(($length + 2))))); do
-                printf "%s" "#"
-            done
-        printf " ]"
+    printf " ]\n"
 done
 #=========================================================================================
 
@@ -76,5 +68,11 @@ else
 fi
 
 echo
+end_message="R E A D ..."
+for i in $end_message; do
+    printf $i
+    sleep .5 
+done
+printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info.\n" 
 echo
- printf "READ... "; tput smul; printf "dotfiles/README.md"; tput rmul; printf " for more info\n"; #tput rmul"
+tput cnorm          # Make prompt visible.

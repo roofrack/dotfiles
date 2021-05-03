@@ -21,7 +21,7 @@ for dir in $DIR_BUILD; do
     length_message=${#message_dir}
     number_of_spaces=$(($(tput cols) - $length_message - 50))
     tput civis                  # Make prompt invisible
-    printf "${message_dir}%*s[ " ${number_of_spaces}
+    printf "${message_dir}%*s[ " ${number_of_spaces}     # The number of spaces gets put in where the "*" is.
     for i in $(seq 46); do
         printf "#"
     done
@@ -50,7 +50,7 @@ for file in $FILES_SYMLINK; do
     fi
 
     printf "$message_symlink%*s[ " ${number_of_spaces}
-    
+
     for i in $(seq 46); do
         printf "#"
     done
@@ -68,11 +68,10 @@ else
 fi
 
 echo
-end_message="R E A D ..."
+end_message="READ. . ."
 for i in $end_message; do
     printf $i
-    sleep .5 
+    sleep 1
 done
-printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info.\n" 
-echo
+printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info.\n\n"
 tput cnorm          # Make prompt visible.
