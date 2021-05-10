@@ -12,8 +12,33 @@ DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 DIR_BUILD=("$DIR_I3" "$DIR_XFCE4" "$DIR_RANGER" "$DIR_WALLPAPER")
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make brace expan work.
-bar="[----------------------------------]"
-length_bar=${#bar}
+BAR="[----------------------------------]"
+length_bar=${#BAR}
+total_dirs=${#DIR_BUILD[@]}
+total_symlinks=${#FILES_SYMLINK[@]}
+
+
+Progress_bar_message(){
+
+    BAR="[----------------------------------]"
+    length_bar=${#BAR}
+    count=0
+    message="$1"
+    message_count="[${count} of $2] "
+    number_of_spaces=$(( $(tput cols) - ${#message} - ${#message_count} - $length_bar ))
+    printf "${message}%*s${message_count}${BAR}" ${number_of_spaces}
+    sleep 0.3s
+    tput cub $(( $length_bar - 2 ))
+
+    for i in $(seq $(( $length_bar - 2 ))); do
+        printf "#"
+    done
+    printf "\n"                         # Seem to need this here for it to work cleanly.
+}
+
+
+
+
 
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
@@ -25,10 +50,10 @@ for dir in "${DIR_BUILD[@]}"; do
     message_count="[${count} of ${#DIR_BUILD[@]}] "
     number_of_spaces=$(( $(tput cols) - ${#message_dir} - ${#message_count} - $length_bar ))
 
-    tput civis                  # Make prompt invisible
-    printf "${message_dir}%*s${message_count}${bar}" ${number_of_spaces}
+    # tput civis                  # Make prompt invisible
+    printf "${message_dir}%*s${message_count}${BAR}" ${number_of_spaces}
     sleep 0.3s
-    tput cub $(( $length_bar - 1 ))
+    tput cub $(( $length_bar - 2 ))
 
     for i in $(seq $(( $length_bar - 2 ))); do
         printf "#"
@@ -57,15 +82,14 @@ for file in $FILES_SYMLINK; do
     $sym_link $HOME
     fi
 
-    # printf "$message_symlink%*s[ " ${number_of_spaces}
-    printf "$message_symlink%*s${message_count2}${bar}" ${number_of_spaces}
-    tput cub $(( $length_bar - 1 ))
+    printf "$message_symlink%*s${message_count2}${BAR}" ${number_of_spaces}
+    tput cub $(( $length_bar - 2 ))
     sleep 0.3s
 
     # for i in $(seq 46); do
     for i in $(seq $(( $length_bar - 2 ))); do
         printf "#"
-        sleep 0.01s
+        # sleep 0.01s
     done
 
     printf "\n"
@@ -88,5 +112,6 @@ for i in $end_message; do
     sleep 0.4s 
 done
 sleep 0.3s
-printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info.";sleep 2; printf "\n"
+printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info";sleep 2; printf "\n"
 tput cnorm          # Make prompt visible.
+tput sgr0
