@@ -45,8 +45,8 @@ Progress_bar_message() {
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
 for dir in "${DIR_BUILD[@]}"; do
-    message_dir="Building directory for $dir"
     mkdir -p $dir
+    message_dir="Building directory for $dir"
     Progress_bar_message "${message_dir}" "${total_dirs}"     # Calling the function with 2 arguments
 done
 printf "\n"
