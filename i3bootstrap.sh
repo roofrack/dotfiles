@@ -22,7 +22,7 @@ count=0
 # This function takes two arguments. $1 a message and $2 how many items will be iterated.
 #-----------------------------------------------------------------------------------------
 Progress_bar_message() {
-    BAR="[-----------------------------------------------------]"
+    BAR="[-------------------------------------------]"
     length_bar=${#BAR}
     count=$(($count+1))
     message_count="[${count} of ${2}] "
