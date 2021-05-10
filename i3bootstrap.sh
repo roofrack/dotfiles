@@ -1,4 +1,9 @@
 #!/bin/bash
+# This script is useful but of course could have been accomplised using only a few lines of code. It was an exercise for
+# myself to learn some bash scripting & i'm sure most of everything I did could have been done much more
+# efficiently but oh well. I learned a lot and had fun doing it.
+# Add more directories below as needed. Any config files added to DIR_DOTFILES will be symlinked when running this script.
+
 clear
 printf "\n"
 tput civis
