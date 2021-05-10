@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+tput civis
 
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
@@ -12,24 +13,19 @@ DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 DIR_BUILD=("$DIR_I3" "$DIR_XFCE4" "$DIR_RANGER" "$DIR_WALLPAPER")
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"   # Can't seem to make brace expan work.
-BAR="[----------------------------------]"
-length_bar=${#BAR}
 total_dirs=${#DIR_BUILD[@]}
-total_symlinks=${#FILES_SYMLINK[@]}
+total_symlinks=$(( $(ls -al ~/dotfiles/Config_Files | wc -l) - 3))      # Must be a better way to calculate this
+count=0
 
-
-Progress_bar_message(){
-
+Progress_bar_message() {
     BAR="[----------------------------------]"
     length_bar=${#BAR}
-    count=0
-    message="$1"
-    message_count="[${count} of $2] "
-    number_of_spaces=$(( $(tput cols) - ${#message} - ${#message_count} - $length_bar ))
-    printf "${message}%*s${message_count}${BAR}" ${number_of_spaces}
+    count=$(($count+1))
+    message_count="[${count} of ${2}] "
+    number_of_spaces=$(( $(tput cols) - ${#1} - ${#message_count} - $length_bar ))
+    printf "${1}%*s${message_count}${BAR}" ${number_of_spaces}
     sleep 0.3s
     tput cub $(( $length_bar - 2 ))
-
     for i in $(seq $(( $length_bar - 2 ))); do
         printf "#"
     done
@@ -37,39 +33,26 @@ Progress_bar_message(){
 }
 
 
-
-
-
+#=========================================================================================
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
-count=0
+
 for dir in "${DIR_BUILD[@]}"; do
-    mkdir -p $dir
-    count=$(( $count+1 ))
     message_dir="Building directory for $dir"
-    message_count="[${count} of ${#DIR_BUILD[@]}] "
-    number_of_spaces=$(( $(tput cols) - ${#message_dir} - ${#message_count} - $length_bar ))
-
-    # tput civis                  # Make prompt invisible
-    printf "${message_dir}%*s${message_count}${BAR}" ${number_of_spaces}
-    sleep 0.3s
-    tput cub $(( $length_bar - 2 ))
-
-    for i in $(seq $(( $length_bar - 2 ))); do
-        printf "#"
-    done
-    printf "\n"                         # Seem to need this here for it to work cleanly.
+    mkdir -p $dir
+    Progress_bar_message "${message_dir}" "${total_dirs}"     # Calling the function with 2 arguments
 done
 printf "\n"
 
 #=========================================================================================
+# Sym-Links
+#=========================================================================================
+
 count=0
 for file in $FILES_SYMLINK; do
     sym_link="ln -sf $file"                         # Must declare these var's here or they won't work.
-    count=$(($count + 1))
-    message_count2="[$count of 14] "
     message_symlink="Sym-Linking $(basename $file)"
-    number_of_spaces=$(($(tput cols) - ${#message_symlink} - ${length_bar} - ${#message_count2}))
+
     if [ $file == $DIR_DOTFILES/config ]; then
         $sym_link $DIR_I3
     elif [ $file == $DIR_DOTFILES/terminalrc ]; then
@@ -81,18 +64,7 @@ for file in $FILES_SYMLINK; do
     else
     $sym_link $HOME
     fi
-
-    printf "$message_symlink%*s${message_count2}${BAR}" ${number_of_spaces}
-    tput cub $(( $length_bar - 2 ))
-    sleep 0.3s
-
-    # for i in $(seq 46); do
-    for i in $(seq $(( $length_bar - 2 ))); do
-        printf "#"
-        # sleep 0.01s
-    done
-
-    printf "\n"
+    Progress_bar_message "${message_symlink}" "$total_symlinks"
 done
 sleep 0.7s
 #=========================================================================================
@@ -109,9 +81,8 @@ echo
 end_message="READ. . ."
 for i in $end_message; do
     printf $i
-    sleep 0.4s 
+    sleep 0.4s
 done
 sleep 0.3s
 printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info";sleep 2; printf "\n"
 tput cnorm          # Make prompt visible.
-tput sgr0
