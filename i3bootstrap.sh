@@ -22,7 +22,7 @@ count=0
 # This function takes two arguments. $1 a message and $2 how many items will be iterated.
 #-----------------------------------------------------------------------------------------
 Progress_bar_message() {
-    BAR="[----------------------------------]"
+    BAR="[-----------------------------------------------------]"
     length_bar=${#BAR}
     count=$(($count+1))
     message_count="[${count} of ${2}] "
@@ -33,7 +33,7 @@ Progress_bar_message() {
     for i in $(seq $(( $length_bar - 2 ))); do
         printf "#"
     done
-    printf "\n"                         # Seem to need this here for it to work cleanly.
+    printf "\n"                                               # Seem to need this here for it to work cleanly.
 }
 
 #=========================================================================================
@@ -51,7 +51,7 @@ printf "\n"
 #=========================================================================================
 count=0
 for file in $FILES_SYMLINK; do
-    sym_link="ln -sf $file"                         # Must declare these var's here or they won't work.
+    sym_link="ln -sf $file"                                   # Must declare these var's here or they won't work.
     message_symlink="Sym-Linking $(basename $file)"
 
     if [[ $file == $DIR_DOTFILES/config ]]; then
@@ -68,6 +68,7 @@ for file in $FILES_SYMLINK; do
     Progress_bar_message "${message_symlink}" "${total_symlinks}"
 done
 sleep 0.7s
+
 #=========================================================================================
 
 if [ -d ~/.tmux ]; then
@@ -78,12 +79,12 @@ else
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-echo
-end_message="READ. . ."
+#----------------------------------------------------------------------------------------
+end_message="\nREAD. . ."
 for i in $end_message; do
-    printf $i
-    sleep 0.2s
+    printf $i; sleep 0.2s
 done
-sleep 0.2s
-printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 2; printf "\n"
+sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
+printf "\n"
+#----------------------------------------------------------------------------------------
 tput cnorm          # Make prompt visible.
