@@ -88,12 +88,12 @@ Plug 'christoomey/vim-tmux-runner'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 "--------------------------------------------------------------------------------
 
 
-"Plugin 'VundleVim/Vundle.vim'
 "Plugin 'klen/python-mode'
 "Plugin 'pydiction'
 "Plugin 'Valloric/YouCompleteMe'
@@ -123,11 +123,6 @@ call plug#end()
 
 " Snippets are separated from the engine. Add this if you want them:
 "Plugin 'honza/vim-snippets'
-
-
-"Need this line after listing all the plugins
-"filetype plugin indent on
-
 
 "------------------------plugin settings----------------------------------------
 
@@ -197,13 +192,13 @@ nnoremap fl :VtrSendLinesToRunner<cr>
 "let g:user_emmet_mode='a'
 
 "Syntastic_settings
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"let g:syntastic_always_populate_loc_list = 0
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 0
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_loc_list_height=2
 

@@ -1,8 +1,6 @@
 #!/bin/bash
-# This script is useful but of course could have been accomplised using only a few lines of code. It was an exercise for
-# myself to learn some bash scripting & i'm sure most of everything I did could have been done much more
-# efficiently but oh well. I learned a lot and had fun doing it.
-# Add more directories below as needed. Any config files added to DIR_DOTFILES will be symlinked when running this script.
+# Add more directories below as needed.
+# Any config files added to DIR_DOTFILES will be symlinked when running this script.
 
 clear
 printf "\n"
@@ -24,15 +22,16 @@ total_symlinks=$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))      # Must be a better
 count=0
 
 #-----------------------------------------------------------------------------------------
-# This function takes two arguments. $1 a message and $2 how many items will be iterated.
+# Function takes two arguments. $1 a message and $2 how many items will be iterated.
 #-----------------------------------------------------------------------------------------
 Progress_bar_message() {
     BAR="[-------------------------------------------]"
     length_bar=${#BAR}
     count=$(($count+1))
-    message_count="[${count} of ${2}] "
+    message_count="(${count}/${2}) "
     number_of_spaces=$(( $(tput cols) - ${#1} - ${#message_count} - $length_bar ))
-    printf "${1}%*s${message_count}${BAR}" ${number_of_spaces}
+    # printf "${message_count}${BAR}${1}%*s" ${number_of_spaces}
+    printf "${message_count}${1}%*s${BAR}" ${number_of_spaces}
     sleep 0.4s
     tput cub $(( $length_bar - 2 ))
     for i in $(seq $(( $length_bar - 2 ))); do
@@ -85,9 +84,9 @@ else
 fi
 
 #----------------------------------------------------------------------------------------
-end_message="\nREAD. . ."
+end_message="\nREAD . . ."
 for i in $end_message; do
-    printf $i; sleep 0.2s
+    printf $i; sleep 0.3s
 done
 sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
 printf "\n"
