@@ -25,11 +25,10 @@ count=0
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 #-----------------------------------------------------------------------------------------
 Progress_bar_message() {
-    # BAR="[-------------------------------------------]"
     if [[ $(tput cols) -lt 95 ]]; then
         BAR="[-------]"
     else
-        BAR="[-------------------------------------------]"
+        BAR="[---------------------------------------]"
     fi
     length_bar=${#BAR}
     count=$(($count+1))
@@ -80,20 +79,4 @@ sleep 0.7s
 
 #=========================================================================================
 
-# if [ -d ~/.tmux ]; then
-    # true
-# else
-    # echo Getting tpm for tmux plugins...
-    # echo
-    # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-# fi
-
-#----------------------------------------------------------------------------------------
-# end_message="\nREAD . . ."
-# for i in $end_message; do
-    # printf $i; sleep 0.3s
-# done
-# sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
-# printf "\n"
-#----------------------------------------------------------------------------------------
 tput cnorm          # Make prompt visible.

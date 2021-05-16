@@ -7,22 +7,6 @@
 #=========================================================================================
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
 
-#=========================================================================================
-
-
-
-
-
-# Tmux Plugin Manager (tpm)
-#=========================================================================================
-if [ -d ~/.tmux ]; then
-    true
-else
-    echo Getting tpm for tmux plugins...
-    echo
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-#=========================================================================================
 
 
 
@@ -32,7 +16,20 @@ source $HOME/dotfiles/SYM_LINK.sh
 
 
 
+# Tmux Plugin Manager (tpm)
+#=========================================================================================
+if [ -d $HOME/.tmux ]; then
+    true
+else
+    sleep 2
+    echo Getting tpm for tmux plugins...
+    echo
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
+
+
+# The end
 #=========================================================================================
 end_message="\nREAD . . ."
 for i in $end_message; do
@@ -40,6 +37,3 @@ for i in $end_message; do
 done
 sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
 printf "\n"
-#=========================================================================================
-
-
