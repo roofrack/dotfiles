@@ -1,0 +1,45 @@
+#!/bin/bash
+# For a new arch install to get up and running quickly with the I3 WM and a few other
+# packages.. 
+
+
+# Installing some packages
+#=========================================================================================
+sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
+
+#=========================================================================================
+
+
+
+
+
+# Tmux Plugin Manager (tpm)
+#=========================================================================================
+if [ -d ~/.tmux ]; then
+    true
+else
+    echo Getting tpm for tmux plugins...
+    echo
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+#=========================================================================================
+
+
+
+# Sym-linking script
+#=========================================================================================
+source $HOME/dotfiles/SYM_LINK.sh
+
+
+
+
+#=========================================================================================
+end_message="\nREAD . . ."
+for i in $end_message; do
+   printf $i; sleep 0.3s
+done
+sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
+printf "\n"
+#=========================================================================================
+
+

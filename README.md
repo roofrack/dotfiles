@@ -3,8 +3,8 @@
                                                 ===========================
 
 I wrote this as a guide for myself for installing some things on a new Arch
-installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few directories and
-symlinks them to my dotfiles directory. It is mainly for setting up the I3
+installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few
+packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3
 window manager but can change and or use it for whatever.
 
 
@@ -28,7 +28,7 @@ Automating my set up...
         font pkg the unicode works)
       • ranger (just nice to have)
 
- 4. Run ./dotfiles/i3bootstrap.sh
+ 4. Run ./dotfiles/bootstrap_arch.sh
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. Dont forget to
@@ -38,6 +38,6 @@ Automating my set up...
     virtualbox issue. I have symlinked this as well to dotfiles directory so should work.
 
  7. Tmux installed with pacman. May want to install tpm (a tmux plugin manager by...
-    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The i3boostrap.sh script
+    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The boostrap_arch.sh script
     is set to install this. Once tmux is open type the prefix key and then "I" to
     have tmux install the plugins listed in your .tmux.conf file.
