@@ -2,20 +2,31 @@
 # For a new arch install to get up and running quickly with the I3 WM and a few other
 # packages..
 clear
+banner_message(){
+    message="Installing some packages and setting up I3 window manager"
+    length_message=${#message}
+    char="II"
+    char_length=$((${#char}*2))
+    space=$(((`tput cols`-$length_message-$char_length)/2))
 
-printf "Running pacman -Syu to make sure system is updated\n"
-sudo pacman -Syu
+    outer=$(printf  "%`tput cols`s\n" | tr ' ' ${char})
+    inner=$(printf "${char}%$((`tput cols` - $char_length))s${char}\n")
+    middle=$(printf "${char}%${space}s${message}%${space}s${char}\n")
 
-printf "\nInstalling git\n"
+    printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer\n\n"
+}
+banner_message
 
-printf "\nCloning dotfiles\n"
-git clone https://github.com/roofrack/dotfiles
+sleep 5; clear; sleep 3
 
 # Installing some packages
 #=========================================================================================
+printf "Running pacman -Syu to make sure system is updated\n\n\n"
+sudo pacman -Syu
 printf "\nSelect the 1 3 4 5 options for I3\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
 printf "\nFinished installing packages.\n"
+sleep 2
 
 
 # Sym-linking script
@@ -32,10 +43,10 @@ if [[ -d $HOME/.tmux ]]; then
 else
     sleep 2
     printf "\n Getting tpm for tmux plugins...\n"
+    sleep 2
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-
 
 
 # The end
