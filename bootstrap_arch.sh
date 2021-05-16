@@ -7,12 +7,13 @@
 #=========================================================================================
 printf "\nSelect the 1 3 4 5 options for I3\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
-
+printf "\nFinished installing packages\n"
 
 
 
 # Sym-linking script
 #=========================================================================================
+printf "\nSetting up directories and Sym-links...\n"
 source $HOME/dotfiles/SYM_LINK.sh
 
 
