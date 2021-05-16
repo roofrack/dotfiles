@@ -1,10 +1,11 @@
 #!/bin/bash
 # For a new arch install to get up and running quickly with the I3 WM and a few other
-# packages.. 
+# packages..
 
 
 # Installing some packages
 #=========================================================================================
+printf "Select the 1 3 4 5 options for I3\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
 
 
@@ -15,10 +16,10 @@ sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
 source $HOME/dotfiles/SYM_LINK.sh
 
 
-
 # Tmux Plugin Manager (tpm)
 #=========================================================================================
-if [ -d $HOME/.tmux ]; then
+printf "\nSetting up Tmux Plugin Manager (tpm)...\n"
+if [[ -d $HOME/.tmux ]]; then
     true
 else
     sleep 2
