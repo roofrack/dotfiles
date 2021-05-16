@@ -1,6 +1,6 @@
-#xorg-xinit
-#xorg-server
-#xfce4-terminal
+xorg-xinit
+xorg-server
+xfce4-terminal
 i3
 picom
 feh

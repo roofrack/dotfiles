@@ -5,7 +5,7 @@
 
 # Installing some packages
 #=========================================================================================
-printf "Select the 1 3 4 5 options for I3\n"
+printf "\nSelect the 1 3 4 5 options for I3\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
 
 
@@ -18,12 +18,11 @@ source $HOME/dotfiles/SYM_LINK.sh
 
 # Tmux Plugin Manager (tpm)
 #=========================================================================================
-printf "\nSetting up Tmux Plugin Manager (tpm)...\n"
 if [[ -d $HOME/.tmux ]]; then
     true
 else
     sleep 2
-    echo Getting tpm for tmux plugins...
+    printf "\n Getting tpm for tmux plugins...\n"
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
