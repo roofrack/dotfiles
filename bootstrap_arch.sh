@@ -1,7 +1,7 @@
 #!/bin/bash
 # For a new arch install to get up and running quickly with the I3 WM and a few other
 # packages..
-
+clear
 
 # Installing some packages
 #=========================================================================================
