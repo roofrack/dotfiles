@@ -1,7 +1,7 @@
 xorg-xinit
 xorg-server
 xfce4-terminal
-#i3
+i3
 picom
 feh
 ranger
