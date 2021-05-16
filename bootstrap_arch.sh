@@ -3,6 +3,14 @@
 # packages..
 clear
 
+printf "Running pacman -Syu to make sure system is updated\n"
+sudo pacman -Syu
+
+printf "\nInstalling git\n"
+
+printf "\nCloning dotfiles\n"
+git clone https://github.com/roofrack/dotfiles
+
 # Installing some packages
 #=========================================================================================
 printf "\nSelect the 1 3 4 5 options for I3\n"
