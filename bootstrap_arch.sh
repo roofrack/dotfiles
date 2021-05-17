@@ -3,16 +3,18 @@
 # packages..
 clear
 banner_message(){
-    message="Installing some packages and setting up I3 window manager"
+    # message="Installing some packages and setting up I3 window manager"
+    message="WELCOME TO ARCH_BOOTSTRAP"
     length_message=${#message}
-    char="II"
+    char="IIIIIIIIIIII"
     char_length=$((${#char}*2))
     space=$(((`tput cols`-$length_message-$char_length)/2))
 
     outer=$(printf  "%`tput cols`s\n" | tr ' ' ${char})
     inner=$(printf "${char}%$((`tput cols` - $char_length))s${char}\n")
-    middle=$(printf "${char}%${space}s${message}%${space}s${char}\n")
+    middle=$(printf "${char}%${space}s${message} %${space}s${char}\n")
 
+    printf "\n\n\n\n\n\n\n\n\n\n\n"
     printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer\n\n"
 }
 banner_message
@@ -21,7 +23,7 @@ sleep 5; clear; sleep 3
 
 # Installing some packages
 #=========================================================================================
-printf "Running pacman -Syu to make sure system is updated\n\n\n"
+printf "Running pacman -Syu to make sure system is updated\n\n"
 sudo pacman -Syu
 printf "\nSelect the 1 3 4 5 options for I3\n\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
