@@ -23,7 +23,7 @@ sleep 5; clear; sleep 3
 #=========================================================================================
 printf "Running pacman -Syu to make sure system is updated\n\n\n"
 sudo pacman -Syu
-printf "\nSelect the 1 3 4 5 options for I3\n"
+printf "\nSelect the 1 3 4 5 options for I3\n\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
 printf "\nFinished installing packages.\n"
 sleep 2

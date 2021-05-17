@@ -13,9 +13,10 @@ DIR_PICS="$HOME/Pictures"
 DIR_I3="$DIR_CONFIG/i3"
 DIR_XFCE4="$DIR_CONFIG/xfce4/terminal"
 DIR_RANGER="$DIR_CONFIG/ranger"
+DIR_PICOM="$DIR_CONFIG/picom"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
-DIR_BUILD=("$DIR_I3" "$DIR_XFCE4" "$DIR_RANGER" "$DIR_WALLPAPER")
+DIR_BUILD=("$DIR_I3" "$DIR_XFCE4" "$DIR_RANGER" "$DIR_PICOM" "$DIR_WALLPAPER")
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"         # Can't seem to make brace expan work.
 total_dirs=${#DIR_BUILD[@]}
 total_symlinks=$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))      # Must be a better way to calculate this
@@ -70,6 +71,8 @@ for file in $FILES_SYMLINK; do
         $sym_link $DIR_RANGER
     elif [[ $file == $DIR_DOTFILES/arch3.png ]]; then
         $sym_link $DIR_WALLPAPER
+    elif [[ $file == $DIR_DOTFILES/picom.conf ]]; then
+        $sym_link $DIR_PICOM
     else
     $sym_link $HOME
     fi
