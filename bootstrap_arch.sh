@@ -1,9 +1,14 @@
 #!/bin/bash
-# For a new arch install to get up and running quickly with the I3 WM and a few other
-# packages..
+#=========================================================================================
+# For a new arch install to get up and running quickly with the I3 WM                    =
+#                                                                                        =
+#                                                                                        =
+#                                                                                        =
+# By: Robert Aylard                                                                      =
+# Email: robaylard@gmail.com                                                             =                               =
+#=========================================================================================
 clear
 banner_message(){
-    # message="Installing some packages and setting up I3 window manager"
     message="WELCOME TO ARCH_BOOTSTRAP"
     length_message=${#message}
     char="IIIIIIIIIIII"
@@ -14,12 +19,12 @@ banner_message(){
     inner=$(printf "${char}%$((`tput cols` - $char_length))s${char}\n")
     middle=$(printf "${char}%${space}s${message} %${space}s${char}\n")
 
-    printf "\n\n\n\n\n\n\n\n\n\n\n"
-    printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer\n\n"
+    printf "\n\n\n\n\n\n\n\n\n"
+    printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer"
 }
 banner_message
 
-sleep 5; clear; sleep 3
+sleep 6; clear; sleep 3
 
 # Installing some packages
 #=========================================================================================

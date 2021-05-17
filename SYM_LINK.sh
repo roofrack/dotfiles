@@ -18,8 +18,8 @@ DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 DIR_BUILD=("$DIR_I3" "$DIR_XFCE4" "$DIR_RANGER" "$DIR_PICOM" "$DIR_WALLPAPER")
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"         # Can't seem to make brace expan work.
-total_dirs=${#DIR_BUILD[@]}
-total_symlinks=$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))      # Must be a better way to calculate this
+total_dirs="${#DIR_BUILD[@]}"
+total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
 count=0
 
 #-----------------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ Progress_bar_message() {
     tput cub $(( $length_bar - 2 ))
     for i in $(seq $(( $length_bar - 2 ))); do
         printf "#"
+        sleep 0.01s
     done
     printf "\n"                                               # Seem to need this here for it to work cleanly.
 }

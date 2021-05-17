@@ -16,6 +16,7 @@ Automating my set up...
  2. In ~ run git clone https://github.com/roofrack/dotfiles.
 
  3. See dotfiles/archPackages for stuff to install but this is all you need for i3...
+    Will be installed when running the script in the next step.
 
       • i3 (select 1 3 4 5)
       • xorg-xinit
@@ -28,7 +29,7 @@ Automating my set up...
         font pkg the unicode works)
       • ranger (just nice to have)
 
- 4. Run ./dotfiles/bootstrap_arch.sh
+ 4. Run dotfiles/bootstrap_arch.sh
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. Dont forget to
