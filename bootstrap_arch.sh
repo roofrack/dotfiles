@@ -3,8 +3,7 @@
 # For a new arch install to get up and running quickly with the I3 WM                    =
 #                                                                                        =
 #                                                                                        =
-#                                                                                        =
-# By: Robert Aylard                                                                      =
+# By:    Robert Aylard                                                                   =
 # Email: robaylard@gmail.com                                                             =                               =
 #=========================================================================================
 clear
@@ -16,8 +15,8 @@ banner_message(){
     space=$(((`tput cols`-$length_message-$char_length)/2))
 
     outer=$(printf  "%`tput cols`s\n" | tr ' ' ${char})
-    inner=$(printf "${char}%$((`tput cols` - $char_length))s${char}\n")
-    middle=$(printf "${char}%${space}s${message} %${space}s${char}\n")
+    inner=$(printf "${char}%$((`tput cols` - $char_length))s${char}")
+    middle=$(printf "${char}%${space}s${message} %${space}s${char}")
 
     printf "\n\n\n\n\n\n\n\n\n"
     printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer"
@@ -28,7 +27,7 @@ sleep 6; clear; sleep 3
 
 # Installing some packages
 #=========================================================================================
-printf "Running pacman -Syu to make sure system is updated\n\n"
+printf "Running pacman -Syu to make sure system is updated ...\n\n"
 sudo pacman -Syu
 printf "\nSelect the 1 3 4 5 options for I3\n\n"
 sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
@@ -38,7 +37,7 @@ sleep 2
 
 # Sym-linking script
 #=========================================================================================
-printf "\nSetting up directories and Sym-links...\n"
+printf "\nSetting up directories and Sym-links ...\n"
 sleep 2
 source $HOME/dotfiles/SYM_LINK.sh
 
@@ -49,7 +48,7 @@ if [[ -d $HOME/.tmux ]]; then
     true
 else
     sleep 2
-    printf "\n Getting tpm for tmux plugins...\n"
+    printf "\n Getting tpm for tmux plugins ...\n"
     sleep 2
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
