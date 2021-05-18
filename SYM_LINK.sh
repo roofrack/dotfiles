@@ -31,7 +31,6 @@ Progress_bar_message() {
     count=$(($count+1))
     message_count="(${count}/${2}) "
     number_of_spaces=$(( $(tput cols) - ${#1} - ${#message_count} - $length_bar ))
-    # printf "${message_count}${BAR}${1}%*s" ${number_of_spaces}
     printf "${message_count}${1}%*s${BAR}" ${number_of_spaces}
     sleep 0.4s
     tput cub $(( $length_bar - 2 ))
