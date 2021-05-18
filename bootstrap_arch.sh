@@ -3,7 +3,6 @@
 # For a new arch install to get up and running quickly with the I3 WM                    =
 #                                                                                        =
 #                                                                                        =
-# By:    Robert Aylard                                                                   =
 # Email: robaylard@gmail.com                                                             =                               =
 #=========================================================================================
 clear
