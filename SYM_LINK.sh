@@ -2,10 +2,6 @@
 # Add more directories below as needed.
 # Any config files added to DIR_DOTFILES will be symlinked when running this script.
 
-# clear
-printf "\n"
-tput civis
-
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
@@ -17,8 +13,8 @@ DIR_PICOM="$DIR_CONFIG/picom"
 DIR_WALLPAPER="$DIR_PICS/wallpaper"
 
 DIR_BUILD=("$DIR_I3" "$DIR_XFCE4" "$DIR_RANGER" "$DIR_PICOM" "$DIR_WALLPAPER")
-FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"         # Can't seem to make brace expan work.
 total_dirs="${#DIR_BUILD[@]}"
+FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to make brace expan work.
 total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
 count=0
 
@@ -49,6 +45,7 @@ Progress_bar_message() {
 #=========================================================================================
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
+printf "\n"; tput civis
 for dir in "${DIR_BUILD[@]}"; do
     mkdir -p $dir
     message_dir="Building directory for $dir"
