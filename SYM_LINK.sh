@@ -22,23 +22,33 @@ count=0
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 #-----------------------------------------------------------------------------------------
 Progress_bar_message() {
-    if [[ $(tput cols) -lt 95 ]]; then
-        BAR="[-------]"
-    else
-        BAR="[---------------------------------------]"
-    fi
-    length_bar=${#BAR}
     count=$(($count+1))
     message_count="(${count}/${2}) "
-    number_of_spaces=$(( $(tput cols) - ${#1} - ${#message_count} - $length_bar ))
-    printf "${message_count}${1}%*s${BAR}" ${number_of_spaces}
-    sleep 0.4s
-    tput cub $(( $length_bar - 2 ))
-    for i in $(seq $(( $length_bar - 2 ))); do
-        printf "#"
-        sleep 0.01s
+    time_total=0
+    bar_timer(){
+        time_start=$(date +'%s%N')
+        a=${time_total:(-10):1} b=${time_total:(-9):2}
+        ab="${a:-0}.${b:-01}s"
+        ab_length=${#ab}
+    }
+    if [[ $(tput cols) -lt 95 ]]; then qty_chars="10"; else qty_chars="23"; fi
+    bar=$(printf '%*s' $qty_chars | tr " " "-")
+    length_bar=${#bar}
+    percent=$((100%length_bar))
+    length_percent="4"
+
+    for i in $(seq $length_bar); do
+        bar_timer
+        number_of_spaces=$(($(tput cols) - ${#message_count} - ${#1} - $ab_length - $length_bar - 4 - $length_percent))
+        bar=${bar/-/\#}
+        percent=$((percent+100/length_bar))
+
+        printf '\r%s%s%*s%s [%s] %3d%%' "${message_count}" "${1}" "${number_of_spaces}" "" "$ab" "$bar" "$percent"
+
+        time_end=$(date +'%s%N')
+        time_total=$((time_total + time_end - time_start))
     done
-    printf "\n"                                               # Seem to need this here for it to work cleanly.
+    printf "\n"
 }
 
 #=========================================================================================
