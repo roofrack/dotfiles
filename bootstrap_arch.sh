@@ -3,20 +3,23 @@
 # For a new arch install to get up and running quickly with the I3 WM                    =
 #                                                                                        =
 #                                                                                        =
-# Email: robaylard@gmail.com                                                             =                               =
+# <robaylard@gmail.com>                                                                  =
 #=========================================================================================
 clear
 banner_message(){
     message="WELCOME TO ARCH_BOOTSTRAP"
     length_message=${#message}
     char="IIIIIIIIIIII"
-    char_length=$((${#char}*2))
-    space=$(((`tput cols`-$length_message-$char_length)/2))
-
-    outer=$(printf  "%`tput cols`s\n" | tr ' ' ${char})
-    inner=$(printf "${char}%$((`tput cols` - $char_length))s${char}")
-    middle=$(printf "${char}%${space}s${message} %${space}s${char}")
-
+    char_length=${#char}
+    space=$((($(tput cols) - $char_length - $length_message - $char_length)/2))
+    outer=$(printf '%*s' "$(tput cols)" | tr ' ' ${char})
+    inner=$(printf '%s%*s%s' "$char" "$(($(tput cols) - (char_length * 2)))" "" "$char")
+    if [[ $(($(tput cols) % 2)) == 0 ]]; then
+        # Need an extra space here only if the terminal is an even number of spaces
+        middle=$(printf '%s%*s%s %*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
+    else
+        middle=$(printf '%s%*s%s%*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
+    fi
     printf "\n\n\n\n\n\n\n\n\n"
     printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer"
 }
