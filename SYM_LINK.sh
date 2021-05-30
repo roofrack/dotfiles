@@ -34,7 +34,7 @@ Progress_bar_message() {
     if [[ $(tput cols) -lt 95 ]]; then qty_chars="10"; else qty_chars="23"; fi
     bar=$(printf '%*s' $qty_chars | tr " " "-")
     length_bar=${#bar}
-    percent=$((100%length_bar))
+    percent=$((100 % length_bar))
     length_percent="4"
 
     for i in $(seq $length_bar); do

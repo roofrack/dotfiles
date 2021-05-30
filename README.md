@@ -26,7 +26,7 @@ Automating my set up...
       • picom (for adding translucency to the xfce4-terminal)
       • gnu-free-fonts (airline works fine without this except for the little line symbol won't
         render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
-        font pkg the unicode works);w
+        font pkg the unicode works
       • ranger (just nice to have)
 
  4. Run dotfiles/bootstrap_arch.sh script which will call the SYM_LINK.sh script.

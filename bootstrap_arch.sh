@@ -15,7 +15,7 @@ banner_message(){
     outer=$(printf '%*s' "$(tput cols)" | tr ' ' ${char})
     inner=$(printf '%s%*s%s' "$char" "$(($(tput cols) - (char_length * 2)))" "" "$char")
     if [[ $(($(tput cols) % 2)) == 0 ]]; then
-        # Need an extra space here only if the terminal is an even number of spaces
+        # Need an extra space here only if the terminal is an even number of columns
         middle=$(printf '%s%*s%s %*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
     else
         middle=$(printf '%s%*s%s%*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
