@@ -65,7 +65,7 @@ printf "\n"
 #=========================================================================================
 count=0
 for file in $FILES_SYMLINK; do
-    sym_link="ln -sf $file"                                   # Must declare these var's here or they won't work.
+    sym_link="ln -sf $file"
     message_symlink="Sym-Linking $(basename $file)"
 
     if [[ $file == $DIR_DOTFILES/config ]]; then
