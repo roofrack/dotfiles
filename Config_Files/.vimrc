@@ -20,7 +20,7 @@ set history=1000                "Store lots of :cmdline history
 set ruler                       "show line number and column
 set mouse=a                     "allows proper use of mouse inside vim
 "set hidden                     "have buffer with unsaved work open in background
-set helpheight=99999            "makes :help open in bigger buffer
+" set helpheight=99999            "makes :help open in bigger buffer
 set wildmenu                    "tab completion for the vim help
 "set noswapfile                 "prevents extra file being saved in home directory
 "set nobackup
@@ -146,6 +146,14 @@ let g:airline_theme='badwolf'
 " when i turn this on it will screw airline up (laptop computer works ok)
 " When its off the fonts don't look as nice
 let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_symbols.colnr = ' ℅:'
+
+
 
 
 "NERDTree_settings ...
