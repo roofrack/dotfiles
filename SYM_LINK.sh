@@ -67,20 +67,26 @@ count=0
 for file in $FILES_SYMLINK; do
     sym_link="ln -sf $file"
     message_symlink="Sym-Linking $(basename $file)"
-
-    if [[ $file == $DIR_DOTFILES/config ]]; then
-        $sym_link $DIR_I3
-    elif [[ $file == $DIR_DOTFILES/terminalrc ]]; then
-        $sym_link $DIR_XFCE4
-    elif [[ $file == $DIR_DOTFILES/rc.conf ]]; then
-        $sym_link $DIR_RANGER
-    elif [[ $file == $DIR_DOTFILES/arch3.png ]]; then
-        $sym_link $DIR_WALLPAPER
-    elif [[ $file == $DIR_DOTFILES/picom.conf ]]; then
-        $sym_link $DIR_PICOM
-    else
+    case $file in
+        $DIR_DOTFILES/config)
+            $sym_link $DIR_I3
+            ;;
+        $DIR_DOTFILES/terminalrc)
+            $sym_link $DIR_XFCE4
+            ;;
+        $DIR_DOTFILES/rc.conf)
+            $sym_link $DIR_RANGER
+            ;;
+        $DIR_DOTFILES/arch3.png)
+            $sym_link $DIR_WALLPAPER
+            ;;
+        $DIR_DOTFILES/picom.conf)
+            $sym_link $DIR_PICOM
+            ;;
+        *)
     $sym_link $HOME
-    fi
+    ;;
+    esac
     Progress_bar_message "${message_symlink}" "${total_symlinks}"
 done
 sleep 0.7s
