@@ -11,6 +11,7 @@ set show-mode-in-prompt on
 # set vi-cmd-mode-string ":"
 
 # set the mode indicators with color
+# used a unicode arrow symbol for insert mode
 # note: left a space in cmd mode so no symbol shows
 set vi-ins-mode-string \1\e[32;1m\2↳\1\e[0m\2
 set vi-cmd-mode-string \1\e[37;1m\2 \1\e[0m\2
