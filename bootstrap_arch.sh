@@ -23,8 +23,16 @@ banner_message(){
     printf "\n\n\n\n\n\n\n\n\n"
     printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer"
 }
-banner_message
+end_message(){
+    end_message="\nREAD . . ."
+    for i in $end_message; do
+        printf $i; sleep 0.3s
+    done
+    sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
+    printf "\n"
+}
 
+banner_message
 sleep 6; clear; sleep 3
 
 # Installing some packages
@@ -59,9 +67,4 @@ fi
 
 # The end
 #=========================================================================================
-end_message="\nREAD . . ."
-for i in $end_message; do
-   printf $i; sleep 0.3s
-done
-sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
-printf "\n"
+end_message
