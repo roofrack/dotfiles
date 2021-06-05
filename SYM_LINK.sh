@@ -27,6 +27,7 @@ declare -A DIR_BUILD=(                                       #
                                                              #
 ##############################################################
 
+
 #=========================================================================================
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 # This is just basically a decoration and was an exercise for myself to learn some bash
@@ -53,7 +54,9 @@ Progress_bar_message() {
         number_of_spaces=$(($(tput cols) - ${#message_count} - ${#1} - $ab_length - $length_bar - 4 - $length_percent))
         bar=${bar/-/\#}
         percent=$((percent+100/length_bar))
+        #---------------------------------------------------------------------------------
         printf '\r%s%s%*s%s [%s] %3d%%' "${message_count}" "${1}" "${number_of_spaces}" "" "$ab" "$bar" "$percent"
+        #---------------------------------------------------------------------------------
         time_end=$(date +'%s%N')
         time_total=$((time_total + time_end - time_start))
     done
