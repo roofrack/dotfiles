@@ -60,7 +60,7 @@ Progress_bar_message() {
 }
 
 #=========================================================================================
-# Building directories and Sym-Links
+# Building Directories and Sym-Links
 #=========================================================================================
 for file in $FILES_SYMLINK; do
 dir_build="${DIR_BUILD[$(basename $file)]}"
