@@ -53,7 +53,6 @@ Progress_bar_message() {
 #=========================================================================================
 # Need to build directories for packages which install config files in nested dir's.
 #=========================================================================================
-count=0
 printf "\n"; tput civis
 for dir in ${DIR_BUILD[@]}; do
     mkdir -p $dir
