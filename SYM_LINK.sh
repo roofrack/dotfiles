@@ -24,7 +24,6 @@ declare -A DIR_BUILD=(
 
 #-----------------------------------------------------------------------------------------
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
-
 # This is just basically a decoration and was an exercise for myself to learn some bash
 # scripting. I had fun making this but probably have done most of it wrong. Oh well. Haha.
 #-----------------------------------------------------------------------------------------
