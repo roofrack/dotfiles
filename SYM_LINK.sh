@@ -14,6 +14,7 @@ declare -A DIR_BUILD=(
     [picom.conf]=$DIR_CONFIG/picom
     #[file]=directory
     #[file]=directory
+    #[file]=directory
 )
 total_dirs="${#DIR_BUILD[@]}"
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to make brace expan work.
