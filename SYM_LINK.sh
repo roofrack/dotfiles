@@ -59,13 +59,13 @@ Progress_bar_message() {
 # Building directories and Sym-Links
 #=========================================================================================
 for file in $FILES_SYMLINK; do
-    dir_build="${DIR_BUILD[$(basename $file)]}"
+dir_build="${DIR_BUILD[$(basename $file)]}"
     if [[ -n $dir_build ]]; then
         mkdir -p $dir_build && ln -sf $file $dir_build
-        message_symlink="Sym-Linking   $dir_build/$(basename $file)"
+        message_symlink="creating sym-link   ${dir_build}/$(basename $file)"
     else
         ln -sf $file $HOME
-        message_symlink="Sym-Linking   $HOME/$(basename $file)"
+        message_symlink="creating sym-link   $HOME/$(basename $file)"
     fi
     Progress_bar_message "${message_symlink}" "${total_symlinks}"
 done
