@@ -32,7 +32,7 @@ declare -A DIR_BUILD=(                                       #
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 # This is just basically a decoration and was an exercise for myself to learn some bash
 # scripting. I had fun making this but probably have done most of it wrong. Oh well. Haha.
-# It prints out a progress bar with 6 components... see the printf command below.
+# A progress bar with 6 components... see the printf command below.
 #=========================================================================================
 Progress_bar_message() {
     count=$(($count+1))
