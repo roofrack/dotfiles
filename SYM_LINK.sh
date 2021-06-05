@@ -31,6 +31,7 @@ declare -A DIR_BUILD=(                                       #
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 # This is just basically a decoration and was an exercise for myself to learn some bash
 # scripting. I had fun making this but probably have done most of it wrong. Oh well. Haha.
+# It prints out a progress bar with 6 components... see the printf command below.
 #=========================================================================================
 Progress_bar_message() {
     count=$(($count+1))
@@ -45,7 +46,7 @@ Progress_bar_message() {
     if [[ $(tput cols) -lt 101 ]]; then qty_chars="10"; else qty_chars="25"; fi
     bar=$(printf '%*s' $qty_chars | tr " " "-")
     length_bar=${#bar}
-    percent=$((100 % length_bar))
+    percent=$((100 % length_bar))                               
     length_percent="4"
     for i in $(seq $length_bar); do
         bar_timer
