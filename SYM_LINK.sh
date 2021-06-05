@@ -1,10 +1,13 @@
 #!/bin/bash
 # Any config files added to DIR_DOTFILES will be symlinked when running this script.
-# Add more directories to be built below along with the name of the file.
+# If the sym-link is going in a nested dir then add the dir path below in the DIR_BUILD 
+# array along with the name of the config file to be symlinked.
 
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
+FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to make brace expan work.
+total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
 
 declare -A DIR_BUILD=(
     [config]=$DIR_CONFIG/i3
@@ -12,17 +15,15 @@ declare -A DIR_BUILD=(
     [rc.conf]=$DIR_CONFIG/ranger
     [arch3.png]=$DIR_PICS/wallpaper
     [picom.conf]=$DIR_CONFIG/picom
-    #[file]=directory
-    #[file]=directory
-    #[file]=directory
+    #[config_file]=directory_where_you_want_the_symlink
+    #[config_file]=directory_where_you_want_the_symlink
 )
-total_dirs="${#DIR_BUILD[@]}"
-FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to make brace expan work.
-total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
 
 #-----------------------------------------------------------------------------------------
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 #-----------------------------------------------------------------------------------------
+# This is just basically a decoration and was an exercise for myself to learn some bash 
+# scripting. I had fun making this but probably have done most of it wrong. Oh well. Haha.
 Progress_bar_message() {
     count=$(($count+1))
     message_count="(${count}/${2}) "
@@ -33,7 +34,7 @@ Progress_bar_message() {
         ab="${a:-0}.${b:-01}s"
         ab_length=${#ab}
     }
-    if [[ $(tput cols) -lt 95 ]]; then qty_chars="10"; else qty_chars="23"; fi
+    if [[ $(tput cols) -lt 101 ]]; then qty_chars="10"; else qty_chars="23"; fi
     bar=$(printf '%*s' $qty_chars | tr " " "-")
     length_bar=${#bar}
     percent=$((100 % length_bar))
@@ -51,27 +52,18 @@ Progress_bar_message() {
 }
 
 #=========================================================================================
-# Need to build directories for packages which install config files in nested dir's.
+# Building directories and Sym-Links
 #=========================================================================================
 printf "\n"; tput civis
-for dir in ${DIR_BUILD[@]}; do
-    mkdir -p $dir
-    message_dir="Building directory for $dir"
-    Progress_bar_message "${message_dir}" "${total_dirs}"     # Calling the function with 2 arguments
-done
-printf "\n"
-
-#=========================================================================================
-# Sym-Links
-#=========================================================================================
-count=0
 for file in $FILES_SYMLINK; do
     if [[ -n ${DIR_BUILD[$(basename $file)]} ]]; then
+        mkdir -p ${DIR_BUILD[$(basename $file)]}
         ln -sf $file ${DIR_BUILD[$(basename $file)]}
+        message_symlink="Sym-Linking   ${DIR_BUILD[$(basename $file)]}/$(basename $file)"
     else
         ln -sf $file $HOME
+        message_symlink="Sym-Linking   $HOME/$(basename $file)"
     fi
-    message_symlink="Sym-Linking $(basename $file)"
     Progress_bar_message "${message_symlink}" "${total_symlinks}"
 done
 
