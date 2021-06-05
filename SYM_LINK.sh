@@ -72,7 +72,7 @@ dir_build="${DIR_BUILD[$(basename $file)]}"
         ln -sf $file $HOME
         dir_symlink="${HOME}"
     fi
-    Progress_bar_message "creating sym-link ${dir_symlink}/$(basename $file)" "${total_symlinks}"
+    Progress_bar_message "creating sym-link   ${dir_symlink}/$(basename $file)" "${total_symlinks}"
 done
 
 tput cnorm          # Make prompt visible.
