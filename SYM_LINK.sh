@@ -13,15 +13,19 @@ DIR_PICS="$HOME/Pictures"
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to make brace expan work.
 total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
 
-declare -A DIR_BUILD=(
-    [config]=$DIR_CONFIG/i3
-    [terminalrc]=$DIR_CONFIG/xfce4/terminal
-    [rc.conf]=$DIR_CONFIG/ranger
-    [arch3.png]=$DIR_PICS/wallpaper
-    [picom.conf]=$DIR_CONFIG/picom
-    #[config_file]=directory_where_you_want_the_symlink
-    #[config_file]=directory_where_you_want_the_symlink
-)
+##############################################################
+                                                             #
+declare -A DIR_BUILD=(                                       #
+    [config]=$DIR_CONFIG/i3                                  #
+    [terminalrc]=$DIR_CONFIG/xfce4/terminal                  #
+    [rc.conf]=$DIR_CONFIG/ranger                             #
+    [arch3.png]=$DIR_PICS/wallpaper                          #
+    [picom.conf]=$DIR_CONFIG/picom                           #
+    #[config_file]=directory_where_you_want_the_symlink      #
+    #[config_file]=directory_where_you_want_the_symlink      #
+)                                                            #
+                                                             #
+##############################################################
 
 #=========================================================================================
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
