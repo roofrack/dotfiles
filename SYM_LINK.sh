@@ -66,12 +66,12 @@ for file in $FILES_SYMLINK; do
 dir_build="${DIR_BUILD[$(basename $file)]}"
     if [[ -n $dir_build ]]; then
         mkdir -p $dir_build && ln -sf $file $dir_build
-        message_symlink="creating sym-link   ${dir_build}/$(basename $file)"
+        message_symlink="${dir_build}/$(basename $file)"
     else
         ln -sf $file $HOME
-        message_symlink="creating sym-link   $HOME/$(basename $file)"
+        message_symlink="$HOME/$(basename $file)"
     fi
-    Progress_bar_message "${message_symlink}" "${total_symlinks}"
+    Progress_bar_message "creating sym-link ${message_symlink}" "${total_symlinks}"
 done
 
 tput cnorm          # Make prompt visible.
