@@ -23,11 +23,11 @@ declare -A DIR_BUILD=(
     #[config_file]=directory_where_you_want_the_symlink
 )
 
-#-----------------------------------------------------------------------------------------
+#=========================================================================================
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
 # This is just basically a decoration and was an exercise for myself to learn some bash
 # scripting. I had fun making this but probably have done most of it wrong. Oh well. Haha.
-#-----------------------------------------------------------------------------------------
+#=========================================================================================
 Progress_bar_message() {
     count=$(($count+1))
     message_count="(${count}/${2}) "
@@ -70,6 +70,5 @@ dir_build="${DIR_BUILD[$(basename $file)]}"
     Progress_bar_message "${message_symlink}" "${total_symlinks}"
 done
 
-#=========================================================================================
-
 tput cnorm          # Make prompt visible.
+#=========================================================================================
