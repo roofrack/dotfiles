@@ -1,7 +1,10 @@
 #!/bin/bash
+#-----------------------------------------------------------------------------------------
 # Any config files added to DIR_DOTFILES will be symlinked when running this script.
-# If the sym-link is going in a nested dir then add the dir path below in the DIR_BUILD 
+
+# If the sym-link is going in a nested dir then add the dir path below in the DIR_BUILD
 # array along with the name of the config file to be symlinked.
+#-----------------------------------------------------------------------------------------
 
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
@@ -21,9 +24,10 @@ declare -A DIR_BUILD=(
 
 #-----------------------------------------------------------------------------------------
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
-#-----------------------------------------------------------------------------------------
-# This is just basically a decoration and was an exercise for myself to learn some bash 
+
+# This is just basically a decoration and was an exercise for myself to learn some bash
 # scripting. I had fun making this but probably have done most of it wrong. Oh well. Haha.
+#-----------------------------------------------------------------------------------------
 Progress_bar_message() {
     count=$(($count+1))
     message_count="(${count}/${2}) "
