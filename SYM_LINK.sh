@@ -42,7 +42,7 @@ Progress_bar_message() {
         ab="${a:-0}.${b:-01}s"
         ab_length=${#ab}
     }
-    if [[ $(tput cols) -lt 101 ]]; then qty_chars="10"; else qty_chars="23"; fi
+    if [[ $(tput cols) -lt 101 ]]; then qty_chars="10"; else qty_chars="25"; fi
     bar=$(printf '%*s' $qty_chars | tr " " "-")
     length_bar=${#bar}
     percent=$((100 % length_bar))
@@ -69,7 +69,7 @@ dir_build="${DIR_BUILD[$(basename $file)]}"
         message_symlink="${dir_build}/$(basename $file)"
     else
         ln -sf $file $HOME
-        message_symlink="$HOME/$(basename $file)"
+        message_symlink="${HOME}/$(basename $file)"
     fi
     Progress_bar_message "creating sym-link ${message_symlink}" "${total_symlinks}"
 done
