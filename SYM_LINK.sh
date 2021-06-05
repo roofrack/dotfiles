@@ -46,7 +46,7 @@ Progress_bar_message() {
     if [[ $(tput cols) -lt 101 ]]; then qty_chars="10"; else qty_chars="25"; fi
     bar=$(printf '%*s' $qty_chars | tr " " "-")
     length_bar=${#bar}
-    percent=$((100 % length_bar))                               
+    percent=$((100 % length_bar))
     length_percent="4"
     for i in $(seq $length_bar); do
         bar_timer
@@ -67,12 +67,12 @@ for file in $FILES_SYMLINK; do
 dir_build="${DIR_BUILD[$(basename $file)]}"
     if [[ -n $dir_build ]]; then
         mkdir -p $dir_build && ln -sf $file $dir_build
-        message_symlink="${dir_build}/$(basename $file)"
+        dir_symlink="${dir_build}"
     else
         ln -sf $file $HOME
-        message_symlink="${HOME}/$(basename $file)"
+        dir_symlink="${HOME}"
     fi
-    Progress_bar_message "creating sym-link ${message_symlink}" "${total_symlinks}"
+    Progress_bar_message "creating sym-link ${dir_symlink}/$(basename $file)" "${total_symlinks}"
 done
 
 tput cnorm          # Make prompt visible.
