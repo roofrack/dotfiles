@@ -1,6 +1,6 @@
 #!/bin/bash
 #-----------------------------------------------------------------------------------------
-# Any config files added to DIR_DOTFILES will be symlinked when running this script. Th
+# Any config files added to DIR_DOTFILES will be symlinked when running this script. The
 # link will be placed in the user's home directory unless another path is added.
 # If the sym-link is going in a nested dir then add the dir path below in the DIR_BUILD
 # array along with the name of the config file to be symlinked.
