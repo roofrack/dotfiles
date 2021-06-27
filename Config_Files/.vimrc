@@ -159,6 +159,7 @@ let g:airline_symbols.colnr = ' ℅:'
 
 
 "NERDTree_settings ...
+" ---------------------------------------------------------
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
 let NERDTreeWinSize = 20
 let NERDTreeShowBookmarks = 1
@@ -170,6 +171,7 @@ nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 
 "vim-tmux-runner settings...
+" ---------------------------------------------------------
 let g:VtrUseVtrMaps = 1          "use default Vtm mappings
 "let g:vtr_filetype_runner_overrides = {
             \ 'python': 'python -i {file}'
@@ -198,49 +200,25 @@ nnoremap fl :VtrSendLinesToRunner<cr>
 
 
 "emmett_settings ...
+" ---------------------------------------------------------
 "This allows the use of the trigger key in all modes
 "let g:user_emmet_mode='a'
 
-"Syntastic_settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_loc_list_height=2
-
-
-"youcompleteme_settings
-" ---------------------------------------------------------
-"let g:ycm_autoclose_preview_window_after_completion=1
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_server_python_interpreter = '/usr/bin/python2'
-" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" let g:ycm_show_diagnostics_ui = 1
-
-"this is so ultisnips can use the tab key. For completion in YCM us <C-n> and <C-p>.
-" let g:ycm_key_list_select_completion=[]
-" let g:ycm_key_list_previous_completion=[]
-
-"this will shut off YCM
-" let g:ycm_auto_trigger=0
 
 " Coc.nvim settings...
 " ---------------------------------------------------------
 " add extensions here
-" let g:coc_global_extensions = [
-"     \'coc-json',
-"     \'coc-tsserver',
-"     \'coc-html',
-"     \'coc-css',
-"     \'coc-sh',
-"     \'coc-vimlsp',
-"     \'coc-prettier'
-"     \ ]
-"     " \'coc-eslint'
+let g:coc_global_extensions = [
+    \'coc-json',
+    \'coc-tsserver',
+    \'coc-html',
+    \'coc-css',
+    \'coc-sh',
+    \'coc-vimlsp',
+    \'coc-prettier',
+    \'coc-eslint'
+    \ ]
 " Use :Prettier to format current buffer
 command! -narg=0 Prettier :CocCommand prettier.formatFile
 " use tab for trigger
@@ -288,7 +266,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 ":line#start,line#endw !bash
 
 "if you just want to run the current line than use...
-".w !bash
+":w !bash
 
 "This works by instead of writing to disk it 'writes' to the stdin of another
 "program which in this case is bash.
