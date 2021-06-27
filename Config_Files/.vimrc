@@ -133,6 +133,7 @@ call plug#end()
 
 
 "vim-airline_settings ...
+" ---------------------------------------------------------
 let g:airline_theme='badwolf'
 " let g:airline_theme='simple'
 " let g:airline_theme='dark'
@@ -217,7 +218,8 @@ let g:coc_global_extensions = [
     \'coc-sh',
     \'coc-vimlsp',
     \'coc-prettier',
-    \'coc-eslint'
+    \'coc-eslint',
+    \'coc-snippets'
     \ ]
 " Use :Prettier to format current buffer
 command! -narg=0 Prettier :CocCommand prettier.formatFile
