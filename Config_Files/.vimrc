@@ -16,14 +16,16 @@ set number                      "Line numbers are good
 "set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
-"set cursorline                 "Turn on line highlighting
+" set cursorline                 "Turn on line highlighting
 set ruler                       "show line number and column
 set mouse=a                     "allows proper use of mouse inside vim
-"set hidden                     "have buffer with unsaved work open in background
+set hidden                     "have buffer with unsaved work open in background
 " set helpheight=99999            "makes :help open in bigger buffer
 set wildmenu                    "tab completion for the vim help
-"set noswapfile                 "prevents extra file being saved in home directory
-"set nobackup
+set noswapfile                 "prevents extra file being saved in home directory
+set nobackup
+set nowritebackup
+set cmdheight=2
 set ttimeoutlen=50              "this prevents delay when using esc to exit insert mode
 set nowrap
 set noshowmode                  "stops insert message appearinge
@@ -38,7 +40,7 @@ augroup END
 
 
 "The line below turns off the white highlighting line
-"hi CursorLine term=bold cterm=bold guibg=Grey40
+hi CursorLine term=bold cterm=bold guibg=Grey40
 
 let mapleader=","
 let maplocalleader="\\"
@@ -88,7 +90,7 @@ Plug 'christoomey/vim-tmux-runner'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-" Plug 'vim-syntastic/syntastic'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 "--------------------------------------------------------------------------------
@@ -212,7 +214,7 @@ nnoremap fl :VtrSendLinesToRunner<cr>
 
 
 "youcompleteme_settings
-"----------------------
+" ---------------------------------------------------------
 "let g:ycm_autoclose_preview_window_after_completion=1
 " let g:ycm_confirm_extra_conf = 0
 " let g:ycm_server_python_interpreter = '/usr/bin/python2'
@@ -226,10 +228,30 @@ nnoremap fl :VtrSendLinesToRunner<cr>
 "this will shut off YCM
 " let g:ycm_auto_trigger=0
 
+" Coc.nvim settings...
+" ---------------------------------------------------------
+" add extensions here
+" let g:coc_global_extensions = [
+"     \'coc-json',
+"     \'coc-tsserver',
+"     \'coc-html',
+"     \'coc-css',
+"     \'coc-sh',
+"     \'coc-vimlsp',
+"     \'coc-prettier'
+"     \ ]
+"     " \'coc-eslint'
+" Use :Prettier to format current buffer
+command! -narg=0 Prettier :CocCommand prettier.formatFile
+" use tab for trigger
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 
-" Ultisnips plugin settings
-"--------------------------
+
+
+" Ultisnips plugin settings...
+" ---------------------------------------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
