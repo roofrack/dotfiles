@@ -81,6 +81,7 @@ endif
 
 "--------------------------plugins----------------------------------------------
 call plug#begin()
+Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -129,7 +130,7 @@ call plug#end()
 "------------------------plugin settings----------------------------------------
 
 "flazz/vim-colorschemes_settings ...
-"colorscheme wombat256
+" colorscheme wombat256
 
 
 "vim-airline_settings ...
