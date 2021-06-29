@@ -91,6 +91,7 @@ Plug 'christoomey/vim-tmux-runner'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -204,7 +205,7 @@ nnoremap fl :VtrSendLinesToRunner<cr>
 "emmett_settings ...
 " ---------------------------------------------------------
 "This allows the use of the trigger key in all modes
-"let g:user_emmet_mode='a'
+let g:user_emmet_mode='a'
 
 
 
