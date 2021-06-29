@@ -59,48 +59,13 @@ sed commands...
 ---------------
 
 
-virtualenv commands...
-----------------------
+python venv
+-----------
+To create a new virtualenv...
+python -m venv directory-name
 
-
-
-Python 2
---------
-
-Using virtualenv & virtualenvwrapper
-------------------------------------
-
-To set the project dir when activating the virtualenv, activate the environment, cd into the dir and then type...
-      setvirtualenvproject
-
-To start a env using python3...
-mkvirtualenv -p /usr/bin/python3 env_name
-
-
-
-Python 3
---------
-
-This is the more correct way rather than virtualenv & virtualenvwrapper. Not sure
-why but when using python3 should use this. I have read that virtualenv is deprecated.
-Need to keep reading.
-
-Cd into your project and type the following to start a new enviroment (usually called venv) ...
-
-see the docs venv has changed with python3.6
-pyvenv <venv>               (Note: <venv> just means the name of the virtualenv)
-
-source <venv>/bin/activate  (this activates the env)
-deactivate (to deactivate the env)
-
-if you want to include system site-packages use ...
-pyvenv --system-site-packages <venv>
-
-
-
-
-
-
+To activate...
+source directory-name/bin/activate
 
 pip commands
 ------------
