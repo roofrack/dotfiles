@@ -1,3 +1,4 @@
+![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
 ### README.md
 ---------
 > __I wrote this as a guide for myself for installing some things on a new Arch__
