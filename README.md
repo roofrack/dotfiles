@@ -7,8 +7,8 @@
 > *  Any additional config files added later to the _~/dotfiles/Config_ directory will be sym-linked to the users home root directory when running the _SYM_LINK.sh_ script.
 > *  If a link is to be in a nested directory (ie ~/.config/terminal/terminalrc) then open _SYM_LINK.sh_ and add
      the name of the config file along with the path of the new directory in the space provided.
-> *  __Warning:__ Make sure you actually move the desired config files out of your home directory into dotfiles/Config before rerunning _SYM_LINK_
-     or they will get overwritten. Yikes. 
+> *  __Warning:__ Make sure you actually __move__ any desired configuration files into your ~/dotfiles/Config __before re-running__ _SYM_LINK_
+     or they will get overwritten. Yikes.
 ---------
 
  
