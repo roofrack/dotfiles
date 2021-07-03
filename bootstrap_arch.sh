@@ -53,7 +53,7 @@ sleep 2
 source $HOME/dotfiles/SYM_LINK.sh
 
 
-# Tmux Plugin Manager (tpm)
+# Tmux Plugin Manager (tpm) and tmux plugins
 #=========================================================================================
 if [[ -d $HOME/.tmux ]]; then
     true
@@ -63,11 +63,10 @@ else
     sleep 2
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    sleep 2
+    printf "\n installing tmux plugins...\n"
+    $HOME/.tmux/plugins/tpm/bin/install_plugins
 fi
-
-# Installing Tmux plugins
-#=========================================================================================
-$HOME/.tmux/plugins/tpm/bin/install_plugins
 
 
 # The end
