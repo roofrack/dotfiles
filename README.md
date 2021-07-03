@@ -1,7 +1,7 @@
-                                  <h1>          ===========================<br>
-                                                =        README.md        =<br>
-                                                ===========================<br>
-</h1>
+                                                ===========================
+                                                =        README.md        =
+                                                ===========================
+
 I wrote this as a guide for myself for installing some things on a new Arch
 installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few
 packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3
