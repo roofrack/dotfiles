@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
-### README.md
+### bootstrap_arch.sh Start-Up Script
 ---------
 > __I wrote this as a guide for myself for installing some things on a new Arch__
 > __installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few__
