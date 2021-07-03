@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
-# bootstrap_arch Start-Up script
+# bootstrap_arch I3 set up script
 ---------
 > *  For setting up a new Arch installation with the I3 window manager.
 > *  This script installs the packages listed below, then uses _SYM_LINK.sh_ to set up any required directories
