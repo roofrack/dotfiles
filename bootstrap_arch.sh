@@ -63,6 +63,8 @@ else
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
+# Installing tmux plugins...
+$HOME/.tmux/plugins/tpm/bin/install_plugins
 
 
 # The end
