@@ -2,7 +2,8 @@
 # bootstrap_arch Start-Up script
 ---------
 > *  For setting up a new Arch installation with the I3 window manager.
-> *  This script installs the packages listed below, then uses SYM_LINK.sh to set up directories for the new sym-links & then the sym-links themselves.
+> *  This script installs the packages listed below, then uses SYM_LINK.sh to set up any required directories
+     for the nested sym-links & then the sym-links themselves.
 > *  Any additional config files added later to the _~/dotfiles/Config_ directory will be sym-linked to the users home directory when running the SYM_LINK.sh script.
 > *  If the link is to be in a nested directory (ie ~/.config/terminal/terminalrc) then open SYM_LINK.sh and add the name of the config file and the new directory path in the space provided.
 ---------
