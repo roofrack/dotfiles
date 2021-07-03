@@ -40,9 +40,9 @@
  6. For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
     virtualbox issue. I have symlinked this as well to the dotfiles directory so should work.
 
- 7. Tmux will be installed with pacman. May want to install tpm (a tmux plugin manager by...
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The boostrap_arch.sh script
-    is set to install this. Once tmux is open type the prefix key and then "I" to
-    have tmux install the plugins listed in your .tmux.conf file. But this will also auto install.
+ 7. Tmux will also be installed and set up with the tpm plugin manager. If you had to do it manually run...
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm and once tmux is open type the prefix key
+    followed by "I" to have tmux install the plugins listed in your .tmux.conf file. But this will all be done
+    automatically with the bootstrap_arch script.
 
 ![GitHub Logo](/images/Logo.png)
