@@ -13,7 +13,7 @@ set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
 set number                      "Line numbers are good
-"set relativenumber
+" set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
 " set cursorline                 "Turn on line highlighting
@@ -256,7 +256,7 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "----------------------------misc mappings--------------------------------------
 
 "source vimrc
-nnoremap <leader>sv :source %<cr>
+nnoremap <leader>sv :source $MYVIMRC
 
 "Quick way to edit your vimrc
 "prevent vimrc from wrapping
