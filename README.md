@@ -1,4 +1,4 @@
-##### README.md
+#### README.md
 ---------
 
 > __I wrote this as a guide for myself for installing some things on a new Arch__
