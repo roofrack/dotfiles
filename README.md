@@ -1,8 +1,8 @@
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
 # bootstrap_arch Start-Up script
 ---------
-> __I wrote this as a guide for myself for installing some things on a new Arch__
-> __installation using a shell script which basically just adds a few__
+> __I wrote this as a guide for myself for installing some things on a new Arch__<
+> __installation using a shell script which basically just adds a few__<
 > __packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3__
 > __window manager but can change and/or use it for whatever.__
 ---------
