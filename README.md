@@ -2,10 +2,10 @@
 ##                                                          README.md
 ##                                                  ==========================
 
-I wrote this as a guide for myself for installing some things on a new Arch
-installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few
-packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3
-window manager but can change and/or use it for whatever.
+> I wrote this as a guide for myself for installing some things on a new Arch
+> installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few
+> packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3
+> window manager but can change and/or use it for whatever.
 
 
 Automating my set up...
@@ -18,16 +18,16 @@ Automating my set up...
  3. See dotfiles/archPackages for stuff to install but this is all you need for i3...
     This will be installed from the pkglist.txt file when running the script in the next step.
 
-      * • i3 (select 1 3 4 5)
-      * • xorg-xinit
-      * • xorg-server
-      * • xfce4-terminal
-      * • feh (for wallpaper)
-      * • picom (for adding translucency to the xfce4-terminal)
-      * • gnu-free-fonts (airline works fine without this except for the little line symbol won't
-        render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
-        font pkg the unicode works
-      * • ranger (just nice to have)
+      *  i3 (select 1 3 4 5)
+      *  xorg-xinit
+      *  xorg-server
+      *  xfce4-terminal
+      *  feh (for wallpaper)
+      *  picom (for adding translucency to the xfce4-terminal)
+      *  gnu-free-fonts (airline works fine without this except for the little line symbol won't
+         render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
+         font pkg the unicode works
+      *  ranger (just nice to have)
 
  4. Run dotfiles/bootstrap_arch.sh script which will call the SYM_LINK.sh script.
 
