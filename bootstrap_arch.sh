@@ -64,13 +64,12 @@ else
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-# Installing tmux plugins...
+
+# Installing Tmux plugins
+#=========================================================================================
 $HOME/.tmux/plugins/tpm/bin/install_plugins
 
 
 # The end
 #=========================================================================================
 end_message
-
-
-
