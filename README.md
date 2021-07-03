@@ -1,6 +1,6 @@
-#                                                  ==========================
-#                                                  =       README.md        =
-#                                                  ==========================
+##                                                  ==========================
+##                                                          README.md
+##                                                  ==========================
 
 I wrote this as a guide for myself for installing some things on a new Arch
 installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few
@@ -41,4 +41,4 @@ Automating my set up...
  7. Tmux will be installed with pacman. May want to install tpm (a tmux plugin manager by...
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The boostrap_arch.sh script
     is set to install this. Once tmux is open type the prefix key and then "I" to
-    have tmux install the plugins listed in your .tmux.conf file. But this should also auto install.
+    have tmux install the plugins listed in your .tmux.conf file. But this will also auto install.
