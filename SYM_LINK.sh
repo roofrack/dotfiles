@@ -4,7 +4,7 @@
 # link will be placed in the user's home directory unless another path is added.
 # If the sym-link is going in a nested dir then add the dir path below in the DIR_BUILD
 # array along with the name of the config file to be symlinked.
-#-----<robaylard@gmail.com>---------------------------------------------------------------
+#------------------------------------------------------------------<robaylard@gmail.com>--
 printf "\n"; tput civis
 
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
