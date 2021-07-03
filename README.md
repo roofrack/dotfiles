@@ -4,7 +4,7 @@
 > *  For setting up a new Arch installation with the I3 window manager.
 > *  This script installs the packages listed below, then uses SYM_LINK.sh to set up directories for the new sym-links & then the sym-links themselves.
 > *  Any additional config files added later to the _~/dotfiles/Config_ directory will be sym-linked to the users home directory when running the SYM_LINK.sh script.
-> *  If the link is to be in a nested directory (ie ~/.config/terminal/terminalrc) then open SYM_LINK.sh and add the name of the config file and the directory path in the space provided.
+> *  If the link is to be in a nested directory (ie ~/.config/terminal/terminalrc) then open SYM_LINK.sh and add the name of the config file and the new directory path in the space provided.
 ---------
 
 
@@ -31,7 +31,7 @@
          font pkg the unicode works
       *  ranger (just nice to have)
 
- 4. Run the ___dotfiles/bootstrap_arch.sh__ script which will call the SYM_LINK.sh_ script.
+ 4. Run the ___dotfiles/bootstrap_arch.sh___ script which will call the SYM_LINK.sh_ script.
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. dont forget to
