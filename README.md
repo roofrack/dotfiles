@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
-### bootstrap_arch.sh Start-Up Script
+#### bootstrap_arch Start-Up script
 ---------
 > __I wrote this as a guide for myself for installing some things on a new Arch__
 > __installation using a shell script which basically just adds a few__
@@ -30,7 +30,7 @@
          font pkg the unicode works
       *  ranger (just nice to have)
 
- 4. Run the __dotfiles/bootstrap_arch.sh__ script which also calls the SYM_LINK.sh script.
+ 4. Run the __dotfiles/bootstrap_arch.sh__ script which also calls the _SYM_LINK.sh script.
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. dont forget to
