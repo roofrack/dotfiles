@@ -16,7 +16,7 @@
  2. In ~ run git clone https://github.com/roofrack/dotfiles.
 
  3. See _dotfiles/archPackages_ for optional stuff to install but this is all you need for i3...
-    This will be installed from the *dotfiles/pkglist.txt file* when running the script in the next step.
+    The following (below) will be installed from the *dotfiles/pkglist.txt file* when running the script in the next step.
 
       *  i3 (select 1 3 4 5)
       *  xorg-xinit
