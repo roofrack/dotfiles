@@ -1,10 +1,11 @@
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
 # bootstrap_arch Start-Up script
 ---------
-> __I wrote this as a guide for myself for installing some things on a new Arch__<
-> __installation using a shell script which basically just adds a few__
-> __packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3__
-> __window manager but can change and/or use it for whatever.__
+> __For setting up a new Arch installation with I3. This script installs packages and then sets up directories__
+> __and the sym-links using SYM_LINK.sh. Additional config files added to the dotfiles/Config directory
+> --will be sym-linked to the users home directory when running this the SYM_LINK.sh script. If the link is to be in a nested
+> --directory (ie .config/terminal/terminalrc) then open SYM_LINK.sh and add the directory path in the space
+> --provided. 
 ---------
 
 
