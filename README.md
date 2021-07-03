@@ -1,3 +1,6 @@
+##### README.md
+---------
+
 > __I wrote this as a guide for myself for installing some things on a new Arch__
 > __installation (arch as a guest inside virtualbox) using a shell script which basically just adds a few__
 > __packages & directories and symlinks them to my dotfiles directory. It is mainly for setting up the I3__
@@ -11,7 +14,7 @@
 
  2. In ~ run git clone https://github.com/roofrack/dotfiles.
 
- 3. See dotfiles/archPackages for optional stuff to install but this is all you need for i3...
+ 3. See _dotfiles/archPackages_ for optional stuff to install but this is all you need for i3...
     This will be installed from the *dotfiles/pkglist.txt file* when running the script in the next step.
 
       *  i3 (select 1 3 4 5)
@@ -25,7 +28,7 @@
          font pkg the unicode works
       *  ranger (just nice to have)
 
- 4. Run the __dotfiles/bootstrap_arch.sh__ script which will call the SYM_LINK.sh script.
+ 4. Run the __dotfiles/bootstrap_arch.sh__ script which also calls the SYM_LINK.sh script.
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
      ~/.xinitrc and comment out last 5 lines and add exec i3. dont forget to
