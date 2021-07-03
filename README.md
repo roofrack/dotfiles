@@ -8,7 +8,7 @@
 > window manager but can change and/or use it for whatever.
 
 
-#### _Automating my set up_...
+###### _Automating my set up_...
 
 
  1. After a new Arch install, do pacman -Syu and install git.
@@ -16,7 +16,7 @@
  2. In ~ run git clone https://github.com/roofrack/dotfiles.
 
  3. See dotfiles/archPackages for stuff to install but this is all you need for i3...
-    This will be installed from the *pkglist.txt* file when running the script in the next step.
+    This will be installed from the *pkglist.txt file* when running the script in the next step.
 
       *  i3 (select 1 3 4 5)
       *  xorg-xinit
