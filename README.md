@@ -42,3 +42,5 @@ Automating my set up...
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm). The boostrap_arch.sh script
     is set to install this. Once tmux is open type the prefix key and then "I" to
     have tmux install the plugins listed in your .tmux.conf file. But this will also auto install.
+
+![GitHub Logo](/images/Logo.png)
