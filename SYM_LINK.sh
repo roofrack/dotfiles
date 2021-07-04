@@ -10,8 +10,8 @@ printf "\n"; tput civis
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
-FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to make brace expan work.
-total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
+FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
+total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"
 count=0
 
 #######################################################################
@@ -81,8 +81,8 @@ for file in $FILES_SYMLINK; do
         fi
         Progress_bar_message "creating sym-link    ${dir_symlink}/$basefile" "${total_symlinks}"
     else
-        # printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$((39 - ${#basefile}))"
-        printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$(($(tput cols) - ${#basefile} - 44))"
+        # printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$((25 - ${#basefile}))"
+        printf 'The sym-link...             %s%*s already exists\n' "$basefile" "$(($(tput cols) - ${#basefile} - 43))"
     fi
 done
 
