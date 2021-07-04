@@ -14,20 +14,20 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"           # Can't seem to 
 total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"      # Must be a better way to calculate this
 count=0
 
-##############################################################
-                                                             #
-declare -A DIR_BUILD=(                                       #
-    [config]=$DIR_CONFIG/i3                                  #
-    [terminalrc]=$DIR_CONFIG/xfce4/terminal                  #
-    [rc.conf]=$DIR_CONFIG/ranger                             #
-    [arch3.png]=$DIR_PICS/wallpaper                          #
-    [picom.conf]=$DIR_CONFIG/picom                           #
-    [coc-settings.json]=$HOME/.vim                           #
-    #[config_file]=directory_where_you_want_the_symlink      #
-    #[config_file]=directory_where_you_want_the_symlink      #
-)                                                            #
-                                                             #
-##############################################################
+#######################################################################
+                                                                      #
+declare -A DIR_BUILD=(                                                #
+    [config]=$DIR_CONFIG/i3                                           #
+    [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
+    [rc.conf]=$DIR_CONFIG/ranger                                      #
+    [arch3.png]=$DIR_PICS/wallpaper                                   #
+    [picom.conf]=$DIR_CONFIG/picom                                    #
+    [coc-settings.json]=$HOME/.vim                                    #
+    #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
+    #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
+)                                                                     #
+                                                                      #
+#######################################################################
 
 
 #=========================================================================================
