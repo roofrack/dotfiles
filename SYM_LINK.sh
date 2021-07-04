@@ -69,15 +69,20 @@ Progress_bar_message() {
 # Building Directories and Sym-Links
 #=========================================================================================
 for file in $FILES_SYMLINK; do
-dir_build="${DIR_BUILD[$(basename $file)]}"
-    if [[ -n $dir_build ]]; then
-        mkdir -p $dir_build && ln -sf $file $dir_build
-        dir_symlink="${dir_build}"
+    basefile=$(basename $file)
+    dir_build="${DIR_BUILD[$basefile]}"
+    if [[ ! -e "${dir_build}/$basefile" && ! -e "${HOME}/$basefile" ]]; then
+        if [[ -n $dir_build ]]; then
+            mkdir -p $dir_build && ln -sf $file $dir_build
+            dir_symlink="${dir_build}"
+        else
+            ln -sf $file $HOME
+            dir_symlink="${HOME}"
+        fi
+        Progress_bar_message "creating sym-link    ${dir_symlink}/$basefile" "${total_symlinks}"
     else
-        ln -sf $file $HOME
-        dir_symlink="${HOME}"
+        printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$((30 - ${#basefile}))"
     fi
-    Progress_bar_message "creating sym-link    ${dir_symlink}/$(basename $file)" "${total_symlinks}"
 done
 
 tput cnorm          # Make prompt visible.

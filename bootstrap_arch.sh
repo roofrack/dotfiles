@@ -1,6 +1,6 @@
 #!/bin/bash
 #=========================================================================================
-# For a new arch install to get up and running quickly with the I3 WM                    =
+# For a new arch install to get up and running quickly with the i3 WM                    =
 #                                                                                        =
 #                                                                                        =
 # <robaylard@gmail.com>                                                                  =

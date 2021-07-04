@@ -4,11 +4,10 @@
 > *  For setting up a new Arch installation with the i3 window manager.
 > *  This script installs the packages listed below, then uses _SYM_LINK.sh_ to set up any required directories
      for the nested sym-links & then the sym-links themselves.
-> *  Any additional config files added later to the _~/dotfiles/Config_ directory will be sym-linked to the users home root directory when running the _SYM_LINK.sh_ script.
+> *  Any additional package config files added later to the _~/dotfiles/Config_ directory will be sym-linked to the users home root directory when running the _SYM_LINK.sh_ script.
 > *  If a link is to be in a nested directory (ie ~/.config/terminal/terminalrc) then open _SYM_LINK.sh_ and add
      the name of the config file along with the path of the new directory in the space provided.
-> *  __Warning:__ Make sure you actually __move__ any desired configuration files into your ~/dotfiles/Config __before re-running__ _SYM_LINK_
-     or they will get overwritten. Yikes.
+> *  And of course don't forget to actually move the desired package config file to your _dotfiles_ directory.
 ---------
 
  
