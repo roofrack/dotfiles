@@ -81,7 +81,8 @@ for file in $FILES_SYMLINK; do
         fi
         Progress_bar_message "creating sym-link    ${dir_symlink}/$basefile" "${total_symlinks}"
     else
-        printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$((30 - ${#basefile}))"
+        # printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$((39 - ${#basefile}))"
+        printf 'The sym-link...             %s%*s already exists.\n' "$basefile" "$(($(tput cols) - ${#basefile} - 44))"
     fi
 done
 
