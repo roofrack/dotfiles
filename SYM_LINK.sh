@@ -81,7 +81,12 @@ for file in $FILES_SYMLINK; do
         fi
         Progress_bar_message "creating sym-link    ${dir_symlink}/$basefile" "${total_symlinks}"
     else
+        if [[ -L "${dir_build}/$basefile" || -L "${HOME}/$basefile" ]]; then
         printf 'The sym-link...             %s%*s already exists\n' "$basefile" "$(($(tput cols) - ${#basefile} - 43))"
+        else
+            printf "Warning: $basefile is a file in your home directory. No link was created.\n"; sleep 2
+            printf "         You may want to move/delete the file and re-run the SYM_LINK script.\n"; sleep 2
+        fi
     fi
 done
 
