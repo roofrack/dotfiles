@@ -129,4 +129,5 @@ roofrack () {
     echo
     echo pushing to GitHub...
     git push origin master
+    cd -
 }
