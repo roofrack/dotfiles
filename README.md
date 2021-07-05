@@ -5,7 +5,7 @@
 > *  This script installs the packages listed below, then uses _SYM_LINK.sh_ to set up any required directories
      for the nested sym-links & then the sym-links themselves.
 > *  Any additional package config files added later to the _~/dotfiles/Config_ directory will be sym-linked to the users home root directory when re-running the _SYM_LINK.sh_ script.
-> *  If a link is to be in a nested directory (ie ~/.config/terminal/terminalrc) then open _SYM_LINK.sh_ and add
+> *  If a link is to be in a nested directory (ie ~/.config/xfce4/terminal/terminalrc) then open _SYM_LINK.sh_ and add
      the name of the config file along with the path of the new directory in the space provided.
 ---------
 
