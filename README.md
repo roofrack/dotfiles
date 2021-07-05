@@ -31,8 +31,9 @@
       *  picom (for adding translucency to the xfce4-terminal)
       *  gnu-free-fonts (airline works fine without this except for the little line symbol won't
          render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
-         font pkg the unicode works
-      *  ranger (just nice to have)
+         font pkg the unicode works (in my terminal anyway)
+      *  tmux
+      *  ranger
 
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
