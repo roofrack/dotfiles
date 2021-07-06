@@ -23,6 +23,7 @@ declare -A DIR_BUILD=(                                                #
     [arch3.png]=$DIR_PICS/wallpaper                                   #
     [picom.conf]=$DIR_CONFIG/picom                                    #
     [coc-settings.json]=$HOME/.vim                                    #
+    [package.json]=$DIR_CONFIG/coc/extensions                         #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
 )                                                                     #
