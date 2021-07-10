@@ -9,7 +9,7 @@
      the name of the config file along with the path of the new directory in the space provided.
 ---------
 
- 
+
 
 
 ###### _Automating my set up_...
@@ -46,5 +46,5 @@
  7. tpm plugin manager will be installed. If you had to do it manually run
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm and once tmux is open type the prefix key
     followed by "I" to have tmux install the plugins listed in your .tmux.conf file.
- 
- 8. vim will autoinstall plugins and coc-extensions when opening the first time. 
+
+ 8. vim will autoinstall plugins and coc-extensions when opening the first time.

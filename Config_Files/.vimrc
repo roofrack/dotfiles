@@ -25,7 +25,7 @@ set wildmenu                    "tab completion for the vim help
 set noswapfile                 "prevents extra file being saved in home directory
 set nobackup
 set nowritebackup
-set cmdheight=2
+" set cmdheight=2
 set ttimeoutlen=50              "this prevents delay when using esc to exit insert mode
 set nowrap
 set noshowmode                  "stops insert message appearinge
@@ -40,7 +40,7 @@ augroup END
 
 
 "The line below turns off the white highlighting line
-hi CursorLine term=bold cterm=bold guibg=Grey40
+" hi CursorLine term=bold cterm=bold guibg=Grey40
 
 let mapleader=","
 let maplocalleader="\\"
@@ -259,11 +259,6 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 nnoremap <leader>sv :source $MYVIMRC
 
 "Quick way to edit your vimrc
-"prevent vimrc from wrapping
-augroup vimrc
-    autocmd!
-    autocmd BufRead .vimrc setlocal nowrap
-augroup END
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "To run certain lines in bash you would use this...
