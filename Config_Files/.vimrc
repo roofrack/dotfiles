@@ -212,20 +212,20 @@ let g:user_emmet_mode='a'
 " Coc.nvim settings...
 " ---------------------------------------------------------
 " add extensions here
-let g:coc_global_extensions = [
-    \'coc-json',
-    \'coc-tsserver',
-    \'coc-html',
-    \'coc-css',
-    \'coc-sh',
-    \'coc-vimlsp',
-    \'coc-prettier',
-    \'coc-eslint',
-    \'coc-snippets'
-    \ ]
-" Use :Prettier to format current buffer
-command! -narg=0 Prettier :CocCommand prettier.formatFile
-" use tab for trigger
+" let g:coc_global_extensions = [
+    " \'coc-json',
+    " " \'coc-tsserver',
+    " \'coc-html',
+    " " " \'coc-css',
+    " " \'coc-sh',
+    " " \'coc-vimlsp',
+    " \'coc-prettier',
+    " \'coc-eslint',
+    " \'coc-snippets'
+    " \ ]
+" " Use :Prettier to format current buffer
+" command! -narg=0 Prettier :CocCommand prettier.formatFile
+" " use tab for trigger
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
