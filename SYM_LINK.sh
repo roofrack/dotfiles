@@ -65,6 +65,13 @@ Progress_bar_message() {
     done
     printf "\n"
 }
+already_exists_message (){
+    start_mess="$1"
+    end_mess="$2"
+    space_1="$((28 - ${#start_mess}))"
+    space_2="$(($(tput cols) - ${#start_mess} - "$space_1" - ${#symlink} - ${#end_mess} - 5))" #(minus 5 lines up better)
+    printf '%s%*s%s%*s%s\n' "$start_mess" "$space_1" "" "$symlink" "$space_2" "" "$end_mess"
+}
 
 #=========================================================================================
 # Building Directories and Sym-Links
@@ -72,23 +79,34 @@ Progress_bar_message() {
 for file in $FILES_SYMLINK; do
     basefile=$(basename $file)
     dir_build="${DIR_BUILD[$basefile]}"
-    if [[ ! -e "${dir_build}/$basefile" && ! -e "${HOME}/$basefile" ]]; then
-        if [[ -n $dir_build ]]; then
-            mkdir -p $dir_build && ln -sf $file $dir_build
-            dir_symlink="${dir_build}"
-        else
-            ln -sf $file $HOME
-            dir_symlink="${HOME}"
-        fi
-        Progress_bar_message "creating sym-link    ${dir_symlink}/$basefile" "${total_symlinks}"
+
+    if [[ -n $dir_build ]]; then
+        dir_symlink="${dir_build}"
     else
-        if [[ -L "${dir_build}/$basefile" || -L "${HOME}/$basefile" ]]; then
-            printf 'The sym-link...             %s%*s already exists\n' "$basefile" "$(($(tput cols) - ${#basefile} - 43))"
-        else
-            printf "Warning: $basefile is a file in your home directory. No link was created.\n"; sleep 2
-        fi
+        dir_symlink="${HOME}"
+    fi
+    symlink="$dir_symlink/$basefile"
+
+    if [[ ! -e "${symlink}" ]]; then
+        mkdir -p $dir_symlink && ln -sf $file $dir_symlink
+        Progress_bar_message "creating sym-link    ${symlink}" "${total_symlinks}"
+    elif [[ -L "${symlink}" ]]; then
+        already_exists_message "The sym-link" "already exists"
+    elif [[ -f "${symlink}" ]]; then
+        already_exists_message "WARNING: THE FILE" "ALREADY EXISTS. DELETE & CREATE LINK? (y/n)"
+        while true; do
+            read -n1 -s
+            case "${REPLY}" in
+                [yY])
+                    ln -sf $file $dir_symlink            # using the -f option will delete the file
+                    Progress_bar_message "creating sym-link    ${symlink}" "${total_symlinks}"
+                    break;;
+                [nN])
+                    break;;
+                *) echo "enter y or n"
+            esac
+        done
     fi
 done
-
 tput cnorm          # Make prompt visible.
 #=========================================================================================
