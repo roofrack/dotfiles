@@ -33,9 +33,11 @@ alias ls='ls --color=auto'
 alias ll='ls -la'
 #alias cl='clear'
 #alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
+
 # This runserver command can also be added to the scripts section of the package.json
 # and run using the npm run devStart or whatever you called it. Easier to just run it 
-# on the command line.
+# on the command line. NOTE: If re=running this command and you get an error 
+# may need to do... [ jobs, fg %job# then Ctrl c ] to kill the process. 
 alias runserver='nodemon server.js & browser-sync start --config ~/bs-config.js'
 alias bob='cd ~/nodejs-express-practice/netninja/nodeCrashCourse/serverRoutes'
 
