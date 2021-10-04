@@ -39,7 +39,7 @@ alias ll='ls -la'
 # on the command line. NOTE: If re=running this command and you get an error 
 # may need to do... [ jobs, fg %job# then Ctrl c ] to kill the process. 
 alias runserver='nodemon server.js & browser-sync start --config ~/bs-config.js'
-alias bob='cd ~/nodejs-express-practice/netninja/nodeCrashCourse/serverRoutes'
+alias bob='cd ~/practice/nodejs-express-practice/netninja/nodeCrashCourse/serverRoutes'
 
 alias his='history 20'
 alias hg='history | grep'
