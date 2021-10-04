@@ -26,6 +26,9 @@ declare -A DIR_BUILD=(                                                #
     [package.json]=$DIR_CONFIG/coc/extensions                         #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
+    #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
+    #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
+    #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
 )                                                                     #
                                                                       #
 #######################################################################

@@ -92,7 +92,10 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript'
+" Plug 'leafOfTree/vim-vue'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 "--------------------------------------------------------------------------------
@@ -212,17 +215,10 @@ let g:user_emmet_mode='a'
 " Coc.nvim settings...
 " ---------------------------------------------------------
 " add extensions here
-" let g:coc_global_extensions = [
-    " \'coc-json',
-    " " \'coc-tsserver',
-    " \'coc-html',
-    " " " \'coc-css',
-    " " \'coc-sh',
-    " " \'coc-vimlsp',
-    " \'coc-prettier',
-    " \'coc-eslint',
-    " \'coc-snippets'
-    " \ ]
+let g:coc_global_extensions = [
+    \'coc-json',
+    \'coc-tsserver',
+    \ ]
 " " Use :Prettier to format current buffer
 " command! -narg=0 Prettier :CocCommand prettier.formatFile
 " " use tab for trigger
