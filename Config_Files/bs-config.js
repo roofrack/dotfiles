@@ -10,7 +10,7 @@ module.exports = {
     "port": 3000,
     "files":[
         "**/*.*",
-    //     "*.html", 
+    //     "*.html",
     //     "*.js",
         // "*.css",
         // "routes/*.js"

@@ -148,6 +148,7 @@ roofrack () {
 runserver() {
 bsync=$(ps a | grep [/]usr/bin/browser-sync)
 if [[ -z $bsync ]]; then
+    # using the '&' runs it in the background.
     browser-sync start --config $HOME/bs-config.js &
     nodemon server.js
 else
