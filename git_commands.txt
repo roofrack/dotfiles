@@ -7,3 +7,8 @@ git push origin master
 
 clone a repo
 git clone https://github/.com/roofrack/dotfiles.git ~/dotfiles
+
+add a new repo on github using curl. This works good. Change the 
+name to whatever you want the new repo to be named.
+Copy the PAT and double click to enter as a password on command line. Paste it from... ~/token.txt
+curl -u 'roofrack' https://api.github.com/user/repos -d '{"name":"barney"}'
