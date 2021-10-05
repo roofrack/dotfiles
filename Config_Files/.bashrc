@@ -35,16 +35,15 @@ alias ll='ls -la'
 #alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 
 # This runserver command can also be added to the scripts section of the package.json
-# and run using the npm run devStart or whatever you called it. Easier to just run it 
-# on the command line. NOTE: If re=running this command and you get an error 
-# may need to do... [ jobs, fg %job# then Ctrl c ] to kill the process. 
-alias runserver='nodemon server.js & browser-sync start --config ~/bs-config.js'
+# and run using the npm run devStart or whatever you called it. Easier to just run it
+# on the command line. NOTE: If re=running this command and you get an error
+# may need to do... [ jobs fg %job# then Ctrl c ] to kill the process.
+# alias runserver='browser-sync start --config ~/bs-config.js & nodemon server.js'
 alias bob='cd ~/practice/nodejs-express-practice/netninja/nodeCrashCourse/serverRoutes'
 
 alias his='history 20'
 alias hg='history | grep'
 
-#alias jf='cd ~/pythonstuff/tutorials/flask/flask-intro/'
 #alias venv='source venv/bin/activate'
 
 alias brc='vim ~/.bashrc'
@@ -135,4 +134,23 @@ roofrack () {
     echo pushing to GitHub...
     git push origin master
     cd -
+}
+
+# Function to start nodemon server and browsersync server...
+# ----------------------------------------------------------
+# Need a test to see if browser-sync is running and if it is don't restart it.
+# Only restart nodemon. The 'z' tests to see if the bsync variable is empty.
+# from google I figured that you need the [ ] around the first character in the grep
+# statement to work. This prevents the ps a from returning the actual grep statement as
+# a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
+# running this would still test to true.
+
+runserver() {
+bsync=$(ps a | grep [/]usr/bin/browser-sync)
+if [[ -z $bsync ]]; then
+    browser-sync start --config $HOME/bs-config.js &
+    nodemon server.js
+else
+    nodemon server.js
+fi
 }
