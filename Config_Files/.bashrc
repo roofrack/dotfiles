@@ -136,12 +136,12 @@ roofrack () {
     cd -
 }
 
-# Function to start nodemon server and browsersync server...
-# ----------------------------------------------------------
+# Function to start both nodemon server and browsersync server...
+# ---------------------------------------------------------------
 # Need a test to see if browser-sync is running and if it is don't restart it.
 # Only restart nodemon. The 'z' tests to see if the bsync variable is empty.
 # from google I figured that you need the [ ] around the first character in the grep
-# statement to work. This prevents the ps a from returning the actual grep statement as
+# statement to work. This prevents the 'ps a' command from returning the actual grep statement as
 # a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
 # running this would still test to true.
 
