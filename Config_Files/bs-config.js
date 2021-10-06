@@ -7,7 +7,7 @@ module.exports = {
         target: "127.0.0.1:3000",
         ws: true
         },
-    "port": 3000,
+    "port": 3001,
     "files":[
         "**/*.*",
     //     "*.html",

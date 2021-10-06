@@ -39,7 +39,7 @@ alias ll='ls -la'
 # on the command line. NOTE: If re=running this command and you get an error
 # may need to do... [ jobs fg %job# then Ctrl c ] to kill the process.
 # alias runserver='browser-sync start --config ~/bs-config.js & nodemon server.js'
-alias bob='cd ~/practice/nodejs-express-practice/netninja/nodeCrashCourse/serverRoutes'
+alias bob='cd ~/practice/nodejs-express-practice/netninja/nodeCrashCourse/serverExpress'
 
 alias his='history 20'
 alias hg='history | grep'
@@ -136,9 +136,10 @@ roofrack () {
     cd -
 }
 
-# Function to start both nodemon server and browsersync server...
-# ---------------------------------------------------------------
-# Need a test to see if browser-sync is running and if it is don't restart it.
+# Function to start both nodemon server and the browsersync server...
+# -------------------------------------------------------------------
+# Need a test to see if browser-sync is running and if it is don't restart it
+# because it will already be running in the background.
 # Only restart nodemon. The 'z' tests to see if the bsync variable is empty.
 # from google I figured that you need the [ ] around the first character in the grep
 # statement to work. This prevents the 'ps a' command from returning the actual grep statement as
@@ -150,8 +151,10 @@ bsync=$(ps a | grep [/]usr/bin/browser-sync)
 if [[ -z $bsync ]]; then
     # using the '&' runs it in the background.
     browser-sync start --config $HOME/bs-config.js &
-    nodemon server.js
+    # nodemon server.js
+    nodemon app.js
 else
-    nodemon server.js
+    # nodemon server.js
+    nodemon app.js
 fi
 }
