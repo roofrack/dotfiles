@@ -4,7 +4,7 @@
 
 export EDITOR='vim'
 
-#add sudo to beginning of line (insert mode)
+# Press <Esc + s> to add sudo to beginning of line (insert mode)
 bind '"\es":"\C-usudo"'
 
 
@@ -25,30 +25,33 @@ bind '"\es":"\C-usudo"'
 # Some alias's
 #-------------
 
-# alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
-#alias go='cd /home/rob/pythonstuff/flask/flask_app'
 alias vi='vim'
 alias ls='ls --color=auto'
 #alias ll='clear; ls -lX'
 alias ll='ls -la'
 #alias cl='clear'
+
+alias brc='vim ~/.bashrc'
+alias vrc='vim ~/.vimrc'
+
 #alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
+#alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
+#alias go='cd /home/rob/pythonstuff/flask/flask_app'
 
 # This runserver command can also be added to the scripts section of the package.json
 # and run using the npm run devStart or whatever you called it. Easier to just run it
 # on the command line. NOTE: If re=running this command and you get an error
 # may need to do... [ jobs fg %job# then Ctrl c ] to kill the process.
 # alias runserver='browser-sync start --config ~/bs-config.js & nodemon server.js'
-alias bob='cd ~/practice/nodejs-express-practice/netninja/nodeCrashCourse/serverExpress'
+alias bob='cd ~/coding-practice/nodejs-express-practice/netninja/nodeCrashCourse/serverExpress'
+
+#alias browser='browser-sync start --config bs-config.js'
+#alias venv='source venv/bin/activate'
 
 alias his='history 20'
 alias hg='history | grep'
 
-#alias venv='source venv/bin/activate'
 
-alias brc='vim ~/.bashrc'
-alias vrc='vim ~/.vimrc'
-#alias browser='browser-sync start --config bs-config.js'
 
 # The arch VM in virtualbox seems to stop keeping track of time when computer is
 # put in hibernation mode. I have not figured out how to make it consistently keep
@@ -56,8 +59,10 @@ alias vrc='vim ~/.vimrc'
 # This command will sync the time...
 alias timeSync='sudo timedatectl set-ntp false && sudo timedatectl set-ntp true'
 
-# The 2 prevents colorscheme change in vim. Sets color to 264
+# tmux stuff...
+#-------------------
 # the -u forces tmux to use unicode. This allows vim-airline to work inside tmux.
+# The 2 prevents colorscheme change in vim. Sets color to 264
 #alias tmux='tmux -2u'
 #alias ta='tmux -2u a'
 #alias ka='killall tmux'
@@ -70,16 +75,6 @@ alias tka='tmux kill-server'
 alias ed='vim ~/dotfiles/SYM_LINK.sh'
 alias run='sh ~/dotfiles/SYM_LINK.sh'
 alias del='rm -rf ~/play/*; clear'
-
-# More tmux stuff...
-#-------------------
-# Could not get this to work
-# Some variables... change these as needed
-#SESSIONNAME="work"
-#MYDIRECTORY_1="~/pythonstuff/tutorials"
-#PATHTODIRECTORY_2="change this to whatever"
-#PATHTODIRECTORY_3="change this to whatever"
-
 
 
 # setting the prompt ...
@@ -94,15 +89,6 @@ PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35
 
 export PS1
 
-
-# Virtualenv
-#-----------
-
-#export WORKON_HOME=$HOME/.virtualenvs
-#export PROJECT_HOME=$HOME/Projects
-#export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
-#export VIRTUALENVWRAPPER_VIRTUALENV=virtualenv2
-#source /usr/bin/virtualenvwrapper.sh
 
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 #source ~/.bin/tmuxinator.bash
