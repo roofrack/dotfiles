@@ -92,7 +92,12 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
+Plug 'sheerun/vim-polyglot'
+" Plug 'eslint/eslint'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'briancollins/vim-jst'
+" Plug 'nikvdp/ejs-syntax'
 " Plug 'leafOfTree/vim-vue'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ryanoasis/vim-devicons'
@@ -161,7 +166,16 @@ endif
 " unicode symbols
 let g:airline_symbols.colnr = ' ℅:'
 
-
+"Syntastc settings ...
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 
 "NERDTree_settings ...
