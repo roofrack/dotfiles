@@ -123,7 +123,7 @@ roofrack () {
     cd -
 }
 
-# Function to start both nodemon server and the browsersync server...
+# Function to start both node[mon] server and the browsersync server...
 # -------------------------------------------------------------------
 # - Need a test to see if browser-sync is running and if it is don't restart it.
 # - Only restart node[mon]. The 'z' tests to see if string or variable is zero or empty and the 'n' tests for NOT empty.
