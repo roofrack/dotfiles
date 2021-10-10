@@ -135,7 +135,7 @@ roofrack () {
 # When running this function need to add the server file as an argument for the function to run.
 
 runserver() {
-    # test to see if a server file was entered
+    # test to see if a server file was entered with the function call
     if [[ -z $1 ]]; then
         while read -p "Please enter the filename to use for the server: "; do
             if [[ -n $REPLY ]] && [[ -f $REPLY ]]; then
