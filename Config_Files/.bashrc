@@ -147,13 +147,14 @@ runserver() {
         done
     fi
     # either use nodemon or node to run server
+    # need to add an additional test here for a nodemon global installation
     if [[ -f ./package.json ]] && [[ -n $(grep "nodemon\":" ./package.json) ]]; then
         useServer="nodemon"
     else
         useServer="node"
     fi
 
-    # start the server(s). Only start node[mon] if bs is already running in the background '&'.
+    # start the server(s). Only start node[mon] if bs is already running in the background '&'
     echo starting the server file... $serverFile
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
     if [[ -z $bsync ]]; then
