@@ -125,9 +125,8 @@ roofrack () {
 
 # Function to start both nodemon server and the browsersync server...
 # -------------------------------------------------------------------
-# Need a test to see if browser-sync is running and if it is don't restart it
-# because it will already be running in the background.
-# Only restart nodemon. The 'z' tests to see if the bsync variable is empty.
+# Need a test to see if browser-sync is running and if it is don't restart it.
+# Only restart nodemon. The 'z' tests to see if string or variable is empty and the n tests for not empty.
 # from google I figured that you need the [ ] around the first character in the grep
 # statement to work. This prevents the 'ps a' command from returning the actual grep statement as
 # a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
@@ -154,8 +153,7 @@ runserver() {
         useServer="node"
     fi
 
-    # start the server(s). Only start node[mon] if bs is already running in the 
-    # background '&'.
+    # start the server(s). Only start node[mon] if bs is already running in the background '&'.
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
     if [[ -z $bsync ]]; then
         browser-sync start --config $HOME/bs-config.js &
