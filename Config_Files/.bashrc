@@ -162,6 +162,7 @@ runserver() {
     echo "starting the server file... $serverFile with $useServer"
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
     if [[ -z $bsync ]]; then
+        echo "starting Browser-Sync... "
         browser-sync start --config $HOME/bs-config.js &
         $useServer $serverFile
     else
