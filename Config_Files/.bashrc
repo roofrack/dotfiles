@@ -134,8 +134,10 @@ roofrack () {
 # This function will work in any directory. Just need to supply the server app file name as an argument.
 
 runserver() {
+    unset ${serverFile}
+    serverFile=$1
     # test to see if a server file was entered with the function call
-    if [[ -z $1 ]]; then
+    if [[ -z $serverFile ]]; then
         while read -p "Please enter the filename to use for the server: "; do
             if [[ -n $REPLY ]] && [[ -f $REPLY ]]; then
                 serverFile=$REPLY
