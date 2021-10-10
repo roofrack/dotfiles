@@ -44,6 +44,7 @@ alias vrc='vim ~/.vimrc'
 # may need to do... [ jobs fg %job# then Ctrl c ] to kill the process.
 # alias runserver='browser-sync start --config ~/bs-config.js & nodemon server.js'
 alias bob='cd ~/coding-practice/nodejs-express-practice/netninja/nodeCrashCourse/serverExpress'
+alias flex='cd ~/coding-practice/css-practice/mdn/flexbox'
 
 #alias browser='browser-sync start --config bs-config.js'
 #alias venv='source venv/bin/activate'
@@ -133,14 +134,22 @@ roofrack () {
 # running this would still test to true.
 
 runserver() {
-bsync=$(ps a | grep [/]usr/bin/browser-sync)
-if [[ -z $bsync ]]; then
-    # using the '&' runs it in the background.
-    browser-sync start --config $HOME/bs-config.js &
-    # nodemon server.js
-    nodemon app.js
-else
-    # nodemon server.js
-    nodemon app.js
-fi
+    # either use node or nodemon to run server
+    if [[ -f ./package.json ]] && [[! -z $(grep "nodemon\":" ./package.json) ]]; then
+        useServer="nodemon"
+    else
+        useServer="node"
+    fi
+    bsync=$(ps a | grep [/]usr/bin/browser-sync)
+    if [[ -z $bsync ]]; then
+        # using the '&' runs it in the background.
+        browser-sync start --config $HOME/bs-config.js &
+        # nodemon server.js
+        # nodemon app.js
+        $useServer server.js
+    else
+        # nodemon server.js
+        # nodemon app.js
+        $useServer server.js
+    fi
 }
