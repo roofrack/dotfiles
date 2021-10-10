@@ -125,15 +125,14 @@ roofrack () {
 
 # Function to start both nodemon server and the browsersync server...
 # -------------------------------------------------------------------
-# Need a test to see if browser-sync is running and if it is don't restart it.
-# Only restart node[mon]. The 'z' tests to see if string or variable is zero or empty and the 'n' tests for NOT empty.
-# from google I figured that you need the [ ] around the first character in the grep
-# statement to work. This prevents the 'ps a' command from returning the actual grep statement as
-# a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
-# running this would still test to true.
-# This function will work in any directory. Just need to supply the server app file name as an argument.
-# Note: had to unset the serverFile variable because when starting the servers in another dir it would
-# remember and use a wrong value which threw an error. So hopefully this will work consistently.
+# - Need a test to see if browser-sync is running and if it is don't restart it.
+# - Only restart node[mon]. The 'z' tests to see if string or variable is zero or empty and the 'n' tests for NOT empty.
+# - From google I figured that you need the [ ] around the first character in the grep
+#   statement to work. This prevents the 'ps a' command from returning the actual grep statement as
+#   a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt running this would still test to true.
+# - This function will work in any directory. Just need to supply the server app file name as an argument.
+# - Note: had to unset the serverFile variable because when starting the servers in another dir it would
+#   remember and use a wrong value which threw an error. So hopefully this will work consistently.
 
 runserver() {
     unset ${serverFile}
