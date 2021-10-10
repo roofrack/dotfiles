@@ -154,10 +154,10 @@ runserver() {
         useServer="node"
     fi
 
-    # if browser-sync is already running... don't restart it
+    # start the server(s). Only start node[mon] if bs is already running in the 
+    # background '&'.
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
     if [[ -z $bsync ]]; then
-        # using the '&' runs it in the background.
         browser-sync start --config $HOME/bs-config.js &
         $useServer $serverFile
     else
