@@ -135,6 +135,7 @@ roofrack () {
 # When running this function need to add the server file as an argument for the function to run.
 
 runserver() {
+    # test to see if a server file was entered
     if [[ -z $1 ]]; then
         while read -p "Please enter the filename to use for the server: "; do
             if [[ -n $REPLY ]] && [[ -f $REPLY ]]; then
@@ -146,7 +147,6 @@ runserver() {
             fi
         done
     fi
-    
     # either use nodemon or node to run server
     if [[ -f ./package.json ]] && [[ -n $(grep "nodemon\":" ./package.json) ]]; then
         useServer="nodemon"
@@ -154,8 +154,8 @@ runserver() {
         useServer="node"
     fi
 
+    # if browser-sync is already running... don't restart it
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
-
     if [[ -z $bsync ]]; then
         # using the '&' runs it in the background.
         browser-sync start --config $HOME/bs-config.js &
