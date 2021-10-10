@@ -131,7 +131,7 @@ roofrack () {
 # statement to work. This prevents the 'ps a' command from returning the actual grep statement as
 # a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
 # running this would still test to true.
-# When running this function need to add the server file as an argument for the function to run.
+# This function will work in any directory. Just need to supply the server app file name as an argument.
 
 runserver() {
     # test to see if a server file was entered with the function call
