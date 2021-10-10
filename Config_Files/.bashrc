@@ -164,6 +164,7 @@ runserver() {
         browser-sync start --config $HOME/bs-config.js &
         $useServer $serverFile
     else
+        echo "(Browser-Sync is already running in the background)"
         $useServer $serverFile
     fi
 }
