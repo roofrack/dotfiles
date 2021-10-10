@@ -132,10 +132,11 @@ roofrack () {
 # statement to work. This prevents the 'ps a' command from returning the actual grep statement as
 # a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
 # running this would still test to true.
+# When running this function need to add the server file as an argument for the function to run.
 
 runserver() {
     # either use node or nodemon to run server
-    if [[ -f ./package.json ]] && [[! -z $(grep "nodemon\":" ./package.json) ]]; then
+    if [[ -f ./package.json ]] && [[ -n $(grep "nodemon\":" ./package.json) ]]; then
         useServer="nodemon"
     else
         useServer="node"
@@ -146,10 +147,12 @@ runserver() {
         browser-sync start --config $HOME/bs-config.js &
         # nodemon server.js
         # nodemon app.js
-        $useServer server.js
+        # $useServer server.js
+        $useServer $1
     else
         # nodemon server.js
         # nodemon app.js
-        $useServer server.js
+        # $useServer server.js
+        $useServer $1
     fi
 }
