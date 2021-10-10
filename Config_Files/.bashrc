@@ -132,6 +132,8 @@ roofrack () {
 # a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt
 # running this would still test to true.
 # This function will work in any directory. Just need to supply the server app file name as an argument.
+# Note: had to unset the serverFile variable because when starting the servers in another dir it would
+# remember and use a wrong value which threw an error. So hopefully this will work consistently.
 
 runserver() {
     unset ${serverFile}
