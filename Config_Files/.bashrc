@@ -21,6 +21,7 @@ bind '"\es":"\C-usudo"'
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# color for man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
