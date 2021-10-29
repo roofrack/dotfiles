@@ -99,7 +99,7 @@ Plug 'sheerun/vim-polyglot'
 " Plug 'briancollins/vim-jst'
 " Plug 'nikvdp/ejs-syntax'
 " Plug 'leafOfTree/vim-vue'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
