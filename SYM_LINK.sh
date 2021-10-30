@@ -18,13 +18,13 @@ count=0
                                                                       #
 declare -A DIR_BUILD=(                                                #
     [config]=$DIR_CONFIG/i3                                           #
+    [i3status.conf]=$DIR_CONFIG/i3                                    #         #
     [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
     [rc.conf]=$DIR_CONFIG/ranger                                      #
     [arch3.png]=$DIR_PICS/wallpaper                                   #
     [picom.conf]=$DIR_CONFIG/picom                                    #
     [coc-settings.json]=$HOME/.vim                                    #
     [package.json]=$DIR_CONFIG/coc/extensions                         #
-    #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
