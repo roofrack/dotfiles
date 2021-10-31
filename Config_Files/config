@@ -9,16 +9,17 @@
 # Hey Robert you need to organize this conf file so it makes sense!
 
 
-
+# ----------------------------------------------------------------------------------------
 # set the mod key to the window key
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 set $mod Mod4
 
 
 
+# ----------------------------------------------------------------------------------------
 # font stuff
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -30,8 +31,9 @@ font pango:DejaVu Sans Mono 10
 
 
 
+# ----------------------------------------------------------------------------------------
 # misc stuff
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -52,9 +54,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
-
+# ----------------------------------------------------------------------------------------
 # mouse bindings
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # stop the mouse being able to auto change focus... annoying
 focus_follows_mouse no
@@ -70,28 +72,30 @@ bindsym --whole-window $mod+button2 kill
 bindsym --whole-window $mod+button3 fullscreen toggle
 
 
-
-
+# ----------------------------------------------------------------------------------------
 # key bindings
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
-# start a terminal
-bindsym $mod+Return exec xfce4-terminal
+# reload the configuration file (I dont really need this)
+# bindsym $mod+Shift+c reload
 
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+q exit
+
+# kill focused window
+bindsym $mod+Shift+c kill
+
+# start a terminal
+bindsym $mod+Return exec xfce4-terminal
+
+# start firefox
+bindsym $mod+o exec firefox
+
 #use this for shutdown
 #set $mode_system System (e)logout,(r) reboot
-
-
 
 # change focus
 bindsym $mod+h focus left
@@ -229,10 +233,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-
-
+# ----------------------------------------------------------------------------------------
 # starting applications
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
@@ -244,8 +247,9 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 
+# ----------------------------------------------------------------------------------------
 # auto start on i3 startup
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # always open firefox in the browser workspace
 # assign [class="firefox" instance="Navigator"] → $browser
@@ -261,9 +265,9 @@ exec_always firefox
 # exec_always --no-startup-id i3-msg 'workspace $browser; exec firefox;
 
 
-
+# ----------------------------------------------------------------------------------------
 # Compositor and wallpaper
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # Wallpaper
 #exec_always feh --bg-fill ~/Pictures/wallpaper/arch1.png
@@ -274,14 +278,16 @@ exec_always feh --bg-fill ~/Pictures/wallpaper/arch3.png
 #exec_always picom -f
 
 
+# ----------------------------------------------------------------------------------------
 # i3-gaps
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 gaps inner 9
 gaps outer 5
 
 
+# ----------------------------------------------------------------------------------------
 # i3bar
-# ----------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
