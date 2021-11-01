@@ -18,7 +18,7 @@ count=0
                                                                       #
 declare -A DIR_BUILD=(                                                #
     [config]=$DIR_CONFIG/i3                                           #
-    [i3status.conf]=$DIR_CONFIG/i3                                    #         #
+    [i3status.conf]=$DIR_CONFIG/i3status                              #
     [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
     [rc.conf]=$DIR_CONFIG/ranger                                      #
     [arch3.png]=$DIR_PICS/wallpaper                                   #

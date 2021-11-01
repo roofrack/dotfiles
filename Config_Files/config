@@ -16,18 +16,19 @@
 set $mod Mod4
 
 
-
 # ----------------------------------------------------------------------------------------
 # font stuff
 # ----------------------------------------------------------------------------------------
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 14
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 10
+# font pango:DejaVu Sans Mono 10
+
+# Download ttf-ubuntu-font-family for this one. Its a bit nicer.
+font pango:Ubuntu Regular 11
 
 
 
@@ -54,33 +55,18 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
-# ----------------------------------------------------------------------------------------
-# mouse bindings
-# ----------------------------------------------------------------------------------------
-
-# stop the mouse being able to auto change focus... annoying
-focus_follows_mouse no
-
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# The middle button and a modifer over any part of the window kills the window
-bindsym --whole-window $mod+button2 kill
-
-# The right button and modifier go full screen
-bindsym --whole-window $mod+button3 fullscreen toggle
 
 
 # ----------------------------------------------------------------------------------------
 # key bindings
 # ----------------------------------------------------------------------------------------
 
-# reload the configuration file (I dont really need this)
-# bindsym $mod+Shift+c reload
+# reload the configuration file
+bindsym $mod+Shift+r reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+# I dont think I need this one
+# bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exit
@@ -94,8 +80,20 @@ bindsym $mod+Return exec xfce4-terminal
 # start firefox
 bindsym $mod+o exec firefox
 
+# move to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# show the first scratchpad window
+bindsym $mod+p scratchpad show
+
+# toggle thru workspaces
+bindsym $mod+Tab workspace next_on_output
+
 #use this for shutdown
 #set $mode_system System (e)logout,(r) reboot
+
+# lock screen using i3lock
+bindsym $mod+x exec i3lock
 
 # change focus
 bindsym $mod+h focus left
@@ -152,9 +150,9 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 
-set $browser "1: browser"
-set $terminal "2: terminal"
-set $ws3 "3"
+set $browser "1: Firefox"
+set $terminal "2:Terminal"
+set $ws3 "3: Files"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -216,7 +214,7 @@ mode "resize" {
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
-        bindshm l resize grow width 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -234,6 +232,24 @@ bindsym $mod+r mode "resize"
 
 
 # ----------------------------------------------------------------------------------------
+# mouse bindings
+# ----------------------------------------------------------------------------------------
+
+# stop the mouse being able to auto change focus... annoying
+focus_follows_mouse no
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# The middle button and a modifer over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
+
+# The right button and modifier go full screen
+bindsym --whole-window $mod+button3 fullscreen toggle
+
+
+# ----------------------------------------------------------------------------------------
 # starting applications
 # ----------------------------------------------------------------------------------------
 
@@ -247,35 +263,41 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 
+
+
 # ----------------------------------------------------------------------------------------
 # auto start on i3 startup
 # ----------------------------------------------------------------------------------------
 
-# always open firefox in the browser workspace
-# assign [class="firefox" instance="Navigator"] → $browser
-exec_always firefox
+# start firefox in the workspace $browser
+exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
 
-# always open terminal in the terminal workspace
+# start terminal emulator in the workspace $terminal
+exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
+
+
+# ----------------------------------------------------------------------------------------
+# move application to an assigned workspace
+# ----------------------------------------------------------------------------------------
+# examples
+# for_window [class="xfce4-terminal"] move to workspace $terminal
+
+# for_window [class="firefox"] move to workspace $browser
+
 # assign [class="xfce4-terminal" instance="xfce4-terminal"] → $terminal
-# exec_always xfce4-terminal
-
-# exec_always xfce4-terminal
-# exec_always firefox
-
-# exec_always --no-startup-id i3-msg 'workspace $browser; exec firefox;
 
 
 # ----------------------------------------------------------------------------------------
 # Compositor and wallpaper
 # ----------------------------------------------------------------------------------------
 
-# Wallpaper
+# Wallpaper using the feh program
 #exec_always feh --bg-fill ~/Pictures/wallpaper/arch1.png
 #exec_always feh --bg-fill ~/Pictures/wallpaper/arch2.png
 exec_always feh --bg-fill ~/Pictures/wallpaper/arch3.png
 
 # Windows Compositor (had to pacman install picom to add transparency to i3)
-#exec_always picom -f
+exec_always picom -f
 
 
 # ----------------------------------------------------------------------------------------
@@ -293,6 +315,6 @@ gaps outer 5
 # finds out, if available)
 
 bar {
-        status_command i3status --config $HOME/.config/i3/i3status.conf
-        # position top
+        status_command i3status --config $HOME/.config/i3status/i3status.conf
+        position top
 }
