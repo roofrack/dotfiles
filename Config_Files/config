@@ -62,11 +62,11 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # ----------------------------------------------------------------------------------------
 
 # reload the configuration file
-bindsym $mod+Shift+r reload
+# bindsym $mod+Shift+r reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # I dont think I need this one
-# bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exit
@@ -266,18 +266,16 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 
 
 # ----------------------------------------------------------------------------------------
-# auto start on i3 startup
+# Auto start some applications putting them in certain workspaces on i3 startup
 # ----------------------------------------------------------------------------------------
 
-# start firefox in the workspace $browser
 exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
 
-# start terminal emulator in the workspace $terminal
 exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
 
 
 # ----------------------------------------------------------------------------------------
-# move application to an assigned workspace
+# Move application to an assigned workspace
 # ----------------------------------------------------------------------------------------
 # examples
 # for_window [class="xfce4-terminal"] move to workspace $terminal
