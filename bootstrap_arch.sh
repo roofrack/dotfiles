@@ -72,7 +72,8 @@ fi
 # Ranger devicon plugin
 #=========================================================================================
 if [[ ! -d $HOME/.config/ranger/plugins ]]; then
-    printf "\n installing ranger devicon plugin...\n"
+    printf "\n\n installing ranger devicon plugin...\n"
+    sleep 2
     mkdir -p .config/ranger/plugins
     git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
 fi
