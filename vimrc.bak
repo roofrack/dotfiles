@@ -12,18 +12,20 @@ set encoding=utf-8              "Need this for vim-airline to work.
 set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
-set number                      "Line numbers are good
-"set relativenumber
+" set number                      "Line numbers are good
+set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
-"set cursorline                 "Turn on line highlighting
+" set cursorline                 "Turn on line highlighting
 set ruler                       "show line number and column
 set mouse=a                     "allows proper use of mouse inside vim
-"set hidden                     "have buffer with unsaved work open in background
-set helpheight=99999            "makes :help open in bigger buffer
+set hidden                     "have buffer with unsaved work open in background
+" set helpheight=99999            "makes :help open in bigger buffer
 set wildmenu                    "tab completion for the vim help
-"set noswapfile                 "prevents extra file being saved in home directory
-"set nobackup
+set noswapfile                 "prevents extra file being saved in home directory
+set nobackup
+set nowritebackup
+" set cmdheight=2
 set ttimeoutlen=50              "this prevents delay when using esc to exit insert mode
 set nowrap
 set noshowmode                  "stops insert message appearinge
@@ -38,8 +40,9 @@ augroup END
 
 
 "The line below turns off the white highlighting line
-"hi CursorLine term=bold cterm=bold guibg=Grey40
+" hi CursorLine term=bold cterm=bold guibg=Grey40
 
+" let mapleader=","
 let mapleader=","
 let maplocalleader="\\"
 
@@ -57,7 +60,6 @@ set autoindent                 "align the new line indent with the previous line
 set foldmethod=indent          "fold based on indent
 set foldnestmax=3              "deepest fold is 3 levels
 set nofoldenable               "dont fold by default
-
 
 
 
@@ -79,6 +81,7 @@ endif
 
 "--------------------------plugins----------------------------------------------
 call plug#begin()
+Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -88,7 +91,17 @@ Plug 'christoomey/vim-tmux-runner'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'vim-syntastic/syntastic'
+Plug 'mattn/emmet-vim'
+" Plug 'pangloss/vim-javascript'
+Plug 'sheerun/vim-polyglot'
+" Plug 'eslint/eslint'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'briancollins/vim-jst'
+" Plug 'nikvdp/ejs-syntax'
+" Plug 'leafOfTree/vim-vue'
+Plug 'ap/vim-css-color'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 "--------------------------------------------------------------------------------
@@ -127,10 +140,11 @@ call plug#end()
 "------------------------plugin settings----------------------------------------
 
 "flazz/vim-colorschemes_settings ...
-"colorscheme wombat256
+" colorscheme wombat256
 
 
 "vim-airline_settings ...
+" ---------------------------------------------------------
 let g:airline_theme='badwolf'
 " let g:airline_theme='simple'
 " let g:airline_theme='dark'
@@ -147,12 +161,31 @@ let g:airline_theme='badwolf'
 " When its off the fonts don't look as nice
 let g:airline_powerline_fonts = 1
 
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_symbols.colnr = ' ℅:'
+
+"Syntastc settings ...
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+
 
 "NERDTree_settings ...
+" ---------------------------------------------------------
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
-let NERDTreeWinSize = 20
+let NERDTreeWinSize = 25
 let NERDTreeShowBookmarks = 1
 let NERDTreeHighlightCursorline=0
+let NERDTreeShowHidden=1
 "Toggle on/off NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree
@@ -160,6 +193,7 @@ nnoremap <silent> <C-s> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 
 "vim-tmux-runner settings...
+" ---------------------------------------------------------
 let g:VtrUseVtrMaps = 1          "use default Vtm mappings
 "let g:vtr_filetype_runner_overrides = {
             \ 'python': 'python -i {file}'
@@ -188,40 +222,30 @@ nnoremap fl :VtrSendLinesToRunner<cr>
 
 
 "emmett_settings ...
+" ---------------------------------------------------------
 "This allows the use of the trigger key in all modes
-"let g:user_emmet_mode='a'
-
-"Syntastic_settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_loc_list_height=2
-
-
-"youcompleteme_settings
-"----------------------
-"let g:ycm_autoclose_preview_window_after_completion=1
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_server_python_interpreter = '/usr/bin/python2'
-" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" let g:ycm_show_diagnostics_ui = 1
-
-"this is so ultisnips can use the tab key. For completion in YCM us <C-n> and <C-p>.
-" let g:ycm_key_list_select_completion=[]
-" let g:ycm_key_list_previous_completion=[]
-
-"this will shut off YCM
-" let g:ycm_auto_trigger=0
+let g:user_emmet_mode='a'
 
 
 
-" Ultisnips plugin settings
-"--------------------------
+" Coc.nvim settings...
+" ---------------------------------------------------------
+" add extensions here
+let g:coc_global_extensions = [
+    \'coc-json',
+    \'coc-tsserver',
+    \ ]
+" " Use :Prettier to format current buffer
+" command! -narg=0 Prettier :CocCommand prettier.formatFile
+" " use tab for trigger
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+
+
+
+" Ultisnips plugin settings...
+" ---------------------------------------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -244,21 +268,16 @@ let g:syntastic_always_populate_loc_list = 1
 "----------------------------misc mappings--------------------------------------
 
 "source vimrc
-nnoremap <leader>sv :source %<cr>
+nnoremap <leader>sv :source $MYVIMRC
 
 "Quick way to edit your vimrc
-"prevent vimrc from wrapping
-augroup vimrc
-    autocmd!
-    autocmd BufRead .vimrc setlocal nowrap
-augroup END
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "To run certain lines in bash you would use this...
 ":line#start,line#endw !bash
 
 "if you just want to run the current line than use...
-".w !bash
+":w !bash
 
 "This works by instead of writing to disk it 'writes' to the stdin of another
 "program which in this case is bash.

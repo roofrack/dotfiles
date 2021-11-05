@@ -32,6 +32,9 @@ font pango:Ubuntu Regular 11
 
 
 
+# assign [class "xfce4-terminal"] $ws
+
+
 # ----------------------------------------------------------------------------------------
 # misc stuff
 # ----------------------------------------------------------------------------------------
@@ -84,10 +87,12 @@ bindsym $mod+o exec firefox
 bindsym $mod+Shift+minus move scratchpad
 
 # show the first scratchpad window
-bindsym $mod+p scratchpad show
+bindsym $mod+minus scratchpad show
 
 # toggle thru workspaces
 bindsym $mod+Tab workspace next_on_output
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
 
 #use this for shutdown
 #set $mode_system System (e)logout,(r) reboot
@@ -150,9 +155,9 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 
-set $browser "1: Firefox"
-set $terminal "2:Terminal"
-set $ws3 "3: Files"
+set $browser "1:  "
+set $terminal "2: "
+set $ws3 "3:  "
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -273,16 +278,14 @@ exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
 
 exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
 
+exec --no-startup-id i3-msg 'workspace $ws3; exec xfce4-terminal'
+
 
 # ----------------------------------------------------------------------------------------
 # Move application to an assigned workspace
 # ----------------------------------------------------------------------------------------
-# examples
-# for_window [class="xfce4-terminal"] move to workspace $terminal
 
-# for_window [class="firefox"] move to workspace $browser
-
-# assign [class="xfce4-terminal" instance="xfce4-terminal"] → $terminal
+# assign [class="Xfce4-terminal"] $ws3
 
 
 # ----------------------------------------------------------------------------------------
@@ -292,7 +295,9 @@ exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
 # Wallpaper using the feh program
 #exec_always feh --bg-fill ~/Pictures/wallpaper/arch1.png
 #exec_always feh --bg-fill ~/Pictures/wallpaper/arch2.png
-exec_always feh --bg-fill ~/Pictures/wallpaper/arch3.png
+# exec_always feh --bg-fill ~/Pictures/wallpaper/arch3.png
+# exec_always feh --bg-fill ~/Downloads/4hqFNve-arch-linux-wallpaper.jpg
+exec_always feh --bg-fill ~/Pictures/wallpaper/1776164.jpg
 
 # Windows Compositor (had to pacman install picom to add transparency to i3)
 exec_always picom -f
@@ -305,6 +310,7 @@ gaps inner 9
 gaps outer 5
 
 
+
 # ----------------------------------------------------------------------------------------
 # i3bar
 # ----------------------------------------------------------------------------------------
@@ -313,6 +319,17 @@ gaps outer 5
 # finds out, if available)
 
 bar {
-        status_command i3status --config $HOME/.config/i3status/i3status.conf
+        # status_command i3status --config $HOME/.config/i3status/i3status.conf
+        # status_command i3status --config /etc/i3status.conf
+
+
+        status_command i3blocks -c $HOME/.config/i3blocks/i3blocks.conf
+
+
+
+
         position top
+        strip_workspace_numbers yes
+        
+        # i3bar_command i3bar --transparency #2828282
 }

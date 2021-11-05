@@ -19,6 +19,7 @@ count=0
 declare -A DIR_BUILD=(                                                #
     [config]=$DIR_CONFIG/i3                                           #
     [i3status.conf]=$DIR_CONFIG/i3status                              #
+    [i3blocks.conf]=$DIR_CONFIG/i3blocks                              #
     [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
     [rc.conf]=$DIR_CONFIG/ranger                                      #
     [arch3.png]=$DIR_PICS/wallpaper                                   #
@@ -65,6 +66,7 @@ Progress_bar_message() {
         #---------------------------------------------------------------------------------------------------------
         time_end=$(date +'%s%N')
         time_total=$((time_total + time_end - time_start))
+        sleep .05
     done
     printf "\n"
 }

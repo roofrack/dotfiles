@@ -12,8 +12,8 @@ set encoding=utf-8              "Need this for vim-airline to work.
 set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
-set number                      "Line numbers are good
-" set relativenumber
+" set number                      "Line numbers are good
+set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
 " set cursorline                 "Turn on line highlighting
@@ -42,6 +42,7 @@ augroup END
 "The line below turns off the white highlighting line
 " hi CursorLine term=bold cterm=bold guibg=Grey40
 
+" let mapleader=","
 let mapleader=","
 let maplocalleader="\\"
 
@@ -59,7 +60,6 @@ set autoindent                 "align the new line indent with the previous line
 set foldmethod=indent          "fold based on indent
 set foldnestmax=3              "deepest fold is 3 levels
 set nofoldenable               "dont fold by default
-
 
 
 
@@ -99,8 +99,9 @@ Plug 'sheerun/vim-polyglot'
 " Plug 'briancollins/vim-jst'
 " Plug 'nikvdp/ejs-syntax'
 " Plug 'leafOfTree/vim-vue'
+Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 "--------------------------------------------------------------------------------
@@ -181,9 +182,10 @@ let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 "NERDTree_settings ...
 " ---------------------------------------------------------
 let g:NERDTreeDirArrows=0        " this fixes weird font in NERDtree...
-let NERDTreeWinSize = 20
+let NERDTreeWinSize = 25
 let NERDTreeShowBookmarks = 1
 let NERDTreeHighlightCursorline=0
+let NERDTreeShowHidden=1
 "Toggle on/off NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 "Show current file in NERDtree

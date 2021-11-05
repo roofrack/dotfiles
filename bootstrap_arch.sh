@@ -69,6 +69,15 @@ else
 fi
 
 
+# Ranger devicon plugin
+#=========================================================================================
+if [[ ! -d $HOME/.config/ranger/plugins ]]; then
+    mkdir -p .config/ranger/plugins
+    git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
+fi
+
+
+
 # The end
 #=========================================================================================
 end_message
