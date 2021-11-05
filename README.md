@@ -34,6 +34,7 @@
          font pkg the unicode works (in my terminal anyway)
       *  tmux
       *  ranger
+      *  ttf-nerd-fonts-symbols (for the vim & ranger devicons plugins)
 
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to

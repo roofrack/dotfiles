@@ -7,3 +7,4 @@ feh
 ranger
 tmux
 gnu-free-fonts
+ttf-nerd-fonts-symbols
