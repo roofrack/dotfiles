@@ -42,6 +42,8 @@ PROMPT_COMMAND="historyclean;$PROMPT_COMMAND"
 
 
 
+
+
 # ignore both will ignore dups and spaces
 # export HISTCONTROL=ignoreboth:erasedups
 
