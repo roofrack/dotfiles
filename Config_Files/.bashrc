@@ -11,12 +11,58 @@ bind '"\es":"\C-usudo"'
 # bash history settings...
 #--------------------------
 
+# This was online and helps keep the history file persistent and the same
+# across terminals. I might switch back to the simplier solutions below if this
+# turns out to be buggy. Seems to work but must hit "enter" to update the 
+# history list.
+
+shopt -s histappend
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTCONTROL="ignoreboth:erasedups"
+HISTIGNORE="history:exit"
+function historyclean {
+    if [[ -e "$HISTFILE" ]]; then
+        exec {history_lock}<"$HISTFILE" && flock -x $history_lock
+        history -a
+        tac "$HISTFILE" | awk '!x[$0]++' | tac > "$HISTFILE.tmp$$"
+        mv -f "$HISTFILE.tmp$$" "$HISTFILE"
+        history -c
+        history -r
+        flock -u $history_lock && unset history_lock
+    fi  
+}
+function historymerge {
+    history -n; history -w; history -c; history -r; 
+}
+trap historymerge EXIT
+
+PROMPT_COMMAND="historyclean;$PROMPT_COMMAND"
+
+
+
+
+# ignore both will ignore dups and spaces
+# export HISTCONTROL=ignoreboth:erasedups
+
+# make all sessions append to .bash_history file instead of just the
+# last one thats closed
+# shopt -s histappend
+
+# add commands immediately so history commands are available to all
+# open shells
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
+
 # export HISTCONTROL=ignoredups
 # export HISTCONTROL=erasedups
-#export HISTCONTROL=ignoreboth:erasedups
 #export HISTIGNORE="history:ll:ls:cd:cl:his"
 #export HISTFILESIZE=1000
 #export HISTSIZE=500
+
+
+
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
