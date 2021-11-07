@@ -7,6 +7,9 @@
 #------------------------------------------------------------------<robaylard@gmail.com>--
 printf "\n"; tput civis
 
+
+
+
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
@@ -14,12 +17,16 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"
 count=0
 
+
+
+
 #######################################################################
                                                                       #
 declare -A DIR_BUILD=(                                                #
     [config]=$DIR_CONFIG/i3                                           #
     [i3status.conf]=$DIR_CONFIG/i3status                              #
     [i3blocks.conf]=$DIR_CONFIG/i3blocks                              #
+    [scripts]=$DIR_CONFIG/i3blocks                                    #
     [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
     [rc.conf]=$DIR_CONFIG/ranger                                      #
     [arch3.png]=$DIR_PICS/wallpaper                                   #
@@ -33,6 +40,8 @@ declare -A DIR_BUILD=(                                                #
 )                                                                     #
                                                                       #
 #######################################################################
+
+
 
 
 #=========================================================================================
@@ -70,6 +79,8 @@ Progress_bar_message() {
     done
     printf "\n"
 }
+
+
 already_exists_message (){
     start_mess="$1"
     end_mess="$2"
@@ -77,6 +88,9 @@ already_exists_message (){
     space_2="$(($(tput cols) - ${#start_mess} - "$space_1" - ${#symlink} - ${#end_mess} - 5))" #(minus 5 lines up better)
     printf '%s%*s%s%*s%s\n' "$start_mess" "$space_1" "" "$symlink" "$space_2" "" "$end_mess"
 }
+
+
+
 
 #=========================================================================================
 # Building Directories and Sym-Links

@@ -293,11 +293,10 @@ exec --no-startup-id i3-msg 'workspace $ws3; exec xfce4-terminal'
 # ----------------------------------------------------------------------------------------
 
 # Wallpaper using the feh program
-#exec_always feh --bg-fill ~/Pictures/wallpaper/arch1.png
-#exec_always feh --bg-fill ~/Pictures/wallpaper/arch2.png
+# exec_always feh --bg-fill ~/Pictures/wallpaper/eMorh0s-arch-linux-wallpaper.jpg
 # exec_always feh --bg-fill ~/Pictures/wallpaper/arch3.png
-# exec_always feh --bg-fill ~/Downloads/4hqFNve-arch-linux-wallpaper.jpg
-exec_always feh --bg-fill ~/Pictures/wallpaper/1776164.jpg
+exec_always feh --bg-fill ~/Pictures/wallpaper/4hqFNve-arch-linux-wallpaper.jpg
+# exec_always feh --bg-fill ~/Pictures/wallpaper/1776164.jpg
 
 # Windows Compositor (had to pacman install picom to add transparency to i3)
 exec_always picom -f
