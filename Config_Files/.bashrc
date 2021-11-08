@@ -13,7 +13,7 @@ bind '"\es":"\C-usudo"'
 
 # This was online and helps keep the history file persistent and the same
 # across terminals. I might switch back to the simplier solutions below if this
-# turns out to be buggy. Seems to work but must hit "enter" to update the 
+# turns out to be buggy. Seems to work but must hit "enter" to update the
 # history list.
 
 shopt -s histappend
@@ -30,10 +30,10 @@ function historyclean {
         history -c
         history -r
         flock -u $history_lock && unset history_lock
-    fi  
+    fi
 }
 function historymerge {
-    history -n; history -w; history -c; history -r; 
+    history -n; history -w; history -c; history -r;
 }
 trap historymerge EXIT
 
@@ -147,7 +147,8 @@ PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35
 export PS1
 
 
-SCRIPT_DIR="$HOME/.config/i3blocks/scripts"
+# this is where the i3blocks scripts are put
+SCRIPT_DIR="$HOME/.config/i3blocks/scripts/"
 export SCRIPT_DIR
 
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
@@ -224,9 +225,8 @@ runserver() {
     if [[ -z $bsync ]]; then
         echo "starting Browser-Sync... "
         browser-sync start --config $HOME/bs-config.js &
-        $useServer $serverFile
     else
         echo "(Browser-Sync is already running in the background)"
-        $useServer $serverFile
     fi
+    $useServer $serverFile
 }

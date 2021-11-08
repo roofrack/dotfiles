@@ -58,7 +58,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-
+# this may stop firefox from adding that stupid window bar on top (annoying)
+default_border pixel 1
 
 
 # ----------------------------------------------------------------------------------------
@@ -257,7 +258,6 @@ bindsym --whole-window $mod+button3 fullscreen toggle
 
 
 
-# default_border pixel 1
 
 
 # ----------------------------------------------------------------------------------------
@@ -333,9 +333,9 @@ set $ubgcolor    #ff0000
 # client        |         border     |     background   |    text       |        indicator |
 #-------------------------------------------------------------------------------------------
   client.focused          $bgcolor         $bgcolor          $textcolor          $bgcolor
-  client.unfocused        $ibgcolor        $ibgcolor         $itextcolor         $ibgcolor 
-  client.focused_inactive $ibgcolor        $ibgcolor         $itextcolor         $ibgcolor  
-  client.urgent           $ubgcolor        $ubgcolor         $textcolor          $ubgcolor   
+  client.unfocused        $ibgcolor        $ibgcolor         $itextcolor         $ibgcolor
+  client.focused_inactive $ibgcolor        $ibgcolor         $itextcolor         $ibgcolor
+  client.urgent           $ubgcolor        $ubgcolor         $textcolor          $ubgcolor
 
 
 
@@ -351,21 +351,23 @@ bar {
         # status_command i3status --config $HOME/.config/i3status/i3status.conf
         # status_command i3status --config /etc/i3status.conf
         status_command i3blocks -c $HOME/.config/i3blocks/i3blocks.conf
+        # status_command MYPATH='$HOME/.config/i3blocks/scripts' i3blocks
+
 
         position top
         strip_workspace_numbers yes
         tray_output none
         font pango:monospace 11
-        
+
         colors {
                 background $bgcolor
                 background $barcolor
-                separator $282828
+                separator  $282828
 
               #-----------------------------------------------------------------------
               # client       |         border     |     background   |    text       |
               #-----------------------------------------------------------------------
-                focused_workspace      $fws             $fws              $textcolor 
+                focused_workspace      $fws             $fws              $textcolor
                 inactive_workspace     $ibgcolor        $ibgcolor         $itextcolor
                 urgent_workspace       $ubgcolor        $ubgcolor         $textcolor
         }
