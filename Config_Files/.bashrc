@@ -120,7 +120,8 @@ alias timeSync='sudo timedatectl set-ntp false && sudo timedatectl set-ntp true'
 #-------------------
 # the -u forces tmux to use unicode. This allows vim-airline to work inside tmux.
 # The 2 prevents colorscheme change in vim. Sets color to 264
-#alias tmux='tmux -2u'
+alias tmux='tmux -2u'
+
 #alias ta='tmux -2u a'
 #alias ka='killall tmux'
 alias tl='tmux ls'
@@ -143,9 +144,11 @@ alias del='rm -rf ~/play/*; clear'
 # OR...
 # PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
 PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
-
 export PS1
 
+
+SCRIPT_DIR="$HOME/.config/i3blocks/scripts"
+export SCRIPT_DIR
 
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 #source ~/.bin/tmuxinator.bash
@@ -155,6 +158,7 @@ source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
 #export PATH=$PATH:~/bin/:~/.bin/
+
 
 # Make the arch logo appear in new shell startup
 #archey

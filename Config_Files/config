@@ -28,7 +28,8 @@ set $mod Mod4
 # font pango:DejaVu Sans Mono 10
 
 # Download ttf-ubuntu-font-family for this one. Its a bit nicer.
-font pango:Ubuntu Regular 11
+# font pango:Ubuntu Regular 11
+font pango:Droid Sans Mono 11
 
 
 
@@ -254,6 +255,11 @@ bindsym --whole-window $mod+button2 kill
 bindsym --whole-window $mod+button3 fullscreen toggle
 
 
+
+
+# default_border pixel 1
+
+
 # ----------------------------------------------------------------------------------------
 # starting applications
 # ----------------------------------------------------------------------------------------
@@ -309,6 +315,30 @@ gaps inner 9
 gaps outer 5
 
 
+# ----------------------------------------------------------------------------------------
+# window colors
+# ----------------------------------------------------------------------------------------
+
+# set $bgcolor     #00897b
+set $bgcolor     #0d94b133
+# set $ibgcolor    #363636
+set $ibgcolor    #0f3d69
+set $fws         #0d94b13388
+set $barcolor    #0d94b1330D
+set $textcolor   #ffffff
+set $itextcolor  #969696
+set $ubgcolor    #ff0000
+
+#-------------------------------------------------------------------------------------------
+# client        |         border     |     background   |    text       |        indicator |
+#-------------------------------------------------------------------------------------------
+  client.focused          $bgcolor         $bgcolor          $textcolor          $bgcolor
+  client.unfocused        $ibgcolor        $ibgcolor         $itextcolor         $ibgcolor 
+  client.focused_inactive $ibgcolor        $ibgcolor         $itextcolor         $ibgcolor  
+  client.urgent           $ubgcolor        $ubgcolor         $textcolor          $ubgcolor   
+
+
+
 
 # ----------------------------------------------------------------------------------------
 # i3bar
@@ -320,15 +350,26 @@ gaps outer 5
 bar {
         # status_command i3status --config $HOME/.config/i3status/i3status.conf
         # status_command i3status --config /etc/i3status.conf
-
-
         status_command i3blocks -c $HOME/.config/i3blocks/i3blocks.conf
-
-
-
 
         position top
         strip_workspace_numbers yes
+        tray_output none
+        font pango:monospace 11
         
-        # i3bar_command i3bar --transparency #2828282
+        colors {
+                background $bgcolor
+                background $barcolor
+                separator $282828
+
+              #-----------------------------------------------------------------------
+              # client       |         border     |     background   |    text       |
+              #-----------------------------------------------------------------------
+                focused_workspace      $fws             $fws              $textcolor 
+                inactive_workspace     $ibgcolor        $ibgcolor         $itextcolor
+                urgent_workspace       $ubgcolor        $ubgcolor         $textcolor
+        }
+
+
+        i3bar_command i3bar --transparency #2828282
 }

@@ -12,7 +12,7 @@ set encoding=utf-8              "Need this for vim-airline to work.
 set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
-" set number                      "Line numbers are good
+set number                      "Line numbers are good
 set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
@@ -31,12 +31,13 @@ set nowrap
 set noshowmode                  "stops insert message appearinge
 set background=dark             "Need this on for tmux to not change the vim color-scheme
 
+
+
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
     autocmd!
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END
-
 
 
 "The line below turns off the white highlighting line
@@ -99,7 +100,8 @@ Plug 'sheerun/vim-polyglot'
 " Plug 'briancollins/vim-jst'
 " Plug 'nikvdp/ejs-syntax'
 " Plug 'leafOfTree/vim-vue'
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
+" Plug 'chrisbra/Colorizer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
@@ -142,6 +144,7 @@ call plug#end()
 "flazz/vim-colorschemes_settings ...
 " colorscheme wombat256
 
+" let g:colorizer_auto_color = 1
 
 "vim-airline_settings ...
 " ---------------------------------------------------------
@@ -168,14 +171,15 @@ endif
 let g:airline_symbols.colnr = ' ℅:'
 
 "Syntastc settings ...
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
+" ---------------------------------------------------------
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 
@@ -235,12 +239,15 @@ let g:coc_global_extensions = [
     \'coc-json',
     \'coc-tsserver',
     \ ]
-" " Use :Prettier to format current buffer
+" Use :Prettier to format current buffer
 " command! -narg=0 Prettier :CocCommand prettier.formatFile
-" " use tab for trigger
+
+" use tab for trigger
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
+"coc-highlight extension
+set termguicolors               " Needed this for coc-highlight to work for showing hex color preview
 
 
 
