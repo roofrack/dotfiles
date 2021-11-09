@@ -27,6 +27,7 @@ declare -A DIR_BUILD=(                                                #
     [i3status.conf]=$DIR_CONFIG/i3status                              #
     [i3blocks.conf]=$DIR_CONFIG/i3blocks                              #
     [scripts]=$DIR_CONFIG/i3blocks                                    #
+    [lock.sh]=$DIR_CONFIG/i3lock/                                     #
     [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
     [rc.conf]=$DIR_CONFIG/ranger                                      #
     [arch3.png]=$DIR_PICS/wallpaper                                   #

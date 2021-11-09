@@ -196,8 +196,10 @@ roofrack () {
 #   remember and use a wrong value which threw an error. So hopefully this will work consistently.
 
 runserver() {
+
     unset ${serverFile}
     serverFile=$1
+
     # test to see if a server file was entered with the function call
     if [[ -z $serverFile ]]; then
         while read -p "Please enter the filename to use for the server: "; do
@@ -210,6 +212,7 @@ runserver() {
             fi
         done
     fi
+
     # either use nodemon or node to run server
     # need to add an additional test here for a nodemon global installation
     if [[ -f ./package.json ]] && [[ -n $(grep "nodemon\":" ./package.json) ]]; then
@@ -218,7 +221,7 @@ runserver() {
         useServer="node"
     fi
 
-    # start the server(s). Only start node[mon] if bs is already running in the background '&'
+    # start the server(s). If browsersync is already running in the background '&' do NOT restart it.
     echo
     echo "starting the server file... $serverFile with $useServer"
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
@@ -229,4 +232,5 @@ runserver() {
         echo "(Browser-Sync is already running in the background)"
     fi
     $useServer $serverFile
+
 }

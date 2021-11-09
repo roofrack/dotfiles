@@ -99,8 +99,15 @@ bindsym $mod+p workspace prev_on_output
 #use this for shutdown
 #set $mode_system System (e)logout,(r) reboot
 
+
+
+
 # lock screen using i3lock
-bindsym $mod+x exec i3lock
+bindsym $mod+x exec $HOME/.config/i3lock/lock.sh
+
+
+
+
 
 # change focus
 bindsym $mod+h focus left
@@ -319,12 +326,13 @@ gaps outer 5
 # window colors
 # ----------------------------------------------------------------------------------------
 
+
 # set $bgcolor     #00897b
 set $bgcolor     #0d94b133
 # set $ibgcolor    #363636
 set $ibgcolor    #0f3d69
-set $fws         #0d94b13388
-set $barcolor    #0d94b1330D
+set $fws         #0d94b188
+set $barcolor    #0d94b10D
 set $textcolor   #ffffff
 set $itextcolor  #969696
 set $ubgcolor    #ff0000
