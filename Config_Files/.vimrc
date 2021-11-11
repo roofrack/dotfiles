@@ -32,6 +32,10 @@ set noshowmode                  "stops insert message appearinge
 set background=dark             "Need this on for tmux to not change the vim color-scheme
 
 
+" command to clear all registers
+" just type :WipeReg
+command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+
 
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap

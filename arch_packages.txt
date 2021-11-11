@@ -1,54 +1,62 @@
-acpi 
-alsa-utils 
-autoconf 
-automake 
-base 
-bash-completion 
-binutils 
-bison 
-conky 
-dhcpcd 
-dmenu 
-fakeroot 
-feh 
-firefox 
-flex 
-gcc 
-git 
-gnu-free-fonts 
-grub 
-htop 
-i3-gaps 
-i3blocks 
-i3lock 
-i3status 
-iwd 
-linux 
-linux-firmware 
-lshw 
-m4 
-make 
-man-db 
-nodejs 
-npm 
-patch 
-perl-anyevent-i3 
-picom 
-pkgconf 
-ranger 
-reflector 
-sudo 
-terminus-font 
-tmux 
-ttf-font-awesome 
-ttf-nerd-fonts-symbols 
-ttf-ubuntu-font-family 
-usbutils 
-vim 
-w3m 
-which 
-xfce4-terminal 
-xorg-server 
-xorg-xinit 
-xorg-xinput 
-xorg-xprop 
+acpi 1.7-3
+alsa-utils 1.2.5.1-1
+autoconf 2.71-1
+automake 1.16.5-1
+base 2-2
+bash-completion 2.11-2
+binutils 2.36.1-3
+bison 3.8.2-1
+chromium 95.0.4638.69-2
+conky 1.12.2-1
+dhcpcd 9.4.0-1
+dmenu 5.0-1
+fakeroot 1.26-1
+feh 3.7.2-1
+firefox 94.0.1-1
+flex 2.6.4-3
+gcc 11.1.0-1
+git 2.33.1-1
+gnu-free-fonts 20120503-8
+grub 2:2.06-2
+gvim 8.2.3582-1
+htop 3.1.1-1
+i3-gaps 4.20.1-1
+i3blocks 1.5-3
+i3lock-color 2.13.c.4-1
+i3status 2.13-3
+inetutils 2.2-1
+iw 5.9-1
+iwd 1.19-1
+linux 5.14.16.arch1-1
+linux-firmware 20211027.1d00989-1
+lshw B.02.19.2-3
+m4 1.4.19-1
+make 4.3-3
+man-db 2.9.4-2
+nodejs 16.11.1-1
+npm 8.1.3-1
+pacman-contrib 1.4.0-4
+patch 2.7.6-8
+perl-anyevent-i3 0.17-7
+picom 8.2-1
+pkgconf 1.8.0-1
+pulseaudio 15.0-1
+ranger 1.9.3-3
+reflector 2021.7.8-1
+rofi 1.7.0-1
+sudo 1.9.8.p2-1
+terminus-font 4.49.1-2
+tmux 3.2_a-1
+ttf-droid 20121017-10
+ttf-font-awesome 5.15.4-1
+ttf-nerd-fonts-symbols 2.1.0+36+gd0bf73a1-4
+ttf-ubuntu-font-family 0.83-7
+usbutils 014-1
+w3m 0.5.3.git20210102_6-1
+which 2.21-5
+xfce4-terminal 0.8.10-2
+xorg-server 21.1.1-2
+xorg-xinit 1.4.1-3
+xorg-xinput 1.6.3-2
+xorg-xprop 1.2.5-1
+yay 11.0.2-1
