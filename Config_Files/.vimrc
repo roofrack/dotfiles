@@ -16,7 +16,7 @@ set number                      "Line numbers are good
 set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
-" set cursorline                 "Turn on line highlighting
+set cursorline                 "Turn on line highlighting
 set ruler                       "show line number and column
 set mouse=a                     "allows proper use of mouse inside vim
 set hidden                     "have buffer with unsaved work open in background
@@ -46,6 +46,8 @@ augroup END
 
 "The line below turns off the white highlighting line
 " hi CursorLine term=bold cterm=bold guibg=Grey40
+" hi CursorLineNr    term=bold cterm=bold ctermfg=012 gui=bold
+
 
 " let mapleader=","
 let mapleader=","
@@ -146,7 +148,7 @@ call plug#end()
 "------------------------plugin settings----------------------------------------
 
 "flazz/vim-colorschemes_settings ...
-" colorscheme wombat256
+colorscheme wombat256
 
 " let g:colorizer_auto_color = 1
 
@@ -252,7 +254,6 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 "coc-highlight extension
 set termguicolors               " Needed this for coc-highlight to work for showing hex color preview
-
 
 
 " Ultisnips plugin settings...
