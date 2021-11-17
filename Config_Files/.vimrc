@@ -16,7 +16,7 @@ set number                      "Line numbers are good
 set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
-set cursorline                 "Turn on line highlighting
+" set cursorline                 "Turn on line highlighting
 set ruler                       "show line number and column
 set mouse=a                     "allows proper use of mouse inside vim
 set hidden                     "have buffer with unsaved work open in background
@@ -151,6 +151,9 @@ call plug#end()
 colorscheme wombat256
 
 " let g:colorizer_auto_color = 1
+
+" this will make vim transparency work if using not the default colorscheme
+hi Normal guibg=NONE ctermbg=NONE
 
 "vim-airline_settings ...
 " ---------------------------------------------------------
