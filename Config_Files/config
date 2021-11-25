@@ -225,10 +225,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 2 px or 2 ppt
+        bindsym j resize grow height 2 px or 2 ppt
+        bindsym k resize shrink height 2 px or 2 ppt
+        bindsym l resize grow width 2 px or 2 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -326,15 +326,19 @@ gaps outer 5
 # window colors
 # ----------------------------------------------------------------------------------------
 
-
 # set $bgcolor     #00897b
-set $bgcolor     #0d94b133
+# set $bgcolor     #0d94b133
+set $bgcolor     #0f3d69
 # set $ibgcolor    #363636
-set $ibgcolor    #0f3d69
-set $fws         #0d94b188
+# set $ibgcolor    #0f3d69
+set $ibgcolor    #0d94b188
+# set $fws         #0d94b188
+set $fws         #0f3d69
 set $barcolor    #0d94b10D
 set $textcolor   #ffffff
-set $itextcolor  #969696
+# set $itextcolor  #969696
+set $itextcolor  #0f3d69
+
 set $ubgcolor    #ff0000
 
 #-------------------------------------------------------------------------------------------
