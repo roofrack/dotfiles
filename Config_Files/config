@@ -312,7 +312,8 @@ exec_always feh --bg-fill ~/Pictures/wallpaper/4hqFNve-arch-linux-wallpaper.jpg
 # exec_always feh --bg-fill ~/Pictures/wallpaper/1776164.jpg
 
 # Windows Compositor (had to pacman install picom to add transparency to i3)
-exec_always picom -f
+# exec_always picom -f
+exec_always picom --experimental-backend
 
 
 # ----------------------------------------------------------------------------------------
@@ -385,5 +386,6 @@ bar {
         }
 
 
-        i3bar_command i3bar --transparency #2828282
+        # i3bar_command i3bar --transparency #2828282
+        i3bar_command i3bar --transparency #282828
 }

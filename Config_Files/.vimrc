@@ -13,7 +13,7 @@ set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
 set number                      "Line numbers are good
-set relativenumber
+" set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
 " set cursorline                 "Turn on line highlighting
@@ -167,7 +167,7 @@ let g:airline_theme='badwolf'
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#buffer_nr_show = 0
 "let g:airline_inactive_collapse=1
-"let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 
 " when i turn this on it will screw airline up (laptop computer works ok)
 " When its off the fonts don't look as nice
@@ -189,7 +189,7 @@ let g:airline_symbols.colnr = ' ℅:'
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 " let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 
 "NERDTree_settings ...
@@ -415,7 +415,7 @@ nnoremap <Leader><Leader> <C-^>
 
 iab pritn print
 iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
-
+iab cl console.log(
 
 
 

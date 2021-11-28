@@ -167,6 +167,32 @@ source /usr/share/git/completion/git-completion.bash
 # Funcions I made (robert)
 # -----------------------
 
+# tmux simple set up
+tm-setup () {
+
+    if [[ -z $(pgrep tmux) ]]; then
+
+        session="play"
+        tmux new-session -d -s $session
+        tmux send-keys -t 0 'cd $HOME/coding-practice/javascript;clear' enter
+        tmux rename-window -t 0 'editor'
+        # split the window into two panes and resize the first pane (pane 0) down a bit
+        tmux split-window -v
+        tmux send-keys -t 1 'cd $HOME/coding-practice/javascript;clear' enter
+        tmux resize-pane -t 0 -D 5
+        tmux send-keys -t 0 'vim play.js' enter
+        tmux send-keys -t 0 ':VtrAttachToPane 1' enter
+        tmux select-pane -t 0
+        tmux attach-session -t $SESSION:0
+
+    else
+
+        echo "tmux session "play" is already running"
+
+    fi
+}
+
+
 # a function to condense git commands
 roofrack () {
     echo cd\'ing into dotfiles
