@@ -187,7 +187,7 @@ tm-setup () {
 
     else
 
-        echo "tmux session "play" is already running"
+        echo "The tmux session \"play\" is already running..."
 
     fi
 }
