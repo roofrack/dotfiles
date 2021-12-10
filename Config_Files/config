@@ -29,7 +29,7 @@ set $mod Mod4
 
 # Download ttf-ubuntu-font-family for this one. Its a bit nicer.
 # font pango:Ubuntu Regular 11
-font pango:Droid Sans Mono 11
+font pango:Droid Sans Mono 9
 
 
 
@@ -370,7 +370,7 @@ bar {
         position top
         strip_workspace_numbers yes
         tray_output none
-        font pango:monospace 11
+        font pango:monospace 9
 
         colors {
                 background $bgcolor

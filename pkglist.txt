@@ -8,3 +8,13 @@ ranger
 tmux
 gnu-free-fonts
 ttf-nerd-fonts-symbols
+nodejs
+npm
+w3m
+acpi
+dmenu
+pacman-contrib
+terminus-font
+ttf-font-awesome
+ttf-droid
+ttf-ubuntu-font-family
