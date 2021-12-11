@@ -1,0 +1,105 @@
+################## VIM VIXEN KEYBINDINGS ##########################
+
+
+
+SCROLLING
+----------------------
+
+    k: scroll up
+    j: scroll down
+    h: scroll left
+    l: scroll right
+    Ctrl+u: scroll up half a page
+    Ctrl+d: scroll down half a page
+    Ctrl+b: scroll up a page
+    Ctrl+f: scroll down a page
+    gg: scroll to the top of a page
+    G: scroll to the bottom of a page
+    0: scroll to the leftmost part of a page
+    $: scroll to the rightmost part of a page
+    m: set a mark for the current position
+    ': jump to a marked position
+
+
+Lowercase marks ([a-z]) store the position of the current tab. Uppercase and numeric marks ([A-Z0-9]) store the position and the tab.
+
+
+
+
+SELECT AND MANAGE TABS
+----------------------
+
+    d: delete the current tab and select the tab to its right
+    D: delete the current tab and select the tab to its left
+    !d: delete a pinned tab
+    u: reopen a closed tab
+    r: reload the current tab
+    R: reload the current tab, bypassing the cache
+    K or gT: select the previous tab
+    J or gt: select the next tab
+    g0: select the first tab
+    g$: select the last tab
+    Ctrl+6: open the previously-selected tab
+    zp: pin the curent tab tab
+    zd: duplicate the current tab
+
+
+
+
+CONSOLE
+----------------------
+
+    :: open the console
+    o, t, w: open a page in the current tab, a new tab, or new window
+    O, T, W: similar to o, t, w, but using the current URL
+    b: select tabs by URL or title
+    a: add the current page to your bookmarks
+
+See the console commands section for a more detailed description.
+
+
+
+
+ZOOM
+----------------------
+
+    zi: zoom in
+    zo: zoom out
+    zz: zoom neutral (reset)
+
+
+
+NAVIGATION
+----------------------
+
+    f: follow links in the page in the current tab
+    F: follow links in the page in a new tab
+    H: go back in history
+    L: go forward in history
+    [[, ]]: find a link to the previous/next page and open it
+    gu: go to the parent directory
+    gU: go to the root directory
+    gi: focus the first input field
+
+Vim Vixen can be configured to follow links opened in tabs in the background instead of switching to a new tab immediately. To do this, you'll need to update the config file: change the "background" property of the "follow.start" action to true, e.g.:
+
+{
+    "keymaps": {
+        "F": { "type": "follow.start", "newTab": true, "background": true }
+    }
+}
+
+
+
+MISC
+----------------------
+
+    y: copy the URL of the current tab to the clipboard
+    p: open the clipboard's URL in the current tab
+    P: open the clipboard's URL in new tab
+    Shift+Esc: enable or disable the add-on in the current tab
+    /: start searching for text in the page
+    n: find the next search result in the page
+    N: find the previous search result in the page
+    gf: view the source of the current tab
+
