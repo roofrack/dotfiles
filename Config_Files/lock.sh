@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Hey Rob you need to download the i3lock-color package from the AUR using yay. This is the config file for i3lock-color.
+
 BLANK='#00000000'
 CLEAR='#ffffff22'
 DEFAULT='#ff00ffcc'

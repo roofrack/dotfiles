@@ -35,6 +35,7 @@
       *  tmux
       *  ranger
       *  ttf-nerd-fonts-symbols (for the vim & ranger devicons plugins)
+      *  a few other things
 
 
  5. I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
@@ -44,8 +45,10 @@
  6. For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
     virtualbox issue. I have symlinked this as well to the dotfiles directory so should work.
 
- 7. tpm plugin manager will be installed. If you had to do it manually run
+ 7. The tpm plugin manager will be installed. If you had to do it manually run
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm and once tmux is open type the prefix key
     followed by "I" to have tmux install the plugins listed in your .tmux.conf file.
 
- 8. vim will autoinstall plugins and coc-extensions when opening the first time.
+ 8. Vim will autoinstall plugins and coc-extensions when opening the first time.
+
+ 9. Install Yay for AUR packages. Install i3lock-color for the lock screen using yay.
