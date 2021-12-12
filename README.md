@@ -55,6 +55,6 @@
 
  10. May need to configure some things for iwd to work...
 
-      * /etc/resolv.conf add 'nameserver 192.168.0.1' for example
+      * /etc/resolv.conf add 'nameserver 192.168.0.1' and 'nameserver 192.168.1.1' for example
       * /etc/iwd/main.conf add 'EnableNetworkConfiguration=true' (check out arch wiki for iwd)
       * start/enable iwd.service
