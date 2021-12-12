@@ -52,3 +52,9 @@
  8. Vim will autoinstall plugins and coc-extensions when opening the first time.
 
  9. Install Yay for AUR packages. Install i3lock-color for the lock screen using yay.
+
+ 10. May need to configure some things for iwd to work...
+
+      * /etc/resolv.conf add 'nameserver 192.168.0.1' for example
+      * /etc/iwd/main.conf add 'EnableNetworkConfiguration=true' (check out arch wiki for iwd)
+      * start/enable iwd.service
