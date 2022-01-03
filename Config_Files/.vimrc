@@ -416,7 +416,7 @@ nnoremap <Leader><Leader> <C-^>
 
 iab pritn print
 iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
-iab cl console.log(
+iab cl console.log
 
 
 
