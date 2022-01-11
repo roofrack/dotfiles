@@ -177,7 +177,7 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 # set $ws10 "10"
-set $vm "10:"
+set $vm "10:-VirtManager"
 
 # switch to workspace
 bindsym $mod+1 workspace number $browser
@@ -296,6 +296,8 @@ exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
 exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
 
 exec --no-startup-id i3-msg 'workspace $ws3; exec xfce4-terminal'
+
+exec --no-startup-id i3-msg 'workspace $vm; exec virt-manager'
 
 
 # ----------------------------------------------------------------------------------------
