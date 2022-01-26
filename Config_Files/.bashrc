@@ -86,6 +86,7 @@ alias ls='ls --color=auto'
 #alias ll='clear; ls -lX'
 alias ll='ls -la'
 #alias cl='clear'
+alias ip='ip -c'
 
 alias brc='vim ~/.bashrc'
 alias vrc='vim ~/.vimrc'
