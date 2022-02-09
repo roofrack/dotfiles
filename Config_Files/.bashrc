@@ -2,6 +2,12 @@
 # ~/.bashrc
 #
 
+# May need to change the resolution in a VM
+# Use xrandr to see what the current resolution is
+# Then uncomment this command to set the resolution...
+# xrandr --output Virtual-1 --mode 1360x768 
+
+
 export EDITOR='vim'
 
 # Press <Esc + s> to add sudo to beginning of line (insert mode)

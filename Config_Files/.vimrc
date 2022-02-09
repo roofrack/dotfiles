@@ -248,6 +248,8 @@ let g:coc_global_extensions = [
     \'coc-json',
     \'coc-tsserver',
     \'coc-highlight',
+    \'coc-eslint',
+    \'coc-prettier'
     \ ]
 " Use :Prettier to format current buffer
 " command! -narg=0 Prettier :CocCommand prettier.formatFile
