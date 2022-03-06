@@ -179,26 +179,42 @@ tm-setup () {
 
     if [[ -z $(pgrep tmux) ]]; then
 
-        session="play"
-        tmux new-session -d -s $session
-        tmux send-keys -t 0 'cd $HOME/coding-practice/javascript;clear' enter
-        tmux rename-window -t 0 'editor'
-        # split the window into two panes and resize the first pane (pane 0) down a bit
-        tmux split-window -v
-        tmux send-keys -t 1 'cd $HOME/coding-practice/javascript;clear' enter
+        # Assigning a few variables
+        sessionName="play"
+        windowOne="server"
+        windowTwo="editor"
+        serverFile="app"
+        editorFile="sandbox.js"
+        directory="$HOME/coding-practice/javascript"
+
+        tmux new-session -d -s $sessionName -n $windowOne -c $directory
+        # Create a new tmux session. The -d prevents attaching to the session right 
+        # away so the script will continue to run. -s names the session. The newly 
+        # created session opens a window and the -n allows you to name it 'server'. 
+        # -c puts you in the desired directory.
+
+        tmux send-keys -t $sessionName:=$windowOne "runserver $serverFile" Enter
+        # starting the server in the target (-t) window named 'server'.
+
+        tmux new-window -t $sessionName -n $windowTwo -c $directory
+        # create a second window and attach to it (if we use -d then it would not attach).
+        # Name it 'editor' and cd into 'coding-practice/javascript'
+
+        tmux  split-window -v -t $session:=$windowTwo
         tmux resize-pane -t 0 -D 5
-        tmux send-keys -t 0 'vim play.js' enter
-        tmux send-keys -t 0 ':VtrAttachToPane 1' enter
+        tmux send-keys -t 1 "cd $directory" Enter
+        # split windowTwo into two panes and resize the first pane (pane 0) down a bit
+        # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
+
+        tmux send-keys -t 0 "vim $editorFile" Enter
+        tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
         tmux select-pane -t 0
-        tmux attach-session -t $SESSION:0
+        tmux attach-session -t $SESSION:$windowTwo
 
     else
-
-        echo "The tmux session \"play\" is already running..."
-
+        echo "The tmux session '$sessionName' is already running..."
     fi
 }
-
 
 # a function to condense git commands
 roofrack () {
