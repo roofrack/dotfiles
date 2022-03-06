@@ -212,7 +212,7 @@ tm-setup () {
         tmux send-keys -t 0 "vim $editorFiles" Enter
         tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
         tmux select-pane -t 0
-        tmux attach-session -t $SESSION:$windowTwoName
+        tmux attach-session -t $SESSION:$windowTwoName.0
 
     else
         echo "The tmux session '${sessionName}' is already running..."
