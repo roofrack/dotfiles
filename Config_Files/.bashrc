@@ -183,7 +183,7 @@ tm-setup () {
         sessionName="play"
         windowOne="server"
         windowTwo="editor"
-        serverFile="app"
+        serverFile="app.js"
         editorFile="sandbox.js"
         directory="$HOME/coding-practice/javascript"
 

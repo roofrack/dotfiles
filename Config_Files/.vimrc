@@ -261,6 +261,8 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "coc-highlight extension
 set termguicolors               " Needed this for coc-highlight to work for showing hex color preview
 
+highlight CocErrorSign guifg=#d1666a    " This is for better eslint error color. Hard to look at otherwise.
+highlight CocUnusedHighlight guibg=#2d332f  " A nicer color for unused variables in javascript
 
 " Ultisnips plugin settings...
 " ---------------------------------------------------------
