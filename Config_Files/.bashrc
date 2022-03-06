@@ -203,10 +203,11 @@ tm-setup () {
         # create a second window and attach to it (if we use -d then it would not attach).
         # Name it 'editor' and cd into 'coding-practice/javascript'
 
-        tmux  split-window -v -t $session:=$windowTwoName
+        tmux  split-window -v -t $session:=$windowTwoName.0
         tmux resize-pane -t 0 -D 5
         # split windowTwo into two panes and resize the first pane (pane 0) down a bit
         # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
+        # The target -t format is... sessionName:windowName.paneNumber
 
         tmux send-keys -t 0 "vim $editorFiles" Enter
         tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
