@@ -182,28 +182,28 @@ tm-setup () {
         sessionName="expressApp"
 
         # Assigning a few variables
-        windowOne="server"
-        windowTwo="editor"
+        windowOneName="server"
+        windowTwoName="editor"
         serverFile="app.js"
         editorFiles="app.js views/index.js"
         directory="$HOME/coding-practice/javascript"
 
         cd $directory
 
-        tmux new-session -d -s $sessionName -n $windowOne
+        tmux new-session -d -s $sessionName -n $windowOneName
         # Create a new tmux session. The -d prevents attaching to the session right 
         # away so the script will continue to run. -s names the session. The newly 
         # created session opens a window and the -n allows you to name it 'server'. 
         # Can also use '-c + directory' to put you in the desired directory.
 
-        tmux send-keys -t $sessionName:=$windowOne "runserver $serverFile" Enter
+        tmux send-keys -t $sessionName:=$windowOneName "runserver $serverFile" Enter
         # starting the server in the target (-t) window named 'server'.
 
-        tmux new-window -t $sessionName -n $windowTwo
+        tmux new-window -t $sessionName -n $windowTwoName
         # create a second window and attach to it (if we use -d then it would not attach).
         # Name it 'editor' and cd into 'coding-practice/javascript'
 
-        tmux  split-window -v -t $session:=$windowTwo
+        tmux  split-window -v -t $session:=$windowTwoName
         tmux resize-pane -t 0 -D 5
         # split windowTwo into two panes and resize the first pane (pane 0) down a bit
         # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
@@ -211,10 +211,10 @@ tm-setup () {
         tmux send-keys -t 0 "vim $editorFiles" Enter
         tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
         tmux select-pane -t 0
-        tmux attach-session -t $SESSION:$windowTwo
+        tmux attach-session -t $SESSION:$windowTwoName
 
     else
-        echo "The tmux session '$sessionName' is already running..."
+        echo "The tmux session '${sessionName}' is already running..."
     fi
 }
 
