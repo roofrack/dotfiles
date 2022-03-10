@@ -242,10 +242,11 @@ roofrack () {
 # -------------------------------------------------------------------
 runserver() {
 
-    # Enter any app.js file names here.
-    possibleAppNames="app.js|index.js|another.js"
+    unset appServer
+    appServer=$1
 
     # Test to see if a file was entered with the function call OR if it even exits.
+    possibleAppNames="app.js|index.js|another.js"
     while [[ ! $1 =~ $possibleAppNames ]] || [[ ! -f $1 ]]; do
         read -p "Enter an existing file name... ie app.js: "
         if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
@@ -267,7 +268,6 @@ runserver() {
     # Test to check if browser-sync is already running. If it is, do not restart.
     browserSyncExists=$(ps a | grep [b]rowser-sync)
     # Using square brackets on the [b] prevents the 'ps a' command from returning its own process.
-
     if [[ -z $browserSyncExists ]]; then
         echo "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
