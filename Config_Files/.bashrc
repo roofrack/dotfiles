@@ -5,7 +5,7 @@
 # May need to change the resolution in a VM
 # Use xrandr to see what the current resolution is
 # Then uncomment this command to set the resolution...
-# xrandr --output Virtual-1 --mode 1360x768 
+# xrandr --output Virtual-1 --mode 1360x768
 
 
 export EDITOR='vim'
@@ -177,9 +177,9 @@ source /usr/share/git/completion/git-completion.bash
 # tmux simple set up
 tm-setup () {
 
-    if [[ -z $(pgrep tmux) ]]; then
+    sessionName="express"
 
-        sessionName="expressApp"
+    if [[ -z $(pgrep tmux) ]]; then
 
         # Assigning a few variables
         windowOneName="server"
@@ -191,9 +191,9 @@ tm-setup () {
         cd $directory
 
         tmux new-session -d -s $sessionName -n $windowOneName
-        # Create a new tmux session. The -d prevents attaching to the session right 
-        # away so the script will continue to run. -s names the session. The newly 
-        # created session opens a window and the -n allows you to name it 'server'. 
+        # Create a new tmux session. The -d prevents attaching to the session right
+        # away so the script will continue to run. -s names the session. The newly
+        # created session opens a window and the -n allows you to name it 'server'.
         # Can also use '-c + directory' to put you in the desired directory.
 
         tmux send-keys -t $sessionName:=$windowOneName "runserver $serverFile" Enter
@@ -203,7 +203,9 @@ tm-setup () {
         # create a second window and attach to it (if we use -d then it would not attach).
         # Name it 'editor' and cd into 'coding-practice/javascript'
 
-        tmux  split-window -v -t $session:=$windowTwoName.0
+        # tmux  split-window -v -t $session:=$windowTwoName.0
+        # the above may not work using -t but works with out it
+        tmux  split-window -v
         tmux resize-pane -t 0 -D 5
         # split windowTwo into two panes and resize the first pane (pane 0) down a bit
         # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
@@ -238,25 +240,16 @@ roofrack () {
 
 # Function to start both node[mon] server and the browsersync server...
 # -------------------------------------------------------------------
-# - Need a test to see if browser-sync is running and if it is don't restart it.
-# - Only restart node[mon]. The 'z' tests to see if string or variable is zero or empty and the 'n' tests for NOT empty.
-# - From google I figured that you need the [ ] around the first character in the grep
-#   statement to work. This prevents the 'ps a' command from returning the actual grep statement as
-#   a process so only the browser-sync process shows up. Otherwise if browser-sync wasnt running this would still test to true.
-# - This function will work in any directory. Just need to supply the server app file name as an argument.
-# - Note: had to unset the serverFile variable because when starting the servers in another dir it would
-#   remember and use a wrong value which threw an error. So hopefully this will work consistently.
-
 runserver() {
 
-    unset ${serverFile}
-    serverFile=$1
+    unset ${appServer}
+    appServer=$1
 
     # test to see if a server file was entered with the function call
-    if [[ -z $serverFile ]]; then
+    if [[ -z $appServer ]]; then
         while read -p "Please enter the filename to use for the server: "; do
             if [[ -n $REPLY ]] && [[ -f $REPLY ]]; then
-                serverFile=$REPLY
+                appServer=$REPLY
                 break
             else
                 echo Must enter the correct file name
@@ -265,13 +258,35 @@ runserver() {
         done
     fi
 
-    # either use nodemon or node to run server
-    # need to add an additional test here for a nodemon global installation
-    if [[ -f ./package.json ]] && [[ -n $(grep "nodemon\":" ./package.json) ]]; then
-        useServer="nodemon"
+    # Test to check if nodemon is installed locally or globally. If not, use node.
+    if [[ -f "node_modules/.bin/nodemon" ]] || [[ -f "/usr/bin/nodemon" ]]; then
+        startNode="./node_modules/.bin/nodemon"
     else
-        useServer="node"
+        startNode="node"
     fi
+
+    echo "-----------------------------------------------------
+    echo "starting the server... $appServer with $startNode"
+    echo "-----------------------------------------------------
+    # Test to check if browser-sync is already running. If it is, do not restart.
+    browserSyncExists=$(ps a | grep [b]rowser-sync)
+    # Using square brackets on the [b] prevents the 'ps a' command from returning its own process.
+
+    if [[ -z $browserSyncExists ]]; then
+        echo "starting browser-sync"
+        ./node_modules/.bin/browser-sync start --config $HOME/bs-config.js &
+    else
+        echo "(browser-sync is already running in the background)"
+    fi
+
+    #--------------------
+    $startNode $appServer
+    #--------------------
+}
+
+
+
+
 
     # start the server(s). If browsersync is already running in the background '&' do NOT restart it.
     echo
@@ -279,10 +294,12 @@ runserver() {
     bsync=$(ps a | grep [/]usr/bin/browser-sync)
     if [[ -z $bsync ]]; then
         echo "starting Browser-Sync... "
-        browser-sync start --config $HOME/bs-config.js &
+        # browser-sync start --config $HOME/bs-config.js &
+        # if browser-sync is install locally (npm i browser-sync --save-dev) then run it this way...
+        npm run browser-sync
     else
         echo "(Browser-Sync is already running in the background)"
     fi
-    $useServer $serverFile
+    $useServer $appServer
 
 }
