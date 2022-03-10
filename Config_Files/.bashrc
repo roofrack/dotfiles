@@ -246,7 +246,7 @@ runserver() {
     appServer=$1
 
     # test to see if a server file was entered with the function call
-    if [[ -z $appServer ]]; then
+    if [[ -z $appServer ]] || [[ ! -f $appServer ]]; then
         while read -p "Please enter the filename to use for the server: "; do
             if [[ -n $REPLY ]] && [[ -f $REPLY ]]; then
                 appServer=$REPLY
