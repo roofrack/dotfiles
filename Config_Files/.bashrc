@@ -242,21 +242,17 @@ roofrack () {
 # -------------------------------------------------------------------
 runserver() {
 
-    unset ${appServer}
-    appServer=$1
+    # Enter any app.js file names here.
+    possibleAppNames="app.js|index.js|another.js"
 
-    # test to see if a server file was entered with the function call
-    if [[ -z $appServer ]] || [[ ! -f $appServer ]]; then
-        while read -p "Please enter the filename to use for the server: "; do
-            if [[ -n $REPLY ]] && [[ -f $REPLY ]]; then
-                appServer=$REPLY
-                break
-            else
-                echo Must enter the correct file name
-                continue
-            fi
-        done
-    fi
+    # Test to see if a file was entered with the function call OR if it even exits.
+    while [[ ! $1 =~ $possibleAppNames ]] || [[ ! -f $1 ]]; do
+        read -p "Enter an existing file name... ie app.js: "
+        if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
+            appServer=$REPLY
+            break
+        fi
+    done
 
     # Test to check if nodemon is installed locally or globally. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]] || [[ -f "/usr/bin/nodemon" ]]; then
@@ -264,10 +260,10 @@ runserver() {
     else
         startNode="node"
     fi
-
     echo "-------------------"
     echo "starting the server... $appServer with $startNode"
     echo "-------------------"
+
     # Test to check if browser-sync is already running. If it is, do not restart.
     browserSyncExists=$(ps a | grep [b]rowser-sync)
     # Using square brackets on the [b] prevents the 'ps a' command from returning its own process.
