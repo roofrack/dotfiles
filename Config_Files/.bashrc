@@ -273,12 +273,13 @@ runserver() {
     # Using square brackets on the [b] prevents the 'ps a' command from returning its own process.
 
     if [[ -z $browserSyncExists ]]; then
-        echo "starting browser-sync..."
-        echo "---------------------"
+        echo "starting browser-sync as a background process..."
+        echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
+        echo "----------------------------------------------------------"
         ./node_modules/.bin/browser-sync start --config $HOME/bs-config.js &
     else
-        echo "(browser-sync is already running in the background)"
-        echo "---------------------------------------------------"
+        echo "browser-sync is already running in the background"
+        echo "-------------------------------------------------"
     fi
 
     #--------------------
