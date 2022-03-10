@@ -255,7 +255,7 @@ runserver() {
         fi
     done
 
-    # Test to check if nodemon is installed locally or globally. If not, use node.
+    # Test to check if nodemon is installed either locally or globally. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]] || [[ -f "/usr/bin/nodemon" ]]; then
         startNode="./node_modules/.bin/nodemon"
     else
@@ -266,8 +266,7 @@ runserver() {
     echo "-------------------"
 
     # Test to check if browser-sync is already running. If it is, do not restart.
-    browserSyncExists=$(ps a | grep [b]rowser-sync)
-    # Using square brackets on the [b] prevents the 'ps a' command from returning its own process.
+    browserSyncExists=$(ps a | grep [b]rowser-sync)     # (square brackets prevent 'ps a' from returning its own ps)
     if [[ -z $browserSyncExists ]]; then
         echo "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
