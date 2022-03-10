@@ -265,19 +265,20 @@ runserver() {
         startNode="node"
     fi
 
-    echo "----------------------"
+    echo "-------------------"
     echo "starting the server... $appServer with $startNode"
-    echo "----------------------"
+    echo "-------------------"
     # Test to check if browser-sync is already running. If it is, do not restart.
     browserSyncExists=$(ps a | grep [b]rowser-sync)
     # Using square brackets on the [b] prevents the 'ps a' command from returning its own process.
 
     if [[ -z $browserSyncExists ]]; then
-        echo "starting browser-sync"
+        echo "starting browser-sync..."
         echo "---------------------"
         ./node_modules/.bin/browser-sync start --config $HOME/bs-config.js &
     else
         echo "(browser-sync is already running in the background)"
+        echo "---------------------------------------------------"
     fi
 
     #--------------------
