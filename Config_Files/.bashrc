@@ -185,7 +185,7 @@ tm-setup () {
         windowOneName="server"
         windowTwoName="editor"
         serverFile="app.js"
-        editorFiles="app.js views/index.js"
+        editorFiles="app.js views/index.ejs"
         directory="$HOME/coding-practice/javascript"
 
         cd $directory
@@ -243,6 +243,7 @@ roofrack () {
 # ---------------------------------------------------------------------------------------
 runserver() {
     appServer=$1
+    bar=$(printf '%*s' "67" | tr " " "-")
 
     # Test if a file was entered with the function call OR if it even exits.
     possibleAppNames="app.js|index.js|another.js"
@@ -254,20 +255,16 @@ runserver() {
     # Test to check if browser-sync is already running. If it is, do not restart
     browserSyncExists=$(ps a | grep [b]rowser-sync) # [] prevents 'ps a' returning twice
     if [[ -z $browserSyncExists ]]; then
-        echo "---------------------------------------------------------------------------"
-        echo "starting browser-sync as a background process..."
+        echo $bar; echo "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
         ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
-        echo "---------------------------------------------------------------------------"
-        echo "browser-sync is already running in the background..."; fi
+        echo $bar; echo "browser-sync is already running in the background..."; fi
 
     # Test to check if nodemon is installed. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
-    echo "---------------------------------------------------------------------------"
-    echo "starting the server... $appServer with $startNode"
-    echo "---------------------------------------------------------------------------"
+    echo $bar; echo "starting the server... $appServer with $startNode"; echo $bar
     $startNode $appServer
 }
