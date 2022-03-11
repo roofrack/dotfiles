@@ -260,8 +260,7 @@ runserver() {
         ./node_modules/.bin/browser-sync start --config $HOME/bs-config.js &
     else
         echo "-------------------------------------------------"
-        echo "browser-sync is already running in the background..."
-    fi
+        echo "browser-sync is already running in the background..."; fi
 
     # Test to check if nodemon is installed either locally or globally. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
@@ -269,6 +268,5 @@ runserver() {
     else startNode="node"; fi
     echo "-------------------"
     echo "starting the server... $appServer with $startNode"
-    echo "-------------------"
-    $startNode $appServer
+    echo "-------------------"; $startNode $appServer
 }
