@@ -266,8 +266,8 @@ runserver() {
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
-        echo "---------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------"
     echo "starting the server... $appServer with $startNode"
-        echo "---------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------"
     $startNode $appServer
 }
