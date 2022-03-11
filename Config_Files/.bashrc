@@ -251,33 +251,27 @@ runserver() {
         read -p "Enter an existing file name... ie app.js: "
         if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
             appServer=$REPLY
-            break
-        fi
-    done
-
-    # Test to check if nodemon is installed either locally or globally. If not, use node.
-    if [[ -f "node_modules/.bin/nodemon" ]] || [[ -f "/usr/bin/nodemon" ]]; then
-        startNode="./node_modules/.bin/nodemon"
-    else
-        startNode="node"
-    fi
-    echo "-------------------"
-    echo "starting the server... $appServer with $startNode"
-    echo "-------------------"
+            break; fi; done
 
     # Test to check if browser-sync is already running. If it is, do not restart.
     browserSyncExists=$(ps a | grep [b]rowser-sync)     # (square brackets prevent 'ps a' from returning its own ps)
     if [[ -z $browserSyncExists ]]; then
+        echo "---------------------------------------------"
         echo "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
-        echo "----------------------------------------------------------"
         ./node_modules/.bin/browser-sync start --config $HOME/bs-config.js &
     else
-        echo "browser-sync is already running in the background"
         echo "-------------------------------------------------"
+        echo "browser-sync is already running in the background..."
     fi
 
-    #====================
+    # Test to check if nodemon is installed either locally or globally. If not, use node.
+    if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
+    elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
+    else startNode="node"; fi
+
+    echo "-------------------"
+    echo "starting the server... $appServer with $startNode"
+    echo "-------------------"
     $startNode $appServer
-    #====================
 }
