@@ -238,11 +238,9 @@ roofrack () {
     cd -
 }
 
-# Function to start both node[mon] server and the browsersync server...
-# -------------------------------------------------------------------
+# Function to start a server app using both node[mon] and browser-sync
+# --------------------------------------------------------------------
 runserver() {
-
-    unset appServer
     appServer=$1
 
     # Test to see if a file was entered with the function call OR if it even exits.
@@ -269,7 +267,6 @@ runserver() {
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
-
     echo "-------------------"
     echo "starting the server... $appServer with $startNode"
     echo "-------------------"
