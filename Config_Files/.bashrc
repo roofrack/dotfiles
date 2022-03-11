@@ -238,35 +238,36 @@ roofrack () {
     cd -
 }
 
-# Function to start a server app using both node[mon] and browser-sync
-# --------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
+# Function to start a server app using both node[mon] and browser-sync                  |
+# ---------------------------------------------------------------------------------------
 runserver() {
     appServer=$1
 
-    # Test to see if a file was entered with the function call OR if it even exits.
+    # Test if a file was entered with the function call OR if it even exits.
     possibleAppNames="app.js|index.js|another.js"
     while [[ ! $1 =~ $possibleAppNames ]] || [[ ! -f $1 ]]; do
         read -p "Enter an existing file name... ie app.js: "
         if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
-            appServer=$REPLY
-            break; fi; done
+            appServer=$REPLY; break; fi; done
 
-    # Test to check if browser-sync is already running. If it is, do not restart.
-    browserSyncExists=$(ps a | grep [b]rowser-sync)     # (square brackets prevent 'ps a' from returning its own ps)
+    # Test to check if browser-sync is already running. If it is, do not restart
+    browserSyncExists=$(ps a | grep [b]rowser-sync) # [] prevents 'ps a' returning twice
     if [[ -z $browserSyncExists ]]; then
-        echo "---------------------------------------------"
+        echo "---------------------------------------------------------------------------"
         echo "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
-        ./node_modules/.bin/browser-sync start --config $HOME/bs-config.js &
+        ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
-        echo "-------------------------------------------------"
+        echo "---------------------------------------------------------------------------"
         echo "browser-sync is already running in the background..."; fi
 
-    # Test to check if nodemon is installed either locally or globally. If not, use node.
+    # Test to check if nodemon is installed. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
-    echo "-------------------"
+        echo "---------------------------------------------------------------------------"
     echo "starting the server... $appServer with $startNode"
-    echo "-------------------"; $startNode $appServer
+        echo "---------------------------------------------------------------------------"
+    $startNode $appServer
 }
