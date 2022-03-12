@@ -243,7 +243,7 @@ roofrack () {
 # ---------------------------------------------------------------------------------------
 runserver() {
     appServer=$1
-    bar=$(printf '%*s' "67" | tr " " "-")
+    linebar=$(printf '%*s' "67" | tr " " "-")
 
     # Test if a file was entered with the function call OR if it even exits.
     possibleAppNames="app.js|index.js|another.js"
@@ -255,16 +255,16 @@ runserver() {
     # Test to check if browser-sync is already running. If it is, do not restart
     browserSyncExists=$(ps a | grep [b]rowser-sync) # [] prevents 'ps a' returning twice
     if [[ -z $browserSyncExists ]]; then
-        echo $bar; echo "starting browser-sync as a background process..."
+        printf "%s\n"  $linebaro "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
         ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
-        echo $bar; echo "browser-sync is already running in the background..."; fi
+        printf "%s\n" $linebar "browser-sync is already running in the background..."; fi
 
     # Test to check if nodemon is installed. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
-    echo $bar; echo "starting the server... $appServer with $startNode"; echo $bar
+    printf "%s\n" $linebar "starting the server... $appServer with $startNode" $linebar
     $startNode $appServer
 }
