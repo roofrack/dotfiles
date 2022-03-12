@@ -242,7 +242,7 @@ roofrack () {
 # Function to start a server app using both node[mon] and browser-sync                  |
 # ---------------------------------------------------------------------------------------
 runserver() {
-    appServer=$1
+    appServerFile=$1
     linebar=$(printf '%*s' "67" | tr " " "-")
 
     # Test if a file was entered with the function call OR if it even exits.
@@ -250,7 +250,7 @@ runserver() {
     while [[ ! $1 =~ $possibleAppNames ]] || [[ ! -f $1 ]]; do
         read -p "Enter an existing file name... ie app.js: "
         if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
-            appServer=$REPLY; break; fi; done
+            appServerFile=$REPLY; break; fi; done
 
     # Test to check if browser-sync is already running. If it is, do not restart.
     browserSyncExists=$(ps a | grep [b]rowser-sync) # [] prevents 'ps a' returning 2X
@@ -265,6 +265,6 @@ runserver() {
     if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
-    printf "%s\n" $linebar "starting the server... $appServer with $startNode" $linebar
-    $startNode $appServer
+    printf "%s\n" $linebar "starting the server... $appServerFile with $startNode" $linebar
+    $startNode $appServerFile
 }
