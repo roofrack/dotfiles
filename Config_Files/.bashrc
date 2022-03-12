@@ -252,10 +252,10 @@ runserver() {
         if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
             appServer=$REPLY; break; fi; done
 
-    # Test to check if browser-sync is already running. If it is, do not restart
-    browserSyncExists=$(ps a | grep [b]rowser-sync) # [] prevents 'ps a' returning twice
+    # Test to check if browser-sync is already running. If it is, do not restart.
+    browserSyncExists=$(ps a | grep [b]rowser-sync) # [] prevents 'ps a' returning 2X
     if [[ -z $browserSyncExists ]]; then
-        printf "%s\n"  $linebaro "starting browser-sync as a background process..."
+        printf "%s\n"  $linebar "starting browser-sync as a background process..."
         echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
         ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
