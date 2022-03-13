@@ -203,10 +203,10 @@ tmExpressSetup () {
     fi
 }
 tmShellSetup () {
-    sessionName="sh-script"
+    sessionName="script"
     if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
 
-        windowOneName="sh-script"
+        windowOneName="editor"
         editFile="play.sh"
         directory="$HOME/coding-practice/shell"
 
@@ -226,29 +226,6 @@ tmShellSetup () {
         echo "The tmux session '${sessionName}' is already running..."
     fi
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # -----------------------------------
 # Function to condense git commands |
