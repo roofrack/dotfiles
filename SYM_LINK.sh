@@ -7,9 +7,6 @@
 #------------------------------------------------------------------<robaylard@gmail.com>--
 printf "\n"; tput civis
 
-
-
-
 DIR_DOTFILES="$HOME/dotfiles/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
@@ -17,16 +14,13 @@ FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
 total_symlinks="$(( $(ls -al $DIR_DOTFILES | wc -l) - 3))"
 count=0
 
-
-
-
 #######################################################################
                                                                       #
 declare -A DIR_BUILD=(                                                #
     [config]=$DIR_CONFIG/i3                                           #
     [i3status.conf]=$DIR_CONFIG/i3status                              #
     [i3blocks.conf]=$DIR_CONFIG/i3blocks                              #
-    [scripts]=$DIR_CONFIG/i3blocks                                    #
+    [i3blocks_scripts]=$DIR_CONFIG/i3blocks                           #
     [wallpaper]=$DIR_PICS/                                            #
     [lock.sh]=$DIR_CONFIG/i3lock/                                     #
     [terminalrc]=$DIR_CONFIG/xfce4/terminal                           #
@@ -41,9 +35,6 @@ declare -A DIR_BUILD=(                                                #
 )                                                                     #
                                                                       #
 #######################################################################
-
-
-
 
 #=========================================================================================
 # Function takes two arguments. $1 a message and $2 how many items will be iterated.
@@ -128,5 +119,9 @@ for file in $FILES_SYMLINK; do
         done
     fi
 done
+# Note: For i3block scripts to run using an enviromental variable...
+# If you name it '.config/i3blocks/i3blocks_scripts' it wont work for some reason. It only works if named /scripts
+# rather then /i3blocks_scripts. There must be a way of adding the path to i3 config file or something.
+mv $HOME/.config/i3blocks/i3blocks_scripts $HOME/.config/i3blocks/scripts
 tput cnorm          # Make prompt visible.
 #=========================================================================================

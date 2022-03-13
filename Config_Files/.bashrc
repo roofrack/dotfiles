@@ -29,8 +29,7 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # this is where the i3blocks scripts are put
-SCRIPT_DIR="$HOME/.config/i3blocks/scripts/"
-export SCRIPT_DIR
+export SCRIPT_DIR='$HOME/.config/i3blocks/scripts/'
 
 # This adds auto completion for git directories
 source /usr/share/git/completion/git-completion.bash
