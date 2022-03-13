@@ -113,10 +113,8 @@ alias vrc='vim ~/.vimrc'
 # on the command line. NOTE: If re=running this command and you get an error
 # may need to do... [ jobs fg %job# then Ctrl c ] to kill the process.
 # alias runserver='browser-sync start --config ~/bs-config.js & nodemon server.js'
-alias bob='cd ~/coding-practice/nodejs-express-practice/netninja/nodeCrashCourse/serverExpress'
-alias flex='cd ~/coding-practice/css-practice/mdn/flexbox'
+alias bob="cd ~/coding-practice/javascript/express/"
 
-#alias browser='browser-sync start --config bs-config.js'
 #alias venv='source venv/bin/activate'
 
 alias his='history 20'
@@ -146,9 +144,7 @@ alias tka='tmux kill-server'
 #-------------------------
 
 # PS1='[\u@\h \W]\$ '
-# OR...
 # PS1="\[\033[1;33m\][\u@\h\[\033[1;35m\] \w \[\033[1;33m\]]\[\033[1;35m\]\$\[\033[0m\]"
-# OR...
 # PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
 PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
 export PS1
@@ -168,7 +164,7 @@ tmExpressSetup () {
         windowTwoName="editor"
         serverFile="app.js"
         editFile="app.js views/index.ejs"
-        directory="$HOME/coding-practice/javascript"
+        directory="$HOME/coding-practice/javascript/express/"
 
         cd "$directory"
 
@@ -185,11 +181,9 @@ tmExpressSetup () {
         # create a second window and attach to it (if we use -d then it would not attach).
         # Name it 'editor'
 
-        # tmux  split-window -v -t $session:=$windowTwoName.0
-        # the above may not work using -t but works with out it
-        tmux  split-window -v
-        tmux resize-pane -t 0 -D 5
-        # split windowTwo into two panes and resize the first pane (pane 0) down a bit
+        tmux  split-window -v -t "$sessionName":"$windowTwoName"
+        tmux resize-pane -t "$sessionName":"$windowTwoName".0 -D 5
+        # vert split windowTwo into two panes and resize the first pane (pane 0) down a bit
         # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
         # The target -t format is... sessionName:windowName.paneNumber
 
@@ -208,7 +202,7 @@ tmShellSetup () {
 
         windowOneName="editor"
         editFile="play.sh"
-        directory="$HOME/coding-practice/shell"
+        directory="$HOME/coding-practice/shell/"
 
         cd "$directory"
 
@@ -264,8 +258,8 @@ runserver() {
     # browserSyncExists=$(ps a | grep "[b]rowser-sync") # [] prevents 'ps a' returning 2X
     browserSyncExists=$(pgrep -fl "[b]rowser-sync") # [] prevents 'ps a' returning 2X
     if [[ -z $browserSyncExists ]]; then
-        printf "%s\n" " $linebar" "starting browser-sync as a background process..."
-        echo "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
+        printf "%s\n" "$linebar" "starting browser-sync as a background process..." \
+        "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
         ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
         printf "%s\n" "$linebar" "browser-sync already running in the background..."; fi
@@ -275,6 +269,5 @@ runserver() {
     elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
     else startNode="node"; fi
     printf "%s\n" "$linebar" "starting server...$appServerFile with $startNode" "$linebar"
-
     "$startNode" "$appServerFile"
 }

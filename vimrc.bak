@@ -12,8 +12,8 @@ set encoding=utf-8              "Need this for vim-airline to work.
 set t_Co=256
 set laststatus=2
 "set modelines=1                "Check for commands on last line
-" set number                      "Line numbers are good
-set relativenumber
+set number                      "Line numbers are good
+" set relativenumber
 set history=1000                "Store lots of :cmdline history
 "set showcmd                    "Show incomplete cmds down the bottom
 " set cursorline                 "Turn on line highlighting
@@ -31,6 +31,12 @@ set nowrap
 set noshowmode                  "stops insert message appearinge
 set background=dark             "Need this on for tmux to not change the vim color-scheme
 
+
+" command to clear all registers
+" just type :WipeReg
+command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+
+
 "This prevents html lines from wrapping when window is shrunk
 augroup html_nowrap
     autocmd!
@@ -38,9 +44,10 @@ augroup html_nowrap
 augroup END
 
 
-
 "The line below turns off the white highlighting line
 " hi CursorLine term=bold cterm=bold guibg=Grey40
+" hi CursorLineNr    term=bold cterm=bold ctermfg=012 gui=bold
+
 
 " let mapleader=","
 let mapleader=","
@@ -99,7 +106,8 @@ Plug 'sheerun/vim-polyglot'
 " Plug 'briancollins/vim-jst'
 " Plug 'nikvdp/ejs-syntax'
 " Plug 'leafOfTree/vim-vue'
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
+" Plug 'chrisbra/Colorizer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
@@ -140,8 +148,12 @@ call plug#end()
 "------------------------plugin settings----------------------------------------
 
 "flazz/vim-colorschemes_settings ...
-" colorscheme wombat256
+colorscheme wombat256
 
+" let g:colorizer_auto_color = 1
+
+" this will make vim transparency work if using not the default colorscheme
+hi Normal guibg=NONE ctermbg=NONE
 
 "vim-airline_settings ...
 " ---------------------------------------------------------
@@ -155,7 +167,7 @@ let g:airline_theme='badwolf'
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#buffer_nr_show = 0
 "let g:airline_inactive_collapse=1
-"let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 
 " when i turn this on it will screw airline up (laptop computer works ok)
 " When its off the fonts don't look as nice
@@ -168,15 +180,16 @@ endif
 let g:airline_symbols.colnr = ' ℅:'
 
 "Syntastc settings ...
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+" ---------------------------------------------------------
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 
 "NERDTree_settings ...
@@ -234,15 +247,22 @@ let g:user_emmet_mode='a'
 let g:coc_global_extensions = [
     \'coc-json',
     \'coc-tsserver',
+    \'coc-highlight',
+    \'coc-eslint',
+    \'coc-prettier'
     \ ]
-" " Use :Prettier to format current buffer
+" Use :Prettier to format current buffer
 " command! -narg=0 Prettier :CocCommand prettier.formatFile
-" " use tab for trigger
+
+" use tab for trigger
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
+"coc-highlight extension
+set termguicolors               " Needed this for coc-highlight to work for showing hex color preview
 
-
+highlight CocErrorSign guifg=#d1666a    " This is for better eslint error color. Hard to look at otherwise.
+highlight CocUnusedHighlight guibg=#2d332f  " A nicer color for unused variables in javascript
 
 " Ultisnips plugin settings...
 " ---------------------------------------------------------
@@ -400,7 +420,7 @@ nnoremap <Leader><Leader> <C-^>
 
 iab pritn print
 iab blink <script src='http://127.0.0.1:9001/js/socket.js'></script>
-
+iab cl console.log
 
 
 
