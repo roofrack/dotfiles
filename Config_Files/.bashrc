@@ -19,7 +19,7 @@ export EDITOR='vim'
 # Press <Esc + s> to add sudo to beginning of line (insert mode)
 bind '"\es":"\C-usudo"'
 
-# color for man pages
+# Color for man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -28,8 +28,8 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# this is where the i3blocks scripts are put
-export SCRIPT_DIR='$HOME/.config/i3blocks/scripts/'
+# I would like to use this path but wont work.
+# export SCRIPT_DIR='$HOME/.config/i3blocks/i3blocks_scripts/'
 
 # This adds auto completion for git directories
 source /usr/share/git/completion/git-completion.bash
@@ -210,10 +210,9 @@ tmShellSetup () {
         tmux resize-pane -t 0 -D 5
         tmux send-keys -t "$sessionName":"$windowName".0 "vim $editFile" Enter
         tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
-        tmux send-keys -t 0 ":nnoremap <leader>sc :w<cr> :VtrSendCommandToRunner shellcheck $editFile<cr>" Enter
-        # Robert this works great. You remapped the Vtr key-binding so you
-        # don't have to manual save each time before sending the file to
-        # the shellcheck program for linting.
+        # tmux send-keys -t 0 ":nnoremap <leader>sc :w<cr> :VtrSendCommandToRunner shellcheck $editFile<cr>" Enter
+        # I dont think you want to remap this robert or you cant clear (flush) the runner command.
+        tmux send-keys -t 0 ":VtrSendCommandToRunner shellcheck $editFile" Enter
         tmux attach-session -t $sessionName:$windowOneName.0
     else
         echo "The tmux session '${sessionName}' is already running..."

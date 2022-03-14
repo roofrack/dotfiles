@@ -369,8 +369,9 @@ set $ubgcolor    #ff0000
 bar {
         # status_command i3status --config $HOME/.config/i3status/i3status.conf
         # status_command i3status --config /etc/i3status.conf
+        status_command SCRIPT_DIR=~/.config/i3blocks/i3blocks_scripts i3blocks
         status_command i3blocks -c $HOME/.config/i3blocks/i3blocks.conf
-        # status_command MYPATH='$HOME/.config/i3blocks/scripts' i3blocks
+
 
 
         position top

@@ -119,9 +119,5 @@ for file in $FILES_SYMLINK; do
         done
     fi
 done
-# Note: For i3block scripts to run using an enviromental variable...
-# If you name it '.config/i3blocks/i3blocks_scripts' it wont work for some reason. It only works if named /scripts
-# rather then /i3blocks_scripts. There must be a way of adding the path to i3 config file or something.
-mv $HOME/.config/i3blocks/i3blocks_scripts $HOME/.config/i3blocks/scripts
 tput cnorm          # Make prompt visible.
 #=========================================================================================
