@@ -186,9 +186,8 @@ tmExpressSetup () {
         # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
         # The target -t format is... sessionName:windowName.paneNumber
 
-        tmux send-keys -t 0 "vim $editFile" Enter
-        tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
-        tmux select-pane -t 0
+        tmux send-keys -t "$sessionName":"$windowTwoName".0 "vim $editFile" Enter
+        tmux send-keys -t "$sessionName":"$windowTwoName".0":VtrAttachToPane 1" Enter
         tmux attach-session -t "$sessionName":"$windowTwoName".0
 
     else
@@ -206,13 +205,13 @@ tmShellSetup () {
         cd "$directory"
 
         tmux new-session -d -s $sessionName -n $windowOneName
-        tmux split-window -v -t 0
-        tmux resize-pane -t 0 -D 5
+        tmux split-window -t "$sessionName":"$windowTwoName" -v
+        tmux resize-pane -t "$sessionName":"$windowTwoName".0 -D 5
         tmux send-keys -t "$sessionName":"$windowName".0 "vim $editFile" Enter
         tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
         # tmux send-keys -t 0 ":nnoremap <leader>sc :w<cr> :VtrSendCommandToRunner shellcheck $editFile<cr>" Enter
         # I dont think you want to remap this robert or you cant clear (flush) the runner command.
-        tmux send-keys -t 0 ":VtrSendCommandToRunner shellcheck $editFile" Enter
+        tmux send-keys -t "$sessionName":"$windowTwoName".0 ":VtrSendCommandToRunner shellcheck $editFile" Enter
         tmux attach-session -t $sessionName:$windowOneName.0
     else
         echo "The tmux session '${sessionName}' is already running..."
