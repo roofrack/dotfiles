@@ -238,7 +238,7 @@ runserver() {
         "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
         ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
-        printf "%s\n" "$linebar" "browser-sync already running in the background..."; fi
+        printf "%s\n" "$LINE_BAR" "browser-sync already running in the background..."; fi
 
     # Test to check if nodemon is installed. If not, use node.
     if [[ -f "node_modules/.bin/nodemon" ]]; then START_NODE="./node_modules/.bin/nodemon"

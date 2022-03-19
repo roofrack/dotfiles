@@ -46,9 +46,9 @@ printf "\nFinished installing packages.\n"
 sleep 2
 
 
-# Building directories and sym-links using SYM_LINK script
+# Building directories and sym-links using the sym_link.sh script
 #=========================================================================================
-printf "\nSetting up directories and Sym-links...\n"
+printf "\nSetting up directories and sym-links...\n"
 sleep 2
 source $HOME/dotfiles/startup_files/sym_link.sh
 
