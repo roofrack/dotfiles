@@ -35,7 +35,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
-#export PATH=$PATH:~/bin/:~/.bin/
+export PATH=$PATH:~/bin/
 
 #---------------------------
 # bash history settings... |

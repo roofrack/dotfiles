@@ -41,7 +41,7 @@ sleep 6; clear; sleep 3
 printf "Running pacman -Syu to make sure system is updated...\n\n"
 sudo pacman -Syu
 printf "\nSelect the 1 3 4 5 options for I3\n\n"
-sudo pacman -S --needed - < $HOME/dotfiles/pkglist.txt
+sudo pacman -S --needed - < $HOME/dotfiles/startup_files/pkglist.txt
 printf "\nFinished installing packages.\n"
 sleep 2
 
@@ -50,7 +50,7 @@ sleep 2
 #=========================================================================================
 printf "\nSetting up directories and Sym-links...\n"
 sleep 2
-source $HOME/dotfiles/bin/sym_link.sh
+source $HOME/dotfiles/startup_files/sym_link.sh
 
 
 # Tmux Plugin Manager (tpm) and tmux plugins

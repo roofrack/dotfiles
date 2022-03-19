@@ -19,9 +19,9 @@
 
  2. In ~ run git clone https://github.com/roofrack/dotfiles.
 
- 3. Run the ___dotfiles/bootstrap_arch.sh___ script which will call the _SYM_LINK.sh_ script.
+ 3. Run the ___dotfiles/startup_files/bootstrap_arch.sh___ script which will call the _sym_link.sh_ script.
 
- 4. The following will be installed from the *~/dotfiles/pkglist.txt* file using pacman.
+ 4. The following will be installed from the *~/dotfiles/startup_files/pkglist.txt* file using pacman.
 
       *  i3 (select 1 3 4 5)
       *  xorg-xinit
