@@ -11,7 +11,7 @@ SESSION_NAME=$(basename "$0" .sh)
 
 if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 
-    tmux new-session -d -s "$SESSION_NAME" -c "$DIRECTORY" -n "$WINDOW_ONE_NAME"
+    tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME" -c "$DIRECTORY"
     tmux split-window -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -v -c "$DIRECTORY"
     tmux resize-window  -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -D 5
     tmux new-window -n "$WINDOW_TWO_NAME" -c "$DIRECTORY"

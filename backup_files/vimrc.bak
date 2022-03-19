@@ -312,6 +312,8 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 " Enter command mode easier ...
 nnoremap ; :
+" Enter the editable command line mode history. This is a really handy mode.
+nnoremap q; q:
 
 
 

@@ -155,18 +155,18 @@ export PS1
 # -----------------------------------
 tmExpressSetup () {
 
+    WINDOW_ONE_NAME="server"
+    WINDOW_TWO_NAME="editor"
+    SERVER_FILE="app.js"
+    EDIT_FILE="app.js views/index.ejs"
+    DIRECTORY="$HOME/coding-practice/javascript/express/"
     SESSION_NAME="express"
+
     # Can do one of three things here but the 3rd one is best I think...
     # if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
-    # if ! tmux list-sessions | grep "$sessionName"; then
+    # if ! tmux list-sessions | grep -q "$sessionName"; then
     if ! tmux has-session -t "$SESSION_NAME"; then
 
-        # Assigning a few variables
-        WINDOW_ONE_NAME="server"
-        WINDOW_TWO_NAME="editor"
-        SERVER_FILE="app.js"
-        EDIT_FILE="app.js views/index.ejs"
-        DIRECTORY="$HOME/coding-practice/javascript/express/"
 
         cd "$DIRECTORY"
 
