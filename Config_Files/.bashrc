@@ -155,66 +155,46 @@ export PS1
 # -----------------------------------
 tmExpressSetup () {
 
-    sessionName="express"
-    if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
+    SESSION_NAME="express"
+    # Can do one of three things here but the 3rd one is best I think...
+    # if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
+    # if ! tmux list-sessions | grep "$sessionName"; then
+    if ! tmux has-session -t "$SESSION_NAME"; then
 
         # Assigning a few variables
-        windowOneName="server"
-        windowTwoName="editor"
-        serverFile="app.js"
-        editFile="app.js views/index.ejs"
-        directory="$HOME/coding-practice/javascript/express/"
+        WINDOW_ONE_NAME="server"
+        WINDOW_TWO_NAME="editor"
+        SERVER_FILE="app.js"
+        EDIT_FILE="app.js views/index.ejs"
+        DIRECTORY="$HOME/coding-practice/javascript/express/"
 
-        cd "$directory"
+        cd "$DIRECTORY"
 
-        tmux new-session -d -s "$sessionName" -n "$windowOneName"
+        tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME"
         # Create a new tmux session. The -d prevents attaching to the session right
         # away so the script will continue to run. -s names the session. The newly
         # created session opens a window and the -n allows you to name it 'server'.
         # Can also use '-c + directory' to put you in the desired directory.
 
-        tmux send-keys -t "$sessionName":"$windowOneName" "runserver $serverFile" Enter
+        tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME" "runserver $SERVER_FILE" Enter
         # starting the server in the target (-t) window named 'server'.
 
-        tmux new-window -t "$sessionName" -n "$windowTwoName"
+        tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME"
         # create a second window and attach to it (if we use -d then it would not attach).
         # Name it 'editor'
 
-        tmux  split-window -v -t "$sessionName":"$windowTwoName"
-        tmux resize-pane -t "$sessionName":"$windowTwoName".0 -D 5
+        tmux  split-window -v -t "$SESSION_NAME":"$WINDOW_TWO_NAME"
+        tmux resize-pane -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 -D 5
         # vert split windowTwo into two panes and resize the first pane (pane 0) down a bit
         # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
         # The target -t format is... sessionName:windowName.paneNumber
 
-        tmux send-keys -t "$sessionName":"$windowTwoName".0 "vim $editFile" Enter
-        tmux send-keys -t "$sessionName":"$windowTwoName".0":VtrAttachToPane 1" Enter
-        tmux attach-session -t "$sessionName":"$windowTwoName".0
+        tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 "vim $EDIT_FILE" Enter
+        tmux send-keys -t "$_SESSION_NAME":"$WINDOW_TWO_NAME".0":VtrAttachToPane 1" Enter
+        tmux attach-session -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0
 
     else
-        echo "The tmux session '${sessionName}' is already running..."
-    fi
-}
-tmShellSetup () {
-    sessionName="script"
-    if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
-
-        windowOneName="editor"
-        editFile="play.sh"
-        directory="$HOME/coding-practice/shell/"
-
-        cd "$directory"
-
-        tmux new-session -d -s $sessionName -n $windowOneName
-        tmux split-window -t "$sessionName":"$windowTwoName" -v
-        tmux resize-pane -t "$sessionName":"$windowTwoName".0 -D 5
-        tmux send-keys -t "$sessionName":"$windowName".0 "vim $editFile" Enter
-        tmux send-keys -t 0 ":VtrAttachToPane 1" Enter
-        # tmux send-keys -t 0 ":nnoremap <leader>sc :w<cr> :VtrSendCommandToRunner shellcheck $editFile<cr>" Enter
-        # I dont think you want to remap this robert or you cant clear (flush) the runner command.
-        tmux send-keys -t "$sessionName":"$windowTwoName".0 ":VtrSendCommandToRunner shellcheck $editFile" Enter
-        tmux attach-session -t $sessionName:$windowOneName.0
-    else
-        echo "The tmux session '${sessionName}' is already running..."
+        echo "The tmux session '${SESSION_NAME}' is already running..."
     fi
 }
 
@@ -241,30 +221,29 @@ roofrack () {
 # Function to start a server app using both node[mon] and browser-sync |
 # ----------------------------------------------------------------------
 runserver() {
-    appServerFile=$1
-    linebar=$(printf '%*s' "67" "" | tr " " "-")
+    APP_SERVER_FILE=$1
+    LINE_BAR=$(printf '%*s' "67" "" | tr " " "-")
 
     # Test if a file was entered with the function call OR if it even exits.
-    possibleAppNames="app.js|index.js|another.js"
-    while [[ ! $1 =~ $possibleAppNames ]] || [[ ! -f $1 ]]; do
+    POSSIBLE_APP_NAMES="app.js|index.js|another.js"
+    while [[ ! $1 =~ "$POSSIBLE_APP_NAMES" ]] || [[ ! -f $1 ]]; do
         read -r -p "Enter an existing file name... ie app.js: "
-        if [[ $REPLY =~ $possibleAppNames ]] && [[ -f $REPLY ]]; then
-            appServerFile=$REPLY; break; fi; done
+        if [[ $REPLY =~ "$POSSIBLE_APP_NAMES" ]] && [[ -f $REPLY ]]; then
+            APP_SERVER_FILE=$REPLY; break; fi; done
 
     # Test to check if browser-sync is already running. If it is, do not restart.
-    # browserSyncExists=$(ps a | grep "[b]rowser-sync") # [] prevents 'ps a' returning 2X
-    browserSyncExists=$(pgrep -fl "[b]rowser-sync") # [] prevents 'ps a' returning 2X
-    if [[ -z $browserSyncExists ]]; then
-        printf "%s\n" "$linebar" "starting browser-sync as a background process..." \
+    BROWSER_SYNC_EXISTS=$(pgrep -fl "[b]rowser-sync") # [ ] prevents 'ps a' returning 2X
+    if [[ -z "$BROWSER_SYNC_EXISTS" ]]; then
+        printf "%s\n" "$LINE_BAR" "starting browser-sync as a background process..." \
         "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
         ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
     else
         printf "%s\n" "$linebar" "browser-sync already running in the background..."; fi
 
     # Test to check if nodemon is installed. If not, use node.
-    if [[ -f "node_modules/.bin/nodemon" ]]; then startNode="./node_modules/.bin/nodemon"
-    elif [[ -f "/usr/bin/nodemon" ]]; then startNode="nodemon"
-    else startNode="node"; fi
-    printf "%s\n" "$linebar" "starting server...$appServerFile with $startNode" "$linebar"
-    "$startNode" "$appServerFile"
+    if [[ -f "node_modules/.bin/nodemon" ]]; then START_NODE="./node_modules/.bin/nodemon"
+    elif [[ -f "/usr/bin/nodemon" ]]; then START_NODE="nodemon"
+    else START_NODE="node"; fi
+    printf "%s\n" "$LINE_BAR" "starting server...$APP_SERVER_FILE with $START_NODE" "$LINE_BAR"
+    "$START_NODE" "$APP_SERVER_FILE"
 }
