@@ -165,7 +165,7 @@ bindsym $mod+a focus parent
 # We use variables to avoid repeating the names in multiple places.
 
 set $browser "1:"
-# set $terminal "2: "
+# set $terminal "2:"
 set $terminal "2:"
 # set $ws3 "3:"
 # set $ws3 "3:"
