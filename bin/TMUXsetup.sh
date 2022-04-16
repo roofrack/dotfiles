@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Just enter yer start file, any other send-keys commands specific for this development
-# enviroment and bob's yer uncle...
+# enviroment (comment out or comment in any) and bob's yer uncle...
 #----------------------------------------------------------------------------------
 ENTER_FILE_PATH=""
 #----------------------------------------------------------------------------------
