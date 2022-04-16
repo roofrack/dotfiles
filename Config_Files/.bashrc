@@ -223,16 +223,16 @@ roofrack () {
 runserver() {
     APP_SERVER_FILE=$1
     LINE_BAR=$(printf '%*s' "67" "" | tr " " "-")
+    POSSIBLE_APP_NAMES="app.js|index.js|another.js"
+    BROWSER_SYNC_EXISTS=$(pgrep -fl "[b]rowser-sync") # [ ] prevents 'ps a' returning 2X
 
     # Test if a file was entered with the function call OR if it even exits.
-    POSSIBLE_APP_NAMES="app.js|index.js|another.js"
     while [[ ! $1 =~ "$POSSIBLE_APP_NAMES" ]] || [[ ! -f $1 ]]; do
         read -r -p "Enter an existing file name... ie app.js: "
         if [[ $REPLY =~ "$POSSIBLE_APP_NAMES" ]] && [[ -f $REPLY ]]; then
             APP_SERVER_FILE=$REPLY; break; fi; done
 
     # Test to check if browser-sync is already running. If it is, do not restart.
-    BROWSER_SYNC_EXISTS=$(pgrep -fl "[b]rowser-sync") # [ ] prevents 'ps a' returning 2X
     if [[ -z "$BROWSER_SYNC_EXISTS" ]]; then
         printf "%s\n" "$LINE_BAR" "starting browser-sync as a background process..." \
         "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
