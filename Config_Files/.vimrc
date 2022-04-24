@@ -94,6 +94,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'jiangmiao/auto-pairs'
 "Plug 'itchyny/lightline.vim'
 "Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
@@ -101,6 +102,8 @@ Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 " Plug 'pangloss/vim-javascript'
 Plug 'sheerun/vim-polyglot'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " Plug 'eslint/eslint'
 " Plug 'vim-syntastic/syntastic'
 " Plug 'briancollins/vim-jst'
@@ -140,10 +143,6 @@ call plug#end()
 "Plugin 'rust-lang/rust.vim'
 "Plugin 'ternjs/tern_for_vim'
 
-"Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
 
 "------------------------plugin settings----------------------------------------
 
@@ -267,15 +266,19 @@ highlight CocUnusedHighlight guibg=#2d332f  " A nicer color for unused variables
 " Ultisnips plugin settings...
 " ---------------------------------------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
+" Settings for editing your snippets
+let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.vim/customUltiSnips"
+let g:UltiSnipsEditSplit="vertical"
+nnoremap <leader>eu :UltiSnipsEdit<cr>
 
-
-
+" Choose which directory(s) to load snippets from
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "customUltiSnips"]
+" This one is for loading ONLY the custom snippets
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/customUltiSnips']
 
 "===============================================================================
 "                                                                              =

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Just enter yer EDIT_FILE path/file_name  & any other send-keys commands specifi
-# for this development enviroment (toggle comments on/off) and bob's yer uncle...
+# Just enter yer EDIT_FILE path/file_name  & any other send-keys commands specific
+# for this development environment (toggle comments on/off) and bob's yer uncle...
 #----------------------------------------------------------------------------------
 EDIT_FILE="$HOME/coding-practice/"
 #----------------------------------------------------------------------------------
@@ -18,12 +18,17 @@ if ! tmux has-session -t "$SESSION_NAME"; then
     tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME" -c "$DIRECTORY"
     tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 "vim $EDIT_FILE" Enter
     tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 ":VtrAttachToPane 1" Enter
+    
     # tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 ":nnoremap <leader>sc :w<cr> \
     #    :VtrSendCommandToRunner shellcheck $EDIT_FILE<cr>" Enter
+
     # tmux send-keys -t "$SESSION_NAME" "if [[ ! -f ${DIRECTORY}/.eslintrc.js ]]; then \
     #     ln -s ~/coding-practice/javascript/.eslintrc.js; fi" Enter
+
     tmux send-keys -t "$SESSION_NAME" "if [[ ! -f ${DIRECTORY}/README.txt ]]; then touch ${DIRECTORY}/README.txt; fi" Enter
+
     # tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME" "clear && node_modules/.bin/browser-sync start --server --files * --no-open" Enter
+
     tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
 
 else
