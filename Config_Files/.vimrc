@@ -242,20 +242,26 @@ let g:user_emmet_mode='a'
 
 " Coc.nvim settings...
 " ---------------------------------------------------------
+
 " add extensions here
 let g:coc_global_extensions = [
     \'coc-json',
     \'coc-tsserver',
     \'coc-highlight',
     \'coc-eslint',
-    \'coc-prettier'
+    \'coc-prettier',
+    \'coc-snippets'
     \ ]
+
+" To move up/down the coc generated list (see coc-vim website)
+inoremap <silent><expr> <C-j>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<C-j>" :
+      \ coc#refresh()
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 " Use :Prettier to format current buffer
 " command! -narg=0 Prettier :CocCommand prettier.formatFile
-
-" use tab for trigger
-inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 "coc-highlight extension
 set termguicolors               " Needed this for coc-highlight to work for showing hex color preview
@@ -265,10 +271,17 @@ highlight CocUnusedHighlight guibg=#2d332f  " A nicer color for unused variables
 
 " Ultisnips plugin settings...
 " ---------------------------------------------------------
+"  Note: Instead of using the UltiSnips plugin you can just use
+"  the coc-snippets. Read the coc-snippets website for config. But here
+"  I use both only because I use some UltiSnips config but may change
+"  to using only coc-snippets and configuring it that way.
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<c-l>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" Could also use this from coc-snippets...
+" imap <C-l> <Plug>(coc-snippets-expand)
 
 " Settings for editing your snippets
 let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.vim/customUltiSnips"

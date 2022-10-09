@@ -14,6 +14,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# export EDITOR='vim'
 export EDITOR='vim'
 
 # Press <Esc + s> to add sudo to beginning of line (insert mode)
@@ -125,6 +126,9 @@ alias hg='history | grep'
 # This command will sync the time...
 alias timeSync='sudo timedatectl set-ntp false && sudo timedatectl set-ntp true'
 
+# alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
+# alias vim='nvim'
+
 #----------------
 # tmux stuff... |
 #----------------
@@ -190,7 +194,7 @@ tmExpressSetup () {
         # The target -t format is... sessionName:windowName.paneNumber
 
         tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 "vim $EDIT_FILE" Enter
-        tmux send-keys -t "$_SESSION_NAME":"$WINDOW_TWO_NAME".0":VtrAttachToPane 1" Enter
+        tmux send-keys -t "$_SESSION_NAME":"$WINDOW_TWO_NAME".0 ":VtrAttachToPane 1" Enter
         tmux attach-session -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0
 
     else

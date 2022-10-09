@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Just enter yer EDIT_FILE path/file_name  & any other send-keys commands specific
+# Just enter yer EDIT_FILE path/file_name & any other send-keys commands specific
 # for this development environment (toggle comments on/off) and bob's yer uncle...
 #----------------------------------------------------------------------------------
 EDIT_FILE="$HOME/coding-practice/"
@@ -10,7 +10,7 @@ WINDOW_TWO_NAME="server"
 DIRECTORY="$(dirname "$EDIT_FILE")"
 SESSION_NAME=$(basename "$0" .sh)
 
-if ! tmux has-session -t "$SESSION_NAME"; then
+if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 
     tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME" -c "$DIRECTORY"
     tmux split-window -t "$SESSION_NAME":"$WINDOW_ONE_NAME" -v -c "$DIRECTORY"

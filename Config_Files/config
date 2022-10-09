@@ -294,10 +294,11 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
 
 exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
+# exec --no-startup-id i3-msg 'workspace $terminal; exec LIBGL_ALWAYS_SOFTWARE=1 alacritty'
 
 exec --no-startup-id i3-msg 'workspace $ws3; exec xfce4-terminal'
 
-exec --no-startup-id i3-msg 'workspace $vm; exec virt-manager'
+# exec --no-startup-id i3-msg 'workspace $vm; exec virt-manager'
 
 
 # ----------------------------------------------------------------------------------------
