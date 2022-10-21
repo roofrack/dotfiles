@@ -1,0 +1,6 @@
+ranger
+tmux
+nodejs
+npm
+base-devel
+gcc
