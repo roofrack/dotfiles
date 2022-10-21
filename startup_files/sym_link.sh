@@ -7,7 +7,7 @@
 #------------------------------------------------------------------<robaylard@gmail.com>--
 printf "\n"; tput civis
 
-DIR_DOTFILES="$HOME/dotfiles/Config_Files"
+DIR_DOTFILES="$HOME/dotfiles/startup_files/Config_Files"
 DIR_CONFIG="$HOME/.config"
 DIR_PICS="$HOME/Pictures"
 FILES_SYMLINK="$DIR_DOTFILES/* $DIR_DOTFILES/.[!.]?*"
