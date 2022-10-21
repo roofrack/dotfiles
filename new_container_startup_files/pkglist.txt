@@ -4,3 +4,4 @@ nodejs
 npm
 base-devel
 gcc
+neovim
