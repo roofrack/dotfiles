@@ -94,7 +94,7 @@ PROMPT_COMMAND="historyclean;$PROMPT_COMMAND"
 # Some alias's |
 #---------------
 
-alias vi='vim'
+alias vim='nvim'
 alias ls='ls --color=auto'
 #alias ll='clear; ls -lX'
 alias ll='ls -la'
@@ -146,10 +146,10 @@ alias tka='tmux kill-server'
 # Setting the prompt ... |
 #-------------------------
 
-# PS1='[\u@\h \W]\$ '
+PS1='[\u@\h \W]\$ '
 # PS1="\[\033[1;33m\][\u@\h\[\033[1;35m\] \w \[\033[1;33m\]]\[\033[1;35m\]\$\[\033[0m\]"
 # PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
-PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
+# PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
 export PS1
 
 
