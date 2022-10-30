@@ -1,7 +1,7 @@
 This directory is for bootstrapping up a new container.
 
-1. run a new container
-2. install git neovim
+1. run a new container ie... podman run -it archlinux
+2. install git neovim sudo
 3. useradd -m -G wheel rob
 4. passwd rob (now add a passwd)
 5. su rob and cd into ~
