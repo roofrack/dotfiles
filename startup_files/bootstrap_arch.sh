@@ -79,6 +79,20 @@ if [[ ! -d $HOME/.config/ranger/plugins ]]; then
 fi
 
 
+# Coding-practice directory
+#=========================================================================================
+sleep 2
+printf "\n\n installing coding-practice...\n"
+git clone https://github.com/roofrack/coding-practice $HOME
+
+
+# Neovim
+#=========================================================================================
+sleep 2
+printf "\n\n installing neovim...\n"
+git clone https://github.com/roofrack/nvim $HOME/.config/nvim
+
+
 
 # The end
 #=========================================================================================
