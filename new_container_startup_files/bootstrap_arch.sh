@@ -45,7 +45,7 @@ sudo pacman -S --needed - < $HOME/dotfiles/new_container_startup_files/pkglist.t
 printf "\nFinished installing packages.\n"
 sleep 2
 
-
+clear
 # Building directories and sym-links using the sym_link.sh script
 #=========================================================================================
 printf "\nSetting up directories and sym-links...\n"
@@ -78,13 +78,19 @@ if [[ ! -d $HOME/.config/ranger/plugins ]]; then
     git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
 fi
 
+clear
 # Clone coding-practice repo
 #=========================================================================================
+sleep 2
+printf "\n\n installing coding-practicen...\n"
 git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 
 # Neovim
 #=========================================================================================
+sleep 2
+printf "\n\n installing Neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
+sleep 2
 
 
 # The end
