@@ -83,7 +83,7 @@ fi
 #=========================================================================================
 sleep 2
 printf "\n\n installing coding-practice...\n"
-git clone https://github.com/roofrack/coding-practice $HOME
+git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 
 
 # Neovim

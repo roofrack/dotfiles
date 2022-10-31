@@ -78,7 +78,7 @@ if [[ ! -d $HOME/.config/ranger/plugins ]]; then
     git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
 fi
 
-# Clone my coding practice repo
+# Clone coding-practice repo
 #=========================================================================================
 git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 
