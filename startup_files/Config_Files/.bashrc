@@ -127,7 +127,6 @@ alias hg='history | grep'
 alias timeSync='sudo timedatectl set-ntp false && sudo timedatectl set-ntp true'
 
 # alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
-# alias vim='nvim'
 
 #----------------
 # tmux stuff... |
@@ -155,11 +154,10 @@ alias tka='tmux kill-server'
 # I did this to change the prompt for containers
 if [ $HOSTNAME == "laptop" ]; then
     PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
-    export PS1
 else
     PS1='[\u@\h \W]\$ '
-    export PS1
 fi
+export PS1
 
 
 # -----------------------------------
