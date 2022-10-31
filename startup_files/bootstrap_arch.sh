@@ -1,11 +1,12 @@
 #!/bin/bash
 #=========================================================================================
 # For a new arch install to get up and running quickly with the i3 WM                    =
+# and/or for a new container to install a few packages and set up directories & symlinks =
 #                                                                                        =
-#                                                                                        =
-# <robaylard@gmail.com>                                                                  =
-#=========================================================================================
+#<robaylard@gmail.com>====================================================================
 
+# Change "laptop" to whatever your host name is on your main install computer so only a few
+# packages get installed for a container enviroment.
 if [ $HOSTNAME == "laptop" ]; then
   startup_package_list="new_install_package_list.txt"
 else
@@ -90,14 +91,14 @@ clear
 # Coding-practice directory
 #=========================================================================================
 sleep 2
-printf "\n\n installing coding-practice...\n"
+printf "installing coding-practice...\n"
 git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 
 
 # Neovim
 #=========================================================================================
 sleep 2
-printf "installing neovim...\n"
+printf "\n\ninstalling neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
 printf "\n\n"
 
@@ -105,3 +106,4 @@ printf "\n\n"
 # The end
 #=========================================================================================
 end_message
+printf "\n\n"
