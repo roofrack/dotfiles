@@ -101,7 +101,7 @@ sleep 2
 printf "\n\ninstalling neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
 printf "\n\n"
--- the line below will have Packer plugin manager set up your config for nvim
+# The line below will have Packer plugin manager set up your config for nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # The end
