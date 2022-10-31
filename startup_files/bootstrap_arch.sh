@@ -6,6 +6,12 @@
 # <robaylard@gmail.com>                                                                  =
 #=========================================================================================
 
+if [ $HOSTNAME == "laptop" ]; then
+  startup_package_list="new_install_package_list.txt"
+else
+  startup_package_list="container_package_list.txt"
+fi
+
 clear
 banner_message(){
     message="WELCOME TO ARCH_BOOTSTRAP"
@@ -40,15 +46,16 @@ sleep 6; clear; sleep 3
 #=========================================================================================
 printf "Running pacman -Syu to make sure system is updated...\n\n"
 sudo pacman -Syu
-printf "\nSelect the 1 3 4 5 options for I3\n\n"
-sudo pacman -S --needed - < $HOME/dotfiles/startup_files/pkglist.txt
+printf "\nInstalling some packages from $startup_package_list file..."
+printf "\nSelect the 1 3 4 5 options IF installing I3\n\n"
+sudo pacman -S --needed - < $HOME/dotfiles/startup_files/$startup_package_list
 printf "\nFinished installing packages.\n"
 sleep 2
 
-
+clear
 # Building directories and sym-links using the sym_link.sh script
 #=========================================================================================
-printf "\nSetting up directories and sym-links...\n"
+printf "Setting up directories and sym-links...\n"
 sleep 2
 source $HOME/dotfiles/startup_files/sym_link.sh
 
@@ -79,6 +86,7 @@ if [[ ! -d $HOME/.config/ranger/plugins ]]; then
 fi
 
 
+clear
 # Coding-practice directory
 #=========================================================================================
 sleep 2
@@ -89,9 +97,9 @@ git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 # Neovim
 #=========================================================================================
 sleep 2
-printf "\n\n installing neovim...\n"
+printf "installing neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
-
+printf "\n\n"
 
 
 # The end

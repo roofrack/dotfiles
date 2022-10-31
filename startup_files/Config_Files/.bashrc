@@ -15,7 +15,7 @@
 [[ $- != *i* ]] && return
 
 # export EDITOR='vim'
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Press <Esc + s> to add sudo to beginning of line (insert mode)
 bind '"\es":"\C-usudo"'
@@ -94,7 +94,7 @@ PROMPT_COMMAND="historyclean;$PROMPT_COMMAND"
 # Some alias's |
 #---------------
 
-alias vi='vim'
+alias vim='nvim'
 alias ls='ls --color=auto'
 #alias ll='clear; ls -lX'
 alias ll='ls -la'
@@ -149,9 +149,17 @@ alias tka='tmux kill-server'
 # PS1='[\u@\h \W]\$ '
 # PS1="\[\033[1;33m\][\u@\h\[\033[1;35m\] \w \[\033[1;33m\]]\[\033[1;35m\]\$\[\033[0m\]"
 # PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
-PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
-export PS1
+# PS2="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
+# export PS1
 
+# I did this to change the prompt for containers
+if [ $HOSTNAME == "laptop" ]; then
+    PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
+    export PS1
+else
+    PS1='[\u@\h \W]\$ '
+    export PS1
+fi
 
 
 # -----------------------------------
