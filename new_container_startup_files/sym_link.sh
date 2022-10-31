@@ -18,7 +18,6 @@ count=0
                                                                       #
 declare -A DIR_BUILD=(                                                #
     [rc.conf]=$DIR_CONFIG/ranger                                      #
-    [nvim]=$DIR_CONFIG/
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
     #[config_file_NAME]=directoryPath_where_you_want_the_symlink      #
 )                                                                     #
