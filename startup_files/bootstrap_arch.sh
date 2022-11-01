@@ -57,7 +57,7 @@ clear
 # Building directories and sym-links using the sym_link.sh script
 #=========================================================================================
 printf "Setting up directories and sym-links...\n"
-sleep 2
+sleep 1
 source $HOME/dotfiles/startup_files/sym_link.sh
 
 
@@ -66,12 +66,12 @@ source $HOME/dotfiles/startup_files/sym_link.sh
 if [[ -d $HOME/.tmux ]]; then
     true
 else
-    sleep 2
+    sleep 1
     printf "\n Getting tpm for tmux plugins...\n"
-    sleep 2
+    sleep 1
     echo
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    sleep 2
+    sleep 1
     printf "\n installing tmux plugins...\n"
     $HOME/.tmux/plugins/tpm/bin/install_plugins
 fi
@@ -80,8 +80,8 @@ fi
 # Ranger devicon plugin
 #=========================================================================================
 if [[ ! -d $HOME/.config/ranger/plugins ]]; then
-    printf "\n\n installing ranger devicon plugin...\n"
-    sleep 2
+    printf "\n installing ranger devicon plugin...\n"
+    sleep 1
     mkdir -p .config/ranger/plugins
     git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
 fi
@@ -89,18 +89,18 @@ fi
 
 # Coding-practice directory
 #=========================================================================================
-sleep 2
-printf "installing coding-practice...\n"
+sleep 1
+printf "\ninstalling coding-practice...\n"
 git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 
 
 # Neovim
 #=========================================================================================
-sleep 2
-printf "\n\ninstalling neovim...\n"
+sleep 1
+printf "\ninstalling neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
 printf "\n"
-printf "now Packer will set up configs inside nvim...
+printf "now Packer will set up configs inside nvim..."
 # The command below will have the Packer Plugin Manager set up your config for nvim
 # It wouldnt work unless nvim is started first and then exits so thats why two commands here
 nvim --headless -c 'quitall'
