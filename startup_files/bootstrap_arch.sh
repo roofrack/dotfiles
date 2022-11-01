@@ -41,7 +41,7 @@ end_message(){
 }
 
 banner_message
-sleep 6; clear; sleep 1
+sleep 4; clear; sleep 1
 
 # Installing some packages
 #=========================================================================================
@@ -99,12 +99,17 @@ git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 sleep 1
 printf "\ninstalling neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
-printf "\n"
-printf "now Packer will set up configs inside nvim..."
+printf "\nPacker setting up configs inside nvim...\n"
 # The command below will have the Packer Plugin Manager set up your config for nvim
 # It wouldnt work unless nvim is started first and then exits so thats why two commands here
 nvim --headless -c 'quitall'
 nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
+
+printf "\ninstalling tree-sitter language parsers...\n"
+printf "\nthis may take a minute\n"
+nvim --headless -c "TSUpdate | quitall"
+printf "\n\n"
+
 
 # The end
 #=========================================================================================
