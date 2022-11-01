@@ -41,7 +41,7 @@ end_message(){
 }
 
 banner_message
-sleep 6; clear; sleep 3
+sleep 6; clear; sleep 1
 
 # Installing some packages
 #=========================================================================================
@@ -51,7 +51,7 @@ printf "\nInstalling some packages from $startup_package_list file..."
 printf "\nSelect the 1 3 4 5 options IF installing I3\n\n"
 sudo pacman -S --needed - < $HOME/dotfiles/startup_files/$startup_package_list
 printf "\nFinished installing packages.\n"
-sleep 2
+sleep 1
 
 clear
 # Building directories and sym-links using the sym_link.sh script
@@ -87,7 +87,6 @@ if [[ ! -d $HOME/.config/ranger/plugins ]]; then
 fi
 
 
-clear
 # Coding-practice directory
 #=========================================================================================
 sleep 2
@@ -100,9 +99,12 @@ git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
 sleep 2
 printf "\n\ninstalling neovim...\n"
 git clone https://github.com/roofrack/nvim $HOME/.config/nvim
-printf "\n\n"
-# The line below will have Packer plugin manager set up your config for nvim
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+printf "\n"
+printf "now Packer will set up configs inside nvim...
+# The command below will have the Packer Plugin Manager set up your config for nvim
+# It wouldnt work unless nvim is started first and then exits so thats why two commands here
+nvim --headless -c 'quitall'
+nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 
 # The end
 #=========================================================================================
