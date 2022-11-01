@@ -63,28 +63,20 @@ source $HOME/dotfiles/startup_files/sym_link.sh
 
 # Tmux Plugin Manager (tpm) and tmux plugins
 #=========================================================================================
-if [[ -d $HOME/.tmux ]]; then
-    true
-else
-    sleep 1
-    printf "\n Getting tpm for tmux plugins...\n"
-    sleep 1
-    echo
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    sleep 1
-    printf "\n installing tmux plugins...\n"
-    $HOME/.tmux/plugins/tpm/bin/install_plugins
-fi
+sleep 1
+printf "\n Getting tpm for tmux plugins...\n"
+sleep 1
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+sleep 1
+printf "\n installing tmux plugins...\n"
+$HOME/.tmux/plugins/tpm/bin/install_plugins
 
 
 # Ranger devicon plugin
 #=========================================================================================
-if [[ ! -d $HOME/.config/ranger/plugins ]]; then
-    printf "\n installing ranger devicon plugin...\n"
-    sleep 1
-    mkdir -p .config/ranger/plugins
-    git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
-fi
+printf "\n installing ranger devicon plugin...\n"
+sleep 1
+git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
 
 
 # Coding-practice directory
@@ -105,10 +97,11 @@ printf "\nPacker setting up configs inside nvim...\n"
 nvim --headless -c 'quitall'
 nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 
-printf "\ninstalling tree-sitter language parsers...\n"
-printf "\nthis may take a minute\n"
-nvim --headless -c "TSUpdate | quitall"
-printf "\n\n"
+# This wouldnt work
+# printf "\ninstalling tree-sitter language parsers...\n"
+# printf "\nthis may take a minute\n"
+# nvim --headless -c "TSUpdate | quitall"
+# printf "\n\n"
 
 
 # The end
