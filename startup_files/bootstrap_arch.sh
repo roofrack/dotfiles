@@ -46,23 +46,23 @@ fi
 printf '%.0s\n' {1..4} # prints 4 empty lines
 printf "Running pacman -Syu to update system...\n"
 sudo pacman -Syu
-printf "\nInstalling some packages from $startup_package_list file...\n"
+printf "\n:: Installing some packages from $startup_package_list file...\n"
 printf "\nSelect the 1 3 4 5 options IF installing I3\n"; sleep 1
 sudo pacman -S --needed - < $HOME/dotfiles/startup_files/$startup_package_list
 
 
 # Building directories and sym-links using the sym_link.sh script
-printf "Setting up directories & sym-links..."; sleep 1
+printf "\n:: Setting up directories & sym-links...\n"; sleep 1
 source $HOME/dotfiles/startup_files/sym_link.sh
 
 
 # Cloning repos from https://github.com
-printf "\nCloning a few repos...\n"; sleep 1
+printf "\n:: Cloning a few repos...\n"; sleep 1
 source $HOME/dotfiles/startup_files/repos_to_clone.sh; sleep 1
 
 
 # Running a few commands
-printf "\nInstalling plugins & misc commands...\n"
+printf "\n:: Installing plugins & misc commands...\n"
 source $HOME/dotfiles/startup_files/bash_commands.sh
 
 
