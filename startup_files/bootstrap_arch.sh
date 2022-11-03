@@ -1,19 +1,11 @@
 #!/bin/bash
 #=========================================================================================
 # For a new arch install to get up and running quickly with the i3 WM                    =
-# and/or for a new container to install a few packages and set up directories & symlinks =
+# or for a new container. Installs a few packages and sets up directories & symlinks     =
 #                                                                                        =
-#<robaylard@gmail.com>====================================================================
+#==<robaylard@gmail.com>==================================================================
 
-# Change "laptop" to whatever your host name is on your main install computer so only a few
-# packages get installed for a container enviroment.
-if [ $HOSTNAME == "laptop" ]; then
-  startup_package_list="new_install_package_list.txt"
-else
-  startup_package_list="container_package_list.txt"
-fi
 
-clear
 banner_message(){
     message="WELCOME TO ARCH_BOOTSTRAP"
     length_message=${#message}
@@ -28,9 +20,9 @@ banner_message(){
     else
         middle=$(printf '%s%*s%s%*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
     fi
-    printf "\n\n\n\n\n\n\n\n\n"
     printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer"
 }
+
 end_message(){
     end_message="\nREAD . . ."
     for i in $end_message; do
@@ -40,71 +32,39 @@ end_message(){
     printf "\n"
 }
 
-banner_message
-sleep 4; clear; sleep 1
+clear; banner_message
 
-# Installing some packages
-#=========================================================================================
-printf "Running pacman -Syu to make sure system is updated...\n\n"
+# Updating system and installing some archlinux packages
+# Change this to whatever your hostname is on your host computer.
+# This is just so it installs less packages for a container install.
+if [ $HOSTNAME == "laptop" ]; then
+  startup_package_list="new_install_package_list.txt"
+else
+  startup_package_list="container_package_list.txt"
+fi
+
+printf '%.0s\n' {1..4} # prints 4 empty lines
+printf "Running pacman -Syu to update system...\n"
 sudo pacman -Syu
-printf "\nInstalling some packages from $startup_package_list file..."
-printf "\nSelect the 1 3 4 5 options IF installing I3\n\n"
+printf "\nInstalling some packages from $startup_package_list file...\n"
+printf "\nSelect the 1 3 4 5 options IF installing I3\n"; sleep 1
 sudo pacman -S --needed - < $HOME/dotfiles/startup_files/$startup_package_list
-printf "\nFinished installing packages.\n"
-sleep 1
 
-clear
+
 # Building directories and sym-links using the sym_link.sh script
-#=========================================================================================
-printf "Setting up directories and sym-links...\n"
-sleep 1
+printf "Setting up directories & sym-links..."; sleep 1
 source $HOME/dotfiles/startup_files/sym_link.sh
 
 
-# Tmux Plugin Manager (tpm) and tmux plugins
-#=========================================================================================
-sleep 1
-printf "\n Getting tpm for tmux plugins...\n"
-sleep 1
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-sleep 1
-printf "\n installing tmux plugins...\n"
-$HOME/.tmux/plugins/tpm/bin/install_plugins
+# Cloning repos from https://github.com
+printf "\nCloning a few repos...\n"; sleep 1
+source $HOME/dotfiles/startup_files/repos_to_clone.sh; sleep 1
 
 
-# Ranger devicon plugin
-#=========================================================================================
-printf "\n installing ranger devicon plugin...\n"
-sleep 1
-git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
-
-
-# Coding-practice directory
-#=========================================================================================
-sleep 1
-printf "\ninstalling coding-practice...\n"
-git clone https://github.com/roofrack/coding-practice $HOME/coding-practice
-
-
-# Neovim
-#=========================================================================================
-sleep 1
-printf "\ninstalling neovim...\n"
-git clone https://github.com/roofrack/nvim $HOME/.config/nvim
-printf "\nPacker setting up configs inside nvim...\n"
-# The command below will have the Packer Plugin Manager set up your config for nvim
-# It wouldnt work unless nvim is started first and then exits so thats why two commands here
-nvim --headless -c 'quitall'
-nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
-
-# This wouldnt work
-# printf "\ninstalling tree-sitter language parsers...\n"
-# printf "\nthis may take a minute\n"
-# nvim --headless -c "TSUpdate | quitall"
-# printf "\n\n"
+# Running a few commands
+printf "\nInstalling plugins & misc commands...\n"
+source $HOME/dotfiles/startup_files/bash_commands.sh
 
 
 # The end
-#=========================================================================================
-end_message
-printf "\n\n"
+end_message; printf "\n"

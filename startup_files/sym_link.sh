@@ -5,7 +5,6 @@
 # If the sym-link is going in a nested dir then add the dir path below in the DIR_BUILD
 # array along with the name of the config file to be symlinked.
 #------------------------------------------------------------------<robaylard@gmail.com>--
-printf "\n"; tput civis
 
 DIR_DOTFILES="$HOME/dotfiles/startup_files/Config_Files"
 DIR_CONFIG="$HOME/.config"
@@ -83,10 +82,11 @@ already_exists_message (){
 
 
 
-
 #=========================================================================================
 # Building Directories and Sym-Links
 #=========================================================================================
+printf "\n"; tput civis
+
 for file in $FILES_SYMLINK; do
     basefile=$(basename $file)
     dir_build="${DIR_BUILD[$basefile]}"
