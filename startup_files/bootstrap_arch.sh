@@ -32,7 +32,7 @@ end_message(){
     printf "\n"
 }
 
-clear; banner_message
+clear; banner_message; sleep 2
 
 # Updating system and installing some archlinux packages
 # Change this to whatever your hostname is on your host computer.
@@ -44,7 +44,7 @@ else
 fi
 
 printf '%.0s\n' {1..4} # prints 4 empty lines
-printf "Running pacman -Syu to update system...\n"
+printf ":: Running pacman -Syu to update system...\n"
 sudo pacman -Syu
 printf "\n:: Installing some packages from $startup_package_list file...\n"
 printf "\nSelect the 1 3 4 5 options IF installing I3\n"; sleep 1
@@ -52,7 +52,7 @@ sudo pacman -S --needed - < $HOME/dotfiles/startup_files/$startup_package_list
 
 
 # Building directories and sym-links using the sym_link.sh script
-printf "\n:: Setting up directories & sym-links...\n"; sleep 1
+printf "\n:: Setting up directories & sym-links..."; sleep 1
 source $HOME/dotfiles/startup_files/sym_link.sh
 
 
