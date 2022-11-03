@@ -8,3 +8,4 @@ source $HOME/.tmux/plugins/tpm/bin/install_plugins
 printf "Configuring neovim\n"
 nvim --headless -c 'quitall'
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless -c 'TSUpdate | quitall'
