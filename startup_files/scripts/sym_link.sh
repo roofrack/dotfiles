@@ -109,7 +109,7 @@ for file in $FILES_SYMLINK; do
             read -n1 -s
             case "${REPLY}" in
                 [yY])
-                    ln -sf $file $dir_symlink            # using the -f option will delete the file
+                    ln -sf $file $dir_symlink # using the -f option will delete the file
                     Progress_bar_message "creating sym-link    ${symlink}" "${total_symlinks}"
                     break;;
                 [nN])
@@ -120,4 +120,3 @@ for file in $FILES_SYMLINK; do
     fi
 done
 tput cnorm          # Make prompt visible.
-#=========================================================================================
