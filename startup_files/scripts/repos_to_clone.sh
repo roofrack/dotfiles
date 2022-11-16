@@ -53,6 +53,7 @@ Progress_bar_message() {
 # Looping thru the repos_to_clone array key/value pairs and cloning into the specified directories...
 # NOTE: $repo is the key (the repo being cloned), ${!repos_to_clone[@]} is all the keys, 
 # and ${repos_to_clone[$repo]} is the value for the destination directory.
+tput civis
 for repo in ${!repos_to_clone[@]};
   do 
     destination_directory=${repos_to_clone[$repo]}
@@ -60,6 +61,8 @@ for repo in ${!repos_to_clone[@]};
       git clone "$repo" "$destination_directory" > /dev/null 2>&1
       Progress_bar_message "cloning $repo INTO $destination_directory" "$repos_total"
     else
-      Progress_bar_message "$destination_directory already exits" "$repos_total"
+      Progress_bar_message "trying to update $destination_directory" "$repos_total"
+      git -C $destination_directory pull $repo > /dev/null 2>&1
     fi
   done
+tput cnorm

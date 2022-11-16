@@ -57,8 +57,8 @@ printf "\n:: Setting up directories & sym-links..."; sleep 1
 source $directory_for_scripts/sym_link.sh
 
 
-# Cloning repos from https://github.com
-printf "\n:: Cloning a few repos...\n"; sleep 1
+# Cloning/updating repos from https://github.com
+printf "\n:: Cloning/Updating a few repos...\n"; sleep 1
 source $directory_for_scripts/repos_to_clone.sh; sleep 1
 
 
