@@ -12,7 +12,7 @@ declare -A repos_to_clone=(
   #[key]="value"
   #[key]="value"
   #[key]="value"
-  #[key]="value"notice
+  #[key]="value"
   #[key]="value"
 )
 
