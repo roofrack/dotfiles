@@ -7,32 +7,10 @@
 
 directory_for_scripts="$HOME/dotfiles/startup_files/scripts/"
 directory_for_packages="$HOME/dotfiles/startup_files/pkg_lists/"
+directory_for_functions="$HOME/dotfiles/startup_files/scripts/functions_bootstrap.sh"
 
-banner_message(){
-    message="WELCOME TO ARCH_BOOTSTRAP"
-    length_message=${#message}
-    char="IIIIIIIIIIII"
-    char_length=${#char}
-    space=$((($(tput cols) - $char_length - $length_message - $char_length)/2))
-    outer=$(printf '%*s' "$(tput cols)" | tr ' ' ${char})
-    inner=$(printf '%s%*s%s' "$char" "$(($(tput cols) - (char_length * 2)))" "" "$char")
-    if [[ $(($(tput cols) % 2)) == 0 ]]; then
-        # Need an extra space here only if the terminal is an even number of columns
-        middle=$(printf '%s%*s%s %*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
-    else
-        middle=$(printf '%s%*s%s%*s%s' "$char" "$space" "" "$message" "$space" ""  "$char")
-    fi
-    printf "$outer$outer$inner$inner$middle$inner$inner$outer$outer"
-}
-
-end_message(){
-    end_message="\nREAD . . ."
-    for i in $end_message; do
-        printf $i; sleep 0.3s
-    done
-    sleep 0.2s; printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"; sleep 1
-    printf "\n"
-}
+# Pulling in a few functions (banner_message(), end_message())...
+source $directory_for_functions
 
 clear; banner_message; sleep 1
 
