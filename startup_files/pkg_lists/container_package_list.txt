@@ -1,3 +1,4 @@
+unzip
 ranger
 tmux
 nodejs
@@ -5,3 +6,4 @@ npm
 pacman-contrib
 neovim
 gcc
+stylua
