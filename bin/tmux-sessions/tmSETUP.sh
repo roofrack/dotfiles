@@ -12,7 +12,7 @@ DIRECTORY="$(dirname "$EDIT_FILE")"
 # SESSION_NAME=$(basename "$0" .sh)
 # extracting part of this filename for a better tmux session name
 current_file_name="$0"
-SESSION_NAME=${current_file_name%.*}               # remove the extension `.csv`
+SESSION_NAME=${current_file_name%.*}               # remove the extension `.sh`
 SESSION_NAME=${SESSION_NAME#"${SESSION_NAME%_*}_"} # remove up to the last underscore `_`
 
 if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
