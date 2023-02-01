@@ -267,12 +267,13 @@ runserver() {
 # Function to quickly edit a new tmux session file
 # ----------------------------------------------------------------------
 
-tmSetUpNewSession() {
-	echo "Copying ~/bin/tmux-sessions/tmSETUP.sh into your new tmux session \ 
-setup script."
+tmsetUpNewSession() {
+	echo
+	echo "Copying ~/bin/tmux-sessions/tmSETUP.sh into your new tmux session setup script."
+	echo
 
 	name="tm"
-	read -e -i "$name" -p "Enter your new tmux session name ie: tmsvelt_tutorial.sh : " input
+	read -e -i "$name" -p "Enter session name such as tmsvelte_tutorial.sh : " input
 	name="${input:-$name}"
 	# echo $name
 
