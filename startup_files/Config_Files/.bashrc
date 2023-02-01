@@ -272,10 +272,9 @@ tmsetUpNewSession() {
 	echo "Copying ~/bin/tmux-sessions/tmSETUP.sh into your new tmux session setup script."
 	echo
 
-	name="tm"
-	read -e -i "$name" -p "Enter session name such as tmsvelte_tutorial.sh : " input
+	name="tm" # adding the prefix tm cause tm is a lot of extra typing haha
+	read -e -i "$name" -p "Enter session name such as 'tmsvelte_BlogTutorial.sh'... : " input
 	name="${input:-$name}"
-	# echo $name
 
 	tm_session_file_name="$HOME/bin/tmux-sessions/$name"
 
