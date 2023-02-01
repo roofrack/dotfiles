@@ -262,3 +262,26 @@ runserver() {
 	printf "%s\n" "$LINE_BAR" "starting server...$APP_SERVER_FILE with $START_NODE" "$LINE_BAR"
 	"$START_NODE" "$APP_SERVER_FILE"
 }
+
+# ----------------------------------------------------------------------
+# Function to quickly edit a new tmux session file
+# ----------------------------------------------------------------------
+
+tmSetUpNewSession() {
+	echo "Copying ~/bin/tmux-sessions/tmSETUP.sh into your new tmux session \ 
+setup script."
+
+	name="tm"
+	read -e -i "$name" -p "Enter your new tmux session name ie: tmsvelt_tutorial.sh : " input
+	name="${input:-$name}"
+	# echo $name
+
+	tm_session_file_name="$HOME/bin/tmux-sessions/$name"
+
+	if [[ ! -f "${tm_session_file_name}" ]]; then
+		cp $HOME/bin/tmux-sessions/tmSETUP.sh $tm_session_file_name
+		nvim $tm_session_file_name
+	else
+		echo "This file already exits"
+	fi
+}
