@@ -12,6 +12,7 @@ EDIT_FILE="$HOME/svelte/docsTut/src/routes/+page.svelte"
 WINDOW_ONE_NAME="editor"
 WINDOW_TWO_NAME="server"
 DIRECTORY="$(dirname "$EDIT_FILE")"
+
 # extracting part of this filename for a better tmux session name
 current_file_name="$0"
 SESSION_NAME=${current_file_name%.*}               # remove the extension `.sh`
@@ -23,6 +24,7 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 	tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME" -c "$DIRECTORY"
 	tmux split-window -t "$SESSION_NAME":"$WINDOW_ONE_NAME" -v -c "$DIRECTORY"
 	tmux resize-pane -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -D 5
+
 	tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME" -c "$DIRECTORY"
 
 	# Turn these settings on/off by commenting out
@@ -31,7 +33,8 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 	tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 "vim ." Enter
 	tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 ":VtrAttachToPane 1" Enter
 
-	tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 "npm run dev -- --host" Enter
+	tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 "npm run dev -- --host &&" Enter
+	# tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 "npm run dev -- --host" Enter
 
 	# tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 ":nnoremap <leader>sc :w<cr> \
 	#    :VtrSendCommandToRunner shellcheck $EDIT_FILE<cr>" Enter

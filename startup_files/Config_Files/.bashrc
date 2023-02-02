@@ -269,11 +269,13 @@ runserver() {
 
 tmsetUpNewSession() {
 	echo
-	echo "Copying ~/bin/tmux-sessions/tmSETUP.sh into your new tmux session setup script."
+	echo "1. Enter a name for the new tmux session...ie/ tmjs_MyProject.sh (substitute js for file type)."
+	echo "2. Edit the file adding any settings for your dev enviroment."
+	echo "3. Running this file will set up the environment."
 	echo
 
 	name="tm" # adding the prefix tm cause tm is a lot of extra typing haha
-	read -e -i "$name" -p "Enter session name such as 'tmsvelte_BlogTutorial.sh'... : " input
+	read -e -i "$name" -p "  Enter tmux session name: " input
 	name="${input:-$name}"
 
 	tm_session_file_name="$HOME/bin/tmux-sessions/$name"
