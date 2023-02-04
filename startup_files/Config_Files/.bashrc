@@ -105,6 +105,9 @@ alias ip='ip -c'
 alias brc='vim ~/.bashrc'
 alias vrc='vim ~/.vimrc'
 
+alias podman='sudo podman'
+alias npm='pnpm'
+
 #alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 #alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
 #alias go='cd /home/rob/pythonstuff/flask/flask_app'
