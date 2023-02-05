@@ -24,6 +24,9 @@ if [ $HOSTNAME == "laptop" ]; then
 else
 	startup_package_list="container_package_list.txt"
 	# update dotfiles in container
+	echo
+	echo "rob updating dotfiles"
+	echo
 	git -C $HOME/dotfiles/ pull
 fi
 printf '%.0s\n' {1..4} # prints 4 empty lines
