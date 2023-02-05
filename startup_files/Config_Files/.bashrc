@@ -36,7 +36,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
-export PATH=~bin:~/bin/tmux-sessions:$PATH
+export PATH=~/bin:~/bin/tmux-sessions:$PATH
 
 #---------------------------
 # bash history settings... |
@@ -106,7 +106,6 @@ alias brc='vim ~/.bashrc'
 alias vrc='vim ~/.vimrc'
 
 alias podman='sudo podman'
-alias npm='pnpm'
 
 #alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
 #alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
