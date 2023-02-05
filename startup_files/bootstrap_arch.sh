@@ -28,7 +28,7 @@ else
 	git -C $HOME/dotfiles/ pull >/dev/null 2>&1
 fi
 printf '%.0s\n' {1..4} # prints 4 empty lines
-printf ":: Updating dotfiles repo in containers only...\n"
+printf "\n:: Updating dotfiles repo in containers only...\n"
 printf ":: Running pacman -Syu to update system...\n"
 # sudo pacman -Syu
 pacman -Syu --noconfirm
