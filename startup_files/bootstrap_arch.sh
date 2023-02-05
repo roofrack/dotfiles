@@ -23,13 +23,12 @@ if [ $HOSTNAME == "laptop" ]; then
 	startup_package_list="new_install_package_list.txt"
 else
 	startup_package_list="container_package_list.txt"
-	# update dotfiles in container
-	echo
+	# update dotfiles in containers
 	echo ":: Updating dotfiles"
-	echo
 	git -C $HOME/dotfiles/ pull >/dev/null 2>&1
 fi
 printf '%.0s\n' {1..4} # prints 4 empty lines
+printf ":: Updating dotfiles repo in containers only...\n"
 printf ":: Running pacman -Syu to update system...\n"
 # sudo pacman -Syu
 pacman -Syu --noconfirm
