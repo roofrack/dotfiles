@@ -1,0 +1,28 @@
+# Robert if you make any changes to your dotfiles then you need to rebuild this image
+# dont forget to do that. Use... podman build -t customName -f Containerfile.arch $dir/where/ever/you/store/your/Containerfiles
+# Or alternatively once inside the new container run git -C $HOME/dotfiles pull
+
+FROM archlinux
+
+MAINTAINER bobs
+
+WORKDIR $HOME
+
+# ENV TERM=dumb
+
+RUN pacman -Syu --needed git nodejs npm --noconfirm
+
+RUN git clone https://github.com/roofrack/dotfiles $HOME/dotfiles/
+
+RUN npm install -g pnpm
+
+# CMD git -C $HOME/dotfiles pull
+
+# couldnt get this to work, it messes up the shell or just exits container...
+# RUN sh $HOME/dotfiles/startup_files/bootstrap_arch.sh --noconfirm
+
+# RUN chmod +x  ~/dotfiles/startup_files/bootstrap_arch.sh
+# CMD  $HOME/dotfiles/startup_files/bootstrap_arch.sh --noconfirm
+
+
+# CMD ["echo", "Hi bobs"]

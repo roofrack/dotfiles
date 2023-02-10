@@ -36,7 +36,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
-export PATH=~/bin:~/bin/tmux-sessions:$PATH
+export PATH=~/bin:~/bin/shell_scripts/tmux-sessions:$PATH
 
 #---------------------------
 # bash history settings... |

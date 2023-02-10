@@ -1,0 +1,13 @@
+FROM alpine
+
+MAINTAINER bobs
+
+WORKDIR $HOME
+
+RUN apk add --upgrade apk-tools
+
+RUN apk upgrade --available
+
+RUN apk add alpine-sdk neovim ranger tmux gcc tree-sitter-cli npm nodejs
+
+RUN git clone https://github.com/roofrack/nvim $HOME/.config/nvim
