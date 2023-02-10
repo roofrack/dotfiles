@@ -74,7 +74,7 @@ trap historymerge EXIT
 PROMPT_COMMAND="historyclean;$PROMPT_COMMAND"
 
 # ignore both will ignore dups and spaces
-# export HISTCONTROL=ignoreboth:erasedups
+export HISTCONTROL=ignoreboth:erasedups
 
 # make all sessions append to .bash_history file instead of just the
 # last one thats closed
