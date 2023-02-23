@@ -2,7 +2,6 @@
 #=========================================================================================
 # For a new arch install to get up and running quickly with the i3 WM                    =
 # or for a new container. Installs a few packages and sets up directories & symlinks     =
-#                                                                                        =
 #==<robaylard@gmail.com>==================================================================
 
 directory_for_scripts="$HOME/dotfiles/startup_files/scripts/"
