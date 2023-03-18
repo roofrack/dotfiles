@@ -10,7 +10,7 @@ source $HOME/.tmux/plugins/tpm/bin/install_plugins
 # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # same thing only for lazy.vim
-$ nvim --headless "+Lazy! sync" +qa
+nvim --headless "+Lazy! sync" +qa
 
 # TODO: Make it work to update treesitter from the command line here
 # nvim --headless -c 'TSUpdate | quitall'
