@@ -1,6 +1,11 @@
 # Robert if you make any changes to your dotfiles then you need to rebuild this image
-# dont forget to do that. Use... podman build -t customName -f Containerfile.arch $dir/where/ever/you/store/your/Containerfiles
+# dont forget to do that. 
 # Or alternatively once inside the new container run git -C $HOME/dotfiles pull
+
+# To build an image using this Container file run...
+# podman build -t customName -f Containerfile.arch $dir/where/ever/you/store/your/Containerfiles
+
+# Now that you have an image you can run containers from it.
 
 FROM archlinux
 

@@ -7,3 +7,4 @@ pacman-contrib
 neovim
 gcc
 stylua
+deno

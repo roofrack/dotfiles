@@ -5,9 +5,10 @@ source $HOME/.tmux/plugins/tpm/bin/install_plugins
 
 # Configure neovim with packer plugin manager. The first line
 # here starts and exits nvim because thats the only way the second line would run.
-printf "Configuring neovim\n"
-nvim --headless -c 'quitall'
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+# printf "Configuring neovim\n"
+# nvim --headless -c 'quitall'
+# nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
 # TODO: Make it work to update treesitter from the command line here
 # nvim --headless -c 'TSUpdate | quitall'
 
