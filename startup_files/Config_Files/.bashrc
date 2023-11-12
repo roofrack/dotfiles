@@ -14,6 +14,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export TERMINAL='alacritty'
+
 # export EDITOR='vim'
 export EDITOR='nvim'
 
