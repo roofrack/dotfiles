@@ -3,7 +3,7 @@
 # Just enter yer EDIT_FILE path/file_name & any other send-keys commands specific
 # for this development environment (toggle comments on/off) and bob's yer uncle...
 #-----------------------------------------------------------------------------------------
-EDIT_FILE="$HOME/svelte/docsTut/src/routes/+page.svelte"
+EDIT_FILE="$HOME/coding-practice/"
 #-----------------------------------------------------------------------------------------
 
 WINDOW_ONE_NAME="editor"
