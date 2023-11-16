@@ -1,6 +1,6 @@
 #!/bin/bash
 #-----------------------------------------------------------------------------------------
-# Any config files added to $HOME/dotfiles/startup_files/dotfiles will be symlinked when running this script. The
+# Any config files added to $HOME/dotfiles/startup_files/dotfiles/ will be symlinked when running this script. The
 # link will be placed in the user's root home directory unless another path is added into the directories_array.
 # If the sym-link is going in a nested directory then add the dotfile below in the directories_array
 # along with the directory where you want the symlink to live.
@@ -14,28 +14,28 @@ dotfiles="$config_file_dir/* $config_file_dir/.[!.]?*" # some regex to get the c
 total_num_of_symlinks="$(($(ls -al $config_file_dir | wc -l) - 3))"
 
 declare -A directories_array=(
-	# ["dotfile"]="path_to_symlink"
-	# Note: can also use a directory as a dotfile. For ex i3blocks_scripts is a directory containing
+	# ["dotfile"]="path_to_symlink/"
+	# Note: can also use a directory as a dotfile. For example the "i3blocks_scripts" is a directory containing
 	# scripts. Rather than symlink each one I just linked their directory.
-	[i3]=$HOME/.config
-	[i3status.conf]=$HOME/.config/i3status
-	[i3blocks.conf]=$HOME/.config/i3blocks
+	[i3]=$HOME/.config/
+	[i3status.conf]=$HOME/.config/i3status/
+	[i3blocks.conf]=$HOME/.config/i3blocks/
 	[i3blocks_scripts]=$HOME/.config/i3blocks/
 	[wallpaper]=$HOME/Pictures/
 	[lock.sh]=$HOME/.config/i3lock/
 	[terminalrc]=$HOME/.config/xfce4/terminal
-	[rc.conf]=$HOME/.config/ranger
-	[picom.conf]=$HOME/.config/picom
-	[coc - settings.json]=$HOME/.vim
-	[package.json]=$HOME/.config/coc/extensions
+	[rc.conf]=$HOME/.config/ranger/
+	[picom.conf]=$HOME/.config/picom/
+	[coc - settings.json]=$HOME/.vim/
+	[package.json]=$HOME/.config/coc/extensions/
 	[customUltiSnips]=$HOME/.vim/
-	#[dotfile]=path_to_symlink
-	#[dotfile]=path_to_symlink
-	#[dotfile]=path_to_symlink
+	#[dotfile]=path_to_symlink/
+	#[dotfile]=path_to_symlink/
+	#[dotfile]=path_to_symlink/
 )
 
 #=========================================================================================
-# Building Directories and Sym-Links with an archlinux like progress bar (but not really)
+# Building Directories and Sym-Links with an archlinux like progress bar (sort of kind of!)
 #=========================================================================================
 # clear the screen & make cursor invisible
 printf "\n"
@@ -62,9 +62,9 @@ for dotfile in $dotfiles; do
 	if [[ ! -e "${path_to_symlink}" ]]; then # only true if the file or directory does NOT exist
 		mkdir -p $dir_needed_for_symlink && ln -sf $dotfile $dir_needed_for_symlink
 		Progress_bar_message "creating sym-link    ${path_to_symlink}" "${total_num_of_symlinks}"
-	elif [[ -L "${path_to_symlink}" ]]; then # true if the file exists and is a symbolic link
+	elif [[ -L "${path_to_symlink}" ]]; then # only true if the file exists and is a symbolic link
 		already_exists_message "The sym-link" "$path_to_symlink" "already exists"
-	elif [[ -e "${path_to_symlink}" ]]; then # true if the file or directory exists
+	elif [[ -e "${path_to_symlink}" ]]; then # only true if the file or directory exists
 		already_exists_message "WARNING: THE FILE" "$path_to_symlink" "ALREADY EXISTS. DELETE & CREATE LINK? (y/n)"
 		while true; do
 			read -n1 -s

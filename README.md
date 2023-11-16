@@ -2,9 +2,8 @@
 # bootstrap_arch i3 set up script
 ---------
 > *  For setting up a new Arch installation with the i3 window manager.
-> *  This script installs the packages listed below, then uses _sym_link.sh_ to set up any required directories
-     for the nested sym-links & then the sym-links themselves.
-> *  Any additional package config files added later to the _~/dotfiles/Config_Files_ directory will be sym-linked to the users home root directory when re-running the _sym_link.sh_ script.
+> *  This script installs the packages listed below, then uses _sym_link.sh_ to set up any required directories & symlinks.
+> *  Any additional dotfiles added later to the _~/dotfiles/startup_files/dotfiles/ directory will be sym-linked to the users home root directory when re-running the _sym_link.sh_ script.
 > *  If a link is to be in a nested directory (ie ~/.config/xfce4/terminal/terminalrc) then open _sym_link.sh_ and add
      the name of the config file along with the path of the new directory in the space provided.
 ---------
@@ -19,22 +18,21 @@
 
  2. In ~ run git clone https://github.com/roofrack/dotfiles.
 
- 3. Run the ___dotfiles/startup_files/bootstrap_arch.sh___ script which will call the _sym_link.sh_ script.
+ 3. Run the ___dotfiles/startup_files/scripts/bootstrap_arch.sh___ script which will call the _sym_link.sh_ script.
 
  4. The following will be installed from the *~/dotfiles/startup_files/pkglist.txt* file using pacman.
 
-      *  i3 (select 1 3 4 5)
+      *  i3
       *  xorg-xinit
       *  xorg-server
       *  xfce4-terminal
       *  feh (for wallpaper)
       *  picom (for adding translucency to the xfce4-terminal)
-      *  gnu-free-fonts (airline works fine without this except for the little line symbol won't
-         render properly u2630, and also the arrow unicode in xfce4-terminal. After adding this
-         font pkg the unicode works (in my terminal anyway)
+      *  gnu-free-fonts
       *  tmux
       *  ranger
       *  ttf-nerd-fonts-symbols (for the vim & ranger devicons plugins)
+      *  you may need to add a nerd font (add what ever you need to the pkglist.txt file)
       *  a few other things
 
 
@@ -43,13 +41,13 @@
      chown .xinitrc to your user or it wont work.
 
  6. For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
-    virtualbox issue. I have symlinked this as well to the dotfiles directory so should work.
+    virtualbox issue (if youre using that). I have symlinked this as well to the dotfiles directory so should work.
 
  7. The tpm plugin manager will be installed. If you had to do it manually run
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm and once tmux is open type the prefix key
     followed by "I" to have tmux install the plugins listed in your .tmux.conf file.
 
- 8. Vim will autoinstall plugins and coc-extensions when opening the first time.
+ 8. Nvim will install plugins using lazy.nvim plugin manager. Lsp language servers should auto-install.
 
  9. Install Yay for AUR packages. Install i3lock-color for the lock screen using yay.
 
