@@ -6,7 +6,7 @@
 
 > - For setting up a new Arch installation with the i3 window manager.
 > - This script installs the packages listed below, then uses _sym_link_ to set up the required directories & symlinks.
-> - Any additional dotfiles added later to the _~/dotfiles/startup_files/dotfiles/_ directory will be sym-linked to the users home root directory when re-running the \_sym*link* script.
+> - Any additional dotfiles added later to the _~/dotfiles/startup_files/dotfiles/_ directory will be sym-linked to the users home root directory when re-running _sym_link_.
 > - If a link is to be in a nested directory (ie ~/.config/xfce4/terminal/terminalrc) then open _sym_link_ and add the name of the config file along with the path of the new directory in the space provided.
 
 ---
