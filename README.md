@@ -31,8 +31,8 @@
     - tmux
     - ranger
     - ttf-nerd-fonts-symbols (for the vim & ranger devicons plugins)
-    - you may need to add a nerd font (add what ever you need to the pkglist.txt file)
     - a few other things
+    - add any other missing applications to the ...pkg_list/file
 
 5.  I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
     ~/.xinitrc and comment out last 5 lines and add exec i3. dont forget to
