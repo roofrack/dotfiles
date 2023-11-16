@@ -10,7 +10,7 @@
 source $HOME/dotfiles/startup_files/scripts/functions_bootstrap.sh
 
 config_file_dir="$HOME/dotfiles/startup_files/dotfiles"
-dotfiles="$config_file_dir/* $config_file_dir/.[!.]?*"
+dotfiles="$config_file_dir/* $config_file_dir/.[!.]?*" # some regex to get the correct list of files.
 total_num_of_symlinks="$(($(ls -al $config_file_dir | wc -l) - 3))"
 
 declare -A directories_array=(
@@ -35,7 +35,7 @@ declare -A directories_array=(
 )
 
 #=========================================================================================
-# Building Directories and Sym-Links
+# Building Directories and Sym-Links with an archlinux like progress bar (but not really)
 #=========================================================================================
 # clear the screen & make cursor invisible
 printf "\n"
