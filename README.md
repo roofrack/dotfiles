@@ -19,7 +19,7 @@
 
 3.  Run the **_dotfiles/startup_files/scripts/bootstrap_arch_** script which will call the _sym_link_ script.
 
-4.  The following will be installed from the _~/dotfiles/startup_files/pkglist.txt_ file using pacman.
+4.  The following will be installed from _~/dotfiles/startup_files/pkg_list/..._ using pacman.
 
     - i3
     - xorg-xinit
