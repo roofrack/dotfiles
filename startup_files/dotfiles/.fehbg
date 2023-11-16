@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/home/rob/Pictures/wallpaper/4hqFNve-arch-linux-wallpaper.jpg' 

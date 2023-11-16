@@ -38,10 +38,13 @@ Progress_bar_message() {
 # Use in sym_link.sh script
 already_exists_message() {
 	start_mess="$1"
-	end_mess="$2"
+	middle_message="$2"
+	end_mess="$3"
 	space_1="$((28 - ${#start_mess}))"
-	space_2="$(($(tput cols) - ${#start_mess} - "$space_1" - ${#symlink} - ${#end_mess} - 5))" #(minus 5 lines up better)
-	printf '%s%*s%s%*s%s\n' "$start_mess" "$space_1" "" "$symlink" "$space_2" "" "$end_mess"
+	# space_2="$(($(tput cols) - ${#start_mess} - "$space_1" - ${#path_to_symlink} - ${#end_mess} - 5))" #(minus 5 lines up better)
+	space_2="$(($(tput cols) - ${#start_mess} - "$space_1" - ${#middle_message} - ${#end_mess} - 5))" #(minus 5 lines up better)
+	# printf '%s%*s%s%*s%s\n' "$start_mess" "$space_1" "" "$path_to_symlink" "$space_2" "" "$end_mess"
+	printf '%s%*s%s%*s%s\n' "$start_mess" "$space_1" "" "$middle_message" "$space_2" "" "$end_mess"
 }
 
 # Use in bootstrap_arch.sh script

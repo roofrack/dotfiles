@@ -4,7 +4,7 @@
 # Function to quickly edit a new tmux session file
 # ----------------------------------------------------------------------
 # This utility will prompt the user for a new tmux session name. (use the format tmlua_GameDev.sh for example)
-# It then copies the ~/bin/tmux-sessions/tmSETUP.sh file and opens it up to
+# It then copies the ~/bin/tmux-sessions/setup_templates/tmux_template.sh file and opens it up to
 # allow for editing (adding windows, splits, features for the tmux session) and
 # then saves it under the session name in ~/bin/tmux-sessions/"session name".
 
@@ -23,7 +23,7 @@ tmsetUpNewSession() {
 
 	if [[ ! -f "${tm_session_file_name}" ]]; then
 		# copy the template using your new session name
-		cp $HOME/bin/tmux-sessions/setup_templates/tmux_template.sh $tm_session_file_name
+		cp $HOME/bin/tmux-sessions/session_setup_scripts/tmux_template.sh $tm_session_file_name
 		# this will open the new session file for editing and put the cursor on row 6 column 34
 		nvim -c "norm 6G33| <cr>" -c "startinsert" $tm_session_file_name
 	else
