@@ -23,7 +23,7 @@ declare -A directories_array=(
 	[i3blocks_scripts]=$HOME/.config/i3blocks/
 	[wallpaper]=$HOME/Pictures/
 	[lock.sh]=$HOME/.config/i3lock/
-	[terminalrc]=$HOME/.config/xfce4/terminal
+	[terminalrc]=$HOME/.config/xfce4/terminal/
 	[rc.conf]=$HOME/.config/ranger/
 	[picom.conf]=$HOME/.config/picom/
 	[coc - settings.json]=$HOME/.vim/
@@ -44,15 +44,14 @@ tput civis
 # dotfile here includes the full path to the file ($HOME/dotfiles/startup_files/dotfiles/filename)
 for dotfile in $dotfiles; do
 	# basename splits off the file name from the directory path. We need two variables here. "dotfile"
-	# contains the full path and we also need "name_of_dotfile" which is just the filename.
+	# contains the full path and "name_of_dotfile" is just the filename without the path.
 	name_of_dotfile=$(basename $dotfile)
 
 	# Looping thru all the dotfiles and if the dotfile "key" happens to be in the directories_array then
 	# the "directory" variable gets set to that "value" from the directories_array (which is a directory).
 	directory="${directories_array[$name_of_dotfile]}"
 
-	if [[ -n $directory ]]; then
-		# If $directory is NOT empty from the previous step then it gets assigned to "dir_needed_for_symlink"
+	if [[ -n $directory ]]; then # If $directory is NOT empty
 		dir_needed_for_symlink="${directory}"
 	else
 		dir_needed_for_symlink="${HOME}"
