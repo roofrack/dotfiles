@@ -39,6 +39,7 @@ source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
 export PATH=~/bin:~/bin/tmux-sessions:$PATH
+export LUA_PATH=~/.config/nvim/
 
 #---------------------------
 # bash history settings... |
@@ -109,9 +110,7 @@ alias vrc='vim ~/.vimrc'
 
 alias podman='sudo podman'
 
-#alias gui='workon gui; cd pythonstuff/pyside/python_central; vim'
-#alias go='cd pythonstuff/tutorials; workon gui; ipython qtconsole &' # The "&" runs the console in the BG
-#alias go='cd /home/rob/pythonstuff/flask/flask_app'
+alias symlink='. $HOME/dotfiles/startup_files/scripts/sym_link.sh'
 
 # This runserver command can also be added to the scripts section of the package.json
 # and run using the npm run devStart or whatever you called it. Easier to just run it
