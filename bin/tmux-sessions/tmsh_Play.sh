@@ -3,7 +3,7 @@
 # Just enter yer EDIT_FILE path/file_name & any other send-keys commands specific
 # for this development environment (toggle comments on/off) and bob's yer uncle...
 #-----------------------------------------------------------------------------------------
-EDIT_FILE="$HOME/coding-practice/" # **** ENTER THE FILE NAME FOR NVIM TO OPEN FIRST ****
+EDIT_FILE="$HOME/coding-practice/shell/play.sh" # **** ENTER THE FILE NAME FOR NVIM TO OPEN FIRST ****
 #-----------------------------------------------------------------------------------------
 
 WINDOW_ONE_NAME="editor" # **** CAN EDIT WINDOW NAME HERE ****
@@ -25,7 +25,7 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 	tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME" -c "$DIRECTORY"
 	tmux split-window -t "$SESSION_NAME":"$WINDOW_ONE_NAME" -v -c "$DIRECTORY"
 	tmux resize-pane -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -D 5
-	tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME" -c "$DIRECTORY"
+	# tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME" -c "$DIRECTORY"
 
 	# ----------------------------------------------         ------------------------
 	# Turn these settings on/off by commenting out #         **** EDIT BELOW !!! ****

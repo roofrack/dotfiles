@@ -7,11 +7,11 @@
 #------------------------------------------------------------------<robaylard@gmail.com>--
 
 # Need to pull in a few functions for use in this script
-source $HOME/dotfiles/startup_files/scripts/functions_bootstrap.sh
+source "$HOME/dotfiles/startup_files/scripts/functions_bootstrap.sh"
 
 config_file_dir="$HOME/dotfiles/startup_files/dotfiles"
 dotfiles="$config_file_dir/* $config_file_dir/.[!.]?*" # some regex to get the correct list of files.
-total_num_of_symlinks="$(($(ls -al $config_file_dir | wc -l) - 3))"
+total_num_of_symlinks="$(($(ls -al "$config_file_dir" | wc -l) - 3))" # subtract 3 because its counting . .. files
 
 declare -A directories_array=(
 	# ["dotfile"]="path_to_symlink/"
@@ -47,7 +47,7 @@ tput civis
 for dotfile in $dotfiles; do
 	# basename splits off the file name from the directory path. We need two variables here. "dotfile"
 	# contains the full path and "name_of_dotfile" is just the filename without the path.
-	name_of_dotfile=$(basename $dotfile)
+	name_of_dotfile="$(basename "$dotfile")"
 
 	# Looping thru all the dotfiles and if the dotfile "key" happens to be in the directories_array then
 	# the "directory" variable gets set to that "value" from the directories_array (which is a directory).
@@ -61,19 +61,20 @@ for dotfile in $dotfiles; do
 	path_to_symlink="$dir_needed_for_symlink/$name_of_dotfile"
 
 	if [[ ! -e "${path_to_symlink}" ]]; then # only true if the file or directory does NOT exist
-		mkdir -p $dir_needed_for_symlink && ln -sf $dotfile $dir_needed_for_symlink
-		Progress_bar_message "creating sym-link    ${path_to_symlink}" "${total_num_of_symlinks}"
+		mkdir -p "$dir_needed_for_symlink" && ln -sf "$dotfile" "$dir_needed_for_symlink"
+		 Progress_bar_message $total_num_of_symlinks "CREATING sym-link    ${path_to_symlink}" 
 	elif [[ -L "${path_to_symlink}" ]]; then # only true if the file exists and is a symbolic link
-		already_exists_message "The sym-link" "$path_to_symlink" "already exists"
+		 Progress_bar_message $total_num_of_symlinks "The sym-link $path_to_symlink ... already exists"
 	elif [[ -e "${path_to_symlink}" ]]; then # only true if the file or directory exists
-		already_exists_message "WARNING: THE FILE" "$path_to_symlink" "ALREADY EXISTS. DELETE & CREATE LINK? (y/n)"
+		Progress_bar_message $total_num_of_symlinks "WARNING: THE FILE $path_to_symlink ALREADY EXISTS. DELETE & CREATE LINK? (y/n)"
 		while true; do
-			read -n1 -s
+			# read -n1 -s
+			read -n1 -s -r
 			case "${REPLY}" in
 			[yY])
-				rm -rf $path_to_symlink                 # need to delete dir first before making the symlink or will throw error
-				ln -sf $dotfile $dir_needed_for_symlink # using the -f option will delete the file
-				Progress_bar_message "creating sym-link    ${path_to_symlink}" "${total_num_of_symlinks}"
+				rm -rf "$path_to_symlink" # need to delete dir first before making the symlink or will throw error
+				ln -sf "$dotfile" "$dir_needed_for_symlink" # using the -f option will delete the file
+				Progress_bar_message "${total_num_of_symlinks}" "CREATING sym-link    ${path_to_symlink}" 
 				break
 				;;
 			[nN])

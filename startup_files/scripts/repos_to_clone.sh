@@ -26,15 +26,15 @@ repos_total=${#repos_to_clone[*]}
 # NOTE: $repo is the key (the repo being cloned), ${!repos_to_clone[@]} is all the keys, 
 # and ${repos_to_clone[$repo]} is the value for the destination directory.
 tput civis
-for repo in ${!repos_to_clone[@]};
+for repo in "${!repos_to_clone[@]}";
   do 
     destination_directory=${repos_to_clone[$repo]}
     if [[ ! -d $destination_directory ]]; then
       git clone "$repo" "$destination_directory" > /dev/null 2>&1
-      Progress_bar_message "cloning $repo INTO $destination_directory" "$repos_total"
+      Progress_bar_message "$repos_total" "cloning $repo INTO $destination_directory"
     else
-      Progress_bar_message "updating $destination_directory..." "$repos_total"
-      git -C $destination_directory pull $repo > /dev/null 2>&1
+      Progress_bar_message "$repos_total" "updating $destination_directory..."
+      git -C "$destination_directory" pull "$repo" > /dev/null 2>&1
     fi
   done
 tput cnorm

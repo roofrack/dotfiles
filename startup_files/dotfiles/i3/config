@@ -14,7 +14,9 @@
 # ----------------------------------------------------------------------------------------
 
 set $mod Mod4
-
+set $default-terminal xfce4-terminal
+# do not focus preview window on open
+no_focus [title="^Peek preview$"]
 
 # ----------------------------------------------------------------------------------------
 # font stuff
@@ -296,11 +298,9 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 
 exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
 
-exec --no-startup-id i3-msg 'workspace $terminal; exec xfce4-terminal'
-# exec --no-startup-id i3-msg 'workspace $terminal; exec alacritty'
-# exec --no-startup-id i3-msg 'workspace $terminal; exec LIBGL_ALWAYS_SOFTWARE=1 alacritty'
+exec --no-startup-id i3-msg 'workspace $terminal; exec $default-terminal'
 
-# exec --no-startup-id i3-msg 'workspace $ws3; exec alacritty'
+exec --no-startup-id i3-msg 'workspace $ws3; exec $default-terminal -e ranger'
 
 # exec --no-startup-id i3-msg 'workspace $vm; exec virt-manager'
 

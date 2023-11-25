@@ -1,4 +1,7 @@
-![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
+![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Arch](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge)
+![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
 
 # bootstrap_arch i3 set up script
 
@@ -54,3 +57,7 @@
     - /etc/resolv.conf add 'nameserver 192.168.0.1' and 'nameserver 192.168.1.1' for example
     - /etc/iwd/main.conf add 'EnableNetworkConfiguration=true' (check out arch wiki for iwd)
     - start/enable iwd.service
+
+# License
+
+![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
