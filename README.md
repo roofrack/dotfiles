@@ -49,6 +49,8 @@ source ~/dotfiles/startup_files/scripts/bootstrap_arch.sh
     - a few other things
     - add any other missing applications to the ...pkg_list/file
 
+### :bulb: Configuration
+
 -  I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
     ~/.xinitrc and comment out last 5 lines and add exec i3. dont forget to
     chown .xinitrc to your user or it wont work.
