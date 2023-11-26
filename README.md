@@ -49,22 +49,22 @@ source ~/dotfiles/startup_files/scripts/bootstrap_arch.sh
     - a few other things
     - add any other missing applications to the ...pkg_list/file
 
-5.  I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
+-  I have this symlinked but may need to re-copy /etc/X11/xinit/xinitrc to
     ~/.xinitrc and comment out last 5 lines and add exec i3. dont forget to
     chown .xinitrc to your user or it wont work.
 
-6.  For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
+-  For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
     virtualbox issue (if youre using that). I have symlinked this as well to the dotfiles directory so should work.
 
-7.  The tpm plugin manager will be installed. If you had to do it manually run  
+-  The tpm plugin manager will be installed. If you had to do it manually run  
     `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` and once tmux is open type the prefix key
     followed by "I" (capital i) to have tmux install the plugins listed in your .tmux.conf file.
 
-8.  Nvim will install plugins using lazy.nvim plugin manager. Lsp language servers should auto-install.
+-  Nvim will install plugins using lazy.nvim plugin manager. Lsp language servers should auto-install.
 
-9.  Install Yay for AUR packages. Install i3lock-color for the lock screen using yay.
+-  Install Yay for AUR packages. Install i3lock-color for the lock screen using yay.
 
-10. May need to configure some things for iwd to work...
+- May need to configure some things for iwd to work...
 
     - /etc/resolv.conf add 'nameserver 192.168.0.1' and 'nameserver 192.168.1.1' for example
     - /etc/iwd/main.conf add 'EnableNetworkConfiguration=true' (check out arch wiki for iwd)
