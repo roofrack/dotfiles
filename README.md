@@ -2,7 +2,7 @@
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
 
-# bootstrap_arch i3 set up script
+# bootstrap_arch i3 set up script :zap:
 
 ---
 
@@ -27,7 +27,7 @@ sudo pacman -Syu git
 cd ~ && git clone https://github.com/roofrack/dotfiles
 ```
 
-3.  Run the **_dotfiles/startup_files/scripts/bootstrap_arch_** script which will call the _sym_link_ script.
+3.  Run the **_dotfiles/startup_files/scripts/bootstrap_arch.sh_** script
 ```sh
 source ~/dotfiles/startup_files/scripts/bootstrap_arch.sh
 ```
@@ -56,7 +56,7 @@ source ~/dotfiles/startup_files/scripts/bootstrap_arch.sh
 
 7.  The tpm plugin manager will be installed. If you had to do it manually run  
     `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` and once tmux is open type the prefix key
-    followed by "I" to have tmux install the plugins listed in your .tmux.conf file.
+    followed by "I" (capital i) to have tmux install the plugins listed in your .tmux.conf file.
 
 8.  Nvim will install plugins using lazy.nvim plugin manager. Lsp language servers should auto-install.
 
