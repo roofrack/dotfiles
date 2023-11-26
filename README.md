@@ -1,5 +1,4 @@
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Arch](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge)
 ![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
 
@@ -9,7 +8,7 @@
 
 > - For setting up a new Arch installation with the i3 window manager.
 > - This script installs the packages listed below, then uses _sym_link_ to set up the required directories & symlinks.
-> - Any additional dotfiles added later to the _~/dotfiles/startup_files/dotfiles/_ directory will be symlinked to the users home root directory when re-running _sym_link_.
+> - Any additional dotfiles added later to the _~/dotfiles/startup_files/dotfiles/_ directory will be symlinked to the users home directory when re-running _sym_link_.
 > - If a link is to be in a nested directory (ie ~/.config/xfce4/terminal/terminalrc) then open _sym_link_ and add the name of the config file along with the path of the new directory in the space provided.
 
 ---
@@ -58,6 +57,6 @@
     - /etc/iwd/main.conf add 'EnableNetworkConfiguration=true' (check out arch wiki for iwd)
     - start/enable iwd.service
 
-# License
+## License
 
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)

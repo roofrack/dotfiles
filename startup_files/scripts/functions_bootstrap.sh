@@ -5,18 +5,6 @@
 # A progress bar with 6 components... see the printf command below.
 #=========================================================================================
 
-# re-doing this so I can understand it better...
-
-# 1) refactor using variable names that make sense & add lots of comments
-
-# 2) add three variables for arguments 
-#     1. input message
-#     2. number of items iterated
-#     3. boolean for turning off/on the bar part of the message so I can use this function for "already exists"
-
-# 3) what ever else my little mind can think of 
-
-
 count=0
 # This needs to be outside the function because its just for setting the initial value for sym_link.
 # The function is called for every dotfile so don't want it to keep re-setting to 0.
@@ -52,7 +40,7 @@ Progress_bar_message() {
 		ab="${a:-0}.${b:-01}s"
 	}
 
-  # 5. The bar '#' COMPONENT
+  # 5. bar '#' COMPONENT
   # bar starts out as spaces and then gets changed to '-' characters and then
   # in the for loop below will get 'transformed' to '#' characters one character at a time.
   # this if statement will adjust how many characters we would like for the bar based on how wide the terminal is
@@ -68,6 +56,7 @@ Progress_bar_message() {
   for i in $(seq "$length_bar"); do
     bar_timer
     number_of_spaces=$(($(tput cols) - ${#how_many_items} - ${#user_input_message} - ${#ab} - ${#bar} - 4 - "$length_percent"))
+    # needed to subtract 4 extra spaces here for things to line up properly (formatter part has some spaces in it plus other stuff)
     bar=${bar/-/\#} # changes the '-' for a '#' using substitution
     percent=$((percent + 100 / length_bar))
     #---------------------------------------------------------------------------------------------------------
@@ -86,7 +75,7 @@ banner_message() {
 	length_message=${#message}
 	char="IIIIIIIIIIII"
 	char_length=${#char}
-	space=$((($(tput cols) - $char_length - $length_message - $char_length) / 2))
+	space=$((($(tput cols) - char_length - length_message - char_length) / 2))
 	outer=$(printf '%*s' "$(tput cols)" "" | tr ' ' ${char})
 	inner=$(printf '%s%*s%s' "$char" "$(($(tput cols) - (char_length * 2)))" "" "$char")
 	if [[ $(($(tput cols) % 2)) == 0 ]]; then
@@ -103,11 +92,13 @@ banner_message() {
 end_message() {
 	end_message="\nREAD . . ."
 	for i in $end_message; do
-		printf $i
+		# printf $i
+		printf '%s' "$i"
 		sleep 0.3s
 	done
 	sleep 0.2s
-	printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"
+	# printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"
+	printf '%s' " $(tput smul)dotfiles/README.md$(tput rmul) for more info"
 	sleep 1
 	printf "\n"
 }
