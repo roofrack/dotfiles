@@ -2,15 +2,15 @@
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
 
-# bootstrap_arch i3 set up script :zap:
+# bootstrap_arch i3 set up script :shell:
 
 ---
+### :sparkles: Intro
 
 > - For setting up a new Arch installation with the i3 window manager.
 > - This script installs the packages listed below, then uses _sym_link_ to set up the required directories & symlinks.
 > - Any additional dotfiles added later to the _~/dotfiles/startup_files/dotfiles/_ directory will be symlinked to the users home directory when re-running _sym_link_.
 > - If a link is to be in a nested directory (ie ~/.config/xfce4/terminal/terminalrc) then open _sym_link_ and add the name of the config file along with the path of the new directory in the space provided.
-
 ---
 
 ### :wrench: Installation
