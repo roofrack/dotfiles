@@ -13,13 +13,24 @@
 
 ---
 
-###### _Automating my set up_...
+### :wrench: Installation
 
-1.  After a new Arch install, do pacman -Syu and install git.
+1.  After a new Arch install, do pacman -Syu and install git.  
 
-2.  In ~ run git clone https://github.com/roofrack/dotfiles.
+```sh
+sudo pacman -Syu git
+```
+
+2.  clone dotfiles
+
+```sh
+cd ~ && git clone https://github.com/roofrack/dotfiles
+```
 
 3.  Run the **_dotfiles/startup_files/scripts/bootstrap_arch_** script which will call the _sym_link_ script.
+```sh
+source ~/dotfiles/startup_files/scripts/bootstrap_arch.sh
+```
 
 4.  The following will be installed from _~/dotfiles/startup_files/pkg_list/..._ using pacman.
 
@@ -43,8 +54,8 @@
 6.  For transluceny edit the /etc/xdg/picom.conf file and comment out vsync. This is a
     virtualbox issue (if youre using that). I have symlinked this as well to the dotfiles directory so should work.
 
-7.  The tpm plugin manager will be installed. If you had to do it manually run
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm and once tmux is open type the prefix key
+7.  The tpm plugin manager will be installed. If you had to do it manually run  
+    `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` and once tmux is open type the prefix key
     followed by "I" to have tmux install the plugins listed in your .tmux.conf file.
 
 8.  Nvim will install plugins using lazy.nvim plugin manager. Lsp language servers should auto-install.
@@ -57,6 +68,6 @@
     - /etc/iwd/main.conf add 'EnableNetworkConfiguration=true' (check out arch wiki for iwd)
     - start/enable iwd.service
 
-## License
+### :white_check_mark: License
 
 ![GitHub](https://img.shields.io/github/license/roofrack/dotfiles)
