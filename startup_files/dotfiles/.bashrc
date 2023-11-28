@@ -106,7 +106,7 @@ alias ll='ls -la'
 alias ip='ip -c'
 
 alias brc='vim ~/.bashrc'
-alias vrc='vim ~/.vimrc'
+alias vrc='nvim ~/.config/nvim/lua/v1/plugins/peek.lua'
 
 alias podman='sudo podman'
 

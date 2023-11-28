@@ -16,7 +16,7 @@
 set $mod Mod4
 set $default-terminal xfce4-terminal
 # do not focus preview window on open
-no_focus [title="^Peek preview$"]
+no_focus [class="firefox" title="^Peek preview$"]
 
 # ----------------------------------------------------------------------------------------
 # font stuff
