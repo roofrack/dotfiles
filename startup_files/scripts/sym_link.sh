@@ -3,7 +3,7 @@
 # Any config files added to $HOME/dotfiles/startup_files/dotfiles/ will be symlinked when running this script. The
 # link will be placed in the user's root home directory unless another path is added into the directories_array.
 # If the sym-link is going in a nested directory then add the dotfile below in the directories_array
-# along with the directory where you want the symlink to live.
+# along with the directory where you want the symlink to live. (also make sure to add it in dotfiles dir)
 #------------------------------------------------------------------<robaylard@gmail.com>--
 
 # Need to pull in a few functions for use in this script
@@ -49,7 +49,7 @@ for dotfile in $dotfiles; do
 	# contains the full path and "name_of_dotfile" is just the filename without the path.
 	name_of_dotfile="$(basename "$dotfile")"
 
-	# Looping thru all the dotfiles and if the dotfile "key" happens to be in the directories_array then
+	# Looping thru all the dotfiles and if the name_of_dotfile "key" happens to be in the directories_array then
 	# the "directory" variable gets set to that "value" from the directories_array (which is a directory).
 	directory="${directories_array[$name_of_dotfile]}"
 
@@ -61,10 +61,10 @@ for dotfile in $dotfiles; do
 	path_to_symlink="$dir_needed_for_symlink/$name_of_dotfile"
 
 	if [[ ! -e "${path_to_symlink}" ]]; then # only true if the file or directory does NOT exist
-		mkdir -p "$dir_needed_for_symlink" && ln -sf "$dotfile" "$dir_needed_for_symlink"
-		 Progress_bar_message $total_num_of_symlinks "CREATING sym-link    ${path_to_symlink}" 
+    mkdir -p "$dir_needed_for_symlink" && ln -sf "$dotfile" "$dir_needed_for_symlink"
+	  Progress_bar_message $total_num_of_symlinks "CREATING sym-link    ${path_to_symlink}" 
 	elif [[ -L "${path_to_symlink}" ]]; then # only true if the file exists and is a symbolic link
-		 Progress_bar_message $total_num_of_symlinks "The sym-link $path_to_symlink ... already exists"
+	  Progress_bar_message $total_num_of_symlinks "The sym-link $path_to_symlink ... already exists"
 	elif [[ -e "${path_to_symlink}" ]]; then # only true if the file or directory exists
 		Progress_bar_message $total_num_of_symlinks "WARNING: THE FILE $path_to_symlink ALREADY EXISTS. DELETE & CREATE LINK? (y/n)"
 		while true; do
