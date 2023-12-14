@@ -15,8 +15,14 @@
 
 set $mod Mod4
 set $default-terminal xfce4-terminal
+# set $default-terminal alacritty
+# set $default-browser firefox
+set $default-browser google-chrome-stable
 # do not focus preview window on open
-no_focus [class="firefox" title="^Peek preview$"]
+# no_focus [class="firefox" title="^Peek preview$"]
+
+# this may stop firefox from adding that stupid window bar on top (annoying)
+default_border pixel 1
 
 # ----------------------------------------------------------------------------------------
 # font stuff
@@ -51,7 +57,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -60,8 +66,6 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# this may stop firefox from adding that stupid window bar on top (annoying)
-default_border pixel 1
 
 
 # ----------------------------------------------------------------------------------------
@@ -82,11 +86,11 @@ bindsym $mod+Shift+q exit
 bindsym $mod+Shift+c kill
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec $default-terminal
 # bindsym $mod+Return exec alacritty
 
-# start firefox
-bindsym $mod+o exec firefox
+# start browser
+bindsym $mod+o exec $default-browser
 
 # move to scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -296,7 +300,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # Auto start some applications putting them in certain workspaces on i3 startup
 # ----------------------------------------------------------------------------------------
 
-exec --no-startup-id i3-msg 'workspace $browser; exec firefox'
+exec --no-startup-id i3-msg 'workspace $browser; exec $default-browser'
 
 exec --no-startup-id i3-msg 'workspace $terminal; exec $default-terminal'
 

@@ -38,7 +38,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
-export PATH=~/bin:~/bin/tmux-sessions/:~/bin/tmux-sessions/session_setup_scripts:$PATH
+export PATH=~/bin:~/bin/tmux-sessions/session_names:~/bin/tmux-sessions/session_setup_scripts:$PATH
 export LUA_PATH=~/.config/nvim/ # cant remember why I did this
 
 #---------------------------
@@ -143,7 +143,9 @@ alias tl='tmux ls'
 alias tn='tmux new -s'
 alias tk='tmux kill-session -t'
 alias ta='tmux a'
-alias tka='tmux kill-server'
+# alias tka='tmux kill-server'
+alias tka=tmdeleteSessionNames.sh
+
 
 #-------------------------
 # Setting the prompt ... |
@@ -156,7 +158,7 @@ alias tka='tmux kill-server'
 # export PS1
 
 # I did this to change the prompt for containers
-if [ $HOSTNAME == "laptop" ]; then
+if [ "$HOSTNAME" == "laptop" ]; then
 	PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
 else
 	PS1='[\u@\h \W]\$ '
@@ -180,7 +182,7 @@ tmExpressSetup() {
 	# if ! tmux list-sessions | grep -q "$sessionName"; then
 	if ! tmux has-session -t "$SESSION_NAME"; then
 
-		cd "$DIRECTORY"
+		cd "$DIRECTORY" || exit
 
 		tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME"
 		# Create a new tmux session. The -d prevents attaching to the session right
