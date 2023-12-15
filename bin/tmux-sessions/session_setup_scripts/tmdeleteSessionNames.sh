@@ -18,7 +18,7 @@ if [[ -n $tmux_running_session_names ]]; then
   for name in $tmux_running_session_names; do
     session_file_name=$(echo "$(ls "$session_names_directory")" | grep "$name")
     if [[ -n $session_file_name ]]; then
-      echo "Would you like to delete $session_names_directory/${session_file_name}?"
+      echo "Would you also like to delete the setup file: $session_names_directory/${session_file_name}?"
       while true; do
         read -n1 -s -r
         case "${REPLY}" in

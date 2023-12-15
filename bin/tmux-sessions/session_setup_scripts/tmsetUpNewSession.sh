@@ -9,11 +9,9 @@
 # then saves it under the session name in ~/bin/tmux-sessions/"session name".
 
 tmsetUpNewSession() {
-	echo "----------------------------------------------------------------"
+	echo "---------------------------------------------------------------|"
 	echo "1. Enter a name for the new tmux session... tm_NAME_js.sh      |" 
-  echo "                                                               |"
 	echo "2. Edit the file adding any settings for your dev environment  |"
-  echo "                                                               |"
 	echo "3. Save and quit nvim.                                         |"
 	echo "_______________________________________________________________|"
   echo
