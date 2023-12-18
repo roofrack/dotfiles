@@ -14,10 +14,13 @@
 # ----------------------------------------------------------------------------------------
 
 set $mod Mod4
+
 set $default-terminal xfce4-terminal
 # set $default-terminal alacritty
+
 # set $default-browser firefox
 set $default-browser google-chrome-stable
+
 # do not focus preview window on open
 # no_focus [class="firefox" title="^Peek preview$"]
 
@@ -85,12 +88,6 @@ bindsym $mod+Shift+q exit
 # kill focused window
 bindsym $mod+Shift+c kill
 
-# start a terminal
-bindsym $mod+Return exec $default-terminal
-# bindsym $mod+Return exec alacritty
-
-# start browser
-bindsym $mod+o exec $default-browser
 
 # move to scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -257,6 +254,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Why bother with the resize mode?? Just use these...
+bindsym $mod+Ctrl+Right resize grow width 20
+bindsym $mod+Ctrl+Up resize shrink height 20
+bindsym $mod+Ctrl+Down resize grow height 20
+bindsym $mod+Ctrl+Left resize shrink width 20
 
 # ----------------------------------------------------------------------------------------
 # mouse bindings
@@ -275,17 +277,26 @@ bindsym --whole-window $mod+button2 kill
 # The right button and modifier go full screen
 bindsym --whole-window $mod+button3 fullscreen toggle
 
-
-
-
-
-
 # ----------------------------------------------------------------------------------------
 # starting applications
 # ----------------------------------------------------------------------------------------
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
+
+# start a terminal
+bindsym $mod+Return exec $default-terminal
+# bindsym $mod+Return exec alacritty
+
+# start browser
+bindsym $mod+o exec $default-browser
+
+# bindsym $mod+y exec $default-browser; exec $default-terminal; exec i3-msg 'resize shrink left 10 px or 10 ppt, resize shrink right 10 px or 10 ppt'
+
+# Trying to resize two windows quickly. This works but was also trying to combine with two open applications as well but wouldnt work
+bindsym $mod+y exec i3-msg resize shrink left 25 px or 25 ppt, resize shrink right 25 px or 25 ppt
+
+
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"

@@ -3,13 +3,13 @@
 # ----------------------------------------------------------------------
 # Function to quickly edit a new tmux session file
 # ----------------------------------------------------------------------
-# This utility will prompt the user for a new tmux session name. (use the format tmlua_GameDev.sh for example)
+# This utility will prompt the user for a new tmux session name. (use the format tm_GameDev.sh for example)
 # It then copies the ~/bin/tmux-sessions/setup_templates/tmux_template.sh file and opens it up to
 # allow for editing (adding windows, splits, features for the tmux session) and
 # then saves it under the session name in ~/bin/tmux-sessions/"session name".
 
 tmsetUpNewSession() {
-	echo "---------------------------------------------------------------|"
+	echo "---------------------------------------------------------------]"
 	echo "1. Enter a name for the new tmux session... tm_NAME_js.sh      |" 
 	echo "2. Edit the file adding any settings for your dev environment  |"
 	echo "3. Save and quit nvim.                                         |"

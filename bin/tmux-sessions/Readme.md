@@ -5,9 +5,9 @@ sized specific for certain projects, and then to have applications running insid
 a code runner to run code in the split pane below or beside, a server, or what ever other applications
 your current project needs.
 
-This differs from Tmux Resurrect in that the set up comes from a premade script file that
+This differs from Tmux Resurrect in that the setup comes from a premade script file that
 you edit to get the setup you want. The file can then be run again to reset the session back up
-after a system reboot or when ever the tmux server is killed. Tmux Resurrect saves your set up
+after a system reboot or when ever the tmux server is killed. Tmux Resurrect saves your setup
 as you go but you have to spend time setting it all up. Here its mostly already set up
 and you just add/delete the options and applications needed.
 
@@ -21,10 +21,10 @@ session setup files using these two scripts.
 
 # Directories & scripts
 
-1. ### session_names directory  
+1. #### session_names directory  
 -    The directory where all the session setup files get saved to which are created when running `tmsetUpNewSession.sh`
 
-2. ### session_setup_scripts directory  
+2. #### session_setup_scripts directory  
 
 - `tmsetUpNewSession.sh` sets up, saves, and runs the new tmux session setup file  
 
@@ -37,9 +37,9 @@ session setup files using these two scripts.
 - Just run the executable `tmsetUpNewSession.sh` in the terminal
 
 - use consistent and unique session names such as tm_PLAY.sh or tm_PLAY_lua.sh  
- (the session name comes from what ever text is between the '_\' and '.sh')  
+ (the session name comes from what ever text is between '_\' and '.sh')  
 
-- run tmdeleteSessionNames.sh to terminate all tmux sessions and give the option to
+- run `tmdeleteSessionNames.sh` to terminate all tmux sessions and give the option to
   delete the set up session files
 
 - I use VTR vim-tmux-runner to run code which seems to works well

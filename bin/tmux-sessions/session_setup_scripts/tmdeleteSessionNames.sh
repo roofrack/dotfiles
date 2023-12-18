@@ -9,27 +9,28 @@ tmux_running_session_names=$(tmux list-sessions -F "#{session_name}")
 # see man tmux
 
 session_names_directory="$HOME/bin/tmux-sessions/session_names"
-# NOTE: Files saved in this directory mold a tmux session and give it a session name. They are created 
-# from running tmsetUPNewSession.sh
+# This directory is where the the template files used to set up a tmux session are saved
 
 if [[ -n $tmux_running_session_names ]]; then
   echo "The tmux server will be terminated..."
 
   for name in $tmux_running_session_names; do
-    session_file_name=$(echo "$(ls "$session_names_directory")" | grep "$name")
-    if [[ -n $session_file_name ]]; then
-      echo "Would you also like to delete the setup file: $session_names_directory/${session_file_name}?"
+    file_name=$(echo "$(ls "$session_names_directory")" | grep "$name")
+    if [[ -n $file_name ]]; then
+    # test to see if there is a matching file in session_names_directory based on tmux session name
+      echo "Would you also like to delete the setup file: $session_names_directory/${file_name}?"
       while true; do
         read -n1 -s -r
         case "${REPLY}" in
         [yY])
-          rm "$session_names_directory"/"$session_file_name"
-          echo "The file: $session_file_name has been deleted"
+          rm "$session_names_directory"/"$file_name"
+          echo "The file: $file_name has been deleted"
           # Progress_bar_message "${total_num_of_symlinks}" "CREATING sym-link    ${path_to_symlink}" 
           #   - I left this in here in case we want to hook up progress bar message. I mean why not?
           break
           ;;
         [nN])
+          echo "The file: $file_name has been saved"
           break
           ;;
         *) echo "enter y or n" ;;
