@@ -20,6 +20,10 @@ An option will be given to delete session setup files whenever the tmux kill-ser
 (which I have saved as an alias 'tka' in .bashrc 'tmux kill all'). Its very quick and easy to set up and delete
 session setup files using these two scripts.
 
+TODO: Make the ui more user friendly. It is very quick and easy if you already understand tmux commands but 
+could be improved to only show the user input options rather than all the other stuff such as variables and
+other commands not directly related to user inputs.
+
 # Directories & scripts
 
 1. #### session_names directory  

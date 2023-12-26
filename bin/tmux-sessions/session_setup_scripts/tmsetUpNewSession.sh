@@ -33,7 +33,7 @@ tmsetUpNewSession() {
     # code of 2 which is greater than 0 so the test is true and the tm_session_file_name will 
     # be deleted. ($? shows the error code of the last command run)
     if [[ $(echo $?) -gt 0 ]]; then
-      rm $tm_session_file_name
+      rm "$tm_session_file_name"
     fi
 	else
 		echo "This file already exits"
