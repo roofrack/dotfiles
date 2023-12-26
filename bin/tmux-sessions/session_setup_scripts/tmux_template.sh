@@ -6,6 +6,18 @@
 EDIT_FILE="$HOME/coding-practice/" # **** ENTER THE FILE NAME FOR NVIM TO OPEN FIRST ***********<<<<<EDIT HERE
 #-----------------------------------------------------------------------------------------
 
+if [[ ! -e $EDIT_FILE ]]; then
+  echo
+  echo - NOTE: "$EDIT_FILE" DOES NOT EXIST
+  echo - Please create directories and the file you want to edit first
+  echo - Install packages... pnpm install etc...
+  # NOTE: I could have the directory/file being automatically added here but I decided not to
+  # because I want tab completion for files to work in the above EDIT_FILE variable assignment
+  # to avoid any extra directories/files being added accidentally.
+  exit 2
+fi
+
+
 WINDOW_ONE_NAME="editor" # **** CAN EDIT WINDOW NAME HERE **************************************<<<<<EDIT HERE
 WINDOW_TWO_NAME="server" # **** CAN EDIT WINDOW NAME HERE **************************************<<<<<EDIT HERE
 

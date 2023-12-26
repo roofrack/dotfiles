@@ -13,7 +13,8 @@ and you just add/delete the options and applications needed.
 
 Running the setup script opens up a new session setup file in nvim. Edit this file mostly by commenting out
 certain lines with unneeded options or commands. Rename/add more windows, commands or options for your
-projects as needed.  
+projects as needed. Must enter a file path and filename to start in the editor. If this filepath doesnt exist
+then the program will exit.
 
 An option will be given to delete session setup files whenever the tmux kill-server command is run
 (which I have saved as an alias 'tka' in .bashrc 'tmux kill all'). Its very quick and easy to set up and delete

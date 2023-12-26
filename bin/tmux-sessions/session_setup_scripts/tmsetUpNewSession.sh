@@ -29,6 +29,12 @@ tmsetUpNewSession() {
 		nvim -c "norm 6G33| <cr>" -c "startinsert" "$tm_session_file_name"
     # run this file to start the tmux session
     $tm_session_file_name
+    # If the edit file does not exist in tm_session_file_name then it will exit with an error 
+    # code of 2 which is greater than 0 so the test is true and the tm_session_file_name will 
+    # be deleted. ($? shows the error code of the last command run)
+    if [[ $(echo $?) -gt 0 ]]; then
+      rm $tm_session_file_name
+    fi
 	else
 		echo "This file already exits"
 	fi
