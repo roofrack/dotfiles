@@ -3,8 +3,20 @@
 # Just enter yer EDIT_FILE path/file_name & any other send-keys commands specific
 # for this development environment (toggle comments on/off) and bob's yer uncle...
 #-----------------------------------------------------------------------------------------
-EDIT_FILE="$HOME/coding-practice/sveltekit/Official_Svelte_tutorial/tutorial/src/routes/+page.svelte" # **** ENTER THE FILE NAME FOR NVIM TO OPEN FIRST ***********<<<<<EDIT HERE
+EDIT_FILE="$HOME/coding-practice/svelte/play/src/routes/+page.svelte" # **** ENTER THE FILE NAME FOR NVIM TO OPEN FIRST ***********<<<<<EDIT HERE
 #-----------------------------------------------------------------------------------------
+
+if [[ ! -e $EDIT_FILE ]]; then
+  echo
+  echo - NOTE: "$EDIT_FILE" DOES NOT EXIST
+  echo - Please create directories and the file you want to edit first
+  echo - Install packages... pnpm install etc...
+  # NOTE: I could have the directory/file being automatically added here but I decided not to
+  # because I want tab completion for files to work in the above EDIT_FILE variable assignment
+  # to avoid any extra directories/files being added accidentally.
+  exit 2
+fi
+
 
 WINDOW_ONE_NAME="editor" # **** CAN EDIT WINDOW NAME HERE **************************************<<<<<EDIT HERE
 WINDOW_TWO_NAME="server" # **** CAN EDIT WINDOW NAME HERE **************************************<<<<<EDIT HERE
@@ -29,7 +41,7 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 	tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME" -c "$DIRECTORY"
 	# tmux split-window -t "$SESSION_NAME":"$WINDOW_ONE_NAME" -v -c "$DIRECTORY"
 	# tmux resize-pane -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -D 5
-	# tmux resize-pane -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -D 10
+	tmux resize-pane -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0 -D 10
 	tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME" -c "$DIRECTORY" # *******************<<<<<EDIT HERE
 
 	# ----------------------------------------------         ------------------------

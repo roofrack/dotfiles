@@ -20,7 +20,7 @@
 # so do that sometime
 xinput set-prop 12 336 50
 
-export TERMINAL='alacritty'
+# export TERMINAL='alacritty'
 
 # export EDITOR='vim'
 export EDITOR='nvim'
@@ -47,6 +47,13 @@ source /usr/share/git/completion/git-completion.bash
 export PATH=~/bin:~/bin/tmux-sessions/session_names:~/bin/tmux-sessions/session_setup_scripts:$PATH
 export LUA_PATH=~/.config/nvim/ # cant remember why I did this
 
+# Lua_Path ... need to add to this if wanting to import lua modules from
+# directories NOT located in .config/nvim/. This works but not totally sure I did it right.
+LUA_PATH='?;?.lua'
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
 #---------------------------
 # bash history settings... |
 #---------------------------
@@ -62,21 +69,21 @@ HISTFILESIZE=20000
 HISTCONTROL="ignoreboth:erasedups"
 HISTIGNORE="history:exit"
 function historyclean {
-	if [[ -e "$HISTFILE" ]]; then
-		exec {history_lock}<"$HISTFILE" && flock -x $history_lock
-		history -a
-		tac "$HISTFILE" | awk '!x[$0]++' | tac >"$HISTFILE.tmp$$"
-		mv -f "$HISTFILE.tmp$$" "$HISTFILE"
-		history -c
-		history -r
-		flock -u $history_lock && unset history_lock
-	fi
+  if [[ -e "$HISTFILE" ]]; then
+    exec {history_lock}<"$HISTFILE" && flock -x $history_lock
+    history -a
+    tac "$HISTFILE" | awk '!x[$0]++' | tac >"$HISTFILE.tmp$$"
+    mv -f "$HISTFILE.tmp$$" "$HISTFILE"
+    history -c
+    history -r
+    flock -u $history_lock && unset history_lock
+  fi
 }
 function historymerge {
-	history -n
-	history -w
-	history -c
-	history -r
+  history -n
+  history -w
+  history -c
+  history -r
 }
 trap historymerge EXIT
 
@@ -152,7 +159,6 @@ alias ta='tmux a'
 # alias tka='tmux kill-server'
 alias tka=tmdeleteSessionNames.sh
 
-
 #-------------------------
 # Setting the prompt ... |
 #-------------------------
@@ -165,9 +171,9 @@ alias tka=tmdeleteSessionNames.sh
 
 # I did this to change the prompt for containers
 if [ "$HOSTNAME" == "laptop" ]; then
-	PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
+  PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
 else
-	PS1='[\u@\h \W]\$ '
+  PS1='[\u@\h \W]\$ '
 fi
 export PS1
 
@@ -176,100 +182,100 @@ export PS1
 # -----------------------------------
 tmExpressSetup() {
 
-	WINDOW_ONE_NAME="server"
-	WINDOW_TWO_NAME="editor"
-	SERVER_FILE="app.js"
-	EDIT_FILE="app.js views/index.ejs"
-	DIRECTORY="$HOME/coding-practice/javascript/express/"
-	SESSION_NAME="express"
+  WINDOW_ONE_NAME="server"
+  WINDOW_TWO_NAME="editor"
+  SERVER_FILE="app.js"
+  EDIT_FILE="app.js views/index.ejs"
+  DIRECTORY="$HOME/coding-practice/javascript/express/"
+  SESSION_NAME="express"
 
-	# Can do one of three things here but the 3rd one is best I think...
-	# if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
-	# if ! tmux list-sessions | grep -q "$sessionName"; then
-	if ! tmux has-session -t "$SESSION_NAME"; then
+  # Can do one of three things here but the 3rd one is best I think...
+  # if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
+  # if ! tmux list-sessions | grep -q "$sessionName"; then
+  if ! tmux has-session -t "$SESSION_NAME"; then
 
-		cd "$DIRECTORY" || exit
+    cd "$DIRECTORY" || exit
 
-		tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME"
-		# Create a new tmux session. The -d prevents attaching to the session right
-		# away so the script will continue to run. -s names the session. The newly
-		# created session opens a window and the -n allows you to name it 'server'.
-		# Can also use '-c + directory' to put you in the desired directory.
+    tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_ONE_NAME"
+    # Create a new tmux session. The -d prevents attaching to the session right
+    # away so the script will continue to run. -s names the session. The newly
+    # created session opens a window and the -n allows you to name it 'server'.
+    # Can also use '-c + directory' to put you in the desired directory.
 
-		tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME" "runserver $SERVER_FILE" Enter
-		# starting the server in the target (-t) window named 'server'.
+    tmux send-keys -t "$SESSION_NAME":"$WINDOW_ONE_NAME" "runserver $SERVER_FILE" Enter
+    # starting the server in the target (-t) window named 'server'.
 
-		tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME"
-		# create a second window and attach to it (if we use -d then it would not attach).
-		# Name it 'editor'
+    tmux new-window -t "$SESSION_NAME" -n "$WINDOW_TWO_NAME"
+    # create a second window and attach to it (if we use -d then it would not attach).
+    # Name it 'editor'
 
-		tmux split-window -v -t "$SESSION_NAME":"$WINDOW_TWO_NAME"
-		tmux resize-pane -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 -D 5
-		# vert split windowTwo into two panes and resize the first pane (pane 0) down a bit
-		# note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
-		# The target -t format is... sessionName:windowName.paneNumber
+    tmux split-window -v -t "$SESSION_NAME":"$WINDOW_TWO_NAME"
+    tmux resize-pane -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 -D 5
+    # vert split windowTwo into two panes and resize the first pane (pane 0) down a bit
+    # note: the windows are divided into panes, the top pane is 0 and the bottom is 1.
+    # The target -t format is... sessionName:windowName.paneNumber
 
-		tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 "vim $EDIT_FILE" Enter
-		tmux send-keys -t "$_SESSION_NAME":"$WINDOW_TWO_NAME".0 ":VtrAttachToPane 1" Enter
-		tmux attach-session -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0
+    tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 "vim $EDIT_FILE" Enter
+    tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0 ":VtrAttachToPane 1" Enter
+    tmux attach-session -t "$SESSION_NAME":"$WINDOW_TWO_NAME".0
 
-	else
-		echo "The tmux session '${SESSION_NAME}' is already running..."
-	fi
+  else
+    echo "The tmux session '${SESSION_NAME}' is already running..."
+  fi
 }
 
 # -----------------------------------
 # Function to condense git commands |
 # -----------------------------------
 roofrack() {
-	echo cd\'ing into dotfiles
-	cd ~/dotfiles
-	echo running git add --all...
-	git add --all
-	echo git status...
-	git status
-	echo
-	echo running git commit...
-	git commit -m "another"
-	echo
-	echo pushing to GitHub...
-	git push origin master
-	cd -
+  echo cd\'ing into dotfiles
+  cd ~/dotfiles
+  echo running git add --all...
+  git add --all
+  echo git status...
+  git status
+  echo
+  echo running git commit...
+  git commit -m "another"
+  echo
+  echo pushing to GitHub...
+  git push origin master
+  cd -
 }
 
 # ----------------------------------------------------------------------
 # Function to start a server app using both node[mon] and browser-sync |
 # ----------------------------------------------------------------------
 runserver() {
-	APP_SERVER_FILE=$1
-	LINE_BAR=$(printf '%*s' "67" "" | tr " " "-")
-	POSSIBLE_APP_NAMES="app.js|index.js|another.js"
-	BROWSER_SYNC_EXISTS=$(pgrep -fl "[b]rowser-sync") # [ ] prevents 'ps a' returning 2X
+  APP_SERVER_FILE=$1
+  LINE_BAR=$(printf '%*s' "67" "" | tr " " "-")
+  POSSIBLE_APP_NAMES="app.js|index.js|another.js"
+  BROWSER_SYNC_EXISTS=$(pgrep -fl "[b]rowser-sync") # [ ] prevents 'ps a' returning 2X
 
-	# Test if a file was entered with the function call OR if it even exits.
-	while [[ ! $1 =~ "$POSSIBLE_APP_NAMES" ]] || [[ ! -f $1 ]]; do
-		read -r -p "Enter an existing file name... ie app.js: "
-		if [[ $REPLY =~ "$POSSIBLE_APP_NAMES" ]] && [[ -f $REPLY ]]; then
-			APP_SERVER_FILE=$REPLY
-			break
-		fi
-	done
+  # Test if a file was entered with the function call OR if it even exits.
+  while [[ ! $1 =~ "$POSSIBLE_APP_NAMES" ]] || [[ ! -f $1 ]]; do
+    read -r -p "Enter an existing file name... ie app.js: "
+    if [[ $REPLY =~ "$POSSIBLE_APP_NAMES" ]] && [[ -f $REPLY ]]; then
+      APP_SERVER_FILE=$REPLY
+      break
+    fi
+  done
 
-	# Test to check if browser-sync is already running. If it is, do not restart.
-	if [[ -z "$BROWSER_SYNC_EXISTS" ]]; then
-		printf "%s\n" "$LINE_BAR" "starting browser-sync as a background process..." \
-			"./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
-		./node_modules/.bin/browser-sync start --config ~/bs-config.js &
-	else
-		printf "%s\n" "$LINE_BAR" "browser-sync already running in the background..."
-	fi
+  # Test to check if browser-sync is already running. If it is, do not restart.
+  if [[ -z "$BROWSER_SYNC_EXISTS" ]]; then
+    printf "%s\n" "$LINE_BAR" "starting browser-sync as a background process..." \
+      "./node_modules/.bin/browser-sync start --config $HOME/bs-config.js"
+    ./node_modules/.bin/browser-sync start --config ~/bs-config.js &
+  else
+    printf "%s\n" "$LINE_BAR" "browser-sync already running in the background..."
+  fi
 
-	# Test to check if nodemon is installed. If not, use node.
-	if [[ -f "node_modules/.bin/nodemon" ]]; then
-		START_NODE="./node_modules/.bin/nodemon"
-	elif [[ -f "/usr/bin/nodemon" ]]; then
-		START_NODE="nodemon"
-	else START_NODE="node"; fi
-	printf "%s\n" "$LINE_BAR" "starting server...$APP_SERVER_FILE with $START_NODE" "$LINE_BAR"
-	"$START_NODE" "$APP_SERVER_FILE"
+  # Test to check if nodemon is installed. If not, use node.
+  if [[ -f "node_modules/.bin/nodemon" ]]; then
+    START_NODE="./node_modules/.bin/nodemon"
+  elif [[ -f "/usr/bin/nodemon" ]]; then
+    START_NODE="nodemon"
+  else START_NODE="node"; fi
+  printf "%s\n" "$LINE_BAR" "starting server...$APP_SERVER_FILE with $START_NODE" "$LINE_BAR"
+  "$START_NODE" "$APP_SERVER_FILE"
 }

@@ -23,16 +23,16 @@ tmsetUpNewSession() {
 	tm_session_file_name="$HOME/bin/tmux-sessions/session_names/$name"
 
 	if [[ ! -f "${tm_session_file_name}" ]]; then
-		# copy the template using your new session name
 		cp "$HOME"/bin/tmux-sessions/session_setup_scripts/tmux_template.sh "$tm_session_file_name"
-		# this will open the new session file for editing and put the cursor on row 6 column 34
+		# copy the template using your new session name
 		nvim -c "norm 6G33| <cr>" -c "startinsert" "$tm_session_file_name"
-    # run this file to start the tmux session
+		# this will open the new session file for editing and put the cursor on row 6 column 34
     $tm_session_file_name
+    # run this file to start the tmux session
+    if [[ $(echo $?) -gt 0 ]]; then
     # If the edit file does not exist in tm_session_file_name then it will exit with an error 
     # code of 2 which is greater than 0 so the test is true and the tm_session_file_name will 
     # be deleted. ($? shows the error code of the last command run)
-    if [[ $(echo $?) -gt 0 ]]; then
       rm "$tm_session_file_name"
     fi
 	else
