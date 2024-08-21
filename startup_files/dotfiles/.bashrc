@@ -145,6 +145,10 @@ alias timeSync='sudo timedatectl set-ntp false && sudo timedatectl set-ntp true'
 
 # alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
 
+# fzf stuff
+alias fzf="fzf --preview 'bat --color=always {}'" # shows previews
+export FZF_DEFAULT_COMMAND="fd --type f"          # fd is faster than using find
+
 #----------------
 # tmux stuff... |
 #----------------
@@ -163,6 +167,37 @@ alias tka=tmdeleteSessionNames.sh
 # Setting the prompt ... |
 #-------------------------
 
+my_prompt() {
+
+  # function to display git branch in prompt
+  parse_git_branch() {
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  }
+
+  # Prompt colors
+  yellow="\[\033[1;33m\]"
+  grey="\[\033[0;36m\]"
+  red="\[\033[1;31m\]"
+  blue="\[\033[1;35m\]"
+
+  # Prompt components
+  user="${yellow}\u"
+  symbol="${grey}@"
+  host="${red}\h"
+  directory="${blue} \W"
+  end="\$\[\033[0m\]"
+
+  # Change prompt while inside containers
+  if [ "$HOSTNAME" == "laptop" ]; then
+    export PS1="$user$symbol$host$directory\$(parse_git_branch)$end"
+  else
+    PS1='[\u@\h \W]\$(parse_git_branch)\$ '
+  fi
+}
+my_prompt
+
+# ------------------------------------------------------------------------------------------
+
 # PS1='[\u@\h \W]\$ '
 # PS1="\[\033[1;33m\][\u@\h\[\033[1;35m\] \w \[\033[1;33m\]]\[\033[1;35m\]\$\[\033[0m\]"
 # PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
@@ -170,12 +205,12 @@ alias tka=tmdeleteSessionNames.sh
 # export PS1
 
 # I did this to change the prompt for containers
-if [ "$HOSTNAME" == "laptop" ]; then
-  PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
-else
-  PS1='[\u@\h \W]\$ '
-fi
-export PS1
+# if [ "$HOSTNAME" == "laptop" ]; then
+# PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
+# else
+# PS1='[\u@\h \W]\$ '
+# fi
+# export PS1
 
 # -----------------------------------
 # Function for a simple tmux set up |
