@@ -181,17 +181,25 @@ my_prompt() {
   blue="\[\033[1;35m\]"
 
   # Prompt components
-  user="${yellow}\u"
-  symbol="${grey}@"
-  host="${red}\h"
-  directory="${blue} \W"
+  # user="${yellow}\u"
+  # symbol="${grey}@"
+  # host="${red}\h"
+  # directory="${blue} \W"
+  # end="\$\[\033[0m\]"
+  # Prompt components
+  user="\u"
+  symbol="@"
+  host="\h"
+  directory=" \W"
   end="\$\[\033[0m\]"
 
   # Change prompt while inside containers
   if [ "$HOSTNAME" == "laptop" ]; then
-    export PS1="$user$symbol$host$directory\$(parse_git_branch)$end"
+    # export PS1="$user$symbol$host$directory\$(parse_git_branch)$end"
+    export PS1="$yellow$user$grey$symbol$red$host$blue$directory\$(parse_git_branch)$end"
   else
-    PS1='[\u@\h \W]\$(parse_git_branch)\$ '
+    # PS1='[\u@\h \W]\$(parse_git_branch)\$ '
+    PS1="$user$symbol$host$directory\$(parse_git_branch)$end"
   fi
 }
 my_prompt
