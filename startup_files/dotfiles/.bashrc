@@ -174,51 +174,29 @@ my_prompt() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
   }
 
-  # Prompt colors
+  # Prompt colors (color goes before component)
   yellow="\[\033[1;33m\]"
   grey="\[\033[0;36m\]"
   red="\[\033[1;31m\]"
   blue="\[\033[1;35m\]"
+  cyan="\[\033[1;36m\]"
 
   # Prompt components
-  # user="${yellow}\u"
-  # symbol="${grey}@"
-  # host="${red}\h"
-  # directory="${blue} \W"
-  # end="\$\[\033[0m\]"
-  # Prompt components
-  user="\u"
-  symbol="@"
-  host="\h"
-  directory=" \W"
-  end="\$\[\033[0m\]"
+  # user="\u"
+  # symbol="@"
+  # host="\h"
+  # working_directory=" \W"
+  end_prompt="\$\[\033[0m\]"
 
   # Change prompt while inside containers
   if [ "$HOSTNAME" == "laptop" ]; then
-    # export PS1="$user$symbol$host$directory\$(parse_git_branch)$end"
-    export PS1="$yellow$user$grey$symbol$red$host$blue$directory\$(parse_git_branch)$end"
+    PS1="$yellow\u$grey@$red\h$blue \W$cyan\$(parse_git_branch)$blue$end_prompt"
   else
-    # PS1='[\u@\h \W]\$(parse_git_branch)\$ '
-    PS1="$user$symbol$host$directory\$(parse_git_branch)$end"
+    PS1="\u@\h \W\$(parse_git_branch)$end_prompt"
   fi
+  export PS1
 }
 my_prompt
-
-# ------------------------------------------------------------------------------------------
-
-# PS1='[\u@\h \W]\$ '
-# PS1="\[\033[1;33m\][\u@\h\[\033[1;35m\] \w \[\033[1;33m\]]\[\033[1;35m\]\$\[\033[0m\]"
-# PS1="\[\033[1;33m\]\u@\h\[\033[1;35m\] \W \[\033[1;35m\]\$\[\033[0m\]"
-# PS2="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
-# export PS1
-
-# I did this to change the prompt for containers
-# if [ "$HOSTNAME" == "laptop" ]; then
-# PS1="\[\033[1;33m\]\u\[\033[0;36m\]@\[\033[1;31m\]\h\[\033[1;35m\] \W\[\033[1;35m\]\$\[\033[0m\]"
-# else
-# PS1='[\u@\h \W]\$ '
-# fi
-# export PS1
 
 # -----------------------------------
 # Function for a simple tmux set up |
