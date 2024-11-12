@@ -8,13 +8,9 @@ printf "Configuring neovim\n"
 nvim --headless "+Lazy! sync" +qa
 printf "\nUse Mason to install lsp servers\n"
 nvim --headless +MasonUpdate +qa
+printf "\n"
 # TODO: Make it work to update treesitter from the command line here
 # nvim --headless -c 'TSUpdate | quitall'
-
-
-
-
-
 
 # reload loads .bashrc && .inputrc without exiting terminal
 exec $SHELL

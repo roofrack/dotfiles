@@ -17,18 +17,21 @@ Quick intro to what I have learned in pacman
 -Make sure mirrorlist is up to date
 
 
+ 
 
-
-Pacaur AUR package manager
+Yay AUR package manager
 --------------------------
 
 use the commands without sudo
 
-pacaur -Syu (updates pacman pkgs first and then checks aur for any updates and then updates those)
-pacaur -aSyu (only updates aur)
-pacaur -u (only updates the specified pkg)
+yay is very easy to use
 
-
+google-chrome
+  -this is kindofa pain to update
+  -delete usr/bin/google-chrome first
+  -then will end up having to delete a bunch more of the old 
+   google-chrome files in order to update. When you
+   try to install, all these old files will be listed. Need to make a script to delete them
 
 These are a collection of commands for pacman orgnized by category
 ------------------------------------------------------------------

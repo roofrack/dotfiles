@@ -160,8 +160,8 @@ alias tl='tmux ls'
 alias tn='tmux new -s'
 alias tk='tmux kill-session -t'
 alias ta='tmux a'
-# alias tka='tmux kill-server'
-alias tka=tmdeleteSessionNames.sh
+alias tka='tmux kill-server'
+# alias tka=tmdeleteSessionNames.sh
 
 #-------------------------
 # Setting the prompt ... |
@@ -174,27 +174,28 @@ my_prompt() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
   }
 
+  # Note: \033 is the same as \e (escape) and [0m\] removes all formatting at the end of PS1
   # Prompt colors (color goes before component)
-  yellow="\[\033[1;33m\]"
-  grey="\[\033[0;36m\]"
-  red="\[\033[1;31m\]"
-  blue="\[\033[1;35m\]"
-  cyan="\[\033[1;36m\]"
+  # -------------
+  local yellow="\[\033[1;33m\]"
+  local cyan="\[\033[0;36m\]"
+  local red="\[\033[1;31m\]"
+  local purple="\[\033[1;35m\]"
 
   # Prompt components
-  # user="\u"
-  # symbol="@"
-  # host="\h"
-  # working_directory=" \W"
-  end_prompt="\$\[\033[0m\]"
+  # -----------------
+  # user = \u
+  # 'at' symbol = @
+  # host = \h
+  # working_directory =  \W
+  local end_prompt="\$\[\033[0m\]"
 
-  # Change prompt while inside containers
+  # Change prompt format while inside containers
   if [ "$HOSTNAME" == "laptop" ]; then
-    PS1="$yellow\u$grey@$red\h$blue \W$cyan\$(parse_git_branch)$blue$end_prompt"
+    PS1="${yellow}\u${cyan}@${red}\h${purple} \W${cyan}\$(parse_git_branch)${purple}${end_prompt}"
   else
-    PS1="\u@\h \W\$(parse_git_branch)$end_prompt"
+    PS1="\u@\h \W${cyan}\$(parse_git_branch)${end_prompt}"
   fi
-  export PS1
 }
 my_prompt
 
@@ -210,9 +211,6 @@ tmExpressSetup() {
   DIRECTORY="$HOME/coding-practice/javascript/express/"
   SESSION_NAME="express"
 
-  # Can do one of three things here but the 3rd one is best I think...
-  # if [[ -z $(tmux list-sessions | grep $sessionName) ]]; then
-  # if ! tmux list-sessions | grep -q "$sessionName"; then
   if ! tmux has-session -t "$SESSION_NAME"; then
 
     cd "$DIRECTORY" || exit
