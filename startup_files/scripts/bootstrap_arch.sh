@@ -9,7 +9,7 @@ directory_for_packages="$HOME/dotfiles/startup_files/pkg_lists/"
 directory_for_functions="$HOME/dotfiles/startup_files/scripts/functions_bootstrap.sh"
 
 # Pulling in a few functions (banner_message(), end_message())...
-source $directory_for_functions
+source "$directory_for_functions"
 
 clear
 banner_message

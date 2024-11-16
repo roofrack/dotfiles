@@ -1,56 +1,18 @@
-#!/bin/bash
+#!/usr/bin/bash
 # This script sets up a quick & easy REPL using Tmux, Nvim, vim-tmux-runner.
 
-# Some foreground colors...
-bold=$(echo -en "\e[1m")
-underline=$(echo -en "\e[4m")
-normal=$(echo -en "\e[0m") # resets the terminal color to default
-purple=$(echo -en "\e[35m")
-green=$(echo -en "\e[32m")
-darkgray=$(echo -en "\e[90m")
-# red=$(echo -en "\e[31m")
+# TODO: tie all tmux scripts together and make a better terminal UI
 
-# border_line="${underline}                                                      ${normal}"
-border_line="${darkgray}${underline}                                                      ${normal}"
-
-# Some background colors...
-BLACK=$(echo -en "\e[40m")
-RED=$(echo -en "\e[41m")
-GREEN=$(echo -en "\e[42m")
-ORANGE=$(echo -en "\e[43m")
-BLUE=$(echo -en "\e[44m")
-PURPLE=$(echo -en "\e[45m")
-AQUA=$(echo -en "\e[46m")
-GRAY=$(echo -en "\e[47m")
-DARKGRAY=$(echo -en "\e[100m")
-LIGHTRED=$(echo -en "\e[101m")
-LIGHTGREEN=$(echo -en "\e[102m")
-LIGHTYELLOW=$(echo -en "\e[103m")
-LIGHTBLUE=$(echo -en "\e[104m")
-LIGHTPURPLE=$(echo -en "\e[105m")
-LIGHTAQUA=$(echo -en "\e[106m")
-# DEFAULT=$(echo -en "\e[49m")
-
-colors=(
-  "$BLACK" "$RED" "$GREEN" "$ORANGE" "$BLUE" "$PURPLE" "$AQUA"
-  "$GRAY" "$DARKGRAY" "$LIGHTRED" "$LIGHTGREEN" "$LIGHTYELLOW" "$LIGHTBLUE"
-  "$LIGHTPURPLE" "$LIGHTAQUA"
-)
-items_total=${#colors[@]}               # total number of items in colors array
-random_number=$((RANDOM % items_total)) # pick a random number out of total number of items in colors array
-color="${colors[$random_number]}"       # choose a color using the random number from above
-
-# A little UI title decoration -------------------------------------------------
-# a random background color from the colors array will be displayed here
-echo
-echo "               ${bold}${color}                    ${normal}"
-echo "               ${bold}${color} tmux/nvim/vtr REPL ${normal}"
-echo "               ${bold}${color}                    ${normal}"
-echo "$border_line"
+# Import ui decorations (button thingy and border) -----------------------------
+source /home/rob/coding-practice/shell/ui_components/ui_components.sh
+# source $HOME/coding-practice/shell/ui_components/ui_components.sh ($HOME gives errors but still works)
+border_line 50
+ui_button_printf "TMUX Nvim VTR REPL" # calling the function here
+border_line
 
 # Prompt for user to enter a file name to kick off the REPL --------------------
 while true; do
-  echo "${bold}${purple}Enter a file to edit:${normal}"
+  printf "${bold}${purple}%s${normal}\n" "Enter a File to Edit:"
   read -i "$HOME/coding-practice/" -r -e -p " " EDIT_FILE # need the " " with the -p otherwise it wont show the input arrow thingy
   # -i insert text at beginning of prompt, -r not sure why, -e gives readline file completion in prompt, -p prompt
   if [[ ! -d $EDIT_FILE ]]; then # if EDIT_FILE is NOT a directory than break out of while loop
@@ -74,9 +36,9 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 
   # Check to see if the file you want to edit exists
   if [[ ! -e $EDIT_FILE ]]; then
-    echo "The file ${bold}${green}$(basename "$EDIT_FILE")${normal} will be created once it is saved in Nvim"
+    printf "The file ${bold}${italic}${green}$(basename "$EDIT_FILE")${normal} %s\n" "will be created once it is saved in Nvim"
   fi
-  echo "$border_line"
+  border_line
 
   # Setting up the windows and splits
   # ---------------------------------
@@ -105,6 +67,6 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
   # ---------------------------------
   tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
 else
-  echo "The tmux session ${bold}${green}${SESSION_NAME}${normal} is already running..."
-  echo "$border_line"
+  printf "The tmux session ${bold}${italic}${green}${SESSION_NAME}${normal} %s\n" "is already running..."
+  border_line
 fi
