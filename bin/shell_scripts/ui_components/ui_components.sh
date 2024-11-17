@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Pull in the ansi color codes file (using $HOME gives warning here but will work)
-source "/home/rob/coding-practice/shell/ui_components/ansi_colors.sh"
+source "/home/rob/bin/shell_scripts/ansi_colors.sh"
 
 # Returns a random background-color using the array below
 # and the ansi color list above
