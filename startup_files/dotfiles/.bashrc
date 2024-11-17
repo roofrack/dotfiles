@@ -18,7 +18,9 @@
 # read archlinux libinput
 # would be better to put this in ~/dotfiles/startup_files/misc_files/30-touchpad.conf
 # so do that sometime
-xinput set-prop 12 336 50
+# Was getting an error with this command so commented out for now.
+# Not sure if it does anything anyway
+# xinput set-prop 12 336 50
 
 # export TERMINAL='alacritty'
 

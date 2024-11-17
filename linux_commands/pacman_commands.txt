@@ -32,6 +32,14 @@ google-chrome
   -then will end up having to delete a bunch more of the old 
    google-chrome files in order to update. When you
    try to install, all these old files will be listed. Need to make a script to delete them
+  -to delete all the files...
+      (can probably use the chrome_delete.txt file thats in my home dir for this)
+      yay -S google-chrome 2> chrome_delete.txt (sends std error to file)
+      edit each line in this file (vim macro) so its the filename only (no extra text)
+      can use a for loop to delete each line the file
+      for f in $(cat chrome_delete.txt
+        rm "$f"
+      done
 
 These are a collection of commands for pacman orgnized by category
 ------------------------------------------------------------------
