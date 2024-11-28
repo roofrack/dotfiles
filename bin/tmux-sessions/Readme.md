@@ -13,8 +13,7 @@ and you just add/delete the options and applications needed.
 
 Running the setup script opens up a new session setup file in nvim. Edit this file mostly by commenting out
 certain lines with unneeded options or commands. Rename/add more windows, commands or options for your
-projects as needed. Must enter a file path and filename to start in the editor. If this filepath doesnt exist
-then the program will exit.
+projects as needed. Must enter a file path and filename to start in the editor.
 
 An option will be given to delete session setup files whenever the tmux kill-server command is run
 (which I have saved as an alias 'tka' in .bashrc 'tmux kill all'). Its very quick and easy to set up and delete
@@ -31,7 +30,7 @@ commands not directly related to user inputs.
 
 2. #### session_setup_scripts directory  
 
-- `tmsetUpNewSession.sh` sets up, saves, and runs the new tmux session setup file  
+- `tmsetupNewSession` sets up, saves, and runs the new tmux session setup file  
 
 - `tmdeleteSessionNames.sh` deletes session setup files
 
@@ -39,12 +38,12 @@ commands not directly related to user inputs.
 
 # Usage
 
-- Just run the executable `tmsetUpNewSession.sh` in the terminal
+- Just run the executable `tmsetupNewSession.sh` in the terminal
 
-- use consistent and unique session names such as tm_PLAY.sh or tm_PLAY_lua.sh  
- (the session name comes from what ever text is between '_\' and '.sh')  
+- Enter a file (can use tab completion) in your project to edit or just for a REPL
+ (the session name and session_file_name are derived from this filename you just entered)  
 
 - run `tmdeleteSessionNames.sh` to terminate all tmux sessions and give the option to
-  delete the set up session files
+  delete the saved set up session files
 
 - I use VTR vim-tmux-runner to run code which seems to works well

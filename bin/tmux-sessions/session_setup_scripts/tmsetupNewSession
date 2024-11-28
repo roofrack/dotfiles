@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 # -------------------------------------------------------------
 # Set up a quick & easy REPL using Tmux, Nvim, vim-tmux-runner.
-# -----------------------------------< robaylard@gmail.com >---
+# --------------------------------------<robaylard@gmail.com>--
+
+tmux_template_name="$HOME/bin/tmux-sessions/session_setup_scripts/tmux_template.sh"
 
 # Import some ui decorations (ui_button_printf & border_line)
 # Ansi color file is also imported with this source
@@ -65,17 +67,16 @@ build_session_name() {
 
 # Returns a quick tmux session using template_name but does not save file
 repl_session() {
-  source "$HOME/coding-practice/shell/tmux/session_setup_scripts/tmux_template.sh"
+  source "$tmux_template_name"
 }
 
 # Returns a custom tmux session and saves the setup file
 # A new file will open in nvim to edit (add/delete tmux settings)
 # Can run this executable file to restart the custom session
 custom_session() {
-  template_name="$HOME/coding-practice/shell/tmux/session_setup_scripts/tmux_template.sh"
-  tm_session_file_name="$HOME/coding-practice/shell/tmux/session_setup_scripts/tm${SESSION_NAME}.sh"
+  tm_session_file_name="$HOME/bin/tmux-sessions/session_names/tm${SESSION_NAME}.sh"
   if [[ ! -f "${tm_session_file_name}" ]]; then
-    cp "$template_name" "$tm_session_file_name"
+    cp "$tmux_template_name" "$tm_session_file_name"
     prepend_text
     nvim -c "norm 4G20| <cr>" "$tm_session_file_name"
     source "$tm_session_file_name"
