@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-# Pull in the ansi color codes file (using $HOME gives warning here but will work)
-source "/home/rob/bin/shell_scripts/ansi_colors.sh"
+# Pull in the ansi color codes file
+source "$HOME/bin/shell_scripts/ui_components/ansi_colors.sh"
 
 # Returns a random background-color using the array below
 # and the ansi color list above
@@ -31,17 +31,14 @@ border_line() {
 #   string as a user input for the button thingy
 # Calls the bg_color_picker function
 ui_button_printf() {
-  bg_color_picker # calling the bg_color_picker function to pick a random bg color
+  bg_color_picker
   local input_text
   input_text=$1 # user input text for the button thingy
   if [[ -z $input_text ]]; then input_text="Hey Enter Some Input Text Here"; fi
   local text_length=${#input_text} # for calculating how many spaces to use
-  local indent_spaces=17           # How far from the left side of terminal to indent
+  local indent_spaces=15           # How far from the left side of terminal to indent
   printf "\n"
   printf "%*s$bold${bg_color}%*s${normal}\n" $indent_spaces "" $((text_length + 2)) ""
   printf "%*s${bold}${bg_color} %*s ${normal}\n" $indent_spaces "" "$text_length" "$input_text"
   printf "%*s$bold${bg_color}%*s${normal}\n" $indent_spaces "" $((text_length + 2)) ""
 }
-# border_line 60
-# ui_button_printf "TMUX Nvim VTR REPL"
-# border_line
