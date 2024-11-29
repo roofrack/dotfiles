@@ -8,6 +8,7 @@
 
 # Use these with the printf command
 
+normal="\e[0m"
 bold="\e[1m"
 underline="\e[4m"
 italic="\e[3m"
@@ -16,7 +17,6 @@ strickthrough="\e[9m"
 blink="\e[5m"
 reverse="\e[7m"
 hidden="\e[8m"
-normal="\e[0m"
 black="\e[30m"
 red="\e[31m"
 green="\e[32m"

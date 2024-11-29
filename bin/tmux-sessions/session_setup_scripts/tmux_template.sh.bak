@@ -30,13 +30,13 @@ template_settings() {
 
   # tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME" "clear &&\
   #    node_modules/.bin/browser-sync start --server --files * --no-open" Enter
+
 }
 
-if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-  printf "The tmux session ${bold}${italic}${green}${SESSION_NAME}${normal} %s\n" \
-    "is already running..."
-  tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
-else
+if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
   template_settings
   tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
+else
+  printf "The tmux session ${bold}${italic}${green}${SESSION_NAME}${normal} %s\n" \
+    "is already running..."
 fi

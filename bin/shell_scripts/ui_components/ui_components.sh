@@ -19,10 +19,9 @@ bg_color_picker() {
 # Returns kind of a 'border' using the ansi escape code for underline
 # Arguments:
 #   accepts a number for how many spaces wide the border should be
+#   defaults to 50 if no argument supplied
 border_line() {
-  local border_length
-  local border_length=$1
-  if [[ -z "$border_length" ]]; then border_length=50; fi
+  local border_length="${1:-50}"
   printf "${darkgray}${underline}%*s${normal}\n" "$border_length"
 }
 
@@ -30,13 +29,13 @@ border_line() {
 # Arguments:
 #   string as a user input for the button thingy
 # Calls the bg_color_picker function
+# indent_spaces is how far from the left side of terminal
 ui_button_printf() {
   bg_color_picker
-  local input_text
-  input_text=$1 # user input text for the button thingy
+  local input_text=$1
   if [[ -z $input_text ]]; then input_text="Hey Enter Some Input Text Here"; fi
-  local text_length=${#input_text} # for calculating how many spaces to use
-  local indent_spaces=15           # How far from the left side of terminal to indent
+  local text_length=${#input_text}
+  local indent_spaces="$(((50 - text_length) / 2))"
   printf "\n"
   printf "%*s$bold${bg_color}%*s${normal}\n" $indent_spaces "" $((text_length + 2)) ""
   printf "%*s${bold}${bg_color} %*s ${normal}\n" $indent_spaces "" "$text_length" "$input_text"

@@ -1,11 +1,11 @@
-EDIT_FILE="/home/rob/coding-practice/shell/play.sh"
-SESSION_NAME="shell_play"
+EDIT_FILE="/home/rob/coding-practice/shell/Mountain.sh"
+SESSION_NAME="shell_Mountain"
 #!/bin/bash
+template_settings() {
 
-WINDOW_ONE_NAME="editor" # ****** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE
-# WINDOW_TWO_NAME="server" # **** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE
-
-if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+  WINDOW_ONE_NAME="editor" # **** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE
+  # WINDOW_TWO_NAME="server" # **** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE
+  # WINDOW_THREE="         " # **** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE
 
   # Setting up the windows and splits ***** EDIT SETTINGS HERE ****<<<<EDIT HERE
   # ----------------------------------------------------------------------------
@@ -32,11 +32,13 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 
   # tmux send-keys -t "$SESSION_NAME":"$WINDOW_TWO_NAME" "clear &&\
   #    node_modules/.bin/browser-sync start --server --files * --no-open" Enter
+}
 
-  # Lastly attach (must do this last)
-  # ---------------------------------
-  tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
-else
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
   printf "The tmux session ${bold}${italic}${green}${SESSION_NAME}${normal} %s\n" \
     "is already running..."
+  tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
+else
+  template_settings
+  tmux attach-session -t "$SESSION_NAME":"$WINDOW_ONE_NAME".0
 fi
