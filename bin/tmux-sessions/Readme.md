@@ -40,10 +40,10 @@ commands not directly related to user inputs.
 
 - Just run the executable `tmsetupNewSession.sh` in the terminal
 
-- Enter a file (can use tab completion) in your project to edit or just for a REPL
+- Enter a file (use tab completion) in your project to edit or just for a REPL
  (the session name and session_file_name are derived from this filename you just entered)  
 
 - run `tmdeleteSessionNames.sh` to terminate all tmux sessions and give the option to
-  delete the saved set up session files
+  delete the saved set-up-session files
 
 - I use VTR vim-tmux-runner to run code which seems to works well
