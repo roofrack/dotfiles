@@ -1,5 +1,5 @@
-EDIT_FILE="/home/rob/coding-practice/shell/Mountain.sh"
-SESSION_NAME="shell_Mountain"
+EDIT_FILE="/home/rob/coding-practice/shell/play.sh"
+SESSION_NAME="shell_play"
 #!/bin/bash
 template_settings() {
 

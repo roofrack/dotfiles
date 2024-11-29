@@ -33,7 +33,7 @@ user_prompt() {
   read -i "$1" -r -e -p "$2" "$3"
 }
 
-# Returns a variable EDIT_FILE (which is a file and its path)
+# Returns global variable EDIT_FILE (which is a file and its path)
 # Validates variable by testing if directory path exists.
 # Use tab completion when prompted
 # For both conditions to be true to exit out of while loop...
@@ -50,22 +50,25 @@ get_edit_file() {
 }
 
 # TODO: combine the two variables, why the sam hill not?
-# Use the EDIT_FILE variable to Return:
+# Use the EDIT_FILE variable to build & Return:
 #   SESSION_NAME variable
 #   SESSION_FILE_NAME variable
 build_session_name() {
+  local dir_name
+  local file_name
   dir_name=$(basename "$(dirname "$EDIT_FILE")")
   file_name=$(basename "${EDIT_FILE%.*}")
   SESSION_NAME="${dir_name}_${file_name}"
   SESSION_FILE_NAME="$HOME/bin/tmux-sessions/session_names/tm${SESSION_NAME}.sh"
 }
 
-existing_session() {
+attach_to_existing_session() {
   border_line
   printf "The session_file${bold}${italic}${green} %s ${normal}already exists\n" \
     "$(basename "$SESSION_FILE_NAME")"
   source "$SESSION_FILE_NAME"
 }
+
 build_custom_session() {
   cp "$TMUX_TEMPLATE_FILE" "$SESSION_FILE_NAME"
   prepend_text
@@ -74,22 +77,22 @@ build_custom_session() {
   source "$SESSION_FILE_NAME"
 }
 
-repl_session() {
+build_repl_session() {
   border_line
   source "$TMUX_TEMPLATE_FILE"
 }
 
-# Returns tmux seesion
+# Returns a tmux session
 get_tmux_session() {
   if [[ -f "${SESSION_FILE_NAME}" ]]; then
-    existing_session
+    attach_to_existing_session
   else
-    prompt_heading "Save and/or Edit custom Session?"
+    prompt_heading "Edit and Save Custom Session?"
     user_prompt "" " y to save:" REPLY
     if [[ "$REPLY" == "y" ]]; then
       build_custom_session
     else
-      repl_session
+      build_repl_session
     fi
   fi
 }
@@ -102,7 +105,6 @@ get_tmux_session() {
 prepend_text() {
   echo "SESSION_NAME=\"$SESSION_NAME\"
       $(cat "$SESSION_FILE_NAME")" >"$SESSION_FILE_NAME"
-  ####
   echo "EDIT_FILE=\"$EDIT_FILE\"
       $(cat "$SESSION_FILE_NAME")" >"$SESSION_FILE_NAME"
 }
