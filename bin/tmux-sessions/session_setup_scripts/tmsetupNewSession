@@ -1,7 +1,7 @@
 #!/usr/bin/bash
-# -------------------------------------------------------------
-# Set up a quick & easy REPL using Tmux, Nvim, vim-tmux-runner.
-# --------------------------------------<robaylard@gmail.com>--
+#  ---------------------------------------------------------------
+# | Set up a quick & easy REPL using Tmux, Nvim, vim-tmux-runner |
+# --------------------------------------<robaylard@gmail.com>----
 # shellcheck source=/dev/null
 
 TMUX_TEMPLATE_FILE="$HOME/bin/tmux-sessions/session_setup_scripts/tmux_template.sh"

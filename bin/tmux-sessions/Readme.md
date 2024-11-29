@@ -46,4 +46,4 @@ commands not directly related to user inputs.
 - run `tmdeleteSessionNames.sh` to terminate all tmux sessions and give the option to
   delete the saved set-up-session files
 
-- I use VTR vim-tmux-runner to run code which seems to works well
+- I use VTR vim-tmux-runner to run code which seems to work well

@@ -1,15 +1,18 @@
 #!/bin/bash
-#
-# Script to give the option of deleting the template files created from the tmsetupNewSession.sh script
-# whenever the tmux server is killed using the .bashrc alias 'tka' (tmux kill-server)
+# -----------------------------------------------------------------------------
+# | Script to give the option of deleting the SESSION_FILE_NAME files created |
+# | from the tmsetupNewSession.sh script whenever the tmux server is killed   |
+# | using the bashrc alias 'tka' (tmux kill-server)                           |
+# ----------------------------------------------------<robaylard@gmail.com>---
 
 tmux_running_session_names=$(tmux list-sessions -F "#{session_name}")
-# Shows all the names of the tmux sessions that are currently running.
-# The F formats `tmux list-sessions` so only the session name shows and not all the other window stuff
-# see man tmux
+# Shows the names of all the tmux sessions that are currently running.
+# The F formats `tmux list-sessions` so only the session name shows and not all
+# the other window stuff. (see man tmux)
 
 session_names_directory="$HOME/bin/tmux-sessions/session_names"
-# This directory is where the the template files used to set up a tmux session are saved
+# This directory is where the the template files used to set up a tmux session
+# are saved.
 
 if [[ -n $tmux_running_session_names ]]; then
   echo "The tmux server will be terminated..."
