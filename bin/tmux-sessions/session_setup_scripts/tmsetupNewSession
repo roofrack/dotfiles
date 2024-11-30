@@ -21,7 +21,7 @@ prompt_heading() {
   printf "${bold}${purple}%s${normal}\n" "$1"
 }
 
-# prompt_user returns a global variable
+# Returns user input variable
 # parameters:
 #   1. inserts placeholder text for '-i' (string)
 #   2. prompt string
@@ -33,7 +33,7 @@ prompt_user() {
   read -i "$1" -r -e -p "$2" "$3"
 }
 
-# Returns global variable EDIT_FILE (which is a file and its path)
+# Returns global variable EDIT_FILE
 # Validates variable by testing if directory path exists.
 # Use tab completion when prompted
 # For both conditions to be true to exit out of while loop...
@@ -49,7 +49,6 @@ get_edit_file() {
   done
 }
 
-# TODO: combine the two variables, why the sam hill not?
 # Use the EDIT_FILE variable to build & Return:
 #   SESSION_NAME variable
 #   SESSION_FILE_NAME variable
@@ -65,7 +64,7 @@ build_session_name_variable() {
 # Returns a tmux session (calls one of the 3 functions below)
 get_tmux_session() {
   if [[ -f "${SESSION_FILE_NAME}" ]]; then
-    attach_to_existing_session
+    attach_to_existing_session_file
   else
     prompt_heading "Edit and Save Custom Session?"
     prompt_user "" " y to save:" REPLY
@@ -77,7 +76,7 @@ get_tmux_session() {
   fi
 }
 
-attach_to_existing_session() {
+attach_to_existing_session_file() {
   border_line
   printf "The session_file${bold}${italic}${green} %s ${normal}already exists\n" \
     "$(basename "$SESSION_FILE_NAME")"
