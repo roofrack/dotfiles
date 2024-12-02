@@ -100,15 +100,15 @@ build_repl_session() {
 #   Builds and returns a new file that can run as an executable to start
 #   a tmux session
 append_text() {
-  local my_items=(
+  local append_lines=(
     "#!/usr/bin/bash"
     "EDIT_FILE=\"$EDIT_FILE\""
     "DIRECTORY=\"$DIRECTORY\""
     "SESSION_NAME=\"$SESSION_NAME\""
     "$(cat "$TMUX_TEMPLATE_FILE")"
   )
-  for item in "${my_items[@]}"; do
-    printf "%s\n" "$item" >>"$SESSION_FILE_NAME"
+  for line in "${append_lines[@]}"; do
+    printf "%s\n" "$line" >>"$SESSION_FILE_NAME"
   done
   chmod +x "$SESSION_FILE_NAME"
 }
