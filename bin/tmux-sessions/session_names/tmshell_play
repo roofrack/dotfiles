@@ -1,6 +1,7 @@
+#!/usr/bin/bash
 EDIT_FILE="/home/rob/coding-practice/shell/play.sh"
+DIRECTORY="/home/rob/coding-practice/shell"
 SESSION_NAME="shell_play"
-#!/bin/bash
 template_settings() {
 
   WINDOW_ONE_NAME="editor" # **** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE

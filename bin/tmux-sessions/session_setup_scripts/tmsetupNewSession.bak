@@ -49,17 +49,18 @@ get_edit_file() {
 }
 
 # Use the EDIT_FILE variable to build & Return:
-#   DIRECTORY variable
+#   DIRECTORY
 #   SESSION_NAME variable
 #   SESSION_FILE_NAME variable
 build_session_name_variable() {
-  DIRECTORY="$(dirname "$EDIT_FILE")"
-  local file_name
+  # DIRECTORY="$(dirname "$EDIT_FILE")"
   local dir_name
+  local file_name
+  dir_name=$(basename "$(dirname "$EDIT_FILE")")
+  # dir_name="$(basename "$DIRECTORY")"
   file_name=$(basename "${EDIT_FILE%.*}")
-  dir_name="$(basename "$DIRECTORY")"
   SESSION_NAME="${dir_name}_${file_name}"
-  SESSION_FILE_NAME="$HOME/bin/tmux-sessions/session_names/tm${SESSION_NAME}"
+  SESSION_FILE_NAME="$HOME/bin/tmux-sessions/session_names/tm${SESSION_NAME}.sh"
 }
 
 # Returns a tmux session (calls one of the 3 functions below)
@@ -85,7 +86,8 @@ attach_to_existing_session_file() {
 }
 
 build_custom_session() {
-  append_text
+  cp "$TMUX_TEMPLATE_FILE" "$SESSION_FILE_NAME"
+  prepend_text
   nvim -c "norm 4G20| <cr>" "$SESSION_FILE_NAME"
   border_line
   source "$SESSION_FILE_NAME"
@@ -96,20 +98,20 @@ build_repl_session() {
   source "$TMUX_TEMPLATE_FILE"
 }
 
-# Called by the build_custom_session function
-#   Builds and returns a new file that can run as an executable to start
-#   a tmux session
-append_text() {
-  local my_items=(
-    "#!/usr/bin/bash"
-    "EDIT_FILE=\"$EDIT_FILE\""
-    "DIRECTORY=\"$DIRECTORY\""
-    "SESSION_NAME=\"$SESSION_NAME\""
-    "$(cat "$TMUX_TEMPLATE_FILE")"
-  )
-  for item in "${my_items[@]}"; do
-    printf "%s\n" "$item" >>"$SESSION_FILE_NAME"
-  done
+# TODO: figure out a cleaner, better way.
+# Need to prepend 3 variables for executable file to work on its own.
+# These next lines prepend to the top of the newly created SESSION_FILE_NAME
+# file in a convaluted way. It seems to work.Tried using sed but couldnt get
+# it to expand the variable inside the sed command
+prepend_text() {
+  echo "SESSION_NAME=\"$SESSION_NAME\" 
+      $(cat "$SESSION_FILE_NAME")" >"$SESSION_FILE_NAME"
+
+  # echo "DIRECTORY=\"$DIRECTORY\"
+  #     $(cat "$SESSION_FILE_NAME")" >"$SESSION_FILE_NAME"
+
+  echo "EDIT_FILE=\"$EDIT_FILE\" 
+      $(cat "$SESSION_FILE_NAME")" >"$SESSION_FILE_NAME"
 }
 
 main() {

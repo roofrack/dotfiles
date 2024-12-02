@@ -1,4 +1,3 @@
-#!/bin/bash
 template_settings() {
 
   WINDOW_ONE_NAME="editor" # **** CAN EDIT WINDOW NAME HERE ******<<<<<EDIT HERE
