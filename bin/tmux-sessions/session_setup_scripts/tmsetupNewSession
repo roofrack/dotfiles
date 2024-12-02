@@ -11,7 +11,7 @@ TMUX_TEMPLATE_FILE="$HOME/bin/tmux-sessions/session_setup_scripts/tmux_template.
 ui_decoration() {
   source "$HOME/bin/shell_scripts/ui_components/ui_components.sh"
   border_line 50
-  ui_button_printf "TMUX Nvim Session Maker"
+  ui_button_printf "TMUX-Nvim-Session-Maker"
   border_line
 }
 
@@ -32,7 +32,7 @@ prompt_user() {
   read -i "$1" -r -e -p "$2" "$3"
 }
 
-# Returns global variable EDIT_FILE
+# Returns global EDIT_FILE variable
 # Validates variable by testing if directory path exists.
 # Use tab completion when prompted
 # For both conditions to be true to exit out of while loop...
@@ -110,6 +110,7 @@ append_text() {
   for item in "${my_items[@]}"; do
     printf "%s\n" "$item" >>"$SESSION_FILE_NAME"
   done
+  chmod +x "$SESSION_FILE_NAME"
 }
 
 main() {
