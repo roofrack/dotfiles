@@ -34,7 +34,7 @@ delete_session_setup_files() {
 }
 
 prompt_user() {
-  printf "Delete session setup file:${bold}${italic}${green} %s${normal} ?\n" \
+  printf "Delete session setup file:${bold}${italic}${green} %s${normal}\n" \
     "$(basename "$SESSION_FILE_NAME")"
   while true; do
     read -n1 -s -r

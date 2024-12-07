@@ -4,6 +4,9 @@
 # --------------------------------------<robaylard@gmail.com>----
 # shellcheck source=/dev/null
 
+# TODO $1 input for EDIT_FILE and use that if exists otherwise go to
+#   prompt_user for entry. Add bash completion for $1
+
 TMUX_TEMPLATE_FILE="$HOME/bin/tmux-sessions/session_setup_scripts/tmux_template.sh"
 
 # Import some ui decorations (ui_button_printf & border_line)
@@ -64,8 +67,8 @@ build_session_name_variable() {
 }
 
 # Returns a tmux session (calls one of the 3 functions below)
-#   attach_to_existing_session_file
-#   build_custom_session
+#   attach_to_existing_session_file or...
+#   build_custom_session or...
 #   build_repl_session
 get_tmux_session() {
   if [[ -f "${SESSION_FILE_NAME}" ]]; then
@@ -96,6 +99,7 @@ build_repl_session() {
 
 # Called by the build_custom_session function
 #   Builds and returns a new executable file used to start a tmux session
+#   Not sure if its ok to do chmod inside script. Probably bad.
 append_text() {
   local append_lines=(
     "#!/usr/bin/bash"
@@ -111,7 +115,7 @@ append_text() {
 }
 
 prompt_user_to_save_session_file() {
-  printf "Edit and Save Custom Session:${bold}${italic}${green} %s${normal} ?\n" \
+  printf "Edit and Save Custom Session:${bold}${italic}${green} %s${normal}\n" \
     "$(basename "$SESSION_FILE_NAME")"
   while true; do
     read -n1 -s -r
