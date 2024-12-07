@@ -5,18 +5,17 @@
 # shellcheck source=/dev/null
 
 # TODO $1 input for EDIT_FILE and use that if exists otherwise go to
-#   prompt_user for entry. Add bash completion for $1
+#   prompt_user for entry. Add bash completion for this.
 
-TMUX_TEMPLATE_FILE="$HOME/bin/tmux-sessions/session_setup_scripts/tmux_template.sh"
+TMUX_TEMPLATE_FILE="../session_setup_scripts/tmux_template.sh"
 
 # Import some ui decorations (ui_button_printf & border_line)
 # Ansi color file is also imported with this source
 ui_decoration() {
-  source "$HOME/bin/shell_scripts/ui_components/ui_components.sh"
+  source "../ui_components/ui_components.sh"
   border_line 50
   ui_button_printf "TMUX-Nvim-Session-Maker"
   printf "\n"
-  # border_line
 }
 
 # parameter: string argument
@@ -63,7 +62,8 @@ build_session_name_variable() {
   file_name=$(basename "${EDIT_FILE%.*}")
   dir_name="$(basename "$DIRECTORY")"
   SESSION_NAME="${dir_name}_${file_name}"
-  SESSION_FILE_NAME="$HOME/bin/tmux-sessions/session_names/tm${SESSION_NAME}"
+  # SESSION_FILE_NAME="$HOME/bin/tmux-sessions/session_names/tm${SESSION_NAME}"
+  SESSION_FILE_NAME="../session_names/tm${SESSION_NAME}"
 }
 
 # Returns a tmux session (calls one of the 3 functions below)

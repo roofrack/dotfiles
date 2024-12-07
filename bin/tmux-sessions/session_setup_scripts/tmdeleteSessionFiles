@@ -5,11 +5,10 @@
 # -------------------------<robaylard@gmail.com>---
 
 ui_decoration() {
-  source "$HOME/bin/shell_scripts/ui_components/ui_components.sh"
+  source "../ui_components/ui_components.sh"
   border_line 50
   ui_button_printf "killing all running tmux sessions..."
   printf "\n"
-  # border_line
 }
 
 # Returns a list of all running tmux sessions
@@ -24,7 +23,7 @@ list_sessions() {
 delete_session_setup_files() {
   list_sessions
   for session in $list_sessions; do
-    SESSION_FILE_NAME="$HOME/bin/tmux-sessions/session_names/tm$session"
+    SESSION_FILE_NAME="../session_names/tm$session"
     if [[ -f $SESSION_FILE_NAME ]]; then
       prompt_user
     fi
@@ -53,6 +52,7 @@ prompt_user() {
   done
 }
 
+# Run main only if there are NO running tmux sessions
 main() {
   if [[ -n $(tmux ls) ]]; then
     ui_decoration

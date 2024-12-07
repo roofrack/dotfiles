@@ -40,7 +40,7 @@ commands not directly related to user inputs.
 
 - Just run the executable `tmsetupNewSession.sh` in the terminal
 
-- Enter a file (use tab completion) in your project to edit or just for a REPL
+- Enter a file (use tab completion) in your project to edit
  (the session name and session_file_name are derived from this filename you just entered)  
 
 - run `tmdeleteSessionNames.sh` to terminate all tmux sessions and give the option to
