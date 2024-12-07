@@ -20,7 +20,7 @@ list_sessions() {
 }
 
 # Deletes session setup files one by one if a session is running for that file
-# Kills the tmux server and ending all sessions
+# Kills the tmux server ending all sessions
 delete_session_setup_files() {
   list_sessions
   for session in $list_sessions; do
@@ -41,11 +41,11 @@ prompt_user() {
     case "${REPLY}" in
     [yY])
       rm "$SESSION_FILE_NAME"
-      printf "File ${bold}${underline}${red}%s${normal}\n" "Deleted"
+      printf "${italic}File ${bold}${underline}${red}%s${normal}\n" "Deleted"
       break
       ;;
     [nN])
-      printf "File ${bold}${underline}${blue}%s${normal}\n" "Saved"
+      printf "${italic}File ${bold}${underline}${blue}%s${normal}\n" "Saved"
       break
       ;;
     *) echo "enter y or n" ;;
@@ -54,7 +54,9 @@ prompt_user() {
 }
 
 main() {
-  ui_decoration
-  delete_session_setup_files
+  if [[ -n $(tmux ls) ]]; then
+    ui_decoration
+    delete_session_setup_files
+  fi
 }
 main
