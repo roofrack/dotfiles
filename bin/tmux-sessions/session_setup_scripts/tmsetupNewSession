@@ -12,7 +12,8 @@ ui_decoration() {
   source "$HOME/bin/shell_scripts/ui_components/ui_components.sh"
   border_line 50
   ui_button_printf "TMUX-Nvim-Session-Maker"
-  border_line
+  printf "\n"
+  # border_line
 }
 
 # parameter: string argument
@@ -97,8 +98,7 @@ build_repl_session() {
 }
 
 # Called by the build_custom_session function
-#   Builds and returns a new file that can run as an executable to start
-#   a tmux session
+#   Builds and returns a new executable file used to start a tmux session
 append_text() {
   local append_lines=(
     "#!/usr/bin/bash"
