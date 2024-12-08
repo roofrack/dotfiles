@@ -46,7 +46,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
-export PATH=~/bin:~/bin/tmux-sessions/session_names:~/bin/tmux-sessions/session_setup_scripts:$PATH
+export PATH=~/bin:~/bin/tmux-session-maker/session_names:~/bin/tmux-session-maker/session_setup_scripts:$PATH
 export LUA_PATH=~/.config/nvim/ # cant remember why I did this
 
 # Lua_Path ... need to add to this if wanting to import lua modules from
