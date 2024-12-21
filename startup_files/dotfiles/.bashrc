@@ -164,6 +164,7 @@ alias tk='tmux kill-session -t'
 alias ta='tmux a'
 # alias tka='tmux kill-server'
 alias tka=tmdeleteSessionFiles
+alias tm=tmsetupNewSession
 
 #-------------------------
 # Setting the prompt ... |

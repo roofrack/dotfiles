@@ -112,7 +112,6 @@ bindsym $mod+x exec $HOME/.config/i3lock/lock.sh
 
 
 
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
