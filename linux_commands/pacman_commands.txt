@@ -37,7 +37,7 @@ google-chrome
       yay -S google-chrome 2> chrome_delete.txt (sends std error to file)
       edit each line in this file (vim macro) so its the filename only (no extra text)
       can use a for loop to delete each line the file
-      for f in $(cat chrome_delete.txt
+      for f in $(cat chrome_delete.txt); do
         rm "$f"
       done
 
