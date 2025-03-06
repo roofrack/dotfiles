@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# connected=$(bluetoothctl devices Connected | cut -d ' ' -f3)
+connected=$(bluetoothctl devices Connected | awk '{print $3" "$4}')
+
+if [ -n "$connected" ]; then
+  echo "  $connected Connected "
+fi

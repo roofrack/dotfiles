@@ -91,7 +91,8 @@ banner_message() {
 
 # Use in bootstrap_arch.sh script
 end_message() {
-  end_message="\nREAD . . ."
+  printf "\n"
+  end_message="READ . . ."
   for i in $end_message; do
     # printf $i
     printf '%s' "$i"

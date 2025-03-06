@@ -301,3 +301,6 @@ runserver() {
   printf "%s\n" "$LINE_BAR" "starting server...$APP_SERVER_FILE with $START_NODE" "$LINE_BAR"
   "$START_NODE" "$APP_SERVER_FILE"
 }
+
+# Auto start WM after login
+startx > /dev/null 2>&1

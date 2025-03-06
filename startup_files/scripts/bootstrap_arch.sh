@@ -51,5 +51,10 @@ printf "\n:: Installing plugins & misc commands...\n"
 source $directory_for_scripts/bash_commands.sh
 
 # The end
+echo
 end_message
 printf "\n"
+sleep 2
+
+# reload loads .bashrc && .inputrc without exiting terminal
+exec $SHELL

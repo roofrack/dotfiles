@@ -310,11 +310,12 @@ bindsym $mod+y exec i3-msg resize shrink left 25 px or 25 ppt, resize shrink rig
 # Auto start some applications putting them in certain workspaces on i3 startup
 # ----------------------------------------------------------------------------------------
 
-exec --no-startup-id i3-msg 'workspace $browser; exec $default-browser'
 
 exec --no-startup-id i3-msg 'workspace $terminal; exec $default-terminal'
 
 exec --no-startup-id i3-msg 'workspace $ws3; exec $default-terminal -e ranger'
+
+exec --no-startup-id i3-msg 'workspace $browser; exec $default-browser'
 
 # exec --no-startup-id i3-msg 'workspace $vm; exec virt-manager'
 
