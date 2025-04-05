@@ -1,0 +1,15 @@
+/usr/share/appdata/google-chrome.appdata.xml
+/usr/share/applications/google-chrome.desktop
+/usr/share/doc/google-chrome-stable/changelog.gz
+/usr/share/gnome-control-center/default-apps/google-chrome.xml
+/usr/share/icons/hicolor/128x128/apps/google-chrome.png
+/usr/share/icons/hicolor/16x16/apps/google-chrome.png
+/usr/share/icons/hicolor/24x24/apps/google-chrome.png
+/usr/share/icons/hicolor/256x256/apps/google-chrome.png
+/usr/share/icons/hicolor/32x32/apps/google-chrome.png
+/usr/share/icons/hicolor/48x48/apps/google-chrome.png
+/usr/share/icons/hicolor/64x64/apps/google-chrome.png
+/usr/share/licenses/google-chrome-stable/WidevineCdm-LICENSE.txt
+/usr/share/licenses/google-chrome/eula_text.html
+/usr/share/man/man1/google-chrome-stable.1.gz
+/usr/share/man/man1/google-chrome.1.gz
