@@ -1,5 +1,6 @@
 # NOTE: google-chrome... is a pain to update because it won't seem to update with
-#       all these chrome files left in the system. This script will delete all these files
+# all these chrome files left in the system. This script will delete all these files.
+# May not be needed on my other computers.
 
 # 1) Run the update command and send the errors to a file...
 # yay -S google-chrome 2> delete_these_chrome_files.txt

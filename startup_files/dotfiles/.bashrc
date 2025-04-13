@@ -127,6 +127,8 @@ alias podman='sudo podman'
 
 alias symlink='. $HOME/dotfiles/startup_files/scripts/sym_link.sh'
 
+alias reflector='sudo reflector --verbose --country Canada --protocol https --sort rate --latest 10 --save /etc/pacman.d/mirrorlist'
+
 # This runserver command can also be added to the scripts section of the package.json
 # and run using the npm run devStart or whatever you called it. Easier to just run it
 # on the command line. NOTE: If re=running this command and you get an error
@@ -303,4 +305,4 @@ runserver() {
 }
 
 # Auto start WM after login
-startx > /dev/null 2>&1
+startx >/dev/null 2>&1
