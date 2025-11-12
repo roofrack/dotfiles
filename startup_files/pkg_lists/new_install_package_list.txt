@@ -21,3 +21,4 @@ ttf-droid
 ttf-ubuntu-font-family
 iw
 stylua
+bat

@@ -94,9 +94,8 @@ end_message() {
   printf "\n"
   end_message="READ . . ."
   for i in $end_message; do
-    # printf $i
     printf '%s' "$i"
-    sleep 0.3s
+    sleep 1s
   done
   sleep 0.2s
   # printf " $(tput smul)dotfiles/README.md$(tput rmul) for more info"
