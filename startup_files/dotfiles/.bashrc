@@ -51,7 +51,8 @@ source /usr/share/git/completion/git-completion.bash
 
 # Adding a ~/bin/ directory to PATH
 # export PATH=~/bin:~/bin/tmux-session-maker/session_names:~/bin/tmux-session-maker/session_setup_scripts:$PATH
-export PATH=~/bin:~/.tmux/tmux-session-maker/session_names:~/.tmux/tmux-session-maker/session_setup_scripts:$PATH
+# export PATH=~/bin:~/.tmux/tmux-session-maker/session_names:~/.tmux/tmux-session-maker/session_setup_scripts:$PATH
+export PATH=~/.cargo/bin/:~/bin:~/.tmux/tmux-session-maker/session_names:~/.tmux/tmux-session-maker/session_setup_scripts:$PATH
 export LUA_PATH=~/.config/nvim/ # cant remember why I did this
 
 # Lua_Path ... need to add to this if wanting to import lua modules from
@@ -62,13 +63,12 @@ LUA_PATH='?;?.lua'
 # bash history settings... |
 #---------------------------
 rm .bash_history.tmp* >/dev/null 2>&1
-shopt -s histappend 
-HISTSIZE=       # leave it open to keep size max
+shopt -s histappend
+HISTSIZE= # leave it open to keep size max
 HISTFILESIZE=20000
 HISTCONTROL=ignoredups:erasedups
 HISTIGNORE="history:exit:his:ls:brc"
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-
 
 #---------------
 # Some alias's |
@@ -116,7 +116,6 @@ export FZF_DEFAULT_COMMAND="fd --type f"          # fd is faster than using find
 # nvim change to different setup
 alias newLSP_NVIM="NVIM_APPNAME=newLSP_NVIM nvim"
 
-
 #----------------
 # tmux stuff... |
 #----------------
@@ -130,7 +129,6 @@ alias ta='tmux a'
 # alias tka='tmux kill-server'
 alias tka=tmdeleteSessionFiles
 alias tm=tmsetupNewSession
-
 
 #-------------------------
 # Setting the prompt ... |
@@ -184,7 +182,6 @@ roofrack() {
   git push origin master
   cd -
 }
-
 
 # Auto start WM after login
 startx >/dev/null 2>&1

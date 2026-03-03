@@ -98,6 +98,28 @@ logging commands
 
 tail -F filename     
 
+USB drives
+-------------------------------------------------
+How to connect USB drive... I keep forgetting
+
+- OK first of all... if the drive doesnt show up, turn off computer,
+  plug it in and turn on. 
+
+- lsblk shows the drive... probably sdb
+- now mount it... mount /dev/sdb2 ~/usb-drive-mountpt (or where ever you want it mounted)
+  (you dont need to mount it just run the command below)
+
+- use dd command to burn the iso onto usb drive...
+  dd if=/path/to/your/isofile of=/your/usb/disk bs=8M status=progress
+  so... could do for example... dd if=~/Downloads/omarchy-3.1.5.iso of=/dev/sdb bs=8M status=progress
+
+ESP32 dev boards
+----------------
+OK so rob you need to add yourself to the uucp group... sudo usermod -a -G uucp $USER
+otherwise it will give you port busy error (when using ESPconnect in the browser)
+
+
+
 notes to me...
 --------------
 
