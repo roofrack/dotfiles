@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 # This is kind of a tutorial for myself to learn and set up ssh cerificate authorization (ca).
-# Need to have password (or key) authorization enabled on host for this to initially be set up.
-# Allow root login in order to copy files over to host (server) (VeryBad! Change it back after setup!!).
-# Uncomment the functions in main() to run functions one at a time to ensure no errors.
+# Allow 'PermitRootLogin yes' in order to copy files over to host (server) (VeryBad! Change it back after setup!!).
 # Can really fine tune restrictions on certificates by using the principle field and setting a time limit.
-# If root is not added to user certificate principles field (-n) then can NOT ssh into server as root user.
+# NOTE: If 'root' is not added to user certificate principles field (-n) then can NOT ssh into server as root user.
 
 # Define a few variables...
-server="root@192.168.122.41"
+my_host="192.168.122.41"
+# server="root@192.168.122.41"
+server="root@$my_host"
 client_directory="$HOME/.ssh"
 server_directory="/etc/ssh"
 user_key="user_key"
@@ -38,7 +38,7 @@ generate_user_keys() {
 # or it wont work. Remember how you spent hours figuring that out. Use correct user names here!
 sign_user_certificate() {
   printf '\n%s\n' "SIGNING USER PUBLIC KEY CERTIFICATE..."
-  ssh-keygen -s "$ca_directory"/"$ca_user" -I "client-machine" -n "root,rob" -V +22d \
+  ssh-keygen -s "$ca_directory"/"$ca_user" -I "client-machine" -n "root,$USER" -V +22d \
     "$client_directory"/"$user_key".pub &>/dev/null
 }
 
@@ -67,25 +67,22 @@ generate_host_keys() {
 # Send certificate back to Host machine (host_key-cert.pub).
 # Remove the host_key.pub & host_key-cert.pub files (do not need anymore after certificate is created).
 sign_host_certificate() {
-  local hostname="192.168.122.41"
   printf '\n%s\n' "SIGNING HOST PUBLIC KEY CERTIFICATE..."
   scp -i "$user_key" "$server":"$server_directory"/"$host_key".pub "$client_directory" &>/dev/null
-  ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$hostname" -V +22d "$client_directory"/"$host_key".pub &>/dev/null
+  ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$my_host" -V +22d "$client_directory"/"$host_key".pub &>/dev/null
   scp -i "$user_key" "$client_directory"/"$host_key"-cert.pub "$server":"$server_directory" &>/dev/null
   rm "$client_directory"/"$host_key".pub "$client_directory"/"$host_key"-cert.pub
 }
 
 # 7. Configure HOST...
-# NOTE: THIS LOCKS DOWN THE SERVER - NO ROOT LOGINS if PermitRootLogin uncommented below.
+# NOTE: THIS LOCKS DOWN THE SERVER - NO ROOT LOGINS
 # Create configuration file (gets merged into sshd_config).
 # Copy configuration file from here to HOST:/etc/ssh/sshd_configd/.
 # Copy CA user_key.pub to server (allows host to trust the client user).
 # Restart the host sshd.
 # Delete my_host_ca_configuration file as not needed here.
 configure_host() {
-  : >"$my_host_ca_configuration" # ': >' creates the file and truncates it
-  cat <<EOF >>"$my_host_ca_configuration"
-  #PermitRootLogin no
+  cat <<EOF >"$my_host_ca_configuration"
   PasswordAuthentication no
   AuthenticationMethods publickey
   
@@ -99,6 +96,7 @@ EOF
   scp -i "$user_key" "$client_directory"/"$my_host_ca_configuration" \
     "$server":"$server_directory"/sshd_config.d/ &>/dev/null
   scp -i "$user_key" "$ca_directory"/"$ca_user".pub "$server":"$server_directory" &>/dev/null
+  ssh -i "$user_key" "$server" "rm /etc/ssh/sshd_config.d/20-single_root_login.conf"
   ssh -i "$user_key" "$server" systemctl restart sshd &>/dev/null
   rm "$my_host_ca_configuration"
 }
@@ -108,14 +106,24 @@ setup_ssh_agent() {
   ssh-add "$client_directory"/"$user_key" &>/dev/null
 }
 
+# NOTE: ROB you need this when ever you run any host function!!! OR IT WONT WORK!
+# Temporily changes PermitRootLogin to yes. Maybe change in future to use user login & sudo.
+single_root_login() {
+  # ssh -t -i user_key rob@192.168.122.41 "echo 'PermitRootLogin yes' | sudo tee \
+  ssh -t -i user_key "$USER"@"$my_host" "echo 'PermitRootLogin yes' | sudo tee \
+    /etc/ssh/sshd_config.d/20-single_root_login.conf >/dev/null && \
+    sudo systemctl restart sshd"
+}
+
 main() {
-  setup_ssh_agent
+  [[ -f "$user_key" ]] && setup_ssh_agent
   # make_CA
-  generate_user_keys
-  sign_user_certificate
-  configure_client
+  # generate_user_keys
+  # sign_user_certificate
+  single_root_login
   generate_host_keys
-  sign_host_certificate
+  # sign_host_certificate
   configure_host
+  # configure_client
 }
 main
