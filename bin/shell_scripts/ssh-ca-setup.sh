@@ -1,8 +1,8 @@
 #!/usr/bin/bash
-# Tutorial for myself to learn and set up ssh cerificate authorization (ca).
+# Tutorial to learn and set up ssh cerificate authorization (ca).
 # Can really fine tune restrictions on certificates by using the principle field and setting a time limit.
-# I had this setup initially for root logins to save typing my password in for sudo commands but I
-# prefer to avoid root login (more secure).
+# I had this setup initially for root logins to save typing my password in for sudo commands but probably
+# best to avoid root login.
 
 # Define variables...
 my_host="192.168.122.41"
@@ -16,10 +16,20 @@ ca_user="ca_user"
 ca_host="ca_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
 
+# Set up temp key auth so can quickly ssh into host for the rest of ca setup and
+# not have to enter a password for each ssh/scp command. Use ssh-agent for this.
+# First, pull in remote host public key and copy to client known_host file.
+# Second, pust the client public key to the hosts .ssh/authorized keys directory.
+# Only need to run this initially if ssh has never been set up for this server.
+temporary_key_setup() {
+  ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
+  ssh-copy-id -i "$user_key.pub" "$server"
+}
+
 # 1. Create a Certificate Authority for signing public keys...
 # Setup a secret directory or place for the certificate authority (CA).
 # Generate certificate keys (they are just reg keys) for both server and client.
-# Of course the actual CA would not go somewhere very secure... not here.
+# Of course the actual CA would go somewhere very secure... not here.
 make_CA() {
   mkdir "$ca_directory"
   ssh-keygen -f "$ca_directory"/"$ca_user" -C "My User CA"
@@ -102,19 +112,20 @@ EOF"
 setup_ssh_agent() {
   if [[ -f "$user_key" ]]; then
     rm "$client_directory"/agent/*
-    eval "$(ssh-agent -s)"                  #&>/dev/null
-    ssh-add "$client_directory"/"$user_key" #&>/dev/null
+    eval "$(ssh-agent -s)"
+    ssh-add "$user_key"
   fi
 }
 
 main() {
-  setup_ssh_agent
   # make_CA
-  generate_user_keys
-  sign_user_certificate
-  generate_host_keys
-  sign_host_certificate
-  configure_host
-  configure_client
+  # generate_user_keys
+  # sign_user_certificate
+  temporary_key_setup
+  setup_ssh_agent
+  # generate_host_keys
+  # sign_host_certificate
+  # configure_host
+  # configure_client
 }
 main
