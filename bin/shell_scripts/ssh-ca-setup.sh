@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 # Tutorial to learn and set up ssh cerificate authorization (ca).
 # Can really fine tune restrictions on certificates by using the principle field and setting a time limit.
-# I had this setup initially for root logins to save typing my password in for sudo commands but probably
-# best to avoid root login.
 
 # Define variables...
 my_host="192.168.122.41"
@@ -17,8 +15,8 @@ ca_host="ca_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
 
 # Saves typing in the key passwd for each ssh/scp command...
-# First, pulls in remote host public key and copy to client known_host file.
-# Second, pushes the client public key to the hosts .ssh/authorized keys directory.
+# First, pull in remote host public key and copy to client known_host file.
+# Second, push the client public key to the host's /home/my_user/.ssh/authorized keys directory.
 # Only need to run this initially if ssh has never been set up for this server.
 temporary_key_setup() {
   if [[ ! -f "$client_directory"/known_hosts ]]; then
@@ -111,10 +109,8 @@ EOF"
 
 start_ssh-agent() {
   killall ssh-agent
-  # if [[ -z "$SSH_AUTH_SOCK" ]]; then
   eval "$(ssh-agent -s)"
   ssh-add "$client_directory"/"$user_key"
-  # fi
 }
 
 main() {
