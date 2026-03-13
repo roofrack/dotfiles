@@ -184,5 +184,34 @@ roofrack() {
 }
 
 # Auto start WM after login
-startx >/dev/null 2>&1
-# startxfce4 >/dev/null 2>&1
+startx >/dev/null &>/dev/null
+# startxfce4 &>/dev/null
+
+# Rob handy snippet you boosted online to auto start/kill ssh-agent
+# ssh-agent for storing the login key passwd for current terminal
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+  echo "Initializing new SSH agent..."
+  # Ensure the environment file is secure
+  touch "$SSH_ENV"
+  chmod 600 "${SSH_ENV}"
+  # Start the agent and capture its output to the environment file
+  /usr/bin/ssh-agent | sed 's/^echo/#echo/' >>"${SSH_ENV}"
+  . "${SSH_ENV}" >/dev/null
+  /usr/bin/ssh-add
+}
+
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+  . "${SSH_ENV}" >/dev/null
+  # Check if the process with SSH_AGENT_PID is still running
+  kill -0 "$SSH_AGENT_PID" 2>/dev/null || {
+    start_agent
+  }
+else
+  start_agent
+fi
+
+# Unset the temporary variable
+unset SSH_ENV

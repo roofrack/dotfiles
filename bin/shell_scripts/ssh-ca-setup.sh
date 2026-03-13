@@ -16,14 +16,15 @@ ca_user="ca_user"
 ca_host="ca_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
 
-# Set up temp key auth so can quickly ssh into host for the rest of ca setup and
-# not have to enter a password for each ssh/scp command. Use ssh-agent for this.
-# First, pull in remote host public key and copy to client known_host file.
-# Second, pust the client public key to the hosts .ssh/authorized keys directory.
+# Saves typing in the key passwd for each ssh/scp command...
+# First, pulls in remote host public key and copy to client known_host file.
+# Second, pushes the client public key to the hosts .ssh/authorized keys directory.
 # Only need to run this initially if ssh has never been set up for this server.
 temporary_key_setup() {
-  ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
-  ssh-copy-id -i "$user_key.pub" "$server"
+  if [[ ! -f "$client_directory"/known_hosts ]]; then
+    ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
+    ssh-copy-id -i "$user_key.pub" "$server"
+  fi
 }
 
 # 1. Create a Certificate Authority for signing public keys...
@@ -65,7 +66,7 @@ configure_client() {
 # Cant seem to add a comment over the ssh wire for server host_key
 # but just go into the host_key file and edit the comment if desired.
 generate_host_keys() {
-  printf '\n%s\n' "LOGGING INTO HOST..."
+  printf '\n%s' "LOGGING INTO HOST..."
   printf '\n%s\n' "GENERATING HOST KEY..."
   ssh -t -q -i "$user_key" "$server" "sudo ssh-keygen -f $server_directory/$host_key"
 }
@@ -80,8 +81,8 @@ sign_host_certificate() {
   scp -i "$user_key" "$server":"$server_directory"/"$host_key".pub "$client_directory" &>/dev/null
   ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$my_host" -V +22d "$client_directory"/"$host_key".pub &>/dev/null
   scp -i "$user_key" "$client_directory"/"$host_key"-cert.pub "$server":"/tmp" &>/dev/null
-  ssh -t -q -i "$user_key" "$server" "sudo mv /tmp/$host_key-cert.pub $server_directory"
-  rm "$client_directory"/"$host_key".pub "$client_directory"/"$host_key"-cert.pub
+  ssh -t -q -i "$user_key" "$server" "sudo mv /tmp/$host_key-cert.pub $server_directory &>/dev/null"
+  rm "$client_directory"/"$host_key".pub "$client_directory"/"$host_key"-cert.pub &>/dev/null
 }
 
 # 7. Configure HOST...
@@ -102,30 +103,29 @@ TrustedUserCAKeys /etc/ssh/${ca_user}.pub
 HostKey /etc/ssh/${host_key}
 HostCertificate /etc/ssh/${host_key}-cert.pub
 EOF"
-  printf '\n%s\n' "COPYING USER CERTIFICATE AUTHORITY $ca_user.pub to host..."
   scp -i "$user_key" "$ca_directory"/"$ca_user".pub "$server":/tmp &>/dev/null
   printf '\n%s\n' "RESTARTING host sshd..."
   ssh -t -i "$user_key" "$server" "sudo mv /tmp/$ca_user.pub $server_directory && \
-    sudo systemctl restart sshd &>/dev/null"
+    sudo systemctl restart sshd &>/dev/null && rm /home/$USER/.ssh/authorized_keys &>/dev/null"
 }
 
-setup_ssh_agent() {
-  if [[ -f "$user_key" ]]; then
-    rm "$client_directory"/agent/*
-    eval "$(ssh-agent -s)"
-    ssh-add "$user_key"
-  fi
+start_ssh-agent() {
+  killall ssh-agent
+  # if [[ -z "$SSH_AUTH_SOCK" ]]; then
+  eval "$(ssh-agent -s)"
+  ssh-add "$client_directory"/"$user_key"
+  # fi
 }
 
 main() {
   # make_CA
-  # generate_user_keys
-  # sign_user_certificate
-  temporary_key_setup
-  setup_ssh_agent
-  # generate_host_keys
-  # sign_host_certificate
-  # configure_host
-  # configure_client
+  generate_user_keys
+  temporary_key_setup # order is important here
+  start_ssh-agent     # order is important here
+  sign_user_certificate
+  generate_host_keys
+  sign_host_certificate
+  configure_host
+  configure_client # order is important here
 }
 main
