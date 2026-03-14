@@ -2,8 +2,7 @@
 # Tutorial to learn and set up ssh cerificate authorization (ca).
 # Can really fine tune restrictions on certificates by using the principle field and setting a time limit.
 # This script initially sets up key authorization and then uses that to set up CA authorization.
-# The ~/.ssh/known_hosts file will have the host ca public key and will certify all hosts.
-#
+# The ~/.ssh/known_hosts file gets the host ca public key which is used to trust all certified hosts.
 
 # Define variables...
 # my_host="192.168.122.10"
@@ -58,7 +57,8 @@ configure_client() {
 # Cant seem to add a comment over the ssh wire for server host_key
 # but just go into the host_key file and edit the comment if desired.
 generate_host_keys() {
-  printf '\n%s' "LOGGING INTO HOST..."
+  clear
+  printf '%s\n' "For host machine $my_host..."
   printf '\n%s\n' "GENERATING HOST KEY..."
   ssh -t -q -i "$user_key" "$server" "sudo ssh-keygen -f $server_directory/$host_key"
 }
@@ -71,7 +71,8 @@ generate_host_keys() {
 sign_host_certificate() {
   printf '\n%s\n' "SIGNING HOST PUBLIC KEY CERTIFICATE..."
   scp -i "$user_key" "$server":"$server_directory"/"$host_key".pub "$client_directory" &>/dev/null
-  ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$my_host" -V +22d "$client_directory"/"$host_key".pub &>/dev/null
+  ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$my_host" -V +22d \
+    "$client_directory"/"$host_key".pub &>/dev/null
   scp -i "$user_key" "$client_directory"/"$host_key"-cert.pub "$server":"/tmp" &>/dev/null
   ssh -t -q -i "$user_key" "$server" "sudo mv /tmp/$host_key-cert.pub $server_directory &>/dev/null"
   rm "$client_directory"/"$host_key".pub "$client_directory"/"$host_key"-cert.pub &>/dev/null
@@ -101,35 +102,17 @@ EOF"
     sudo systemctl restart sshd &>/dev/null && rm /home/$USER/.ssh/authorized_keys &>/dev/null"
 }
 
-# Saves typing in the key passwd for each ssh/scp command...
-# ssh-agent does the magic of supplying the user key passwd here. (See function at bottom)
+# Sets up temporary key authorization and then can pass the key to ssh-agent (no more typing key p/w's).
 # First, this pulls in remote host public key and copies to client ~/.ssh/known_host file.
 # Second, then pushes the client public key to the host's ~/.ssh/authorized keys directory.
 # (if get the host pub key first then you avoid tofu)
 # Only need to run this initially if ssh keys auth has never been set up for the host before.
 temporary_key_authorization() {
-  # This script seems to work fine without this commented out block...
-  # while true; do
-  #   read -n 1 -r -s -p 'Are you connecting to this host FOR THE FIRST TIME (y/n)?: ' answer
-  #   case $answer in
-  #   [Yy]*)
-  #     echo
-  #     ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
-  #     ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host"
-  #     break
-  #     ;;
-  #   [Nn]*)
-  #     echo
-  #     break
-  #     ;;
-  #   *) printf '\n%s\n' "Please enter y or n" ;;
-  #   esac
-  # done
   ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
   ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host"
 }
 
-start_ssh-agent() {
+start_ssh_agent() {
   killall ssh-agent
   eval "$(ssh-agent -s)"
   ssh-add "$client_directory"/"$user_key"
@@ -141,7 +124,7 @@ main() {
   generate_user_keys
   sign_user_certificate
   temporary_key_authorization
-  start_ssh-agent
+  start_ssh_agent
   generate_host_keys
   sign_host_certificate
   configure_host
