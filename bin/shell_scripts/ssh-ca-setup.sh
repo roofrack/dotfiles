@@ -1,29 +1,22 @@
 #!/usr/bin/bash
 # Tutorial to learn and set up ssh cerificate authorization (ca).
 # Can really fine tune restrictions on certificates by using the principle field and setting a time limit.
+# This script initially sets up key authorization and then uses that to set up CA authorization.
+# The ~/.ssh/known_hosts file will have the host ca public key and will certify all hosts.
+#
 
 # Define variables...
+# my_host="192.168.122.10"
 my_host="192.168.122.41"
-server="$USER"@"$my_host"
-client_directory="$HOME/.ssh"
+server="${USER}@${my_host}"
+client_directory="${HOME}/.ssh"
 server_directory="/etc/ssh"
 user_key="user_key"
 host_key="host_key"
-ca_directory="$client_directory/ca"
+ca_directory="${client_directory}/ca"
 ca_user="ca_user"
 ca_host="ca_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
-
-# Saves typing in the key passwd for each ssh/scp command...
-# First, pull in remote host public key and copy to client known_host file.
-# Second, push the client public key to the host's /home/my_user/.ssh/authorized keys directory.
-# Only need to run this initially if ssh has never been set up for this server.
-temporary_key_setup() {
-  if [[ ! -f "$client_directory"/known_hosts ]]; then
-    ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
-    ssh-copy-id -i "$user_key.pub" "$server"
-  fi
-}
 
 # 1. Create a Certificate Authority for signing public keys...
 # Setup a secret directory or place for the certificate authority (CA).
@@ -51,9 +44,10 @@ sign_user_certificate() {
 }
 
 # 4. Configure the client...
-# This needs to be last in main fn.
+# This needs to be last in main function.
 # Add the CA host public key to the ~/.ssh/known_hosts file for host auth (no more tofu).
-# The `*` here allows any host using this CA (I think).
+# Must prepend '@cert-authority *' to host pub key.
+# The `*` here allows any host using this CA (I think). Could add host ip or name I think.
 configure_client() {
   echo "@cert-authority * $(cat "$ca_directory"/"$ca_host".pub)" >"$client_directory"/known_hosts
 }
@@ -107,21 +101,50 @@ EOF"
     sudo systemctl restart sshd &>/dev/null && rm /home/$USER/.ssh/authorized_keys &>/dev/null"
 }
 
+# Saves typing in the key passwd for each ssh/scp command...
+# ssh-agent does the magic of supplying the user key passwd here. (See function at bottom)
+# First, this pulls in remote host public key and copies to client ~/.ssh/known_host file.
+# Second, then pushes the client public key to the host's ~/.ssh/authorized keys directory.
+# (if get the host pub key first then you avoid tofu)
+# Only need to run this initially if ssh keys auth has never been set up for the host before.
+temporary_key_authorization() {
+  # This script seems to work fine without this commented out block...
+  # while true; do
+  #   read -n 1 -r -s -p 'Are you connecting to this host FOR THE FIRST TIME (y/n)?: ' answer
+  #   case $answer in
+  #   [Yy]*)
+  #     echo
+  #     ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
+  #     ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host"
+  #     break
+  #     ;;
+  #   [Nn]*)
+  #     echo
+  #     break
+  #     ;;
+  #   *) printf '\n%s\n' "Please enter y or n" ;;
+  #   esac
+  # done
+  ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts
+  ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host"
+}
+
 start_ssh-agent() {
   killall ssh-agent
   eval "$(ssh-agent -s)"
   ssh-add "$client_directory"/"$user_key"
 }
 
+# Order is important here.
 main() {
   # make_CA
   generate_user_keys
-  temporary_key_setup # order is important here
-  start_ssh-agent     # order is important here
   sign_user_certificate
+  temporary_key_authorization
+  start_ssh-agent
   generate_host_keys
   sign_host_certificate
   configure_host
-  configure_client # order is important here
+  configure_client
 }
 main
