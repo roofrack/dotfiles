@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # Tutorial to learn and set up ssh cerificate authorization (ca).
-# Can really fine tune restrictions on certificates by using the principle field and setting a time limit.
+# Can fine tune restrictions on certificates by using the principle field and setting a time limit.
 # This script initially sets up key authorization and then uses that to set up CA authorization.
 # The ~/.ssh/known_hosts file gets the host ca public key which is used to trust all certified hosts.
 
@@ -15,6 +15,8 @@ ca_directory="${client_directory}/ca"
 ca_user="ca_user"
 ca_host="ca_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
+color_bold_underline="\e[1;4;35m"
+normal_color="\e[0m"
 
 # 1. Create a Certificate Authority for signing public keys...
 # Setup a secret directory or place for the certificate authority (CA).
@@ -47,8 +49,7 @@ sign_user_certificate() {
 # Cant seem to add a comment over the ssh wire for server host_key
 # but just go into the host_key file and edit the comment if desired.
 generate_host_keys() {
-  printf '\n%s\n' "GENERATING HOST KEY..."
-  printf '%s\n' "for host machine $my_host"
+  printf "\n%s ${color_bold_underline}%s${normal_color}...\n" "GENERATING HOST KEY for host" "${my_host}"
   ssh -t -q -i "$user_key" "$server" "sudo ssh-keygen -f $server_directory/$host_key"
 }
 
@@ -100,13 +101,11 @@ configure_client() {
   echo "@cert-authority * $(cat "$ca_directory"/"$ca_host".pub)" >"$client_directory"/known_hosts
 }
 
-# Three helper functions for this script...
+# Three helper functions...
 confirm_ip_for_host() {
   clear
   while true; do
-    color_bold_underline="\e[1;4;35m"
-    normal_color="\e[0m"
-    printf "Is $color_bold_underline%s$normal_color the correct Host to ssh into? (y/n)" "$my_host"
+    printf "Is $color_bold_underline%s${normal_color} the CORRECT HOST to ssh into? (y/n)" "$my_host"
     read -n1 -s -r reply
     case "$reply" in
     [Yy]*)
@@ -114,26 +113,27 @@ confirm_ip_for_host() {
       break
       ;;
     [Nn]*)
-      read -r -e -p $'\nEnter correct host ip: ' -i "192.168." correct_ip
+      printf "\n%s" "Enter correct host ip: "
+      read -r -e -i "192.168." correct_ip
       my_host="$correct_ip"
       server="${USER}@${my_host}"
       break
       ;;
     *)
-      echo "ENTER y or n."
+      echo " ENTER y or n"
       ;;
     esac
   done
 }
 
 # Sets up temporary key authorization and then can pass the key to ssh-agent (no more typing key p/w's).
-# First, this pulls in remote host public key and copies to client ~/.ssh/known_host file.
+# First, this pulls in remote host public key and copies to client ~/.ssh/known_host file (no tofu).
 # Second, then pushes the client public key to the host's ~/.ssh/authorized keys directory.
-# Order here avoids tofu by getting using ssh-keyscan to copy host key.
 # Only need to run this initially if ssh keys auth has never been set up for the host before.
 temporary_key_authorization() {
-  if ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts; then
-    ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host"
+  # if ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts; then
+  if ssh-keyscan -t ed25519 "$my_host" >>"$client_directory"/known_hosts; then
+    ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host" 2>/dev/null
   else
     printf "No route to Host!!!"
     printf '\n%s\n' "Use [Ctr-C] to quit, rerun script, and enter correct Host IP."
@@ -150,8 +150,8 @@ start_ssh_agent() {
 # Order is important here.
 main() {
   # make_CA
-  # generate_user_keys
-  # sign_user_certificate
+  generate_user_keys
+  sign_user_certificate
   confirm_ip_for_host
   temporary_key_authorization
   start_ssh_agent

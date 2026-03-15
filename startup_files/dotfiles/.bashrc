@@ -156,7 +156,7 @@ my_prompt() {
   local end_prompt="\$\[\033[0m\]"
 
   # Change prompt format while inside containers
-  if [ "$HOSTNAME" == "arch" ]; then
+  if [[ "$HOSTNAME" == "lap"* ]]; then
     PS1="${yellow}\u${cyan}@${red}\h${purple} \W${cyan}\$(parse_git_branch)${purple}${end_prompt}"
   else
     PS1="\u@\h \W${cyan}\$(parse_git_branch)${end_prompt}"
