@@ -88,11 +88,11 @@ HostCertificate /etc/ssh/${host_key}-cert.pub
 EOF"
   scp -i "$user_key" "$ca_directory"/"$ca_user".pub "$server":/tmp &>/dev/null
   printf '\n%s\n' "RESTARTING host sshd..."
-  ssh -t -i "$user_key" "$server" "sudo mv /tmp/$ca_user.pub $server_directory && \
+  ssh -t -q -i "$user_key" "$server" "sudo mv /tmp/$ca_user.pub $server_directory && \
     sudo systemctl restart sshd &>/dev/null && rm /home/$USER/.ssh/authorized_keys &>/dev/null"
 }
 
-# 7. Configure the client...
+# 7. Configure client...
 # This needs to be last in main function.
 # Add the CA host public key to the ~/.ssh/known_hosts file for host auth (no more tofu).
 # Must prepend '@cert-authority *' to host pub key.
@@ -127,16 +127,16 @@ confirm_ip_for_host() {
 }
 
 # Sets up temporary key authorization and then can pass the key to ssh-agent (no more typing key p/w's).
-# First, this pulls in remote host public key and copies to client ~/.ssh/known_host file (no tofu).
+# First, this pulls in remote host public key and copies to client ~/.ssh/known_host file (eliminates tofu).
 # Second, then pushes the client public key to the host's ~/.ssh/authorized keys directory.
 # Only need to run this initially if ssh keys auth has never been set up for the host before.
 temporary_key_authorization() {
-  # if ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts; then
-  if ssh-keyscan -t ed25519 "$my_host" >>"$client_directory"/known_hosts; then
+  if ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts; then
+    # if ssh-keyscan -t ed25519 "$my_host" >>"$client_directory"/known_hosts; then
     ssh-copy-id -i "$client_directory"/"$user_key".pub "$my_host" 2>/dev/null
   else
     printf "No route to Host!!!"
-    printf '\n%s\n' "Use [Ctr-C] to quit, rerun script, and enter correct Host IP."
+    printf '\n%s\n' "Use [Ctr-C] to quit & must start or enter correct Host."
     sleep 39
   fi
 }
@@ -150,8 +150,8 @@ start_ssh_agent() {
 # Order is important here.
 main() {
   # make_CA
-  generate_user_keys
-  sign_user_certificate
+  # generate_user_keys
+  # sign_user_certificate
   confirm_ip_for_host
   temporary_key_authorization
   start_ssh_agent
