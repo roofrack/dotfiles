@@ -36,6 +36,7 @@ make_CA() {
 # but just go into the host_key file and edit the comment if desired.
 generate_host_keys() {
   printf "\n%s ${color_bold_underline}%s${normal_color}...\n" "GENERATING HOST KEY for host" "${my_host}"
+  printf "%s\n" "DO NOT USE A PASSWORD FOR HOST KEY!!"
   ssh -t -q -i "$user_key" "$my_host" "sudo ssh-keygen -f ${host_directory}/${host_key}"
 }
 
@@ -96,8 +97,7 @@ confirm_ip_for_host() {
       ;;
     [Nn]*)
       printf "\n%s" "Enter correct host ip: "
-      read -e -r -i "192.168." my_host
-      # my_host="${USER}@${my_host}"
+      read -e -r -i "192.168." my_host # user inputs ip address for host
       break
       ;;
     *)
@@ -129,6 +129,7 @@ start_ssh_agent() {
 
 # Order is important here.
 main() {
+  # make_CA
   confirm_ip_for_host
   temporary_key_authorization
   start_ssh_agent
