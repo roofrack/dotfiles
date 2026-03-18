@@ -1,20 +1,20 @@
 #!/usr/bin/bash
+# SSH Key Certificate Authorization for Hosts.
 # Tutorial to learn and set up ssh cerificate authorization (ca).
 # Can fine tune restrictions on certificates by using the principle field and setting a time limit.
 # This script initially sets up key authorization and then uses that to set up CA authorization.
-# Client is the machine you are on, Host is the remote machine. Server is user@host (for lack of a better name).
-# The ~/.ssh/known_hosts file gets the host ca public key which is used to trust all certified hosts.
+# I'm using the client user_key here for passwordless ssh'ing (-i $user_key) for initial setup as
+# we are ssh'ing into the host from the client.
 
-# Define variables...
-my_username="$USER"
 my_host="192.168.122.41"
+my_username="$USER"
 client_directory="/home/${my_username}/.ssh"
+user_key="${client_directory}/${my_username}_key"
 host_directory="/etc/ssh"
-ca_directory="${client_directory}/ca"
-user_key="${client_directory}/user_key"
 host_key="host_key"
-ca_user="${ca_directory}/ca_key_user"
-ca_host="${ca_directory}/ca_key_host"
+ca_directory="/home/rob/.ssh/ca"
+ca_user="ca_key_user"
+ca_host="ca_key_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
 color_bold_underline="\e[1;4;35m"
 normal_color="\e[0m"
@@ -25,26 +25,11 @@ normal_color="\e[0m"
 # Of course the actual CA would go somewhere very secure... not here.
 make_CA() {
   mkdir "$ca_directory" &>/dev/null
-  ssh-keygen -f "$ca_user" -C "My User CA"
-  ssh-keygen -f "$ca_host" -C "My Host CA"
+  ssh-keygen -f "$ca_directory"/"$ca_user" -C "My User CA"
+  ssh-keygen -f "$ca_directory"/"$ca_host" -C "My Host CA"
 }
 
-# 2. Generate USER Keys...
-generate_user_keys() {
-  printf '\n%s\n' "GENERATING USER KEYS..."
-  ssh-keygen -f "$user_key" -C "My User Key"
-}
-
-# 3. Sign user_key.pub using the Certificate Authority ca_user key...
-# Rob you need to remember that the principles field needs to be correct or leave blank
-# or it wont work. Remember how you spent hours figuring that out. Use correct user names here!
-sign_user_certificate() {
-  printf '\n%s\n' "SIGNING USER PUBLIC KEY CERTIFICATE..."
-  ssh-keygen -s "$ca_user" -I "client-machine" -n "ben,$my_username" -V +22d \
-    "$user_key".pub &>/dev/null
-}
-
-# 4. Generate HOST Keys...
+# 2. Generate HOST Keys...
 # DO NOT put password on host key as sshd needs to access it!
 # Could just go into my_host directly and generate host keys there.
 # Cant seem to add a comment over the ssh wire for my_host host_key
@@ -54,7 +39,7 @@ generate_host_keys() {
   ssh -t -q -i "$user_key" "$my_host" "sudo ssh-keygen -f ${host_directory}/${host_key}"
 }
 
-# 5. Sign host_key.pub using the Certificate Authority...
+# 3. Sign host_key.pub using the Certificate Authority...
 # Copy the host public key over to where ever the CA is.
 # Make sure principles field `-n` is correct (correct host names).
 # Send certificate back to host machine (host_key-cert.pub).
@@ -63,7 +48,7 @@ sign_host_certificate() {
   printf '\n%s\n' "SIGNING HOST PUBLIC KEY CERTIFICATE..."
   scp -i "$user_key" "$my_host":"$host_directory"/"$host_key".pub "$client_directory" &>/dev/null
 
-  ssh-keygen -h -s "$ca_host" -I "host-machine" -n "$my_host" -V +22d \
+  ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$my_host" -V +22d \
     "$host_key".pub &>/dev/null
 
   scp -i "$user_key" "$host_key"-cert.pub "$my_host":"/tmp" &>/dev/null
@@ -71,12 +56,12 @@ sign_host_certificate() {
   rm "$host_key".pub "$host_key"-cert.pub &>/dev/null
 }
 
-# 6. Configure HOST...
+# 4. Configure HOST...
 # NOTE: THIS LOCKS DOWN THE SERVER - NO ROOT OR PASSWORD LOGINS (KEY AUTH ONLY).
 # Creates configuration file (gets merged into host sshd_config).
 # Copy CA user_key.pub to my_host (allows host to trust the client user).
 # Restart the host sshd.
-# '##*/' syntax isolates the filename from the directory.
+# Reset the client known_hosts file to cert auth only (no tofu).
 configure_host() {
   printf '\n%s\n' "CONFIGURING host settings..."
   ssh -t -q -i "$user_key" "$my_host" "sudo tee \
@@ -86,22 +71,15 @@ AuthenticationMethods publickey
 PermitRootLogin no
   
   
-TrustedUserCAKeys ${host_directory}/${ca_user##*/}.pub
+TrustedUserCAKeys ${host_directory}/${ca_user}.pub
 HostKey ${host_directory}/${host_key}
 HostCertificate ${host_directory}/${host_key}-cert.pub
 EOF"
-  scp -i "$user_key" "$ca_user".pub "$my_host":/tmp &>/dev/null
+  scp -i "$user_key" "$ca_directory"/"$ca_user".pub "$my_host":/tmp &>/dev/null
   printf '\n%s\n' "RESTARTING host sshd..."
-  ssh -t -q -i "$user_key" "$my_host" "sudo mv /tmp/${ca_user##*/}.pub $host_directory && \
+  ssh -t -q -i "$user_key" "$my_host" "sudo mv /tmp/${ca_user}.pub $host_directory && \
     sudo systemctl restart sshd &>/dev/null && rm /home/${my_username}/.ssh/authorized_keys &>/dev/null"
-}
-# 7. Configure client...
-# This needs to be last in main function.
-# Add the CA host public key to the ~/.ssh/known_hosts file for host auth (no more tofu).
-# Must prepend '@cert-authority *' to host pub key.
-# The `*` here allows any host using this CA (I think). Could add host ip or name I think.
-configure_client() {
-  echo "@cert-authority * $(cat "$ca_host".pub)" >"$client_directory"/known_hosts
+  echo "@cert-authority * $(cat "${ca_directory}/$ca_host".pub)" >"$client_directory"/known_hosts
 }
 
 # Three helper functions...
@@ -118,8 +96,7 @@ confirm_ip_for_host() {
       ;;
     [Nn]*)
       printf "\n%s" "Enter correct host ip: "
-      read -e -r -i "192.168." correct_ip
-      my_host="$correct_ip"
+      read -e -r -i "192.168." my_host
       # my_host="${USER}@${my_host}"
       break
       ;;
@@ -140,7 +117,7 @@ temporary_key_authorization() {
   else
     printf '\n%s' "No route to Host!!!"
     printf '\n%s\n%s' "ctr-c to quit." "Make sure host is running!"
-    sleep 39
+    sleep 39 # sleep to give time for user to ctr-c out
   fi
 }
 
@@ -152,15 +129,11 @@ start_ssh_agent() {
 
 # Order is important here.
 main() {
-  # make_CA
-  generate_user_keys
-  sign_user_certificate
-  # confirm_ip_for_host
-  # temporary_key_authorization
-  # start_ssh_agent
-  # generate_host_keys
-  # sign_host_certificate
-  # configure_host
-  # configure_client
+  confirm_ip_for_host
+  temporary_key_authorization
+  start_ssh_agent
+  generate_host_keys
+  sign_host_certificate
+  configure_host
 }
 main
