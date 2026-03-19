@@ -18,7 +18,7 @@ make_CA() {
 
 signing_my_own_user_account() {
   ssh-keygen -f "$client_directory"/"$user_key"
-  ssh-keygen -s "$ca_directory"/"$ca_user" -I "client-machine" -n "rob" -V +22d \
+  ssh-keygen -s "$ca_directory"/"$ca_user" -I "client-machine" -n "rob,ben" -V +22d \
     "$user_key".pub &>/dev/null
   echo "@cert-authority * $(cat ${ca_directory}/ca_key_host.pub)" >"$client_directory"/known_hosts
 }
@@ -29,7 +29,6 @@ signing_other_user_accounts() {
     "$client_directory"/known_hosts &>/dev/null
 
   sudo cp -a "$client_directory"/"$user_key".pub .
-  # ssh-keygen -s ${ca_directory}/ca_key_user -I "client-machine" -n "$my_username,rob" -V +22d \
   ssh-keygen -s ${ca_directory}/ca_key_user -I "client-machine" -n "rob,$my_username" -V +22d \
     "$user_key".pub &>/dev/null
   sudo mv "$user_key"-cert.pub "$client_directory" &>/dev/null
@@ -44,9 +43,10 @@ confirm_user() {
   printf "You've selected USER: ${color_bold_underline}%s${normal_color}.\n" "$my_username"
   client_directory="/home/${my_username}/.ssh"
   user_key="${my_username}_key"
+
   if [[ "$my_username" == "$USER" ]]; then
     signing_my_own_user_account
-  elif [[ ! "$my_username" == "$USER" ]] && id -u "$my_username" &>/dev/null; then
+  elif id -u "$my_username" &>/dev/null; then # does user exist?
     signing_other_user_accounts
   else
     printf "The USER ${color_bold_underline}%s${normal_color} does not exist.\n" "$my_username"

@@ -3,8 +3,7 @@
 # Tutorial to learn and set up ssh cerificate authorization (ca).
 # Can fine tune restrictions on certificates by using the principle field and setting a time limit.
 # This script initially sets up key authorization and then uses that to set up CA authorization.
-# I'm using the client user_key here for passwordless ssh'ing (-i $user_key) for initial setup as
-# we are ssh'ing into the host from the client.
+# I'm using the client user_key here for passwordless ssh'ing (-i $user_key) for initial setup.
 
 my_host="192.168.122.41"
 my_username="$USER"
@@ -30,14 +29,11 @@ make_CA() {
 }
 
 # 2. Generate HOST Keys...
-# DO NOT put password on host key as sshd needs to access it!
+# DO NOT put password on host key as sshd needs to access it! (use -N flag)
 # Could just go into my_host directly and generate host keys there.
-# Cant seem to add a comment over the ssh wire for my_host host_key
-# but just go into the host_key file and edit the comment if desired.
 generate_host_keys() {
   printf "\n%s ${color_bold_underline}%s${normal_color}...\n" "GENERATING HOST KEY for host" "${my_host}"
-  printf "%s\n" "DO NOT USE A PASSWORD FOR HOST KEY!!"
-  ssh -t -q -i "$user_key" "$my_host" "sudo ssh-keygen -f ${host_directory}/${host_key}"
+  ssh -t -q -i "$user_key" "$my_host" "sudo ssh-keygen -f ${host_directory}/${host_key} -N \"\""
 }
 
 # 3. Sign host_key.pub using the Certificate Authority...
@@ -61,6 +57,7 @@ sign_host_certificate() {
 # NOTE: THIS LOCKS DOWN THE SERVER - NO ROOT OR PASSWORD LOGINS (KEY AUTH ONLY).
 # Creates configuration file (gets merged into host sshd_config).
 # Copy CA user_key.pub to my_host (allows host to trust the client user).
+# Change the owner from your user to 'root' on the files that were copied to host.
 # Restart the host sshd.
 # Reset the client known_hosts file to cert auth only (no tofu).
 configure_host() {
@@ -70,6 +67,7 @@ configure_host() {
 PasswordAuthentication no
 AuthenticationMethods publickey
 PermitRootLogin no
+Port 2222
   
   
 TrustedUserCAKeys ${host_directory}/${ca_user}.pub
@@ -78,8 +76,11 @@ HostCertificate ${host_directory}/${host_key}-cert.pub
 EOF"
   scp -i "$user_key" "$ca_directory"/"$ca_user".pub "$my_host":/tmp &>/dev/null
   printf '\n%s\n' "RESTARTING host sshd..."
-  ssh -t -q -i "$user_key" "$my_host" "sudo mv /tmp/${ca_user}.pub $host_directory && \
-    sudo systemctl restart sshd &>/dev/null && rm /home/${my_username}/.ssh/authorized_keys &>/dev/null"
+  ssh -t -q -i "$user_key" "$my_host" "\
+    sudo mv /tmp/${ca_user}.pub $host_directory &&\
+    sudo chown -R root:root ${host_directory} &&\
+    sudo systemctl restart sshd &>/dev/null &&\
+    rm /home/${my_username}/.ssh/authorized_keys &>/dev/null"
   echo "@cert-authority * $(cat "${ca_directory}/$ca_host".pub)" >"$client_directory"/known_hosts
 }
 
