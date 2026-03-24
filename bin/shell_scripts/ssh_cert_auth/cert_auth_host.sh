@@ -4,7 +4,9 @@
 # Can fine tune restrictions on certificates by using the principle field and setting a time limit.
 # This script initially sets up key authorization and then uses that to set up CA authorization.
 # I'm using the client user_key here for passwordless ssh'ing (-i $user_key) for initial setup.
+# NOTE: scp uses -P & ssh uses -p (different)
 
+# my_host="192.168.122.10"
 my_host="192.168.122.41"
 my_username="$USER"
 client_directory="/home/${my_username}/.ssh"
@@ -17,6 +19,7 @@ ca_host="ca_key_host"
 my_host_ca_configuration="20-my_ca.conf" # NOTE: conf NOT config!!
 color_bold_underline="\e[1;4;35m"
 normal_color="\e[0m"
+port="2222"
 
 # 1. Create a Certificate Authority for signing public keys...
 # Setup a secret directory or place for the certificate authority (CA).
@@ -33,7 +36,8 @@ make_CA() {
 # Could just go into my_host directly and generate host keys there.
 generate_host_keys() {
   printf "\n%s ${color_bold_underline}%s${normal_color}...\n" "GENERATING HOST KEY for host" "${my_host}"
-  ssh -t -q -i "$user_key" "$my_host" "sudo ssh-keygen -f ${host_directory}/${host_key} -N \"\""
+  printf "%s\n" "NO PASSWORD"
+  ssh -p "$port" -t -q -i "$user_key" "$my_host" "sudo ssh-keygen -f ${host_directory}/${host_key} -N \"\""
 }
 
 # 3. Sign host_key.pub using the Certificate Authority...
@@ -43,13 +47,13 @@ generate_host_keys() {
 # Remove the host_key.pub & host_key-cert.pub files from client (not needed).
 sign_host_certificate() {
   printf '\n%s\n' "SIGNING HOST PUBLIC KEY CERTIFICATE..."
-  scp -i "$user_key" "$my_host":"$host_directory"/"$host_key".pub "$client_directory" &>/dev/null
+  scp -P "$port" -i "$user_key" "$my_host":"$host_directory"/"$host_key".pub "$client_directory" &>/dev/null
 
   ssh-keygen -h -s "$ca_directory"/"$ca_host" -I "host-machine" -n "$my_host" -V +22d \
     "$host_key".pub &>/dev/null
 
-  scp -i "$user_key" "$host_key"-cert.pub "$my_host":"/tmp" &>/dev/null
-  ssh -t -q -i "$user_key" "$my_host" "sudo mv /tmp/${host_key}-cert.pub $host_directory &>/dev/null"
+  scp -P "$port" -i "$user_key" "$host_key"-cert.pub "$my_host":"/tmp" &>/dev/null
+  ssh -p "$port" -t -q -i "$user_key" "$my_host" "sudo mv /tmp/${host_key}-cert.pub $host_directory &>/dev/null"
   rm "$host_key".pub "$host_key"-cert.pub &>/dev/null
 }
 
@@ -62,8 +66,8 @@ sign_host_certificate() {
 # Reset the client known_hosts file to cert auth only (no tofu).
 configure_host() {
   printf '\n%s\n' "CONFIGURING host settings..."
-  ssh -t -q -i "$user_key" "$my_host" "sudo tee \
-    $host_directory/sshd_config.d/$my_host_ca_configuration &>/dev/null <<EOF
+  ssh -p "$port" -t -q -i "$user_key" "$my_host" "sudo tee \
+$host_directory/sshd_config.d/$my_host_ca_configuration &>/dev/null <<EOF
 PasswordAuthentication no
 AuthenticationMethods publickey
 PermitRootLogin no
@@ -74,9 +78,9 @@ TrustedUserCAKeys ${host_directory}/${ca_user}.pub
 HostKey ${host_directory}/${host_key}
 HostCertificate ${host_directory}/${host_key}-cert.pub
 EOF"
-  scp -i "$user_key" "$ca_directory"/"$ca_user".pub "$my_host":/tmp &>/dev/null
+  scp -P "$port" -i "$user_key" "$ca_directory"/"$ca_user".pub "$my_host":/tmp &>/dev/null
   printf '\n%s\n' "RESTARTING host sshd..."
-  ssh -t -q -i "$user_key" "$my_host" "\
+  ssh -p "$port" -t -q -i "$user_key" "$my_host" "\
     sudo mv /tmp/${ca_user}.pub $host_directory &&\
     sudo chown -R root:root ${host_directory} &&\
     sudo systemctl restart sshd &>/dev/null &&\
@@ -113,8 +117,8 @@ confirm_ip_for_host() {
 # Second, then pushes the client public key to the host's ~/.ssh/authorized keys directory.
 # Only need to run this initially if ssh keys auth has never been set up for the host before.
 temporary_key_authorization() {
-  if ssh-keyscan -t ed25519 "$my_host" >"$client_directory"/known_hosts; then
-    ssh-copy-id -i "$user_key".pub "$my_host" &>/dev/null
+  if ssh-keyscan -p "$port" -t ed25519 "$my_host" >>"$client_directory"/known_hosts; then
+    ssh-copy-id -p "$port" -i "$user_key".pub "$my_host" &>/dev/null
   else
     printf '\n%s' "No route to Host!!!"
     printf '\n%s\n%s' "ctr-c to quit." "Make sure host is running!"

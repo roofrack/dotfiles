@@ -83,6 +83,8 @@ alias ip='ip -c'
 alias brc='vim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/lua/v1/plugins/peek.lua'
 
+alias nm='nmcli'
+
 alias podman='sudo podman'
 
 alias symlink='. $HOME/dotfiles/startup_files/scripts/sym_link.sh'

@@ -15,8 +15,9 @@
 
 set $mod Mod4
 
-set $default-terminal xfce4-terminal
+# set $default-terminal xfce4-terminal
 # set $default-terminal alacritty
+set $default-terminal ghostty
 
 # set $default-browser firefox
 set $default-browser google-chrome-stable
@@ -41,6 +42,8 @@ default_border pixel 1
 # Download ttf-ubuntu-font-family for this one. Its a bit nicer.
 # font pango:Ubuntu Regular 11
 font pango:Droid Sans Mono 9
+# font  pango:JetBrainsMono NF SemiBold Italic 11
+# font  pango:JetBrainsMonoNL NF 11
 
 
 
@@ -399,6 +402,7 @@ bar {
         # tray_output none
         tray_output primary
         font pango:monospace 9
+        # font  xft:JetBrainsMono NF SemiBold Italic 9
 
         colors {
                 background $bgcolor

@@ -16,7 +16,12 @@ total_num_of_symlinks="$(($(ls -al "$config_file_dir" | wc -l) - 3))" # subtract
 declare -A directories_array=(
   # ["dotfile"]="path_to_symlink/"
   # Note: can also use a directory as a dotfile. For example the "i3blocks_scripts" is a directory containing
-  # scripts. Rather than symlink each one I just linked their directory.
+  # scripts. Rather than symlink each one I just linked their directory. 
+
+  # Like for example ~/.config/ghostty/config... I put the directory name on the left side of the array and
+  # then the path to it on the right side of the array. Then move the directory into ~/dotfiles/startup_files/dotfiles
+  # and run symlink.
+  [ghostty]=$HOME/.config/
   [i3]=$HOME/.config/
   [i3status.conf]=$HOME/.config/i3status/
   [i3blocks.conf]=$HOME/.config/i3blocks/

@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 # SSH Key Certificate Authorization for Users on the same client machine.
+# TODO
+# function for signing users that are on another host. It will be exactly
+# the same as the one for cert-host.
+
 ca_directory="/home/rob/.ssh/ca"
 ca_user="ca_key_user"
 ca_host="ca_key_host"
