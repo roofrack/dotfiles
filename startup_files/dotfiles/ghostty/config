@@ -1,8 +1,12 @@
 #- [ Fonts ] -----------------------------------------------
 # After experimenting I like this font
+font-family = "JetBrainsMono NF Light"
 # font-family-bold-italic = "JetBrainsMono NF SemiBold Italic"
 # font-family = "Terminus Regular"
-font-family = "JetBrainsMono NF Light"
+# I dont like these fonts
+# font-family = "Fira Code Nerd Font"
+# font-family = "JetBrainsMonoNL Nerd Font Mono ExtraLight"
+# font-family = "Hack Nerd Font"
 font-size = 10
 font-style = "Thin"
 font-feature = -liga
@@ -17,10 +21,11 @@ font-feature = -liga
 # theme = Ayu Mirage
 theme = 3024 Night
 # theme = Catppuccin Frappe
-# Think I like this one the best
 # theme = Dracula+
-
-background-opacity = .8
+# theme = Kanagawabones
+# Nice background color...
+background = 1e1e2e
+background-opacity = .9
 
 # Makes the foreground color for whiter fonts
 # foreground = "#FFFFFF"
@@ -35,9 +40,9 @@ window-decoration = none
 # Cursor options
 cursor-style = block
 cursor-style-blink = false
-# cursor-color = #f2d5cf
-cursor-color = #436f8a
-cursor-opacity = 0.9
+cursor-color = #f2d5cf
+# cursor-color = #436f8a
+cursor-opacity = .6
 shell-integration-features = no-cursor
 
 # This is the configuration file for Ghostty.

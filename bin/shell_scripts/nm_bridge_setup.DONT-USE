@@ -1,4 +1,8 @@
 #!/bin/bash
+############################################################
+# Rob this one doesnt really work. Use ~/coding-practice/shell/nm_br0_wifi_switch.sh instead
+# ##########################################################
+
 # Setting up a bridge to use with kvm,libvirt virtual machines...
 
 # To be able to ssh into vm from another machine other than the host machine
