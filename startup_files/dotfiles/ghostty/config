@@ -25,11 +25,11 @@ theme = 3024 Night
 # theme = Kanagawabones
 # Nice background color...
 background = 1e1e2e
-background-opacity = .9
+background-opacity = .95
 
 # Makes the foreground color for whiter fonts
-# foreground = "#FFFFFF"
-foreground = "#F0F0F0"
+foreground = "#FFFFFF"
+# foreground = "#F0F0F0"
 
 #- [ Window Settings ] -------------------------------------
 # Gets rid of heading at top of screen.
