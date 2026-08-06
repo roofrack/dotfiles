@@ -20,16 +20,16 @@ POLL_INTERVAL=2
 
 # Create the bridge br0 (disable stp so switches to ethernet quicker)
 # Add physical device enp0s31f6 as a slave to the br0 bridge.
-# (Delete added in case one of br0 or br0-slave doesnt exist)
+# (Delete added just in case one of br0 or br0-slave doesnt exist)
 set_up_bridge() {
   local connections
-  connections=$(nmcli -t -f NAME connection show)
+  connections=$(nmcli -t -f NAME con show)
 
   if ! grep -qx "$BRIDGE_NAME" <<<"$connections" ||
     ! grep -qx "${BRIDGE_NAME}-slave" <<<"$connections"; then
 
-    nmcli connection delete "$BRIDGE_NAME" 2>/dev/null || true
-    nmcli connection delete "${BRIDGE_NAME}-slave" 2>/dev/null || true
+    nmcli con delete "$BRIDGE_NAME" 2>/dev/null || true
+    nmcli con delete "${BRIDGE_NAME}-slave" 2>/dev/null || true
 
     nmcli con add type bridge \
       ifname "$BRIDGE_NAME" \
@@ -49,15 +49,15 @@ is_wifi_enabled() {
 
 wifi_up() {
   echo "WIFI connected to $WIFI_CONNECTION..."
-  nmcli connection down "$BRIDGE_NAME" &>/dev/null || true
+  nmcli con down "$BRIDGE_NAME" &>/dev/null || true
   nmcli radio wifi on
 }
 
 ethernet_up() {
   echo "Ethernet connected to $ETHERNET_INTERFACE..."
   nmcli radio wifi off
-  nmcli connection up "${BRIDGE_NAME}-slave" &>/dev/null || true
-  nmcli connection up "$BRIDGE_NAME" &>/dev/null || true
+  nmcli con up "${BRIDGE_NAME}-slave" &>/dev/null || true
+  nmcli con up "$BRIDGE_NAME" &>/dev/null || true
 }
 
 # The 'carrier' file contains 1 if link is up, 0 if down/unplugged.

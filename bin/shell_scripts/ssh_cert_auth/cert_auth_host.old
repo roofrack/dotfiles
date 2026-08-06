@@ -67,13 +67,11 @@ sign_host_certificate() {
 configure_host() {
   printf '\n%s\n' "CONFIGURING host settings..."
   ssh -p "$port" -t -q -i "$user_key" "$my_host" "sudo tee \
-$host_directory/sshd_config.d/$my_host_ca_configuration &>/dev/null <<EOF
+    $host_directory/sshd_config.d/$my_host_ca_configuration &>/dev/null <<EOF
 PasswordAuthentication no
 AuthenticationMethods publickey
 PermitRootLogin no
 Port 2222
-  
-  
 TrustedUserCAKeys ${host_directory}/${ca_user}.pub
 HostKey ${host_directory}/${host_key}
 HostCertificate ${host_directory}/${host_key}-cert.pub

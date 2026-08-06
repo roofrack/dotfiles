@@ -1,189 +1,215 @@
----
+SSH Certificate Authority (CA) Setup
+Automated setup of SSH certificate-based authentication using a trusted Certificate Authority (CA). This replaces traditional authorized_keys management with a centralized and scalable trust model.
 
-# SSH Certificate Authority (CA) Setup
+🧠 Overview
+This script:
 
-This guide explains how to configure SSH certificate-based authentication using a trusted Certificate Authority (CA), instead of managing `authorized_keys` on every server.
+Creates User CA and Host CA
 
----
+Bootstraps access using an existing SSH key
 
-## 🧠 Overview
+Generates and signs host certificates
 
-Instead of copying public keys to each server:
+Configures the SSH server to trust the CA
 
-* A **CA signs user public keys**
-* Servers **trust the CA**
-* Users authenticate using **short-lived certificates**
+Configures the client to trust host certificates
 
----
+Locks down SSH to certificate-based authentication only
 
-## 🔐 1. Create the CA
+Key Features
+No more authorized_keys management
 
-Run on a secure machine:
+Time-limited certificates (+30d by default)
 
-```bash
-ssh-keygen -t ed25519 -f /etc/ssh/ca_user -C "SSH User CA"
-```
+Uses principals (-n) for host validation
 
-Files created:
+Fully automated end-to-end setup
 
-* `/etc/ssh/ca_user` (private key — keep secure)
-* `/etc/ssh/ca_user.pub` (public key — distribute to servers)
+⚠️ Notes:
 
----
+Initial access uses an existing SSH key ($user_key)
 
-## 🖥️ 2. Configure SSH Server
+scp uses -P, ssh uses -p
 
-Edit `/etc/ssh/sshd_config`:
+Script assumes sudo access on the target host
 
-```bash
+⚙️ Usage
+Bash
+￼
+./setup-ca.sh [HOST]
+Example:
+Bash
+￼
+./setup-ca.sh 192.168.122.40
+If no host is provided, it defaults to:
+
+￼
+192.168.122.40
+📁 Default Configuration
+Variable	Description	Default
+my_host	Target host	192.168.122.40
+my_username	Local username	$USER
+user_key	SSH key for bootstrap	~/.ssh/<user>_key
+ca_dir	CA key directory	~/.ssh/ca
+ca_user_key	User CA key	~/.ssh/ca/ca_user
+ca_host_key	Host CA key	~/.ssh/ca/ca_host
+host_key	Host SSH key	/etc/ssh/host_key
+port	SSH port	22
+￼
+🚀 What the Script Does
+1. 🔐 Create Certificate Authorities
+Generates:
+
+ca_user → signs user keys
+
+ca_host → signs host keys
+
+Uses ed25519 keys
+
+Skips creation if they already exist
+
+2. 🔑 Setup Temporary Access
+Clears old host key entries
+
+Adds host to known_hosts
+
+Ensures SSH access using:
+
+Existing key (~/.ssh/<user>_key)
+
+Falls back to ssh-copy-id if needed
+
+3. 🖥️ Generate Host Key (Remote)
+On the target host:
+
+Creates /etc/ssh/host_key if it doesn't exist
+
+Uses ed25519
+
+No passphrase (required for sshd)
+
+4. ✍️ Sign Host Certificate
+Copies host public key to local machine
+
+Signs it with Host CA
+
+Uses:
+
+Principal: <host>
+
+Validity: +30 days
+
+Copies certificate back to host:
+
+/etc/ssh/host_key-cert.pub
+
+5. 🔒 Configure SSH Server
+Creates:
+
+￼
+/etc/ssh/sshd_config.d/20-my_ca.conf
+With:
+
+Bash
+￼
+PasswordAuthentication no
+AuthenticationMethods publickey
+PermitRootLogin no
 TrustedUserCAKeys /etc/ssh/ca_user.pub
-```
+HostKey /etc/ssh/host_key
+HostCertificate /etc/ssh/host_key-cert.pub
+Also:
 
-(Optional) Restrict access using principals:
+Installs CA public key
 
-```bash
-AuthorizedPrincipalsFile /etc/ssh/auth_principals/%u
-```
+Fixes permissions
 
-Restart SSH:
+Restarts sshd
 
-```bash
-sudo systemctl restart sshd
-```
+⚠️ This step locks down SSH:
 
----
+❌ No passwords
 
-## 👤 3. Generate User Key
+❌ No root login
 
-On the client machine:
+✅ Certificate-based auth only
 
-```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
-```
+6. 🤝 Configure Client Trust
+Adds Host CA to ~/.ssh/known_hosts:
 
----
+Bash
+￼
+@cert-authority * <CA_HOST_PUBLIC_KEY>
+Removes reliance on TOFU (Trust On First Use)
 
-## ✍️ 4. Sign the User Key
+7. 🔐 Start SSH Agent
+Starts ssh-agent if not running
 
-On the CA machine:
+Adds your user key automatically
 
-```bash
-ssh-keygen -s /etc/ssh/ca_user \
-  -I username_identity \
-  -n username \
-  -V +8h \
-  ~/.ssh/id_ed25519.pub
-```
+🔄 Authentication Flow
+Client connects to host
 
-Options:
+Host presents CA-signed host certificate
 
-* `-I` → certificate identity (label)
-* `-n` → allowed username(s)
-* `-V` → validity period (e.g., `+8h`, `+1d`, `+52w`)
+Client verifies via trusted CA
 
-This creates:
+User authenticates using key (and optionally signed certs later)
 
-```
-~/.ssh/id_ed25519-cert.pub
-```
+⚠️ Important Notes
+Host key must NOT have a passphrase
 
----
+Certificate validity is 30 days by default
 
-## 🚀 5. Connect
+Principals (-n) must match hostname exactly
 
-Ensure both files exist on the client:
+Script requires:
 
-```
-~/.ssh/id_ed25519
-~/.ssh/id_ed25519-cert.pub
-```
+ssh, scp, ssh-keygen, ssh-copy-id, ssh-keyscan
 
-Then connect:
+You must have:
 
-```bash
-ssh user@server
-```
+SSH access
 
-No `authorized_keys` needed 🎉
+sudo privileges on the host
 
----
+🛠️ Troubleshooting
+Permission Denied
+Check SSH access manually:
 
-## 🔒 6. (Optional) Configure Principals
+Bash
+￼
+ssh -i ~/.ssh/<user>_key user@host
+SSH Fails After Setup
+Validate config:
 
-Create per-user principal files:
+Bash
+￼
+sudo sshd -t
+Host Verification Issues
+Reset known hosts:
 
-```bash
-sudo mkdir -p /etc/ssh/auth_principals
-echo "username" | sudo tee /etc/ssh/auth_principals/username
-```
+Bash
+￼
+rm ~/.ssh/known_hosts
+Re-run script.
 
----
+✅ Benefits
+Centralized SSH trust model
 
-## 🌐 7. (Optional) Host Certificates
+No authorized_keys distribution
 
-Sign host keys:
+Automatic trust via CA
 
-```bash
-ssh-keygen -s /etc/ssh/ca_host \
-  -I host_identity \
-  -h \
-  -n hostname \
-  /etc/ssh/ssh_host_ed25519_key.pub
-```
+Time-limited credentials
 
-Client trusts CA via `~/.ssh/known_hosts`:
+Scalable across many hosts
 
-```
-@cert-authority *.example.com ssh-ed25519 AAAA...
-```
+📌 Future Improvements
+User certificate signing automation
 
----
+Configurable certificate validity
 
-## 🛠️ Troubleshooting
+Multi-host support
 
-Check certificate details:
-
-```bash
-ssh-keygen -L -f ~/.ssh/id_ed25519-cert.pub
-```
-
-Verbose SSH:
-
-```bash
-ssh -vvv user@server
-```
-
-Check server logs:
-
-```bash
-sudo journalctl -u sshd
-```
-
----
-
-## 🔥 Best Practices
-
-* Keep CA private key offline or secured
-* Use short-lived certificates (`+8h` or less)
-* Separate **user CA** and **host CA**
-* Audit certificates regularly
-
----
-
-## 📌 Summary
-
-* Servers trust a CA
-* CA signs user keys
-* Users authenticate with certificates
-* No more manual key distribution
-
----
-
----
-
-If you want, I can upgrade this README with:
-
-* a **script to automate signing**
-* a **multi-server deployment example**
-* or integration with tools like Vault or step-ca
-
+Role-based principals

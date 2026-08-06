@@ -1,0 +1,199 @@
+#!/usr/bin/env bash
+# Revised to use ssh multiplexing so can reuse same ssh connection for
+# both ssh & scp. I dont think I need to run the ssh-agent function here.
+
+set -euo pipefail
+IFS=$'\n\t'
+
+# ---------------- CONFIG ----------------
+my_host="${1:-192.168.122.40}"
+my_username="${USER}"
+
+client_ssh_dir="${HOME}/.ssh"
+user_key="${client_ssh_dir}/${my_username}_key"
+
+host_ssh_dir="/etc/ssh"
+host_key="${host_ssh_dir}/host_key"
+
+ca_dir="${client_ssh_dir}/ca"
+ca_user_key="${ca_dir}/ca_user"
+ca_host_key="${ca_dir}/ca_host"
+
+sshd_dropin="20-my_ca.conf"
+port="22"
+
+# colors
+GREEN="\e[32m"
+BLUE="\e[34m"
+RED="\e[31m"
+NC="\e[0m"
+
+# SSH multiplexing
+CONTROL_DIR="${client_ssh_dir}/cm"
+mkdir -p "$CONTROL_DIR"
+
+SSH_OPTS=(
+  -q
+  -p "$port"
+  -i "$user_key"
+  -o ControlMaster=auto
+  -o ControlPath="$CONTROL_DIR/%C"
+  -o ControlPersist=15s
+)
+
+# ---------------- UTIL ------------------
+log() { printf "${BLUE}[INFO]${NC} \
+  ${GREEN}%s${NC} ${BLUE}%s${NC}\n" "$1" "${2:-}"; }
+
+warn() { printf "${RED}[WARN]${NC} %s\n" "$*" >&2; }
+
+fail() {
+  printf "${RED}[ERROR]${NC} %s\n" "$*" >&2
+  exit 1
+}
+
+require_cmd() {
+  command -v "$1" >/dev/null || fail "Missing command: $1"
+}
+
+# SSH helpers
+ssh_run() {
+  ssh -t "${SSH_OPTS[@]}" "$my_host" "$@"
+}
+
+scp_to() {
+  scp "${SSH_OPTS[@]/-p/-P}" "$1" "$my_host:$2"
+}
+
+scp_from() {
+  scp "${SSH_OPTS[@]/-p/-P}" "$my_host:$1" "$2"
+}
+
+# -------------- PRECHECKS --------------
+for cmd in ssh scp ssh-keygen ssh-copy-id ssh-keyscan; do
+  require_cmd "$cmd"
+done
+
+mkdir -p "$client_ssh_dir" "$ca_dir"
+chmod 700 "$client_ssh_dir" "$ca_dir"
+
+# -------------- CA SETUP ---------------
+make_ca() {
+  log "Ensuring CA keys exist..."
+
+  [[ -f "$ca_user_key" ]] ||
+    ssh-keygen -q -t ed25519 -f "$ca_user_key" -C "User CA"
+
+  [[ -f "$ca_host_key" ]] ||
+    ssh-keygen -q -t ed25519 -f "$ca_host_key" -C "Host CA"
+}
+
+# -------- TEMP KEY AUTH ----------------
+setup_temp_access() {
+  log "Setting up temporary SSH access..."
+
+  ssh-keygen -R "$my_host" >/dev/null 2>&1 || :
+  ssh-keyscan -p "$port" -t ed25519 "$my_host" \
+    >"$client_ssh_dir/known_hosts.tmp"
+
+  cat "$client_ssh_dir/known_hosts.tmp" >>"$client_ssh_dir/known_hosts"
+  rm -f "$client_ssh_dir/known_hosts.tmp"
+
+  if ! ssh "${SSH_OPTS[@]}" -o BatchMode=yes "$my_host" true 2>/dev/null; then
+    log "Copying SSH key to host..."
+    ssh-copy-id -p "$port" -i "${user_key}.pub" "$my_host" >/dev/null 2>&1
+  else
+    log "Key access already works"
+  fi
+}
+
+# -------- HOST KEY GENERATION ----------
+generate_host_key() {
+  log "Ensuring host key exists..."
+
+  ssh_run "[[ -f \"$host_key\" ]] || sudo ssh-keygen -q -t ed25519 -f \"$host_key\" -N ''"
+}
+
+# -------- SIGN HOST CERT ---------------
+sign_host_cert() {
+  log "Signing host certificate..."
+
+  tmp_dir="$(mktemp -d)"
+  cleanup() { rm -rf "$tmp_dir"; }
+  trap cleanup EXIT
+
+  scp_from "${host_key}.pub" "$tmp_dir/" &>/dev/null
+
+  ssh-keygen -q -h \
+    -s "$ca_host_key" \
+    -I "host-cert" \
+    -n "$my_host" \
+    -V "+30d" \
+    "$tmp_dir/host_key.pub"
+
+  scp_to "$tmp_dir/host_key-cert.pub" "/tmp/" &>/dev/null
+}
+
+# -------- CONFIGURE HOST ---------------
+configure_host() {
+  log "Configuring sshd on host..."
+
+  # Upload CA pubkey
+  scp_to "${ca_user_key}.pub" "/tmp/" &>/dev/null
+
+  ssh_run "sudo tee ${host_ssh_dir}/sshd_config.d/${sshd_dropin} >/dev/null <<EOF
+PasswordAuthentication no
+AuthenticationMethods publickey
+PermitRootLogin no
+TrustedUserCAKeys ${host_ssh_dir}/ca_user.pub
+HostKey ${host_key}
+HostCertificate ${host_key}-cert.pub
+EOF
+  sudo mv /tmp/ca_user.pub ${host_ssh_dir}
+  sudo mv /tmp/host_key-cert.pub ${host_ssh_dir}/ 2>/dev/null || true
+  sudo chmod 644 ${host_ssh_dir}/ca_user.pub
+  sudo chmod 600 ${host_key}
+  sudo chmod 644 ${host_key}.pub ${host_key}-cert.pub
+  sudo chown root:root ${host_ssh_dir}/ca_user.pub
+  sudo chown root:root ${host_key}-cert.pub
+  rm -f \$HOME/.ssh/authorized_keys 2>/dev/null || true
+  sudo systemctl restart sshd"
+}
+
+# -------- CLIENT TRUST -----------------
+configure_client() {
+  log "Configuring client trust..."
+
+  ca_pub=$(<"${ca_host_key}.pub")
+
+  grep -q "@cert-authority" "$client_ssh_dir/known_hosts" 2>/dev/null ||
+    echo "@cert-authority * $ca_pub" >>"$client_ssh_dir/known_hosts"
+}
+
+# -------- SSH AGENT --------------------
+start_agent() {
+  log "Starting ssh-agent..."
+
+  if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
+    eval "$(ssh-agent -s)" >/dev/null
+  fi
+
+  ssh-add "$user_key" >/dev/null 2>&1 || true
+}
+
+# -------------- MAIN -------------------
+main() {
+  log "Target host:" "$my_host"
+
+  make_ca
+  setup_temp_access
+  # start_agent
+  generate_host_key
+  sign_host_cert
+  configure_host
+  configure_client
+
+  log "DONE ✅"
+}
+
+main "$@"

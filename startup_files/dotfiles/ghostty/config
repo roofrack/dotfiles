@@ -1,3 +1,5 @@
+# need this for ssh but maybe dont keep it on
+term = "xterm-256color"
 #- [ Fonts ] -----------------------------------------------
 # After experimenting I like this font
 font-family = "JetBrainsMono NF Light"

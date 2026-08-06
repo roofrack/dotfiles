@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Setting up a bridge to use with kvm,libvirt virtual machines...
+# Setting up a bridge to use with kvm/libvirt virtual machines...
 
 # To be able to ssh into vm from another machine other than the host machine
 # we need to set up a bridge to reach the vm network. A bridge interface will not
@@ -9,7 +9,7 @@ set -euo pipefail
 # interface. I can not get NetworkManager to seamlessly switch between wifi and ethernet
 # when using a bridge so wrote this helper script.
 # NOTE:
-#   -If other nm ethernet con profiles exist then delete them or set priority for br0.
+#   -If other nm ethernet conn profiles exist then delete them or set priority for br0.
 #   -If you do unplug the ethernet cable than the vm will need to be restarted or can run
 #    systemctl restart libvirtd.
 
