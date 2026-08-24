@@ -316,7 +316,8 @@ bindsym $mod+y exec i3-msg resize shrink left 25 px or 25 ppt, resize shrink rig
 
 exec --no-startup-id i3-msg 'workspace $terminal; exec $default-terminal'
 
-exec --no-startup-id i3-msg 'workspace $ws3; exec $default-terminal -e ranger'
+# exec --no-startup-id i3-msg 'workspace $ws3; exec $default-terminal -e ranger'
+exec --no-startup-id i3-msg 'workspace $ws3; exec $default-terminal -e yazi'
 
 exec --no-startup-id i3-msg 'workspace $browser; exec $default-browser'
 

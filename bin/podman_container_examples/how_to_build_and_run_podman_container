@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# ------------------------------------------------
+# How to build and run a container using podman.
+# In this example we are creating a container for
+# opencode ai.
+# ------------------------------------------------
+
+# ROB NOTE:
+#   A 'Containerfile' is a file containing instructions for building an image. (not for building a container)
+#   A 'run.sh' file contains the instructions for creating a container from an image.
+#   Stick each of these chubby little files in each of your projects.
+
+# ONCE YOU BUILD THE IMAGE, THEN YOU CAN RUN CONTAINERS. IF USING AN OPENCODE CONTAINER
+# THEN BEST PRACTICE IS TO USE --rm TO REMOVE THE RUNNING CONTAINER AFTER EXITING.
+
+# First of all here are a few commands you need to know...
+podman images                # (shows what images are downloaded)
+podman images -a             # removes all savec images
+podman ps -a                 # (shows what containers are present running or exited)
+podman attach container-name # (attach to a running container)
+
+# 1) Build an image using a Containerfile (same as a dockerfile only podman uses Containerfile)
+# NOTE:
+#   So many options for this. I like using an archlinux container so instead of using a
+#   Containerfile I use a script which uses pacstrap and my current local archlinux installation
+#   to build a lightweight Archlinux container locally. See the arch_image_build.sh
+#   Build into this image whatever apps you want to use... like opencode.
+#   Using this script builds the container so you do NOT need the build step listed below.
+FROM node:22-bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  ca-certificates \
+  git \
+  bash &&
+  rm -rf /var/lib/apt/lists/*
+RUN npm install -g opencode-ai
+WORKDIR /workspace
+ENTRYPOINT []
+CMD ["bash"]
+
+# 2) Build the image for the container...
+#       the -t flag is for tag (you provide a name for the image)
+#    Will automatically use Containerfile if in present directory.
+podman build -t opencode-runner:local .
+
+# 3) Run the container using the image 'opencode-runner'...
+#      - use a file called run.sh and make it executable
+#      -Only run this command once for starting a new container.
+#      -Make sure you are in your project directory first as it will mount that directory
+#        -v is for volume... links a host dir to the container directory so configs and
+#          data are persistent.
+#      -If want to connect to opencode.nvim for seamless integration need to add
+#        --port 4096 --hostname 0.0.0.0 to expose this to host from container.
+#
+podman run -it --rm --name opencode-session \
+  -p 4096:4096 \
+  --security-opt=no-new-privileges \
+  -v "$(pwd)":/workspace:z \
+  -v "$HOME/.local/share/opencode:/root/.local/share/opencode:z" \
+  -v ~/.config/opencode:/root/.config/opencode:Z,ro \
+  opencode-runner:local opencode --port 4096 --hostname 0.0.0.0 .

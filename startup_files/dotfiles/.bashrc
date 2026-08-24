@@ -43,6 +43,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # This adds auto completion for git directories
 source /usr/share/git/completion/git-completion.bash
 
+# bash completions for herdr
+source <(herdr completion bash)
 #-------------------
 # Path variable... |
 #------------------
